@@ -28,21 +28,11 @@ client.on('message', message =>
 		let target = message.guild;
 		
 		var msg0 = message.content.split(' ');
+		delete msg0[0];
+		var arg = msg0.join(" ");
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
-
-		if(message.content.startsWith("+s"))
-		{
-			args[0] = "";
-			var x = randomize(0, 5);
-			if(x > 1)
-			{
-				post(`${message.author}` + " has spitted on" + args.join(" ") + "'s grave :purple_heart:");
-			} else {
-				post(`${message.author}` + " has took a shit on" + args.join(" ") + "'s grave :poo:");
-			}
-		}
 		
 		const command = args.shift().toLowerCase();
 		
@@ -53,13 +43,12 @@ client.on('message', message =>
 				break;
 			
 			case "s":
-				args[0] = "";
 				var x = randomize(0, 5);
 				if(x > 1)
 				{
-					post(`${message.author}` + " has spitted on" + args.join(" ") + "'s grave :purple_heart:");
+					post(`${message.author}` + " has spitted on" + arg + "'s grave :purple_heart:");
 				} else {
-					post(`${message.author}` + " has took a shit on" + args.join(" ") + "'s grave :poo:");
+					post(`${message.author}` + " has took a shit on" + arg + "'s grave :poo:");
 				}	
 				break;
 				
@@ -102,16 +91,14 @@ client.on('message', message =>
 				{
 					message.reply("please specify a user to message.");
 				} else {
-					delete args[0];
-					user.send(args.join(" "));
+					delete msg0[0];
+					user.send(arg);
 				}
 				break;
 			}
 			
 			case "post":
-				delete msg0[0];
-				var msg1 = msg0.join(" ");
-				post(msg1);
+				post(arg);
 				break;
 
 	}
