@@ -12,7 +12,7 @@ function randomize(min, max)
 
 
 const prefix = "/";
-const helpTab = "```Burgerbotz Commands\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
+const helpTab = "```/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
 client.on('message', message => 
 {
@@ -48,7 +48,7 @@ client.on('message', message =>
 		switch(command)
 		{
 			case "help":
-				post(helpTab);
+				post("***__Burgerbotz Commands__***\n" + helpTab);
 				break;
 			
 			case "s":
