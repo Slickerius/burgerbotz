@@ -67,6 +67,10 @@ client.on('message', message =>
 				break;
 					
 			case "random":
+				if(args[0] == null)
+				{
+					post("Correct usage: /random <upper bound>");
+				}
 				var x = parseInt(args[0]);
 				post("Returned integer " + Math.floor(Math.random() * x));
 				break;
