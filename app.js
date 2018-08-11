@@ -12,6 +12,7 @@ function randomize(min, max)
 
 
 const prefix = "/";
+const helpTab = "```Burgerbotz Commands\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
 client.on('message', message => 
 {
@@ -46,51 +47,66 @@ client.on('message', message =>
 		
 		switch(command)
 		{
-				case "ping":
-					post("***PONG!*** Returned request in " + (Date.now() - message.createdTimestamp) + " ms");
-					break;
-					
-				case "random":
-					var x = parseInt(args[0]);
-					post("Returned integer " + Math.floor(Math.random() * x));
-					break;
-					
-				case "coinflip":
-					var x = Math.floor(Math.random() * 2);
-					if(x === 0)
-					{
-						message.reply("you got heads");
-					} else {
-						message.reply("you got tails");
-					}
-					break;
-					
-				case "rape":
-					if(message.mentions.users.size < 1)
-					{
-						message.reply("please specify a user to *rape*!");
-					} else {
-					message.channel.send(`${user} has been brutally sodomized by ${message.author}`, {files: ["https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif"]});
-					}
-					break;
-					
-				case "dm":
-				{
-					if(message.mentions.users.size < 1)
-					{
-						message.reply("please specify a user to message.");
-					} else {
-						delete args[0];
-						user.send(args.join(" "));
-					}
-					break;
-				}
+			case "help":
+				post(helpTab);
+				break;
 			
-				case "post":
-					post(args.join(" "));
-					break;
+			case "s":
+				args[0] = "";
+				var x = randomize(0, 5);
+				if(x > 1)
+				{
+					post(`${message.author}` + " has spitted on" + args.join(" ") + "'s grave :purple_heart:");
+				} else {
+					post(`${message.author}` + " has took a shit on" + args.join(" ") + "'s grave :poo:");
+				}	
+				break;
+				
+			case "ping":
+				post("***PONG!*** Returned request in " + (Date.now() - message.createdTimestamp) + " ms");
+				break;
+					
+			case "random":
+				var x = parseInt(args[0]);
+				post("Returned integer " + Math.floor(Math.random() * x));
+				break;
+					
+			case "coinflip":
+				var x = Math.floor(Math.random() * 2);
+				if(x === 0)
+				{
+					message.reply("you got heads");
+				} else {
+					message.reply("you got tails");
+				}
+				break;
+					
+			case "rape":
+				if(message.mentions.users.size < 1)
+				{
+					message.reply("please specify a user to *rape*!");
+				} else {
+					message.channel.send(`${user} has been brutally sodomized by ${message.author}`, {files: ["https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif"]});
+				}
+				break;
+					
+			case "dm":
+			{
+				if(message.mentions.users.size < 1)
+				{
+					message.reply("please specify a user to message.");
+				} else {
+					delete args[0];
+					user.send(args.join(" "));
+				}
+				break;
+			}
+			
+			case "post":
+				post(args.join(" "));
+				break;
 
-		}
+	}
 });
 
 client.login(process.env.BOT_TOKEN);
