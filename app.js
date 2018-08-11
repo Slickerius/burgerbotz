@@ -27,7 +27,7 @@ client.on('message', message =>
 		let user = message.mentions.users.first();
 		let target = message.guild;
 		
-		var msg0 = message.split(' ');
+		var msg0 = message.content.split(' ');
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
