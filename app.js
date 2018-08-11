@@ -91,7 +91,7 @@ client.on('message', message =>
 				{
 					message.reply("please specify a user to message.");
 				} else {
-					delete msg0[0];
+					delete msg0[1];
 					var msg1 = msg0.join(" ");
 					user.send(msg1);
 				}
