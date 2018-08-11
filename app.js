@@ -27,6 +27,7 @@ client.on('message', message =>
 		let user = message.mentions.users.first();
 		let target = message.guild;
 		
+		var msg0 = message.split(' ');
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
@@ -70,9 +71,10 @@ client.on('message', message =>
 				if(args[0] == null)
 				{
 					post("Correct usage: /random <upper bound>");
+				} else {
+					var x = parseInt(args[0]);
+					post("Returned integer " + Math.floor(Math.random() * x));
 				}
-				var x = parseInt(args[0]);
-				post("Returned integer " + Math.floor(Math.random() * x));
 				break;
 					
 			case "coinflip":
@@ -107,7 +109,9 @@ client.on('message', message =>
 			}
 			
 			case "post":
-				post(args.join(" "));
+				delete msg0[0];
+				var msg1 = msg0.join(" ");
+				post(msg1);
 				break;
 
 	}
