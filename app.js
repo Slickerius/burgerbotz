@@ -110,6 +110,7 @@ client.on('message', message =>
 							turnID = player2ID;
 							f0 = false;
 						}
+					}
 				} else if(message.content.startsWith("2")) {
 					var damage = randomize(10, 20);
 					if(sender.id === player1ID)
