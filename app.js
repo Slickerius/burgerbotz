@@ -33,6 +33,7 @@ var f0 = false;
 
 client.on('message', message => 
 {
+		console.log("[" + message.guild.name + "]<" + message.channel.name + ">" + sender.username + ": " + message.content);
  	        function post(String)
 		{
 			message.channel.send(String);
@@ -45,6 +46,7 @@ client.on('message', message =>
 		
 		function onDefeat(player1, player2)
 		{
+			inGame = false;
 			post("***:trophy: " + player1 + " has defeated " + player2 + "!***");
 		}
 		
@@ -123,12 +125,12 @@ client.on('message', message =>
 				} else if(message.content.startsWith("2")) {
 					if(sender.id == player1ID && p1isCrippled)
 					{
-						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!");
+						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!***");
 						
 						turnID = player2ID;
 						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 					} else if (sender.id == player2ID && p2isCrippled) {
-						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!");
+						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!***");
 						
 						turnID = player1ID;
 						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
