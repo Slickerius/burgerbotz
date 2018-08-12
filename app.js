@@ -122,19 +122,24 @@ client.on('message', message =>
 				break;
 				
 			case "burger":
-				if(database[sender.id].burgers > 1)
+				if(message.mentions.users.size > 1)
 				{
-					if(!database[user.id])
+					if(database[sender.id].burgers > 1)
 					{
-						post("bar");
-						database[user.id] = {burgers: 1000};
-					}
+						if(!database[user.id])
+						{
+							post("bar");
+							database[user.id] = {burgers: 1000};
+						}
 					
-					database[user.id].burgers += 1;
-					database[sender.id].burgers -= 1;
-					post("Given a burger to user " + user.username);
+						database[user.id].burgers += 1;
+						database[sender.id].burgers -= 1;
+						post("Given a burger to user " + user.username);
+					} else {
+						message.reply("you don't have enough burgers!");	
+					}
 				} else {
-					message.reply("you don't have enough burgers!");	
+					post("You have to mention someone to give a burger to");	
 				}
 
 	}
