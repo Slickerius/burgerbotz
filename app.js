@@ -27,6 +27,8 @@ var player1ID = "";
 var player2ID = "";
 var player1Name = "";
 var player2Name = "";
+var p1isCrippled = false;
+var p2isCrippled = false;
 var f0 = false;
 
 client.on('message', message => 
@@ -47,6 +49,8 @@ client.on('message', message =>
 		}
 		
 		let sender = message.author;
+	
+		var luckPoints = randomize(0, 100);
 	
 		if(sender === client.user) return;
 		
@@ -75,9 +79,14 @@ client.on('message', message =>
 		}
 	
 		if(inGame && turnID === sender.id)
-		{
+		{		
 				if(message.content.startsWith("1"))
 				{
+					if(luckPoints > 85)
+					{
+						database[sender.id].ammo += 1;
+						post("***" + sender.username + " grabbed a magazine whilst punching their opponent! +1 ammo***");
+					}
 					var damage = randomize(5, 10);
 					if(sender.id === player1ID)
 					{
@@ -112,6 +121,35 @@ client.on('message', message =>
 						}
 					}
 				} else if(message.content.startsWith("2")) {
+					if(sender.id == player1ID && p1isCrippled)
+					{
+						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!");
+						
+						turnID = player2ID;
+						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+					} else if (sender.id == player2ID && p2isCrippled) {
+						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!");
+						
+						turnID = player1ID;
+						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+					} else {
+					if(luckPoints > 90)
+					{
+						if(sender.id == player1ID)
+						{
+							p1isCrippled = true;
+							post(":boot: ***" + sender.username + " torn their hamstring whilst trying to kick their opponent!***");
+							
+							turnID = player2ID;
+							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+						} else {
+							p2isCrippled = true;
+							post(":boot: ***" + sender.username + " torn their hamstring whilst trying to kick their opponent!***");
+							
+							turnID = player1ID;
+							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+						}
+					}
 					var damage = randomize(10, 20);
 					if(sender.id === player1ID)
 					{
@@ -138,6 +176,7 @@ client.on('message', message =>
 							onDefeat(player2Name, player1Name);
 							inGame = false;
 						}
+					}
 					}
 				} else if(message.content.startsWith("3")) {
 					var damage = randomize(30, 70);
