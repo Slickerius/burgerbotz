@@ -249,7 +249,7 @@ client.on('message', message =>
 			
 			case "s":
 				var x = randomize(0, 5);
-				if(msg[1] != null)
+				if(args[0] != null)
 				{
 					if(x > 1)
 					{
