@@ -14,30 +14,142 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
-
 const prefix = "/";
 const helpTab = "```/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
+var inGame = false;
+var inRequest = false;
+var turnID = "";
+var reqID = "";
+var player1ID = "";
+var player2ID = "";
+var player1Name = "";
+var player2Name = "";
+
 client.on('message', message => 
 {
-    function post(String)
+ 	        function post(String)
 		{
 			message.channel.send(String);
 			return 0;
+		}
+		function tabScreen(pTurn, p1ID, p2ID, p1Name, p2Name)
+		{		
+			post("```" + pTurn + "'s turn.\n\n" + p1Name + " HP: " + database[p1ID].hp + "\n" + p2Name + " HP: " + database[p2ID].hp + "\n\n[1] Punch\n[2] Kick\n[3] Heal\n[4] Run```");	
+		}
+		
+		function onDefeat(player1, player2)
+		{
+			post("***:trophy: " + player1 + " has defeated " + player2 + "!***");
 		}
 		
 		let sender = message.author;
 	
 		if(sender === client.user) return;
 		
-		if(!database[sender.id]) database[sender.id] =
-		{
-			burgers: 1000
-		}
-		
 		let user = message.mentions.users.first();
 		let target = message.guild;
 		
+		if(inRequest && reqID === sender.id)
+		{
+			if(message.content.startsWith("1"))
+			{
+				inGame = true;
+				tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+			} else if (message.content.startsWith("2")) {
+				inGame = false;
+				post(sender.username + " has fled the scene!");
+			}
+		}
+		
+		if(inGame && turnID === sender.id)
+		{
+				if(message.content.startsWith("1"))
+				{
+					var damage = randomize(5, 10);
+					if(sender.id === player1ID)
+					{
+						database[player2ID].hp -= damage;
+						post(player1Name + " has punched " + player2Name + ". -" + damage + " HP");
+						
+						if(database[player2ID].hp > 0)
+						{
+							turnID = player2ID;
+							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+						} else {
+							onDefeat(player1Name, player2Name);
+							inGame = false;
+						}
+					} else {
+						database[player1ID].hp -= damage;
+						post(player2Name + " has punched " + player1Name + ". -" + damage + " HP");
+						
+						if(database[player1ID].hp > 0)
+						{
+							turnID = player1ID;
+							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+						} else {
+							onDefeat(player2Name, player1Name);
+							inGame = false;
+						}
+					}
+				} else if(message.content.startsWith("2")) {
+					var damage = randomize(10, 20);
+					if(sender.id === player1ID)
+					{
+						database[player2ID].hp -= damage;
+						post(player1Name + " has kicked " + player2Name + ". -" + damage + " HP");
+						
+						if(database[player2ID].hp > 0)
+						{
+							turnID = player2ID;
+							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+						} else {
+							onDefeat(player1Name, player2Name);
+							inGame = false;
+						}
+					} else {
+						database[player1ID].hp -= damage;
+						post(player2Name + " has kicked " + player1Name + ". -" + damage + " HP");
+						
+						if(database[player1ID].hp > 0)
+						{
+							turnID = player1ID;
+							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+						} else {
+							onDefeat(player2Name, player1Name);
+							inGame = false;
+						}
+					}
+				} else if(message.content.startsWith("3")) {
+					var healPoints = randomize(5, 30);
+
+					if(database[sender.id].hp + healPoints >= 100)
+					{
+						healPoints = 100 - database[sender.id].hp;
+					}
+					
+					if(sender.id === player1ID)
+					{
+						database[player1ID].hp += healPoints;
+						post(player1Name + " has healed themselves, gaining " + healPoints + " HP");
+						
+						turnID = player2ID;
+						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+					} else {
+						database[player2ID].hp += healPoints;
+						post(player2Name + " has healed themselves, gaining " + healPoints + " HP");
+						
+						turnID = player1ID;
+						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+					}
+				} else if(message.content.startsWith("4")) {
+					post(sender.username + " has left the battlefield!");
+					inGame = false;
+				}
+				
+		}
+	
 		var msg0 = message.content.split(' ');
 		delete msg0[0];
 		var arg = msg0.join(" ");
@@ -111,36 +223,32 @@ client.on('message', message =>
 				post(arg);
 				break;
 				
-			case "burgers":
-				if(message.mentions.users.size < 1)
+			case "battle":
+				if(message.mentions.users.size < 1) 
 				{
-					message.reply("you have " + database[sender.id].burgers + " :hamburger:");
+					post("You have to mention someone to battle with")
+				} else if (message.mentions.users.size >= 1 && user === sender) {
+					post("You can not battle yourself!");
 				} else {
-					if(!database[user.id]) database[user.id] = {burgers: 1000};
-					post(user.username + " has " + database[user.id].burgers + " :hamburger:");
+					if(!database[user.id]) database[user.id] = {hp: 100};
+					if(!database[sender.id]) database[sender.id] = {hp: 100};
+					
+					database[user.id] = {hp: 100};
+					database[sender.id] = {hp: 100};
+					
+					player1ID = sender.id;
+					player2ID = user.id;
+					
+					player1Name = sender.username;
+					player2Name = user.username;
+					
+					turnID = player1ID;
+					reqID = user.id;
+					
+					post(`${user}, you have been challenged to a battle by ${sender.username}!` + "\n```[1] Engage\n[2] Run```");
+					inRequest = true;
 				}
 				break;
-				
-			case "burger":
-				if(message.mentions.users.size >= 1)
-				{
-					if(database[sender.id].burgers > 1)
-					{
-						if(!database[user.id])
-						{
-							post("foo");
-							database[user.id] = {burgers: 1000};
-						}
-					
-						database[user.id].burgers += 1;
-						database[sender.id].burgers -= 1;
-						post("Given a burger to user " + user.username);
-					} else {
-						message.reply("you don't have enough burgers!");	
-					}
-				} else {
-					post("You have to mention someone to give a burger to");	
-				}
 
 	}
 		fs.writeFile('userData.json', JSON.stringify(database), (err) =>
