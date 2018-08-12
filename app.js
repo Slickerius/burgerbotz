@@ -97,7 +97,6 @@ client.on('message', message =>
 				break;
 					
 			case "dm":
-			{
 				if(message.mentions.users.size < 1)
 				{
 					message.reply("please specify a user to message.");
@@ -107,7 +106,6 @@ client.on('message', message =>
 					user.send(msg1);
 				}
 				break;
-			}
 			
 			case "post":
 				post(arg);
