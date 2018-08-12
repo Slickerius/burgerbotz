@@ -77,9 +77,6 @@ client.on('message', message =>
 				post(sender.username + " has fled the scene!");
 			}
 		}
-		
-		database[sender.id].wins = 1;
-		database[sender.id].losses = 1;
 	
 		if(inGame && turnID === sender.id)
 		{
@@ -338,7 +335,14 @@ client.on('message', message =>
 				break;
 				
 			case "battlestats":
-				
+				if(database[sender.id].wins == null)
+				{
+		  			database[sender.id].wins = 0;
+				}
+				if(database[sender.id].losses == null)
+				{
+					database[sender.id].losses = 0;
+				}
 				post("***__" + sender.username + " Battle Stats__***\n```Wins: " + database[sender.id].wins + "\nLosses: " + database[sender.id].losses + "```");
 				break;
 			
