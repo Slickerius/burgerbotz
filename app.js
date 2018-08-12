@@ -168,7 +168,7 @@ client.on('message', message =>
 							} else {
 								database[player1ID].hp -= damage;
 								database[player2ID].ammo -= 1;
-								post(player2Name + " has shot " + player1Name + ", dealing " healPoints + " HP");
+								post(player2Name + " has shot " + player1Name + " dealing " healPoints + " HP");
 								
 								turnID = player1ID;
 								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
