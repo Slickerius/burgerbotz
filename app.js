@@ -116,6 +116,16 @@ client.on('message', message =>
 			case "burgers":
 				message.reply("you have " + database[sender.id].burgers + " :hamburger:");
 				break;
+				
+			case "burger":
+				if(database[sender.id].burgers > 1)
+				{
+					database[user.id].burgers += 2;
+					database[sender.id].burgers -= 1;
+					post("Given a burger to user " + user.username);
+				} else {
+					message.reply("you don't have enough burgers!");	
+				}
 
 	}
 					   
