@@ -190,7 +190,7 @@ client.on('message', message =>
 								database[player2ID].ammo -= 1;
 								post(":gun: ***" + player2Name + " has shot " + player1Name + ", dealing " + damage + " HP***");
 								
-								if(database[player2ID].hp > 0)
+								if(database[player1ID].hp > 0)
 								{
 									turnID = player1ID;
 									tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
@@ -336,6 +336,8 @@ client.on('message', message =>
 					post("You have to mention someone to battle with")
 				} else if (message.mentions.users.size >= 1 && user === sender) {
 					post("You can not battle yourself!");
+				} else if (inGame) {
+					post("A battle is already running!");
 				} else {
 					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1};
 					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1};
