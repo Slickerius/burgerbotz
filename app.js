@@ -249,12 +249,17 @@ client.on('message', message =>
 			
 			case "s":
 				var x = randomize(0, 5);
-				if(x > 1)
+				if(msg[1] != null)
 				{
-					post(`${message.author}` + " has spitted on" + arg + "'s grave :purple_heart:");
+					if(x > 1)
+					{
+						post(`${message.author}` + " has spitted on" + arg + "'s grave :purple_heart:");
+					} else {
+						post(`${message.author}` + " has took a shit on" + arg + "'s grave :poo:");
+					}
 				} else {
-					post(`${message.author}` + " has took a shit on" + arg + "'s grave :poo:");
-				}	
+					post("Use /s to spit on something's grave");	
+				}
 				break;
 				
 			case "ping":
