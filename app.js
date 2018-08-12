@@ -203,8 +203,25 @@ client.on('message', message =>
 						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 					}
 				} else if(message.content.startsWith("5")) {
-					post(sender.username + " has left the battlefield!");
-					inGame = false;
+					var luck = randomize(0, 10);
+					var damage = randomize(5, 10);
+					if(luck > 6)
+					{
+						post(sender.username + " has left the battlefield!");
+						inGame = false;
+					} else {
+						database[sender.id].hp -= damage;
+						post(sender.username + " tried to run away but slipped and fell! -" + damage + " HP");
+						
+						if(sender.id === player 1ID)
+						{
+							turnID = player2ID;
+							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+						} else {
+							turnID = player1ID;
+							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
+						}
+					}
 				}
 				
 		}
