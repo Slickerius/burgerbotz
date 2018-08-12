@@ -44,6 +44,12 @@ client.on('message', message =>
 		{
 			post("***:trophy: " + player1 + " has defeated " + player2 + "!***");
 		}
+	
+		function updateStats(winnerID, loserID)
+		{
+			database[winnerID].wins += 1;
+			database[loserID].losses += 1;
+		}
 		
 		let sender = message.author;
 	
@@ -88,6 +94,7 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player1Name, player2Name);
+							updateStats(player1Name, player2Name);
 							inGame = false;
 						}
 					} else {
@@ -100,6 +107,7 @@ client.on('message', message =>
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player2Name, player1Name);
+							updateStats(player2Name, player1Name);
 							inGame = false;
 						}
 					}
@@ -116,6 +124,7 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player1Name, player2Name);
+							updateStats(player1Name, player2Name);
 							inGame = false;
 						}
 					} else {
@@ -128,6 +137,7 @@ client.on('message', message =>
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player2Name, player1Name);
+							updateStats(player2Name, player1Name);
 							inGame = false;
 						}
 					}
@@ -151,8 +161,15 @@ client.on('message', message =>
 								database[player1ID].ammo -= 1;
 								post(":gun: ***" + player1Name + " has shot " + player2Name + ", dealing " + damage + " HP***");
 								
-								turnID = player2ID;
-								tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
+								if(database[player2ID].hp > 0)
+								{
+									turnID = player2ID;
+									tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
+								} else {
+									onDefeat(player1Name, player2Name);
+									updateStats(player1Name, player2Name);
+									inGame = false;
+								}
 							}
 						} else {
 							post(":gun: **Click** ***You tried to open fire but you ran out of ammo!***");
@@ -176,8 +193,15 @@ client.on('message', message =>
 								database[player2ID].ammo -= 1;
 								post(":gun: ***" + player2Name + " has shot " + player1Name + ", dealing " + damage + " HP***");
 								
-								turnID = player1ID;
-								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
+								if(database[player2ID].hp > 0)
+								{
+									turnID = player1ID;
+									tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
+								} else {
+									onDefeat(player2Name, player1Name);
+									updateStats(player2Name, player1Name);
+									inGame = false;
+								}
 							}
 						} else {
 							post(":gun: **Click** ***You tried to open fire but you ran out of ammo!***");
@@ -310,6 +334,10 @@ client.on('message', message =>
 				post(arg);
 				break;
 				
+			case "battlestats":
+				post("***__" + sender.username + " Battle Stats__***\n```Wins: " + database[sender.id].wins + "\nLosses: " + database[sender.id].losses + "```");
+				break;
+			
 			case "battle":
 				if(message.mentions.users.size < 1) 
 				{
@@ -317,8 +345,8 @@ client.on('message', message =>
 				} else if (message.mentions.users.size >= 1 && user === sender) {
 					post("You can not battle yourself!");
 				} else {
-					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1};
-					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1};
+					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, wins: 0, losses: 0};
+					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, wins: 0, losses: 0};
 					
 					database[user.id] = {hp: 100, ammo: 1};
 					database[sender.id] = {hp: 100, ammo: 1};
