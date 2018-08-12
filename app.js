@@ -58,7 +58,12 @@ client.on('message', message =>
 			{
 				inGame = true;
 				inRequest = false;
-				tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+				if(turnID == player1ID)
+				{
+					tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+				} else {
+					tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+				}
 			} else if (message.content.startsWith("2")) {
 				inGame = false;
 				inRequest = false;
@@ -318,7 +323,13 @@ client.on('message', message =>
 					player1Name = sender.username;
 					player2Name = user.username;
 					
-					turnID = player1ID;
+					var rand = randomize(0, 2);
+					if(rand > 0)
+					{
+						turnID = player1ID;
+					} else {
+						turnID = player2ID;
+					}
 					reqID = user.id;
 					
 					post(`${user}, you have been challenged to a battle by ${sender.username}!` + "\n```[1] Engage\n[2] Run```");
