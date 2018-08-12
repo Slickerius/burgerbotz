@@ -213,7 +213,7 @@ client.on('message', message =>
 						database[sender.id].hp -= damage;
 						post(sender.username + " tried to run away but slipped and fell! -" + damage + " HP");
 						
-						if(sender.id === player 1ID)
+						if(sender.id === player1ID)
 						{
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
