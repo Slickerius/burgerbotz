@@ -17,6 +17,8 @@ function randomize(min, max)
 const prefix = "/";
 const helpTab = "```/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
+//a
+
 var inGame = false;
 var inRequest = false;
 var turnID = "";
