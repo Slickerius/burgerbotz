@@ -56,13 +56,14 @@ client.on('message', message =>
 		{
 			if(message.content.startsWith("1"))
 			{
-				inGame = true;
 				inRequest = false;
 				if(turnID == player1ID)
 				{
 					tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+					inGame = true;
 				} else {
 					tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+					inGame = true;
 				}
 			} else if (message.content.startsWith("2")) {
 				inGame = false;
