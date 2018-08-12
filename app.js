@@ -55,9 +55,11 @@ client.on('message', message =>
 			if(message.content.startsWith("1"))
 			{
 				inGame = true;
+				inRequest = false;
 				tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 			} else if (message.content.startsWith("2")) {
 				inGame = false;
+				inRequest = false;
 				post(sender.username + " has fled the scene!");
 			}
 		}
