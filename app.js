@@ -78,6 +78,8 @@ client.on('message', message =>
 			}
 		}
 		
+		if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, wins: 1, losses: 1};
+	
 		if(inGame && turnID === sender.id)
 		{
 				if(message.content.startsWith("1"))
@@ -335,7 +337,7 @@ client.on('message', message =>
 				break;
 				
 			case "battlestats":
-				if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, wins: 1, losses: 1};
+				
 				post("***__" + sender.username + " Battle Stats__***\n```Wins: " + database[sender.id].wins + "\nLosses: " + database[sender.id].losses + "```");
 				break;
 			
@@ -346,8 +348,8 @@ client.on('message', message =>
 				} else if (message.mentions.users.size >= 1 && user === sender) {
 					post("You can not battle yourself!");
 				} else {
-					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, wins: 0, losses: 0};
-					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, wins: 0, losses: 0};
+					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1};
+					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1};
 					
 					database[user.id] = {hp: 100, ammo: 1};
 					database[sender.id] = {hp: 100, ammo: 1};
