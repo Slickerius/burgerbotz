@@ -15,9 +15,11 @@ function randomize(min, max)
 }
 
 const prefix = "/";
-const helpTab = "```/battle - Challenges another user to a battle!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
+const helpTab = "```/battle - Challenges another user to a battle!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
 //b
+
+const invite = "https://discordapp.com/oauth2/authorize/?permissions=8&scope=bot&client_id=475698098249924628";
 
 var inGame = false;
 var inRequest = false;
@@ -380,6 +382,10 @@ client.on('message', message =>
 			
 			case "post":
 				post(arg);
+				break;
+				
+			case "invite":
+				post("**Invite me to your server! ^~^**\n" + invite);
 				break;
 				
 			case "battle":
