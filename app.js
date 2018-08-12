@@ -145,7 +145,7 @@ client.on('message', message =>
 	}
 });
 
-fs.writeFile('data/userData.json', JSON.stringify(database), (err) =>
+fs.writeFile('userData.json', JSON.stringify(database), (err) =>
 {
 	if(err) throw err;		
 });
