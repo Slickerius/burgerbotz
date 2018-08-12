@@ -57,6 +57,8 @@ client.on('message', message =>
 		
 		let user = message.mentions.users.first();
 		let target = message.guild;
+	
+		if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, wins: 0, losses: 0};
 		
 		if(inRequest && reqID === sender.id)
 		{
