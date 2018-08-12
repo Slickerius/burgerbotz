@@ -26,7 +26,14 @@ client.on('message', message =>
 			return 0;
 		}
 		
-		if(message.author === client.user) return;
+		let sender = message.author;
+	
+		if(sender === client.user) return;
+		
+		if(!database[sender.id]) database[sender.id]
+		{
+			burgers = 1000;
+		}
 		
 		let user = message.mentions.users.first();
 		let target = message.guild;
@@ -105,8 +112,17 @@ client.on('message', message =>
 			case "post":
 				post(arg);
 				break;
+				
+			case "burgers":
+				message.reply("you have " + database[sender.id].burgers + " :hamburger:");
+				break;
 
 	}
+					   
+	fs.writeFile('data/userData.json', JSON.stringify(database), (err) =>
+	{
+		if(err) console.error(err);			
+	});
 });
 
 client.login(process.env.BOT_TOKEN);
