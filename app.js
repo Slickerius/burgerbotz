@@ -51,6 +51,8 @@ client.on('message', message =>
 		function onDefeat(player1, player2)
 		{
 			inGame = false;
+			p1isCrippled = false;
+			p2isCrippled = false;
 			post("***:trophy: " + player1 + " has defeated " + player2 + "!***");
 		}
 		
@@ -155,7 +157,7 @@ client.on('message', message =>
 							turnID = player1ID;
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						}
-					}
+					} else {
 					var damage = randomize(10, 20);
 					if(sender.id === player1ID)
 					{
@@ -182,6 +184,7 @@ client.on('message', message =>
 							onDefeat(player2Name, player1Name);
 							inGame = false;
 						}
+					}
 					}
 					}
 				} else if(message.content.startsWith("3")) {
