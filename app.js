@@ -128,7 +128,7 @@ client.on('message', message =>
 					{
 						if(!database[user.id])
 						{
-							post("bar");
+							post("foo");
 							database[user.id] = {burgers: 1000};
 						}
 					
