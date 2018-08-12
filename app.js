@@ -337,7 +337,7 @@ client.on('message', message =>
 				} else if (message.mentions.users.size >= 1 && user === sender) {
 					post("You can not battle yourself!");
 				} else if (inGame) {
-					post("A battle is already running!");
+					post("A battle is already ongoing!");
 				} else {
 					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1};
 					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1};
