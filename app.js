@@ -138,11 +138,11 @@ client.on('message', message =>
 				}
 
 	}
-					   
-	fs.writeFile('data/userData.json', JSON.stringify(database), (err) =>
-	{
-		if(err) console.error(err);			
-	});
+});
+
+fs.writeFile('data/userData.json', JSON.stringify(database), (err) =>
+{
+	if(err) throw err;		
 });
 
 client.login(process.env.BOT_TOKEN);
