@@ -44,12 +44,6 @@ client.on('message', message =>
 		{
 			post("***:trophy: " + player1 + " has defeated " + player2 + "!***");
 		}
-	
-		function updateStats(winnerID, loserID)
-		{
-			database[winnerID].wins += 1;
-			database[loserID].losses += 1;
-		}
 		
 		let sender = message.author;
 	
@@ -69,7 +63,6 @@ client.on('message', message =>
 					inGame = true;
 				} else {
 					tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
-					inGame = true;
 				}
 			} else if (message.content.startsWith("2")) {
 				inGame = false;
@@ -94,7 +87,6 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player1Name, player2Name);
-							updateStats(player1ID, player2ID);
 							inGame = false;
 						}
 					} else {
@@ -107,7 +99,6 @@ client.on('message', message =>
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player2Name, player1Name);
-							updateStats(player2ID, player1ID);
 							inGame = false;
 						}
 					}
@@ -124,7 +115,6 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player1Name, player2Name);
-							updateStats(player1ID, player2ID);
 							inGame = false;
 						}
 					} else {
@@ -137,7 +127,6 @@ client.on('message', message =>
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player2Name, player1Name);
-							updateStats(player2ID, player1ID);
 							inGame = false;
 						}
 					}
@@ -167,7 +156,6 @@ client.on('message', message =>
 									tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
 									onDefeat(player1Name, player2Name);
-									updateStats(player1ID, player2ID);
 									inGame = false;
 								}
 							}
@@ -199,7 +187,6 @@ client.on('message', message =>
 									tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
 									onDefeat(player2Name, player1Name);
-									updateStats(player2ID, player1ID);
 									inGame = false;
 								}
 							}
@@ -334,18 +321,6 @@ client.on('message', message =>
 				post(arg);
 				break;
 				
-			case "battlestats":
-				if(database[sender.id].wins == null)
-				{
-		  			database[sender.id].wins = 0;
-				}
-				if(database[sender.id].losses == null)
-				{
-					database[sender.id].losses = 0;
-				}
-				post("***__" + sender.username + " Battle Stats__***\n```Wins: " + database[sender.id].wins + "\nLosses: " + database[sender.id].losses + "```");
-				break;
-			
 			case "battle":
 				if(message.mentions.users.size < 1) 
 				{
