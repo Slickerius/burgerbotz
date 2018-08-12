@@ -94,7 +94,7 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player1Name, player2Name);
-							updateStats(player1Name, player2Name);
+							updateStats(player1ID, player2ID);
 							inGame = false;
 						}
 					} else {
@@ -107,7 +107,7 @@ client.on('message', message =>
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player2Name, player1Name);
-							updateStats(player2Name, player1Name);
+							updateStats(player2ID, player1ID);
 							inGame = false;
 						}
 					}
@@ -124,7 +124,7 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player1Name, player2Name);
-							updateStats(player1Name, player2Name);
+							updateStats(player1ID, player2ID);
 							inGame = false;
 						}
 					} else {
@@ -137,7 +137,7 @@ client.on('message', message =>
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player2Name, player1Name);
-							updateStats(player2Name, player1Name);
+							updateStats(player2ID, player1ID);
 							inGame = false;
 						}
 					}
@@ -167,7 +167,7 @@ client.on('message', message =>
 									tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
 									onDefeat(player1Name, player2Name);
-									updateStats(player1Name, player2Name);
+									updateStats(player1ID, player2ID);
 									inGame = false;
 								}
 							}
@@ -199,7 +199,7 @@ client.on('message', message =>
 									tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
 									onDefeat(player2Name, player1Name);
-									updateStats(player2Name, player1Name);
+									updateStats(player2ID, player1ID);
 									inGame = false;
 								}
 							}
