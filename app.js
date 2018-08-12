@@ -57,8 +57,6 @@ client.on('message', message =>
 		
 		let user = message.mentions.users.first();
 		let target = message.guild;
-	
-		if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, wins: 0, losses: 0};
 		
 		if(inRequest && reqID === sender.id)
 		{
@@ -337,6 +335,7 @@ client.on('message', message =>
 				break;
 				
 			case "battlestats":
+				if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, wins: 0, losses: 0};
 				post("***__" + sender.username + " Battle Stats__***\n```Wins: " + database[sender.id].wins + "\nLosses: " + database[sender.id].losses + "```");
 				break;
 			
