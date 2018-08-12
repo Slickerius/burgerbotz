@@ -30,10 +30,17 @@ client.on('message', message =>
 	
 		if(sender === client.user) return;
 		
-		if(!database[sender.id]) database[sender.id] =
-		{
-			burgers: 1000
+		if(!database[sender.id]) database[sender.id] = 
+		{ 
+			messages: 0 
 		}
+		
+		database[sender.id].messages++;
+		
+		fs.writeFile('userData.json', JSON.stringify(database), (err) =>
+		{
+			if(err) throw err;		
+		});
 		
 		let user = message.mentions.users.first();
 		let target = message.guild;
@@ -110,45 +117,6 @@ client.on('message', message =>
 			case "post":
 				post(arg);
 				break;
-				
-			case "burgers":
-				if(message.mentions.users.size < 1)
-				{
-					message.reply("you have " + database[sender.id].burgers + " :hamburger:");
-				} else {
-					if(!database[user.id]) database[user.id] = {burgers: 1000};
-					fs.writeFile('userData.json', JSON.stringify(database), (err) =>
-					{
-						if(err) throw err;		
-					});
-					post(user.username + " has " + database[user.id].burgers + " :hamburger:");
-				}
-				break;
-				
-			case "burger":
-				if(message.mentions.users.size >= 1)
-				{
-					if(database[sender.id].burgers > 1)
-					{
-						if(!database[user.id])
-						{
-							post("bar");
-							database[user.id] = {burgers: 1000};
-						}
-					
-						database[user.id].burgers += 1;
-						database[sender.id].burgers -= 1;
-						fs.writeFile('userData.json', JSON.stringify(database), (err) =>
-						{
-							if(err) throw err;		
-						});
-						post("Given a burger to user " + user.username);
-					} else {
-						message.reply("you don't have enough burgers!");	
-					}
-				} else {
-					post("You have to mention someone to give a burger to");	
-				}
 
 	}
 });
