@@ -33,8 +33,12 @@ var f0 = false;
 
 client.on('message', message => 
 {
-		console.log("[" + message.guild.name + "]<" + message.channel.name + ">" + message.author.username + ": " + message.content);
- 	        function post(String)
+		if(message.guild != null && message.channel != null && message.content != null)
+		{
+			console.log("[" + message.guild.name + "]<" + message.channel.name + ">" + message.author.username + ": " + message.content);
+		}
+	
+		function post(String)
 		{
 			message.channel.send(String);
 			return 0;
