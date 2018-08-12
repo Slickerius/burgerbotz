@@ -30,9 +30,9 @@ client.on('message', message =>
 	
 		if(sender === client.user) return;
 		
-		if(!database[sender.id]) database[sender.id]
+		if(!database[sender.id]) database[sender.id] =
 		{
-			burgers = 1000;
+			burgers: 1000;
 		}
 		
 		let user = message.mentions.users.first();
