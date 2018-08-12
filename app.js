@@ -35,7 +35,7 @@ client.on('message', message =>
 		}
 		function tabScreen(pTurn, p1ID, p2ID, p1Name, p2Name)
 		{		
-			post("```" + pTurn + "'s turn.\n\n" + p1Name + " HP: " + database[p1ID].hp + "\n" + p2Name + " HP: " + database[p2ID].hp + "\n\n[1] Punch\n[2] Kick\n[3] Heal\n[4] Run```");	
+			post("```" + pTurn + "'s turn.\n\n" + p1Name + " HP: " + database[p1ID].hp + "/100 Ammo: " + database[p1ID].ammo + "\n" + p2Name + " HP: " + database[p2ID].hp + "/100 Ammo: " + database[p2ID].ammo + "\n\n[1] Punch\n[2] Kick\n[3] Shoot\n[4] Heal\n[5] Run```");	
 		}
 		
 		function onDefeat(player1, player2)
@@ -124,6 +124,61 @@ client.on('message', message =>
 						}
 					}
 				} else if(message.content.startsWith("3")) {
+					var damage = randomize(30, 70);
+
+					if(sender.id === player1ID)
+					{
+						if(database[player1ID].ammo > 0)
+						{
+							var luck = randomize(0, 10);
+							if(luck > 7)
+							{
+								post("Your shot has missed!");
+								database[player1ID].ammo -= 1;	
+								
+								turnID = player2ID;
+								tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+							} else {
+								database[player2ID].hp -= damage;
+								database[player1ID].ammo -= 1;
+								post(player1Name + " has shot " + player2Name + ", dealing " healPoints + " HP");
+								
+								turnID = player2ID;
+								tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
+							}
+						} else {
+							post("**Click** You tried to open fire but you ran out of ammo!");
+							
+							turnID = player2ID;
+							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+						}
+					} else {
+						if(database[player2ID].ammo > 0)
+						{
+							var luck = randomize(0, 10);
+							if(luck > 7)
+							{
+								post("Your shot has missed!");
+								database[player2ID].ammo -= 1;	
+								
+								turnID = player1ID;
+								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+							} else {
+								database[player1ID].hp -= damage;
+								database[player2ID].ammo -= 1;
+								post(player2Name + " has shot " + player1Name + ", dealing " healPoints + " HP");
+								
+								turnID = player1ID;
+								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
+							}
+						} else {
+							post("**Click** You tried to open fire but you ran out of ammo!");
+							
+							turnID = player1ID;
+							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+						}
+					}
+				} else if(message.content.startsWith("4")) {
 					var healPoints = randomize(5, 30);
 
 					if(database[sender.id].hp + healPoints >= 100)
@@ -145,7 +200,7 @@ client.on('message', message =>
 						turnID = player1ID;
 						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 					}
-				} else if(message.content.startsWith("4")) {
+				} else if(message.content.startsWith("5")) {
 					post(sender.username + " has left the battlefield!");
 					inGame = false;
 				}
@@ -232,11 +287,11 @@ client.on('message', message =>
 				} else if (message.mentions.users.size >= 1 && user === sender) {
 					post("You can not battle yourself!");
 				} else {
-					if(!database[user.id]) database[user.id] = {hp: 100};
-					if(!database[sender.id]) database[sender.id] = {hp: 100};
+					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1};
+					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1};
 					
-					database[user.id] = {hp: 100};
-					database[sender.id] = {hp: 100};
+					database[user.id] = {hp: 100, ammo: 1};
+					database[sender.id] = {hp: 100, ammo: 1};
 					
 					player1ID = sender.id;
 					player2ID = user.id;
