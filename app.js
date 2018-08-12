@@ -27,6 +27,7 @@ var player1ID = "";
 var player2ID = "";
 var player1Name = "";
 var player2Name = "";
+var f0 = false;
 
 client.on('message', message => 
 {
@@ -63,6 +64,8 @@ client.on('message', message =>
 					inGame = true;
 				} else {
 					tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+					f0 = true;
+					inGame = true;
 				}
 			} else if (message.content.startsWith("2")) {
 				inGame = false;
@@ -90,18 +93,23 @@ client.on('message', message =>
 							inGame = false;
 						}
 					} else {
-						database[player1ID].hp -= damage;
-						post(":punch: ***" + player2Name + " has punched " + player1Name + ". -" + damage + " HP***");
-						
-						if(database[player1ID].hp > 0)
+						if(!f0)
 						{
-							turnID = player1ID;
-							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+							database[player1ID].hp -= damage;
+							post(":punch: ***" + player2Name + " has punched " + player1Name + ". -" + damage + " HP***");
+							
+							if(database[player1ID].hp > 0)
+							{
+								turnID = player1ID;
+								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+							} else {
+								onDefeat(player2Name, player1Name);
+								inGame = false;
+							}
 						} else {
-							onDefeat(player2Name, player1Name);
-							inGame = false;
+							turnID = player2ID;
+							f0 = false;
 						}
-					}
 				} else if(message.content.startsWith("2")) {
 					var damage = randomize(10, 20);
 					if(sender.id === player1ID)
