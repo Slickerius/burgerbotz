@@ -78,7 +78,8 @@ client.on('message', message =>
 			}
 		}
 		
-		if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, wins: 1, losses: 1};
+		database[sender.id].wins = 1;
+		database[sender.id].losses = 1;
 	
 		if(inGame && turnID === sender.id)
 		{
