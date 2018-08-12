@@ -117,6 +117,10 @@ client.on('message', message =>
 					message.reply("you have " + database[sender.id].burgers + " :hamburger:");
 				} else {
 					if(!database[user.id]) database[user.id] = {burgers: 1000};
+					fs.writeFile('userData.json', JSON.stringify(database), (err) =>
+					{
+						if(err) throw err;		
+					});
 					post(user.username + " has " + database[user.id].burgers + " :hamburger:");
 				}
 				break;
@@ -134,6 +138,10 @@ client.on('message', message =>
 					
 						database[user.id].burgers += 1;
 						database[sender.id].burgers -= 1;
+						fs.writeFile('userData.json', JSON.stringify(database), (err) =>
+						{
+							if(err) throw err;		
+						});
 						post("Given a burger to user " + user.username);
 					} else {
 						message.reply("you don't have enough burgers!");	
@@ -143,11 +151,6 @@ client.on('message', message =>
 				}
 
 	}
-});
-
-fs.writeFile('userData.json', JSON.stringify(database), (err) =>
-{
-	if(err) throw err;		
 });
 
 client.login(process.env.BOT_TOKEN);
