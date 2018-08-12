@@ -122,7 +122,7 @@ client.on('message', message =>
 				break;
 				
 			case "burger":
-				if(message.mentions.users.size > 1)
+				if(message.mentions.users.size >= 1)
 				{
 					if(database[sender.id].burgers > 1)
 					{
