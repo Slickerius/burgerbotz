@@ -114,13 +114,21 @@ client.on('message', message =>
 				break;
 				
 			case "burgers":
-				message.reply("you have " + database[sender.id].burgers + " :hamburger:");
+				if(message.mentions.users.size < 1)
+				{
+					message.reply("you have " + database[sender.id].burgers + " :hamburger:");
+				} else {
+					if(!database[user.id].burgers) database[user.id].burgers = {burgers: 1000};
+					post(user.username + " has " + database[user.id].burgers + " :hamburger:");
+				}
 				break;
 				
 			case "burger":
 				if(database[sender.id].burgers > 1)
 				{
-					database[user.id].burgers += 2;
+					if(!database[user.id].burgers) database[user.id].burgers = {burgers: 1000};
+					
+					database[user.id].burgers += 1;
 					database[sender.id].burgers -= 1;
 					post("Given a burger to user " + user.username);
 				} else {
