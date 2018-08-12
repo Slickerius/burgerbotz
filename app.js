@@ -361,7 +361,11 @@ client.on('message', message =>
 				} else {
 					delete msg0[1];
 					var msg1 = msg0.join(" ");
-					user.send(msg1);
+					try {
+						user.send(msg1);
+					} catch(err) {
+						post("Cannot send message to this user!");
+					}
 				}
 				break;
 			
