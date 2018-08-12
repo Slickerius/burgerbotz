@@ -79,7 +79,7 @@ client.on('message', message =>
 					if(sender.id === player1ID)
 					{
 						database[player2ID].hp -= damage;
-						post(player1Name + " has punched " + player2Name + ". -" + damage + " HP");
+						post(":punch: ***" + player1Name + " has punched " + player2Name + ". -" + damage + " HP***");
 						
 						if(database[player2ID].hp > 0)
 						{
@@ -91,7 +91,7 @@ client.on('message', message =>
 						}
 					} else {
 						database[player1ID].hp -= damage;
-						post(player2Name + " has punched " + player1Name + ". -" + damage + " HP");
+						post(":punch: ***" + player2Name + " has punched " + player1Name + ". -" + damage + " HP***");
 						
 						if(database[player1ID].hp > 0)
 						{
@@ -107,7 +107,7 @@ client.on('message', message =>
 					if(sender.id === player1ID)
 					{
 						database[player2ID].hp -= damage;
-						post(player1Name + " has kicked " + player2Name + ". -" + damage + " HP");
+						post(":boot: ***" + player1Name + " has kicked " + player2Name + ". -" + damage + " HP***");
 						
 						if(database[player2ID].hp > 0)
 						{
@@ -119,7 +119,7 @@ client.on('message', message =>
 						}
 					} else {
 						database[player1ID].hp -= damage;
-						post(player2Name + " has kicked " + player1Name + ". -" + damage + " HP");
+						post(":boot: ***" + player2Name + " has kicked " + player1Name + ". -" + damage + " HP***");
 						
 						if(database[player1ID].hp > 0)
 						{
@@ -140,7 +140,7 @@ client.on('message', message =>
 							var luck = randomize(0, 10);
 							if(luck > 7)
 							{
-								post("Your shot has missed!");
+								post(":gun: ***Your shot has missed!***");
 								database[player1ID].ammo -= 1;	
 								
 								turnID = player2ID;
@@ -148,13 +148,13 @@ client.on('message', message =>
 							} else {
 								database[player2ID].hp -= damage;
 								database[player1ID].ammo -= 1;
-								post(player1Name + " has shot " + player2Name + ", dealing " + damage + " HP");
+								post(":gun: + ***" + player1Name + " has shot " + player2Name + ", dealing " + damage + " HP***");
 								
 								turnID = player2ID;
 								tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
 							}
 						} else {
-							post("**Click** You tried to open fire but you ran out of ammo!");
+							post(":gun: **Click** ***You tried to open fire but you ran out of ammo!***");
 							
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
@@ -165,7 +165,7 @@ client.on('message', message =>
 							var luck = randomize(0, 10);
 							if(luck > 7)
 							{
-								post("Your shot has missed!");
+								post(":gun: ***Your shot has missed!***");
 								database[player2ID].ammo -= 1;	
 								
 								turnID = player1ID;
@@ -173,13 +173,13 @@ client.on('message', message =>
 							} else {
 								database[player1ID].hp -= damage;
 								database[player2ID].ammo -= 1;
-								post(player2Name + " has shot " + player1Name + ", dealing " + damage + " HP");
+								post(":gun: ***" + player2Name + " has shot " + player1Name + ", dealing " + damage + " HP***");
 								
 								turnID = player1ID;
 								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
 							}
 						} else {
-							post("**Click** You tried to open fire but you ran out of ammo!");
+							post(":gun: **Click** ***You tried to open fire but you ran out of ammo!***");
 							
 							turnID = player1ID;
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
@@ -196,13 +196,13 @@ client.on('message', message =>
 					if(sender.id === player1ID)
 					{
 						database[player1ID].hp += healPoints;
-						post(player1Name + " has healed themselves, gaining " + healPoints + " HP");
+						post(":hamburger: ***" + player1Name + " has healed themselves, gaining " + healPoints + " HP***");
 						
 						turnID = player2ID;
 						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 					} else {
 						database[player2ID].hp += healPoints;
-						post(player2Name + " has healed themselves, gaining " + healPoints + " HP");
+						post(":hamburger: ***" + player2Name + " has healed themselves, gaining " + healPoints + " HP***");
 						
 						turnID = player1ID;
 						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
@@ -212,11 +212,11 @@ client.on('message', message =>
 					var damage = randomize(5, 10);
 					if(luck > 6)
 					{
-						post(sender.username + " has left the battlefield!");
+						post(":footprints: ***" + sender.username + " has left the battlefield!***");
 						inGame = false;
 					} else {
 						database[sender.id].hp -= damage;
-						post(sender.username + " tried to run away but slipped and fell! -" + damage + " HP");
+						post(":cartwheel: ***" + sender.username + " tried to run away but slipped and fell! -" + damage + " HP***");
 						
 						if(sender.id === player1ID)
 						{
