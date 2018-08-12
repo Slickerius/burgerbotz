@@ -15,7 +15,7 @@ function randomize(min, max)
 }
 
 const prefix = "/";
-const helpTab = "```/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
+const helpTab = "```/battle - Challenges another user to a battle!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
 //a
 
@@ -148,7 +148,7 @@ client.on('message', message =>
 							} else {
 								database[player2ID].hp -= damage;
 								database[player1ID].ammo -= 1;
-								post(":gun: + ***" + player1Name + " has shot " + player2Name + ", dealing " + damage + " HP***");
+								post(":gun: ***" + player1Name + " has shot " + player2Name + ", dealing " + damage + " HP***");
 								
 								turnID = player2ID;
 								tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
