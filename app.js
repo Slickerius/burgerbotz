@@ -118,7 +118,7 @@ client.on('message', message =>
 				{
 					message.reply("you have " + database[sender.id].burgers + " :hamburger:");
 				} else {
-					if(!database[user.id].burgers) database[user.id].burgers = {burgers: 1000};
+					if(!database[user.id]) database[user.id] = {burgers: 1000};
 					post(user.username + " has " + database[user.id].burgers + " :hamburger:");
 				}
 				break;
@@ -126,7 +126,7 @@ client.on('message', message =>
 			case "burger":
 				if(database[sender.id].burgers > 1)
 				{
-					if(!database[user.id].burgers) database[user.id].burgers = {burgers: 1000};
+					if(!database[user.id]) database[user.id] = {burgers: 1000};
 					
 					database[user.id].burgers += 1;
 					database[sender.id].burgers -= 1;
