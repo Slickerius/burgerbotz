@@ -401,6 +401,8 @@ client.on('message', message =>
 					message.reply("you have to mention someone to calculate the niggerness of!");
 				} else {
 					var result = randomize(0,100);
+					if(!database[user.id]) database[user.id] = {nigger: result};
+					
 					if(database[user.id].nigger == null)
 					{
 						database[user.id] = {nigger: result};
