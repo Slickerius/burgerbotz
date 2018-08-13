@@ -369,7 +369,7 @@ client.on('message', message =>
 				} else {
 					let embed = new Discord.RichEmbed()
 					.setDescription(`${user} has been brutally sodomized by ${message.author}`)
-					.addColor("#dfff40")
+					.setColor("#dfff40")
 					.attachFile("https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif");	
 					
 					message.channel.send(embed);
