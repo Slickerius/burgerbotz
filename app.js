@@ -21,6 +21,7 @@ const helpTab = "```/battle - Challenges another user to a battle!\n/coinflip - 
 
 const invite = "https://discordapp.com/oauth2/authorize/?permissions=8&scope=bot&client_id=475698098249924628";
 
+var inGame = false;
 var inRequest = false;
 var turnID = "";
 var reqID = "";
@@ -28,6 +29,8 @@ var player1ID = "";
 var player2ID = "";
 var player1Name = "";
 var player2Name = "";
+var p1isCrippled = false;
+var p2isCrippled = false;
 var f0 = false;
 
 client.on('message', message => 
@@ -49,10 +52,9 @@ client.on('message', message =>
 		
 		function onDefeat(player1, player2)
 		{
-			database[player1ID].inGame = false;
-			database[player2ID].inGame = false;
-			database[player1ID].isCrippled = false;
-			database[player2ID].isCrippled = false;
+			inGame = false;
+			p1isCrippled = false;
+			p2isCrippled = false;
 			post("***:trophy: " + player1 + " has defeated " + player2 + "!***");
 		}
 		
@@ -64,9 +66,7 @@ client.on('message', message =>
 		
 		let user = message.mentions.users.first();
 		let target = message.guild;
-	
-		if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-			
+		
 		if(inRequest && reqID === sender.id)
 		{
 			if(message.content.startsWith("1"))
@@ -75,21 +75,20 @@ client.on('message', message =>
 				if(turnID == player1ID)
 				{
 					tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
-					database[player1ID].inGame = true;
-					database[player2ID].inGame = true;
+					inGame = true;
 				} else {
 					tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 					f0 = true;
-					database[player1ID].inGame = true;
-					database[player2ID].inGame = true;
+					inGame = true;
 				}
 			} else if (message.content.startsWith("2")) {
+				inGame = false;
 				inRequest = false;
 				post(sender.username + " has fled the scene!");
 			}
 		}
 	
-		if(database[sender.id].inGame && turnID === sender.id)
+		if(inGame && turnID === sender.id)
 		{		
 				if(message.content.startsWith("1"))
 				{
@@ -110,6 +109,7 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player1Name, player2Name);
+							inGame = false;
 						}
 					} else {
 						if(!f0)
@@ -123,6 +123,7 @@ client.on('message', message =>
 								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 							} else {
 								onDefeat(player2Name, player1Name);
+								inGame = false;
 							}
 						} else {
 							turnID = player2ID;
@@ -130,13 +131,13 @@ client.on('message', message =>
 						}
 					}
 				} else if(message.content.startsWith("2")) {
-					if(sender.id == player1ID && database[player1ID].isCrippled)
+					if(sender.id == player1ID && p1isCrippled)
 					{
 						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!***");
 						
 						turnID = player2ID;
 						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
-					} else if (sender.id == player2ID && database[player2ID].isCrippled) {
+					} else if (sender.id == player2ID && p2isCrippled) {
 						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!***");
 						
 						turnID = player1ID;
@@ -146,13 +147,13 @@ client.on('message', message =>
 					{
 						if(sender.id == player1ID)
 						{
-							database[player1ID].isCrippled = true;
+							p1isCrippled = true;
 							post(":boot: ***" + sender.username + " torn their hamstring whilst trying to kick their opponent!***");
 							
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
-							database[player2ID].isCrippled = true;
+							p2isCrippled = true;
 							post(":boot: ***" + sender.username + " torn their hamstring whilst trying to kick their opponent!***");
 							
 							turnID = player1ID;
@@ -171,6 +172,7 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player1Name, player2Name);
+							inGame = false;
 						}
 					} else {
 						database[player1ID].hp -= damage;
@@ -182,6 +184,7 @@ client.on('message', message =>
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
 							onDefeat(player2Name, player1Name);
+							inGame = false;
 						}
 					}
 					}
@@ -212,6 +215,7 @@ client.on('message', message =>
 									tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
 									onDefeat(player1Name, player2Name);
+									inGame = false;
 								}
 							}
 						} else {
@@ -280,8 +284,7 @@ client.on('message', message =>
 					if(luck > 6)
 					{
 						post(":footprints: ***" + sender.username + " has left the battlefield!***");
-						database[player1ID].inGame = false;
-						database[player2ID].inGame = false;
+						inGame = false;
 					} else {
 						database[sender.id].hp -= damage;
 						post(":cartwheel: ***" + sender.username + " tried to run away but slipped and fell! -" + damage + " HP***");
@@ -386,23 +389,19 @@ client.on('message', message =>
 				break;
 				
 			case "battle":
-				if(message.mentions.users.size >= 1)
-				{
-					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-				}
-				
 				if(message.mentions.users.size < 1) 
 				{
 					post("You have to mention someone to battle with")
 				} else if (message.mentions.users.size >= 1 && user === sender) {
 					post("You can not battle yourself!");
-				} else if (database[sender.id].inGame) {
-					post("You are already in the middle of a battle!");
-				} else if (database[user.id].inGame) { 
-					post("This user is already in the middle of a battle!");
+				} else if (inGame) {
+					post("A battle is already ongoing!");
 				} else {
-					database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-					database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
+					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1};
+					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1};
+					
+					database[user.id] = {hp: 100, ammo: 1};
+					database[sender.id] = {hp: 100, ammo: 1};
 					
 					player1ID = sender.id;
 					player2ID = user.id;
