@@ -369,7 +369,7 @@ client.on('message', message =>
 					message.reply("please specify a user to *rape*!");
 				} else {
 					let botembed = new Discord.RichEmbed()
-					.setImage("https://www.tenor.co/yhu9.gif")
+					.setImage("https://media1.tenor.com/images/dc7284a153bbc22dd2ddda022957e2be/tenor.gif")
 					.setDescription(`${user} has been brutally sodomized by ${message.author}`)
 					.setColor("#fcc66a");
 					
