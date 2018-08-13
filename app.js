@@ -368,9 +368,8 @@ client.on('message', message =>
 					message.reply("please specify a user to *rape*!");
 				} else {
 					let embed = new Discord.RichEmbed()
-					.setDescription(`${user} has been brutally sodomized by ${message.author}`)
-					.setColor("#dfff40")
-					.attachFile("https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif");	
+					.setDescription("***" + user.username + " has been brutally sodomized by " + sender.username + "***")
+					.setColor("#dfff40");
 					
 					return message.channel.send(embed);
 				}
