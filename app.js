@@ -346,11 +346,11 @@ client.on('message', message =>
 				break;
 					
 			case "random":
-				if(args[0] == null)
+				if(arg[1] == null)
 				{
 					post("Correct usage: /random <upper bound>");
 				} else {
-					var x = parseInt(args[0]);
+					var x = parseInt(arg[1]);
 					post("Returned integer " + Math.floor(Math.random() * x));
 				}
 				break;
