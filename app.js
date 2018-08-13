@@ -348,8 +348,7 @@ client.on('message', message =>
 				{
 					post("Correct usage: /random <upper bound>");
 				} else {
-					console.log(args[0] + " " + args[1] + " " + arg[0] + " " + arg[1] + " " + arg[2]);
-					var x = parseInt(arg[1]);
+					var x = parseInt(args[1]);
 					post("Returned integer " + Math.floor(Math.random() * x));
 				}
 				break;
