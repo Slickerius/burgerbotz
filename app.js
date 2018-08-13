@@ -20,7 +20,7 @@ const helpTab = "```/battle - Challenges another user to a battle!\n/coinflip - 
 //b
 
 const invite = "https://discordapp.com/oauth2/authorize/?permissions=8&scope=bot&client_id=475698098249924628";
-const rapeGifs = ["https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif", "a", "a"];
+const rapeGifs = ["https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif", "https://media1.tenor.com/images/dc7284a153bbc22dd2ddda022957e2be/tenor.gif", "https://i.pinimg.com/originals/ce/41/9c/ce419c7a3723967df36b4a3c7ddfc8ac.gif", "https://i.pinimg.com/originals/9c/11/f6/9c11f69bdf4517a6226f57875b163c20.gif"];
 
 var inGame = false;
 var inRequest = false;
@@ -368,8 +368,11 @@ client.on('message', message =>
 				{
 					message.reply("please specify a user to *rape*!");
 				} else {
+					var a = rapeGifs.length - 1;
+					var x = randomize(0, a);
+
 					let botembed = new Discord.RichEmbed()
-					.setImage("https://media1.tenor.com/images/dc7284a153bbc22dd2ddda022957e2be/tenor.gif")
+					.setImage(rapeGifs[x])
 					.setDescription(`${user} has been brutally sodomized by ${message.author}`)
 					.setColor("#fcc66a");
 					
