@@ -32,6 +32,9 @@ var f0 = false;
 
 client.on('message', message => 
 {
+		if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
+		if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
+	
 		if(message.guild != null && message.channel != null && message.content != null)
 		{
 			console.log("[" + message.guild.name + "]<" + message.channel.name + ">" + message.author.username + ": " + message.content);
@@ -384,9 +387,6 @@ client.on('message', message =>
 				break;
 				
 			case "battle":
-				if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-				if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-				
 				if(message.mentions.users.size < 1) 
 				{
 					post("You have to mention someone to battle with")
