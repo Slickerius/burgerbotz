@@ -20,7 +20,7 @@ const helpTab = "```/battle - Challenges another user to a battle!\n/coinflip - 
 //b
 
 const invite = "https://discordapp.com/oauth2/authorize/?permissions=8&scope=bot&client_id=475698098249924628";
-const rapeGifs = "https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif", "a", "a";
+var rapeGifs = "https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif", "a", "a";
 
 var inGame = false;
 var inRequest = false;
