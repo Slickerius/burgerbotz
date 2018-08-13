@@ -305,11 +305,10 @@ client.on('message', message =>
 		var msg0 = message.content.split(' ');
 		var cmd0 = msg0[0];
 		var cmd = "";
-		cmd0.toLowerCase();
 	
 		if(cmd0.charAt(0) == prefix)
 		{
-			cmd = cmd0.slice(1);
+			cmd = cmd0.slice(1).toLowerCase();
 		}
 		
 		delete msg0[0];
