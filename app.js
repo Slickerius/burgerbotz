@@ -372,7 +372,7 @@ client.on('message', message =>
 					.setColor("#dfff40")
 					.attachFile("https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif");	
 					
-					message.channel.send(embed);
+					return message.channel.send(embed);
 				}
 				break;
 					
