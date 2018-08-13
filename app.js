@@ -368,8 +368,7 @@ client.on('message', message =>
 				{
 					message.reply("please specify a user to *rape*!");
 				} else {
-					var a = rapeGifs.length - 1;
-					var x = randomize(0, a);
+					var x = randomize(0, rapeGifs.length);
 
 					let botembed = new Discord.RichEmbed()
 					.setImage(rapeGifs[x])
