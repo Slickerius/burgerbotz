@@ -7,13 +7,6 @@ var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 client.on('ready', () => 
 {
    console.log('Burgerbotz ready! :3');
-   var x = 0;
-   client.guilds.forEach(function(guild)
-   {
-	x++;
-	console.log(guild.name);
-   });
-   console.log(x);	
 });
 
 function randomize(min, max) 
@@ -374,7 +367,12 @@ client.on('message', message =>
 				{
 					message.reply("please specify a user to *rape*!");
 				} else {
-					message.channel.send(`${user} has been brutally sodomized by ${message.author}`, {files: ["https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif"]});
+					let embed = new Discord.RichEmbed()
+					.addDescription(`${user} has been brutally sodomized by ${message.author}`)
+					.addColor("#dfff40")
+					.attachFile("https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif");	
+					
+					message.channel.send(embed);
 				}
 				break;
 					
