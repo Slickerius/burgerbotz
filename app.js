@@ -32,9 +32,6 @@ var f0 = false;
 
 client.on('message', message => 
 {
-		if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-		if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-	
 		if(message.guild != null && message.channel != null && message.content != null)
 		{
 			console.log("[" + message.guild.name + "]<" + message.channel.name + ">" + message.author.username + ": " + message.content);
@@ -67,6 +64,9 @@ client.on('message', message =>
 		
 		let user = message.mentions.users.first();
 		let target = message.guild;
+	
+		if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
+		if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
 		
 		if(inRequest && reqID === sender.id)
 		{
