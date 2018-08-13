@@ -312,6 +312,8 @@ client.on('message', message =>
 			cmd0.replace(prefix, '');
 			cmd = cmd0;
 		}
+	
+		console.log(cmd);
 		
 		delete msg0[0];
 		var arg = msg0.join(" ");
