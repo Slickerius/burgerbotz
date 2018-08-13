@@ -128,13 +128,13 @@ client.on('message', message =>
 						}
 					}
 				} else if(message.content.startsWith("2")) {
-					if(sender.id == player1ID && p1isCrippled)
+					if(sender.id == player1ID && database[player1ID].isCrippled)
 					{
 						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!***");
 						
 						turnID = player2ID;
 						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
-					} else if (sender.id == player2ID && p2isCrippled) {
+					} else if (sender.id == player2ID && database[player2ID].isCrippled) {
 						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!***");
 						
 						turnID = player1ID;
