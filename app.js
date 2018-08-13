@@ -64,9 +64,6 @@ client.on('message', message =>
 		
 		let user = message.mentions.users.first();
 		let target = message.guild;
-	
-		if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-		if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
 		
 		if(inRequest && reqID === sender.id)
 		{
@@ -387,6 +384,12 @@ client.on('message', message =>
 				break;
 				
 			case "battle":
+				if(message.mentions.users.size >= 1)
+				{
+					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
+					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
+				}
+				
 				if(message.mentions.users.size < 1) 
 				{
 					post("You have to mention someone to battle with")
