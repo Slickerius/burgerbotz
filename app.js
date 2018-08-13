@@ -303,7 +303,7 @@ client.on('message', message =>
 		}
 	
 		var msg0 = message.content.split(' ');
-		var cmd0 = msg[0];
+		var cmd0 = msg0[0];
 		var cmd = "";
 		cmd0.toLowerCase();
 	
