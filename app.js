@@ -383,6 +383,9 @@ client.on('message', message =>
 				break;
 				
 			case "battle":
+				if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
+				if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
+				
 				if(message.mentions.users.size < 1) 
 				{
 					post("You have to mention someone to battle with")
@@ -393,9 +396,6 @@ client.on('message', message =>
 				} else if (database[user.id].inGame) { 
 					post("This user is already in the middle of a battle!");
 				} else {
-					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
-					
 					database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
 					database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
 					
