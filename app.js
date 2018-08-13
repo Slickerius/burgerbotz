@@ -7,6 +7,7 @@ var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 client.on('ready', () => 
 {
    console.log('Burgerbotz ready! :3');
+   client.user.setGame("with Johnny");
 });
 
 function randomize(min, max) 
