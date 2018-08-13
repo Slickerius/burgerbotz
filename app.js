@@ -367,10 +367,7 @@ client.on('message', message =>
 				{
 					message.reply("please specify a user to *rape*!");
 				} else {
-					let botembed = new Discord.RichEmbed()
-					.setDescription("Hello World!")
-					.setColor("#dfff40")
-					.addField("Hello", "World!");
+					let botembed = new Discord.RichEmbed().setDescription("Hello World!").setColor("#dfff40").addField("Hello", "World!");
 					
 					return message.channel.send(botembed);
 				}
