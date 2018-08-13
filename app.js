@@ -14,7 +14,7 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const prefix = "/";
+const prefix = '/';
 const helpTab = "```/battle - Challenges another user to a battle!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
 //b
@@ -303,15 +303,23 @@ client.on('message', message =>
 		}
 	
 		var msg0 = message.content.split(' ');
+		var cmd0 = msg[0];
+		var cmd = "";
+		cmd0.toLowerCase();
+	
+		if(cmd0.charAt(0) == prefix)
+		{
+			cmd0.replace(prefix, '');
+			cmd = cmd0;
+		}
+		
 		delete msg0[0];
 		var arg = msg0.join(" ");
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
 		
-		const command = args.shift().toLowerCase();
-		
-		switch(command)
+		switch(cmd)
 		{
 			case "help":
 				post("***__Burgerbotz Commands__***\n" + helpTab);
@@ -425,10 +433,10 @@ client.on('message', message =>
 				        {
 						if(inRequest)
 						{	
-							post("***" + user.username + " has ignored " + sender.username + "'s challenge to battle.***");
+							post(":shrug: ***" + user.username + " has ignored " + sender.username + "'s challenge to battle.***");
 							inRequest = false;
 						}
-					}, 30000);
+					}, 90000);
 				}
 				break;
 
