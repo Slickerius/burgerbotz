@@ -420,6 +420,15 @@ client.on('message', message =>
 					
 					post(`${user}, you have been challenged to a battle by ${sender.username}!` + "\n```[1] Engage\n[2] Run```");
 					inRequest = true;
+					
+					setTimeout(function()
+				        {
+						if(inRequest)
+						{	
+							post("***" + user.username + " has ignored " + sender.username + "'s challenge to battle.***");
+							inRequest = false;
+						}
+					}, 30000);
 				}
 				break;
 
