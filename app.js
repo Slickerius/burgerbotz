@@ -309,8 +309,7 @@ client.on('message', message =>
 	
 		if(cmd0.charAt(0) == prefix)
 		{
-			cmd0.slice(1);
-			cmd = cmd0;
+			cmd = cmd0.slice(2);
 		}
 	
 		console.log(cmd);
