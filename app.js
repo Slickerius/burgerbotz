@@ -405,7 +405,7 @@ client.on('message', message =>
 					{
 						database[user.id] = {nigger: result};
 					}
-					post(":dindu:454150474619289602 ***__Niggerator X3000__*** :dindu:454150474619289602\n\n***" + user.username + "*** : " + database[user.id].nigger + "%");
+					post("<:dindu:454150474619289602> ***__Niggerator X3000__*** <:dindu:454150474619289602>\n\n:bar_chart: ***" + user.username + "*** : ***" + database[user.id].nigger + "%***");
 				}
 				break;
 			
