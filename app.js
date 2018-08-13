@@ -311,8 +311,6 @@ client.on('message', message =>
 		{
 			cmd = cmd0.slice(1);
 		}
-	
-		console.log(cmd);
 		
 		delete msg0[0];
 		var arg = msg0.join(" ");
@@ -350,6 +348,7 @@ client.on('message', message =>
 				{
 					post("Correct usage: /random <upper bound>");
 				} else {
+					console.log(args[0] + " " + args[1] + " " + arg[0] + " " + arg[1] + " " + arg[2]);
 					var x = parseInt(arg[1]);
 					post("Returned integer " + Math.floor(Math.random() * x));
 				}
