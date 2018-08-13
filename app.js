@@ -278,7 +278,8 @@ client.on('message', message =>
 					if(luck > 6)
 					{
 						post(":footprints: ***" + sender.username + " has left the battlefield!***");
-						inGame = false;
+						database[player1ID].inGame = false;
+						database[player2ID].inGame = false;
 					} else {
 						database[sender.id].hp -= damage;
 						post(":cartwheel: ***" + sender.username + " tried to run away but slipped and fell! -" + damage + " HP***");
