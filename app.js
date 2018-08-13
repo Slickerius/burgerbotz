@@ -87,7 +87,7 @@ client.on('message', message =>
 			}
 		}
 	
-		if(database[sender.id].inGame == true && turnID === sender.id)
+		if(database[sender.id].inGame && turnID === sender.id)
 		{		
 				if(message.content.startsWith("1"))
 				{
@@ -388,8 +388,10 @@ client.on('message', message =>
 					post("You have to mention someone to battle with")
 				} else if (message.mentions.users.size >= 1 && user === sender) {
 					post("You can not battle yourself!");
-				} else if (inGame) {
-					post("A battle is already ongoing!");
+				} else if (database[sender.id].inGame) {
+					post("You are already in the middle of a battle!");
+				} else if (database[user.id].inGame) { 
+					post("This user is already in the middle of a battle!");
 				} else {
 					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
 					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1, isCrippled: false, inGame: false};
