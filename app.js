@@ -395,7 +395,12 @@ client.on('message', message =>
 				break;
 			
 			case "post":
-				post(arg);
+				if(arg.length > 1)
+				{
+					post(arg);
+				} else {
+					post("Correct usage: /post <message>");
+				}
 				break;
 				
 			case "invite":
