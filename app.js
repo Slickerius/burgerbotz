@@ -87,7 +87,7 @@ client.on('message', message =>
 			}
 		}
 	
-		if(inGame && turnID === sender.id)
+		if(database[sender.id].inGame == true && turnID === sender.id)
 		{		
 				if(message.content.startsWith("1"))
 				{
