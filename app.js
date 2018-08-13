@@ -394,6 +394,20 @@ client.on('message', message =>
 					}
 				}
 				break;
+				
+			case "nigger":
+				if(message.mentions.users.size < 1)
+				{
+					message.reply("you have to mention someone to calculate the niggerness of!");
+				} else {
+					var result = randomize(0,100);
+					if(database[user.id].nigger == null)
+					{
+						database[user.id] = {nigger: result};
+					}
+					post(":dindu:454150474619289602 ***__Niggerator X3000__*** :dindu:454150474619289602\n\n***" + user.username + "*** : " + database[user.id].nigger + "%");
+				}
+				break;
 			
 			case "post":
 				if(arg.length > 1)
