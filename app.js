@@ -438,11 +438,33 @@ client.on('message', message =>
 						let msg1 = msg0.join(" ");
 						user.send(msg1);
 						post(":incoming_envelope: **Message sent!**");
-						setTimeout(function()
-						{
-							client.user.lastMessage.delete();
-						}, 3000);
+					} else {
+						post(":octagonal_sign **You can only send direct messages to humans!**");	
 					}
+				}
+				break;
+				
+			case "rainbow":
+				if(message.guild.member(sender).hasPermission("ADMINISTRATOR")
+				{
+				   	guild.roles.forEach(function(role)
+					{
+						if(role.name == args[0])
+						{
+							var oriColor = role.hexColor;
+							if(!database[role.name]) database[role.name] = {rainbow: false, originalColor: hexColor};
+							if(!database[role.name].rainbow)
+							{
+								for(i = 0; i < 2; i++)
+								{
+									role.setColor('RANDOM');
+									i = 0;
+								}
+							} else {
+								role.setColor(database[role.name].originalColor);	
+							}
+						}
+					});
 				}
 				break;
 				
