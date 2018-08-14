@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const fs = require('fs');
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
-var hq;
 var hqChannel;
 
 client.on('ready', () => 
@@ -54,10 +53,10 @@ client.on('message', message =>
 {
 		if(message.guild != null && message.channel != null && message.content != null)
 		{
-			console.log("[" + message.guild.name + "]<" + message.channel.name + ">" + message.author.username + ": " + message.content);
+			console.log("[" + message.guild.name + "]<#" + message.channel.name + ">" + message.author.username + ": " + message.content);
 			if(message.guild.id != "424507027432144913")
 			{
-				hqChannel.send("[" + message.guild.name + "]<" + message.channel.name + "> **" + message.author.username + "** : " + message.content);
+				hqChannel.send("[" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "** : " + message.content);
 			}
 		}
 	
