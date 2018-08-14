@@ -101,7 +101,7 @@ client.on('message', message =>
 		{
 			message.mentions.users.forEach(function(userf)
 			{
-				if(!database[userf.id]) database[userf.id] {afk: false, afkMessage: ""};
+				if(!database[userf.id]) database[userf.id] = {afk: false, afkMessage: ""};
 				if(database[userf.id].afk == true)
 				{
 					post("**" + userf.username + "** is away from keyboard ***(" + database[userf.id].afkMessage + ")***");	
@@ -484,11 +484,6 @@ client.on('message', message =>
 					database[sender.id].afkMessage = arg;
 					
 					post("**" + sender.username + "** is now AFK ***(" + database[sender.id].afkMessage + ")***.");
-				} else {
-					database[sender.id].afk = false;
-					database[sender.id].afkMessage = "";
-					
-					post("**" + sender.username + "** is no longer AFK.");
 				}
 				break;
 				
