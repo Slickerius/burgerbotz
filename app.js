@@ -8,7 +8,7 @@ var hqChannel;
 client.on('ready', () => 
 {
    console.log('Burgerbotz ready! :3');
-   client.user.setGame("with Johnny");
+   client.user.setGame("with Carlton");
    client.guilds.forEach(function(guild)
    {
 	if(guild.id === "424507027432144913")
