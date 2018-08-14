@@ -435,19 +435,19 @@ client.on('message', message =>
 				break;
 				
 			case "burger":
-				let x = randomize(0, burgerGifs.length);
+				let yz = randomize(0, burgerGifs.length);
 				
 				if(message.mentions.users.size < 1)
 				{
 					let botembed = new Discord.RichEmbed()
-					.setImage(burgerGifs[x])
+					.setImage(burgerGifs[yz])
 					.setDescription(`**${sender.username}** is eating a hamburger!`)
 					.setColor("#fcc66a");
 					
 					return message.channel.send(botembed);		
 				} else {
 					let botembed = new Discord.RichEmbed()
-					.setImage(burgerGifs[x])
+					.setImage(burgerGifs[yz])
 					.setDescription(`**${sender.username}** is feeding a hamburger to **${user.username}**`)
 					.setColor("#fcc66a");
 					
