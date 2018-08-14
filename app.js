@@ -3,11 +3,26 @@ const client = new Discord.Client();
 const fs = require('fs');
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
+var hq;
+var hqChannel;
 
 client.on('ready', () => 
 {
    console.log('Burgerbotz ready! :3');
    client.user.setGame("with Johnny");
+   client.guilds.forEach(function(guild)
+   {
+	if(guild.id === "424507027432144913")
+	{
+		guild.channels.forEach(function(channel)
+		{
+			if(channel.id === "478887378929451009")
+			{
+				hqChannel = channel;	
+			}
+		});
+	}
+   });
 });
 
 function randomize(min, max) 
@@ -40,6 +55,7 @@ client.on('message', message =>
 		if(message.guild != null && message.channel != null && message.content != null)
 		{
 			console.log("[" + message.guild.name + "]<" + message.channel.name + ">" + message.author.username + ": " + message.content);
+			hqChannel.send("[" + message.guild.name + "]<" + message.channel.name + ">" + message.author.username + ": " + message.content);
 		}
 	
 		function post(String)
