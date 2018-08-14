@@ -101,6 +101,7 @@ client.on('message', message =>
 		{
 			message.mentions.users.forEach(function(userf)
 			{
+				if(!database[userf.id]) database[userf.id] {afk: false, afkMessage: ""};
 				if(database[userf.id].afk == true)
 				{
 					post("**" + userf.username + "** is away from keyboard ***(" + database[userf.id].afkMessage + ")***");	
