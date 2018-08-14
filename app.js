@@ -480,10 +480,13 @@ client.on('message', message =>
 				if(!database[sender.id].afk)
 				{
 					database[sender.id].afk = true;
-					for(i = 0; i <= 1; i++)
+					for(i = 0; i < 2; i++)
 					{
 						delete arg[i];
 					}
+					
+					console.log(arg);
+					
 					database[sender.id].afkMessage = arg;
 					
 					post("**" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***).");
