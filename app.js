@@ -480,10 +480,9 @@ client.on('message', message =>
 				if(!database[sender.id].afk)
 				{
 					database[sender.id].afk = true;
-					delete arg[0];
-					for(c = 0; c < arg.length; c++)
+					for(i = 0; i <= 1; i++)
 					{
-						console.log(arg[c]);	
+						delete arg[i];
 					}
 					database[sender.id].afkMessage = arg;
 					
