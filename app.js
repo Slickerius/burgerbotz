@@ -432,12 +432,12 @@ client.on('message', message =>
 				{
 					message.reply("please specify a user to message.");
 				} else {
-					delete msg0[1];
-					let msg1 = msg0.join(" ");
-					try {
+					if(!user.bot)
+					{
+						delete msg0[1];
+						let msg1 = msg0.join(" ");
 						user.send(msg1);
-					} catch(err) {
-						post("Cannot send message to this user!");
+						client.lastMessage.delete(50);
 					}
 				}
 				break;
