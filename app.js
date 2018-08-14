@@ -483,7 +483,7 @@ client.on('message', message =>
 					delete arg[0];
 					for(c = 0; c < arg.length; c++)
 					{
-						post(arg[c]);	
+						console.log(arg[c]);	
 					}
 					database[sender.id].afkMessage = arg;
 					
