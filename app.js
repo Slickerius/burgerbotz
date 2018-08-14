@@ -361,7 +361,7 @@ client.on('message', message =>
 		switch(cmd)
 		{
 			case "help":
-				post("***__Burgerbotz Commands__***\n" + helpTab);
+				post(":hamburger: ***__Burgerbotz Commands__*** :hamburger:\n" + helpTab);
 				break;
 			
 			case "s":
