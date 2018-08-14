@@ -79,6 +79,16 @@ client.on('message', message =>
 		}
 		
 		let sender = message.author;
+		
+		if(!database[sender.id]) database[sender.id] = {afk: false, afkMessage: ""};
+	
+		if(database[sender.id].afk)
+		{
+			database[sender.id].afk = false;
+			database[sender.id].afkMessage = "";
+			
+			post("**" + sender.username + "** is no longer AFK.");
+		}
 	
 		var luckPoints = randomize(0, 100);
 	
@@ -86,6 +96,17 @@ client.on('message', message =>
 		
 		let user = message.mentions.users.first();
 		let target = message.guild;
+	
+		if(message.mentions.users.size > 0)
+		{
+			message.mentions.users.forEach(function(userf)
+			{
+				if(database[userf.id].afk == true)
+				{
+					post("**" + userf.username + "** is away from keyboard ***(" + database[userf.id].afkMessage + ")***");	
+				}
+			})	
+		}
 		
 		if(inRequest && reqID === sender.id)
 		{
@@ -452,6 +473,22 @@ client.on('message', message =>
 				
 			case "invite":
 				post("**Invite me to your server! ^~^**\n" + invite);
+				break;
+				
+			case "afk":		
+				if(!database[sender.id].afk)
+				{
+					database[sender.id].afk = true;
+					delete arg[0];
+					database[sender.id].afkMessage = arg;
+					
+					post("**" + sender.username + "** is now AFK ***(" + database[sender.id].afkMessage + ")***.");
+				} else {
+					database[sender.id].afk = false;
+					database[sender.id].afkMessage = "";
+					
+					post("**" + sender.username + "** is no longer AFK.");
+				}
 				break;
 				
 			case "battle":
