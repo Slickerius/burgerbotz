@@ -340,6 +340,14 @@ client.on('message', message =>
 						}
 					}
 				}
+			setTimeout(function()
+			{
+				if(inGame)
+				{	
+					post(":shrug: ***The battle has concluded with no clear victor.***");
+					inGame = false;
+				}
+			}, 180000);
 				
 		}
 	
@@ -481,6 +489,10 @@ client.on('message', message =>
 						post("<:dindu:454150474619289602> ***__Niggerator X3000__*** <:dindu:454150474619289602>\n\n:bar_chart: **" + user.username + "** : **" + database[user.id].nigger + "%**\n*This person is almost undoubtedly a nigger.* :watermelon:**OOGA BOOGA DINDU NUFFIN!!1**:basketball:");	
 					}
 				}
+				break;
+				
+			case "resb":
+				inGame = false;
 				break;
 			
 			case "post":
