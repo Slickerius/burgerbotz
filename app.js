@@ -481,8 +481,8 @@ client.on('message', message =>
 				{
 					database[sender.id].afk = true;
 					delete arg[0];
-					var a = arg[0].slice(1);
-					database[sender.id].afkMessage = a;
+					arg[0].slice(1);
+					database[sender.id].afkMessage = arg;
 					
 					post("**" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***).");
 				}
