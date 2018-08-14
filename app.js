@@ -104,7 +104,7 @@ client.on('message', message =>
 				if(!database[userf.id]) database[userf.id] = {afk: false, afkMessage: ""};
 				if(database[userf.id].afk == true)
 				{
-					post("**" + userf.username + "** is away from keyboard (***" + database[userf.id].afkMessage + "***)");	
+					post(":footprints: **" + userf.username + "** is away from keyboard (***" + database[userf.id].afkMessage + "***)");	
 				}
 			})	
 		}
@@ -479,13 +479,11 @@ client.on('message', message =>
 			case "afk":		
 				if(!database[sender.id].afk)
 				{
-					database[sender.id].afk = true;
-					
+					database[sender.id].afk = true;			
 					var a = arg.slice(1);
-					
 					database[sender.id].afkMessage = a;
 					
-					post("**" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***).");
+					post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***).");
 				}
 				break;
 				
