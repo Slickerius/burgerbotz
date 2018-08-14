@@ -444,30 +444,6 @@ client.on('message', message =>
 				}
 				break;
 				
-			case "rainbow":
-				if(message.guild.member(sender).hasPermission("ADMINISTRATOR"))
-				{
-				   	message.guild.roles.forEach(function(role)
-					{
-						if(role.name == args[0])
-						{
-							var oriColor = role.hexColor;
-							if(!database[role.name]) database[role.name] = {rainbow: false, originalColor: hexColor};
-							if(!database[role.name].rainbow)
-							{
-								for(i = 0; i < 2; i++)
-								{
-									role.setColor('RANDOM');
-									i = 0;
-								}
-							} else {
-								role.setColor(database[role.name].originalColor);	
-							}
-						}
-					});
-				}
-				break;
-				
 			case "burger":
 				let yz = randomize(0, burgerGifs.length);
 				
