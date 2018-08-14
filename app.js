@@ -30,12 +30,11 @@ function randomize(min, max)
 }
 
 const prefix = '/';
-const helpTab = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
-
-//b
+const helpTab = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/coinflip - Flips a coin\n/burger - A burger a day keeps the doctor away!\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
 const invite = "https://discordapp.com/oauth2/authorize/?permissions=8&scope=bot&client_id=475698098249924628";
 const rapeGifs = ["https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif", "https://media1.tenor.com/images/dc7284a153bbc22dd2ddda022957e2be/tenor.gif", "https://i.pinimg.com/originals/ce/41/9c/ce419c7a3723967df36b4a3c7ddfc8ac.gif", "https://i.pinimg.com/originals/9c/11/f6/9c11f69bdf4517a6226f57875b163c20.gif", "https://media.giphy.com/media/TxBXGd0h4kVS8/giphy.gif"];
+const burgerGifs = ["https://i.gifer.com/Qlsi.gif", "https://gif-free.com/uploads/posts/2018-01/1517419327_anime-girl-eating-burger.gif", "https://i.gifer.com/nwL.gif", "https://i.gifer.com/ElSx.gif", "https://img.fireden.net/a/image/1486/57/1486574417193.gif"];
 
 var inGame = false;
 var inRequest = false;
@@ -409,11 +408,11 @@ client.on('message', message =>
 				{
 					message.reply("please specify a user to *rape*!");
 				} else {
-					var x = randomize(0, rapeGifs.length);
+					let x = randomize(0, rapeGifs.length);
 
 					let botembed = new Discord.RichEmbed()
 					.setImage(rapeGifs[x])
-					.setDescription(`${user} has been brutally sodomized by ${message.author}`)
+					.setDescription(`**${user.username}** has been brutally sodomized by **${sender.username}**`)
 					.setColor("#fcc66a");
 					
 					return message.channel.send(botembed);
@@ -426,12 +425,33 @@ client.on('message', message =>
 					message.reply("please specify a user to message.");
 				} else {
 					delete msg0[1];
-					var msg1 = msg0.join(" ");
+					let msg1 = msg0.join(" ");
 					try {
 						user.send(msg1);
 					} catch(err) {
 						post("Cannot send message to this user!");
 					}
+				}
+				break;
+				
+			case "burger":
+				let x = randomize(0, burgerGifs.length);
+				
+				if(message.mentions.users.size < 1)
+				{
+					let botembed = new Discord.RichEmbed()
+					.setImage(burgerGifs[x])
+					.setDescription(`**${sender.username}** is eating a hamburger!`)
+					.setColor("#fcc66a");
+					
+					return message.channel.send(botembed);		
+				} else {
+					let botembed = new Discord.RichEmbed()
+					.setImage(burgerGifs[x])
+					.setDescription(`**${sender.username}** is feeding a hamburger to **${user.username}**`)
+					.setColor("#fcc66a");
+					
+					return message.channel.send(botembed);		
 				}
 				break;
 				
