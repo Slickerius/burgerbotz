@@ -438,7 +438,10 @@ client.on('message', message =>
 						let msg1 = msg0.join(" ");
 						user.send(msg1);
 						post(":incoming_envelope: **Message sent!**");
-						client.lastMessage.delete(50);
+						setTimeout(function()
+					        {
+							client.lastMessage.delete();
+						}, 500);
 					}
 				}
 				break;
