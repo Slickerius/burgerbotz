@@ -441,14 +441,14 @@ client.on('message', message =>
 				{
 					let botembed = new Discord.RichEmbed()
 					.setImage(burgerGifs[yz])
-					.setDescription(`**${sender.username}** is eating a hamburger!`)
+					.setDescription(`:hamburger: **${sender.username}** is eating a hamburger!`)
 					.setColor("#fcc66a");
 					
 					return message.channel.send(botembed);		
 				} else {
 					let botembed = new Discord.RichEmbed()
 					.setImage(burgerGifs[yz])
-					.setDescription(`**${sender.username}** is feeding a hamburger to **${user.username}**`)
+					.setDescription(`:hamburger: **${sender.username}** is feeding a hamburger to **${user.username}**`)
 					.setColor("#fcc66a");
 					
 					return message.channel.send(botembed);		
