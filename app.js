@@ -365,7 +365,7 @@ client.on('message', message =>
 				break;
 			
 			case "s":
-				var x = randomize(0, 5);
+				let x = randomize(0, 5);
 				if(args[0] != null)
 				{
 					if(x > 1)
