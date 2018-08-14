@@ -30,7 +30,7 @@ function randomize(min, max)
 }
 
 const prefix = '/';
-const helpTab = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/coinflip - Flips a coin\n/burger - A burger a day keeps the doctor away!\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
+const helpTab = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/burger - A burger a day keeps the doctor away!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
 const invite = "https://discordapp.com/oauth2/authorize/?permissions=8&scope=bot&client_id=477763761629954060";
 const rapeGifs = ["https://img.4plebs.org/boards/sp/image/1405/27/1405279865972.gif", "https://media1.tenor.com/images/dc7284a153bbc22dd2ddda022957e2be/tenor.gif", "https://i.pinimg.com/originals/ce/41/9c/ce419c7a3723967df36b4a3c7ddfc8ac.gif", "https://i.pinimg.com/originals/9c/11/f6/9c11f69bdf4517a6226f57875b163c20.gif", "https://media.giphy.com/media/TxBXGd0h4kVS8/giphy.gif"];
