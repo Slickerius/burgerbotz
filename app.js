@@ -440,8 +440,8 @@ client.on('message', message =>
 						post(":incoming_envelope: **Message sent!**");
 						setTimeout(function()
 						{
-							client.user.lastMessage.delete(5);
-						}, 500);
+							client.user.lastMessage.delete();
+						}, 3000);
 					}
 				}
 				break;
