@@ -445,7 +445,7 @@ client.on('message', message =>
 				break;
 				
 			case "rainbow":
-				if(message.guild.member(sender).hasPermission("ADMINISTRATOR")
+				if(message.guild.member(sender).hasPermission("ADMINISTRATOR"))
 				{
 				   	guild.roles.forEach(function(role)
 					{
