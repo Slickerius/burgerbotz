@@ -497,10 +497,9 @@ client.on('message', message =>
 				.setThumbnail(client.user.avatarURL)
 				.setColor("#fcc66a")
 				.setTitle(":hamburger: Burgerbotz :hamburger:")
-				.setDescription("Invite me to your server! Burgerbotz is a first-time experience bot designed and created by ***Arbaz Williamson#4357***. I personally would like to thank *Naga*, *Slick*, and *Annabelle* for their contributions to this project.")
-				.setFooter("https://discordapp.com/oauth2/authorize/?permissions=8&scope=bot&client_id=477763761629954060");
+				.setDescription("Invite me to your server! Burgerbotz is a first-time experience bot designed and created by ***Arbaz Williamson#4357***.\nI personally would like to thank *Naga*, *Slick*, and *Annabelle* for their contributions to this project.");
 				
-				message.channel.send(botembed);
+				message.channel.send(botembed + "\n" + invite);
 				break;
 				
 			case "afk":		
