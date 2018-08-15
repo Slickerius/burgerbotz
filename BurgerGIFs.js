@@ -1,1 +1,0 @@
-module.exports = ["https://i.gifer.com/Qlsi.gif", "https://media.giphy.com/media/EmSCxtcjQCmXK/giphy.gif", "https://gif-free.com/uploads/posts/2018-01/1517419327_anime-girl-eating-burger.gif", "https://i.gifer.com/nwL.gif", "https://i.gifer.com/ElSx.gif", "https://img.fireden.net/a/image/1486/57/1486574417193.gif"];
