@@ -35,8 +35,8 @@ const prefix = '/';
 const helpTab = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/burger - A burger a day keeps the doctor away!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
 const invite = "\uD83C\uDF80\n<https://bit.ly/2KQn8fX>";
-const rapeGifs = require('RapeGIFs.js');
-const burgerGifs = require('BurgerGIFs.js');
+const rapeGifs = require('/RapeGIFs.js');
+const burgerGifs = require('/BurgerGIFs.js');
 
 var inGame = false;
 var inRequest = false;
