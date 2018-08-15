@@ -34,7 +34,7 @@ const helpTab = "```/afk - Sets away from keyboard status\n/battle - Challenges 
 
 const invite = "\uD83C\uDF80\n<https://bit.ly/2KQn8fX>";
 const rapeGifs = require('RapeGIFs.js');
-const burgerGifs = require('BurgerGIFs');
+const burgerGifs = require('BurgerGIFs.js');
 
 var inGame = false;
 var inRequest = false;
