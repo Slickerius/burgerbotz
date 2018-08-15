@@ -29,6 +29,8 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+//a
+
 const prefix = '/';
 const helpTab = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/burger - A burger a day keeps the doctor away!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
