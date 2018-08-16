@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const unst = require('./storage/unstatics.js');
-const status = "with Annabelle nigger tits";
+const status = "with Carlton";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var hqChannel;
