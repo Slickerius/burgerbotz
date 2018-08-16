@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const unst = require('./storage/unstatics.js');
+const status = "with Annabelle nigger tits";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var hqChannel;
@@ -28,7 +29,7 @@ client.on('ready', () =>
 	    }
 	);
 		
-   client.user.setGame("with Carlton");
+   client.user.setGame(status);
    client.guilds.forEach(function(guild)
    {
 	if(guild.id === "424507027432144913")
