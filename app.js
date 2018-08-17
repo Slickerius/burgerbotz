@@ -12,12 +12,6 @@ client.on('ready', () =>
 {
    var x = 0;
    console.log('Burgerbotz ready! :3');
-		
-   client.guilds.forEach(function(guild)
-   {
-	servers[x] = guild;
-	x++;
-   });		
 	
    client.user.setGame(status);
    client.guilds.forEach(function(guild)
@@ -524,15 +518,7 @@ client.on('message', message =>
 				}
 				break;
 				
-			case "inf":
-				var x = 0;
-				post("***__Burgerbotz Servers__***");
-				for(i = 0; i < servers.length; i++)
-				{
-					post("**>" + servers[i].name + ":** " + servers[i].owner.user.username + "#" + servers[i].owner.user.discriminator);
-				}
-				post("Total: " + x + " servers.");
-				break;
+			
 				
 			case "invite":
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
