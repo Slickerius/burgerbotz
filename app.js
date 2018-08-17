@@ -1,4 +1,19 @@
-const Discord = require('discord.js');
+const fs = require('fs');
+
+var data = {}
+data.table = []
+for (i=0; i <26 ; i++){
+   var obj = {
+       id: i,
+       square: i * i
+   }
+   data.table.push(obj)
+}
+fs.writeFile ("input.json", JSON.stringify(data), function(err) {
+    if (err) throw err;
+    console.log('complete');
+    }
+);const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const unst = require('./storage/unstatics.js');
@@ -126,7 +141,12 @@ client.on('message', message =>
 				if(!database[userf.id]) database[userf.id] = {afk: false, afkMessage: ""};
 				if(database[userf.id].afk == true)
 				{
-					post(":footprints: **" + userf.username + "** is away from keyboard (***" + database[userf.id].afkMessage + "***)");	
+					if(database[userf.id].afkMessage == null)
+					{
+						post(":footprints: **" + userf.username + "** is away from keyboard");	
+					} else {
+						post(":footprints: **" + userf.username + "** is away from keyboard (***" + database[userf.id].afkMessage + "***)");	
+					}
 				}
 			})	
 		}
@@ -540,7 +560,12 @@ client.on('message', message =>
 					var a = arg.slice(1);
 					database[sender.id].afkMessage = a;
 					
-					post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***).");
+					if(a == null)
+					{
+						post(":footprints: **" + sender.username + "** is now AFK");	
+					} else {
+						post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
+					}
 				}
 				break;
 				
