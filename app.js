@@ -45,6 +45,8 @@ client.on('ready', () =>
    });
 });
 
+//a
+
 function randomize(min, max) 
 {
 	return Math.floor(Math.random() * (max - min)) + min;
