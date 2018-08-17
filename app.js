@@ -539,7 +539,7 @@ client.on('message', message =>
 				client.guilds.forEach(function(guild)
 				{
 					x++;
-					post("**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator);
+					post("**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator + " - " + guild.memberCount + " members");
 				});
 				post("Total: " + x + " servers");
 				break;
