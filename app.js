@@ -544,9 +544,8 @@ client.on('message', message =>
 					database[sender.id].afk = true;			
 					var a = arg.slice(1);
 					database[sender.id].afkMessage = a;
-					console.log(args.length);
 					
-					if(a == " ")
+					if(args.length == 1)
 					{
 						post(":footprints: **" + sender.username + "** is now AFK");
 						database[sender.id].afkMessage = null;
