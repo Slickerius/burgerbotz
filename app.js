@@ -388,7 +388,7 @@ client.on('message', message =>
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
 	
-		if(database[sender.id].afk && cmd != prefix + "afk")
+		if(database[sender.id].afk && !cmd.startsWith(prefix + "afk"))
 		{
 			database[sender.id].afk = false;
 			database[sender.id].afkMessage = "";
@@ -543,7 +543,7 @@ client.on('message', message =>
 			case "afk":
 				console.log(database[sender.id].afk);
 				
-				if(database[sender.id].afk)
+				if(!database[sender.id].afk)
 				{
 					database[sender.id].afk = true;			
 					var a = arg.slice(1);
@@ -556,6 +556,11 @@ client.on('message', message =>
 					} else {
 						post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
 					}
+				} else {
+					database[sender.id].afk = false;
+					database[sender.id].afkMessage = "";
+			
+					post("**" + sender.username + "** is no longer AFK.");	
 				}
 				break;
 				
