@@ -540,7 +540,8 @@ client.on('message', message =>
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
 				break;
 				
-			case "afk":		
+			case "afk":
+				console.log(database[sender.id].afk);
 				if(!database[sender.id].afk)
 				{
 					database[sender.id].afk = true;			
