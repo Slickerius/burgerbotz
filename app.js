@@ -6,11 +6,19 @@ const status = "with Carlton";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var hqChannel;
+var servers;
 
 client.on('ready', () => 
 {
+   var x = 0;
    console.log('Burgerbotz ready! :3');
 		
+   client.guilds.forEach(function(guild)
+   {
+	servers[x] = guild;
+	x++;
+   });		
+	
    client.user.setGame(status);
    client.guilds.forEach(function(guild)
    {
@@ -519,11 +527,10 @@ client.on('message', message =>
 			case "inf":
 				var x = 0;
 				post("***__Burgerbotz Servers__***");
-				client.guilds.forEach(function(guild)
+				for(i = 0; i < servers.length; i++)
 				{
-					x++;
-					post("**>" + guild.name + ":** " + guild.owner.user.username + "#" + guild.owner.user.discriminator);
-				});
+					post("**>" + servers[i].name + ":** " + servers[i].owner.user.username + "#" + servers[i].owner.user.discriminator);
+				}
 				post("Total: " + x + " servers.");
 				break;
 				
