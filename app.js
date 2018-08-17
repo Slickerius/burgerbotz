@@ -573,9 +573,9 @@ client.on('message', message =>
 			case "prune":
 				if(args.length >= 1)
 				{
-					if(!isNaN(parseFloat(n)))
+					var x = parseInt(args[1]);
+					if(!isNaN(parseFloat(x)))
 					{
-						var x = parseInt(args[0]);
 						message.channel.bulkDelete(x);
 					} else {
 						post("**" + sender.username + "**, you have to enter a valid number");	
