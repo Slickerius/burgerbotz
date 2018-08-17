@@ -542,7 +542,7 @@ client.on('message', message =>
 				
 			case "afk":
 				console.log(database[sender.id].afk);
-				if(!database[sender.id].afk)
+				if(database[sender.id].afk)
 				{
 					database[sender.id].afk = true;			
 					var a = arg.slice(1);
