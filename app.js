@@ -571,17 +571,17 @@ client.on('message', message =>
 				break;
 				
 			case "prune":
-				if(args.length >= 1)
+				if(args.length < 1)
 				{
+					post("*Correct usage: " + prefix + "prune <amount>*");
+				} else {
 					if(!isNaN(parseFloat(args[1])))
 					{
 						var x = parseInt(args[1]);
-						message.channel.bulkDelete(x);
+						message.channel.bulkDelete(x + 1);
 					} else {
 						post("**" + sender.username + "**, you have to enter a valid number");	
-					}
-				} else {
-					post("*Correct usage: " + prefix + "prune <amount>*");	
+					}	
 				}
 				break;
 				
