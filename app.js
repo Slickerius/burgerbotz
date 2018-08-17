@@ -393,6 +393,8 @@ client.on('message', message =>
 			database[sender.id].afk = false;
 			database[sender.id].afkMessage = "";
 			
+			console.log("a");
+			
 			post("**" + sender.username + "** is no longer AFK.");
 		}
 		
