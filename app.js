@@ -541,21 +541,18 @@ client.on('message', message =>
 				break;
 				
 			case "afk":
-				if(!database[sender.id]) database[sender.id] = {afk: false, afkMessage: ""};
 				console.log(database[sender.id].afk);
-				if(database[sender.id].afk)
-				{
-					database[sender.id].afk = true;			
-					var a = arg.slice(1);
-					database[sender.id].afkMessage = a;
+				
+				database[sender.id].afk = true;			
+				var a = arg.slice(1);
+				database[sender.id].afkMessage = a;
 					
-					if(args.length == 1)
-					{
-						post(":footprints: **" + sender.username + "** is now AFK.");
-						database[sender.id].afkMessage = null;
-					} else {
-						post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
-					}
+				if(args.length == 1)
+				{
+					post(":footprints: **" + sender.username + "** is now AFK.");
+					database[sender.id].afkMessage = null;
+				} else {
+					post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
 				}
 				break;
 				
