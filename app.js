@@ -53,7 +53,7 @@ function randomize(min, max)
 //a
 
 const prefix = '/';
-const helpTab = unst.rape;
+const helpTab = unst.help;
 
 const invite = "\uD83C\uDF80\n<https://bit.ly/2KQn8fX>";
 const rapeGifs = unst.rape;
