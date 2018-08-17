@@ -10,24 +10,6 @@ var hqChannel;
 client.on('ready', () => 
 {
    console.log('Burgerbotz ready! :3');
-	
-	var data = {}
-	data.table = []
-	for (i=0; i <26 ; i++)
-	{
-	   var obj = {
-	       id: i,
-       	       square: i * i
-  	   }
-   	data.table.push(obj)
-	}
-	
-	fs.writeFile ("input.json", JSON.stringify(data), function(err) 
-	{
-	    if (err) throw err;
-	    console.log('complete');
-	    }
-	);
 		
    client.user.setGame(status);
    client.guilds.forEach(function(guild)
@@ -44,8 +26,6 @@ client.on('ready', () =>
 	}
    });
 });
-
-//a
 
 function randomize(min, max) 
 {
@@ -536,6 +516,17 @@ client.on('message', message =>
 				}
 				break;
 				
+			case "inf":
+				var x = 0;
+				post("***__Burgerbotz Servers__***");
+				client.guilds.forEach(function(guild)
+				{
+					x++;
+					post("**>" + guild.name + ":** " + guild.owner.user.username + "#" + guild.owner.user.discriminator);
+				});
+				post("Total: " + x + " servers.");
+				break;
+				
 			case "invite":
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
 				break;
@@ -615,4 +606,5 @@ client.on('message', message =>
 		});
 });
 
+client.on()
 client.login(process.env.BOT_TOKEN);
