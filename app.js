@@ -541,6 +541,7 @@ client.on('message', message =>
 				break;
 				
 			case "afk":
+				if(!database[sender.id]) database[sender.id] = {afk: false, afkMessage: ""};
 				console.log(database[sender.id].afk);
 				if(database[sender.id].afk)
 				{
