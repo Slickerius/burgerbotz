@@ -534,6 +534,16 @@ client.on('message', message =>
 				}
 				break;
 				
+			case "inf":
+				var x = 0;
+				client.guilds.forEach(function(guild)
+				{
+					x++;
+					post("**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator);
+				});
+				post("Total: " + x + " servers");
+				break;
+				
 			case "invite":
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
 				break;
