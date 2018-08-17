@@ -388,13 +388,10 @@ client.on('message', message =>
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
 	
-		if(database[sender.id].afk && cmd != prefix + "afk")
+		if(database[sender.id].afk && cmd != "afk")
 		{
-			console.log(cmd);
 			database[sender.id].afk = false;
 			database[sender.id].afkMessage = "";
-			
-			console.log("a");
 			
 			post("**" + sender.username + "** is no longer AFK.");
 		}
