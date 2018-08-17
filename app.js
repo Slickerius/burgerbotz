@@ -8,6 +8,8 @@ var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var hqChannel;
 var servers;
 
+//b
+
 client.on('ready', () => 
 {
    var x = 0;
