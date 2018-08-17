@@ -106,14 +106,6 @@ client.on('message', message =>
 		
 		if(!database[sender.id]) database[sender.id] = {afk: false, afkMessage: ""};
 	
-		if(database[sender.id].afk)
-		{
-			database[sender.id].afk = false;
-			database[sender.id].afkMessage = "";
-			
-			post("**" + sender.username + "** is no longer AFK.");
-		}
-	
 		var luckPoints = randomize(0, 100);
 	
 		if(sender === client.user) return;
@@ -395,6 +387,14 @@ client.on('message', message =>
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
+	
+		if(database[sender.id].afk && cmd != "afk")
+		{
+			database[sender.id].afk = false;
+			database[sender.id].afkMessage = "";
+			
+			post("**" + sender.username + "** is no longer AFK.");
+		}
 		
 		switch(cmd)
 		{
@@ -543,16 +543,19 @@ client.on('message', message =>
 			case "afk":
 				console.log(database[sender.id].afk);
 				
-				database[sender.id].afk = true;			
-				var a = arg.slice(1);
-				database[sender.id].afkMessage = a;
-					
-				if(args.length == 1)
+				if(!database[sender.id].afk)
 				{
-					post(":footprints: **" + sender.username + "** is now AFK.");
+					database[sender.id].afk = true;			
+					var a = arg.slice(1);
+					database[sender.id].afkMessage = a;
+		
+					if(args.length == 1)
+					{
+						post(":footprints: **" + sender.username + "** is now AFK.");
 					database[sender.id].afkMessage = null;
-				} else {
-					post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
+					} else {
+						post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
+					}
 				}
 				break;
 				
