@@ -544,6 +544,7 @@ client.on('message', message =>
 					database[sender.id].afk = true;			
 					var a = arg.slice(1);
 					database[sender.id].afkMessage = a;
+					console.log(args.length);
 					
 					if(a == " ")
 					{
