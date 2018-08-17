@@ -545,12 +545,12 @@ client.on('message', message =>
 					var a = arg.slice(1);
 					database[sender.id].afkMessage = a;
 					
-					if(a == null)
+					if(a == " ")
 					{
-						post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
+						post(":footprints: **" + sender.username + "** is now AFK");
+						database[sender.id].afkMessage = null;
 					} else {
-						post(":footprints: **" + sender.username + "** is now AFK");	
-						console.log(a);
+						post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
 					}
 				}
 				break;
