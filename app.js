@@ -53,23 +53,18 @@ function randomize(min, max)
 //a
 
 const prefix = '/';
-const helpTab = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/burger - A burger a day keeps the doctor away!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
+const helpTab = unst.rape;
 
 const invite = "\uD83C\uDF80\n<https://bit.ly/2KQn8fX>";
 const rapeGifs = unst.rape;
 const burgerGifs = unst.burger;
 
-var inGame = false;
-var inRequest = false;
-var turnID;
-var reqID;
-var player1ID;
-var player2ID;
-var player1Name;
-var player2Name;
-var p1isCrippled = false;
-var p2isCrippled = false;
-var f0 = false;
+var inGame = false, inRequest = false,
+    turnID, reqID,
+    player1ID, player2ID,
+    player1Name, player2Name,
+    p1isCrippled = false, p2isCrippled = false,
+    f0 = false;
 
 client.on('message', message => 
 {
@@ -569,22 +564,7 @@ client.on('message', message =>
 					post("**" + sender.username + "** is no longer AFK.");	
 				}
 				break;
-				
-			case "prune":
-				if(args.length < 1)
-				{
-					post("*Correct usage: " + prefix + "prune <amount>*");
-				} else {
-					if(!isNaN(parseFloat(args[1])))
-					{
-						var x = parseInt(args[1]);
-						message.channel.bulkDelete(x + 1);
-					} else {
-						post("**" + sender.username + "**, you have to enter a valid number");	
-					}	
-				}
-				break;
-				
+	
 			case "battle":
 				if(message.mentions.users.size < 1) 
 				{
