@@ -550,7 +550,7 @@ client.on('message', message =>
 					
 					if(args.length == 1)
 					{
-						post(":footprints: **" + sender.username + "** is now AFK");
+						post(":footprints: **" + sender.username + "** is now AFK.");
 						database[sender.id].afkMessage = null;
 					} else {
 						post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
