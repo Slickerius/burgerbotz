@@ -388,8 +388,9 @@ client.on('message', message =>
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
 	
-		if(database[sender.id].afk && !args.startsWith(prefix + "afk"))
+		if(database[sender.id].afk && cmd != prefix + "afk")
 		{
+			console.log(cmd);
 			database[sender.id].afk = false;
 			database[sender.id].afkMessage = "";
 			
