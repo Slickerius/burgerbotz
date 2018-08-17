@@ -6,15 +6,29 @@ const status = "with Carlton";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var hqChannel;
-var servers;
-
-//a
 
 client.on('ready', () => 
 {
-   var x = 0;
    console.log('Burgerbotz ready! :3');
 	
+	var data = {}
+	data.table = []
+	for (i=0; i <26 ; i++)
+	{
+	   var obj = {
+	       id: i,
+       	       square: i * i
+  	   }
+   	data.table.push(obj)
+	}
+	
+	fs.writeFile ("input.json", JSON.stringify(data), function(err) 
+	{
+	    if (err) throw err;
+	    console.log('complete');
+	    }
+	);
+		
    client.user.setGame(status);
    client.guilds.forEach(function(guild)
    {
@@ -371,7 +385,7 @@ client.on('message', message =>
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
-	
+		
 		if(database[sender.id].afk && cmd != "afk")
 		{
 			database[sender.id].afk = false;
@@ -520,15 +534,11 @@ client.on('message', message =>
 				}
 				break;
 				
-			
-				
 			case "invite":
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
 				break;
 				
 			case "afk":
-				console.log(database[sender.id].afk);
-				
 				if(!database[sender.id].afk)
 				{
 					database[sender.id].afk = true;			
@@ -601,5 +611,4 @@ client.on('message', message =>
 		});
 });
 
-client.on()
 client.login(process.env.BOT_TOKEN);
