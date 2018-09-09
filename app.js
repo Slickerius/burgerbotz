@@ -69,7 +69,8 @@ var inGame = false, inRequest = false,
     f0 = false;
 
 //Flag game vars
-var inFGame = false, flagID;
+var inFGame = false;
+var flagID = "";
 
 client.on('message', message => 
 {
