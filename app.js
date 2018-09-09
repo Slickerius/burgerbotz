@@ -542,7 +542,7 @@ client.on('message', message =>
 				
 			case "flags":
 				var x = randomize(0, flags.length);
-				var flagID = flags[x].toLowerCase();
+				var flagID = flags[x].id.toLowerCase();
 				post(":flag_black: __***Flagspotting***__ :flag_black:");
 				post(":flag_" + flagID + ":");
 				break;
