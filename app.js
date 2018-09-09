@@ -60,6 +60,7 @@ const invite = "\uD83C\uDF80\n<https://bit.ly/2KQn8fX>";
 const rapeGifs = unst.rape;
 const burgerGifs = unst.burger;
 
+//Battle game vars
 var inGame = false, inRequest = false,
     turnID, reqID,
     player1ID, player2ID,
@@ -67,8 +68,22 @@ var inGame = false, inRequest = false,
     p1isCrippled = false, p2isCrippled = false,
     f0 = false;
 
+//Flag game vars
+var inFGame = false, flagID;
+
 client.on('message', message => 
 {
+		if(inFGame)
+		{
+			var response = message.content.toLowerCase(), flagName = flags[flagID].name.toLowerCase();
+			
+			if(response.includes(flagName))
+			{
+				post("***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "***");
+				inFGame = false;
+			}
+		}
+		
 		if(message.guild != null && message.channel != null && message.content != null)
 		{
 			console.log("[" + message.guild.name + "]<#" + message.channel.name + ">" + message.author.username + ": " + message.content);
@@ -542,9 +557,20 @@ client.on('message', message =>
 				
 			case "flags":
 				var x = randomize(0, flags.length);
-				var flagID = flags[x].id.toLowerCase();
-				post(":flag_black: __***Flagspotting***__ :flag_black:");
+				flagID = flags[x].id.toLowerCase();
+				inFGame = true;
+				
+				post(":checkered_flag: __***Flagspotting***__ :checkered_flag:\n*You have 10 seconds to guess the flag!*");
 				post(":flag_" + flagID + ":");
+				
+				setTimeout(function()
+				{
+					if(inFGame)
+					{	
+						post(":alarm_clock: **Time's up!** No one answered correctly. Answer: **" + flags[x].name + "**.");
+						inFGame = false;
+					}
+				}, 10000);
 				break;
 				
 			case "invite":
