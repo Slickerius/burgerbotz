@@ -362,7 +362,7 @@ client.on('message', message =>
 					post(":shrug: ***The battle has concluded with no clear victor.***");
 					inGame = false;
 				}
-			}, 180000);
+			}, 1800000);
 				
 		}
 	
