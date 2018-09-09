@@ -567,7 +567,7 @@ client.on('message', message =>
 				inFGame = true;
 				console.log(x + " " + xID + " " + flagID);
 				
-				post(":checkered_flag: __***Flagspotting***__ :checkered_flag:\n*You have 10 seconds to guess the flag!*");
+				post(":checkered_flag: __***Flagspotting***__ :checkered_flag:\n*You have 15 seconds to guess the flag!*");
 				post(":flag_" + xID + ":");
 				
 				flagTimeout = setTimeout(function()
@@ -577,7 +577,7 @@ client.on('message', message =>
 						post(":alarm_clock: **Time's up!** No one answered correctly. Answer: **" + flags[x].name + "**.");
 						inFGame = false;
 					}
-				}, 10000);	
+				}, 15000);	
 				}
 				break;
 				
