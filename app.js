@@ -70,7 +70,7 @@ var inGame = false, inRequest = false,
 
 //Flag game vars
 var inFGame = false;
-var flagID = "";
+var flagID;
 
 client.on('message', message => 
 {
@@ -559,7 +559,7 @@ client.on('message', message =>
 			case "flags":
 				var x = randomize(0, flags.length);
 				var xID = flags[x].id.toLowerCase();
-				flagID = xID;
+				flagID = x;
 				inFGame = true;
 				console.log(x + " " + xID + " " + flagID);
 				
