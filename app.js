@@ -557,6 +557,10 @@ client.on('message', message =>
 				break;
 				
 			case "flags":
+				if(inFGame)
+				{
+					post("A flagspotting game is already underway!");
+				} else {
 				var x = randomize(0, flags.length);
 				var xID = flags[x].id.toLowerCase();
 				flagID = x;
@@ -573,7 +577,8 @@ client.on('message', message =>
 						post(":alarm_clock: **Time's up!** No one answered correctly. Answer: **" + flags[x].name + "**.");
 						inFGame = false;
 					}
-				}, 10000);
+				}, 10000);	
+				}
 				break;
 				
 			case "invite":
