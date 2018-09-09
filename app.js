@@ -54,6 +54,7 @@ function randomize(min, max)
 
 const prefix = '/';
 const helpTab = unst.help;
+const flags = unst.flags;
 
 const invite = "\uD83C\uDF80\n<https://bit.ly/2KQn8fX>";
 const rapeGifs = unst.rape;
@@ -372,7 +373,9 @@ client.on('message', message =>
 	
 		if(cmd0.charAt(0) == prefix)
 		{
-			cmd = cmd0.slice(1).toLowerCase();
+			cmd = cmd0.slice(1).
+			
+			Case();
 		}
 		
 		delete msg0[0];
@@ -537,6 +540,13 @@ client.on('message', message =>
 					post("**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator + " - " + guild.memberCount + " members");
 				});
 				post("Total: " + x + " servers");
+				break;
+				
+			case "flags":
+				var x = randomize(0, flags.length);
+				var flagID = flags[x].toLowerCase();
+				post(":flag_black: __***Flagspotting***__ :flag_black:");
+				post(":flag_" + flagID + ":");
 				break;
 				
 			case "invite":
