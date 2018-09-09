@@ -79,7 +79,7 @@ client.on('message', message =>
 			
 			if(response.includes(flagName))
 			{
-				post("***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "***");
+				post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "***");
 				clearTimeout(flagTimeout);
 				inFGame = false;
 			}
