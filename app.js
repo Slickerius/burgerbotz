@@ -69,8 +69,7 @@ var inGame = false, inRequest = false,
     f0 = false;
 
 //Flag game vars
-var inFGame = false;
-var flagID;
+var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
@@ -81,6 +80,7 @@ client.on('message', message =>
 			if(response.includes(flagName))
 			{
 				post("***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "***");
+				clearTimeout(flagTimeout);
 				inFGame = false;
 			}
 		}
@@ -566,7 +566,7 @@ client.on('message', message =>
 				post(":checkered_flag: __***Flagspotting***__ :checkered_flag:\n*You have 10 seconds to guess the flag!*");
 				post(":flag_" + xID + ":");
 				
-				setTimeout(function()
+				flagTimeout = setTimeout(function()
 				{
 					if(inFGame)
 					{	
