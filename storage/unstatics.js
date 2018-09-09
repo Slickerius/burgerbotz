@@ -250,6 +250,7 @@ flags = [
   {id: "TM", name: "Turkmenistan"},
   {id: "TC", name: "Turks and Caicos Islands"},
   {id: "TV", name: "Tuvalu"},
+  
   {id: "UG", name: "Uganda"},
   {id: "UA", name: "Ukraine"},
   {id: "AE", name: "United Arab Emirates"},
@@ -258,13 +259,17 @@ flags = [
   {id: "UM", name: "US Minor Outlying Islands"},
   {id: "UY", name: "Uruguay"},
   {id: "UZ", name: "Uzbekistan"},
+  
   {id: "VU", name: "Vanuatu"},
   {id: "VE", name: "Venezuela"},
   {id: "VN", name: "Vietnam"},
   {id: "VI", name: "US Virgin Islands"},
+  
   {id: "WF", name: "Wallis and Futuna"},
   {id: "EH", name: "Western Sahara"},
+  
   {id: "YE", name: "Yemen"},
+  
   {id: "ZM", name: "Zambia"},
   {id: "ZW", name: "Zimbabwe"}];
 
