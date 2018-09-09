@@ -1,3 +1,21 @@
+flags = [
+  {id: "AF", name: "Afghanistan"},
+  {id: "AX", name: "Aland Islands"},
+  {id: "AL", name: "Albania"},
+  {id: "DZ", name: "Algeria"},
+  {id: "AS", name: "American Samoa"},
+  {id: "AD", name: "Andorra"},
+  {id: "AO", name: "Angola"},
+  {id: "AI", name: "Anguilla"},
+  {id: "AQ", name: "Antarctica"},
+  {id: "AG", name: "Antigua and Barbuda"},
+  {id: "AR", name: "Argentina"},
+  {id: "AM", name: "Armenia"},
+  {id: "AW", name: "Aruba"},
+  {id: "AU", name: "Australia"},
+  {id: "AT", name: "Austria"},
+  {id: "AZ", name: "Azerbaijan"}];
+
 burger = [
   "https://i.gifer.com/Qlsi.gif", 
   "https://media.giphy.com/media/EmSCxtcjQCmXK/giphy.gif", 
@@ -18,4 +36,4 @@ rape = [
 
 help = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/burger - A burger a day keeps the doctor away!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
-module.exports = {burger, rape, help};
+module.exports = {flags, burger, rape, help};
