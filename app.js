@@ -561,6 +561,7 @@ client.on('message', message =>
 				var xID = flags[x].id.toLowerCase();
 				flagID = xID;
 				inFGame = true;
+				console.log(x + " " + xID + " " + flagID);
 				
 				post(":checkered_flag: __***Flagspotting***__ :checkered_flag:\n*You have 10 seconds to guess the flag!*");
 				post(":flag_" + xID + ":");
