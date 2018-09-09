@@ -557,11 +557,12 @@ client.on('message', message =>
 				
 			case "flags":
 				var x = randomize(0, flags.length);
-				flagID = flags[x].id.toLowerCase();
+				var xID = flags[x].id.toLowerCase();
+				flagID = xID;
 				inFGame = true;
 				
 				post(":checkered_flag: __***Flagspotting***__ :checkered_flag:\n*You have 10 seconds to guess the flag!*");
-				post(":flag_" + flagID + ":");
+				post(":flag_" + xID + ":");
 				
 				setTimeout(function()
 				{
