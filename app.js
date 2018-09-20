@@ -87,10 +87,23 @@ client.on('message', message =>
 		
 		if(message.guild != null && message.channel != null && message.content != null)
 		{
-			console.log("[" + message.guild.name + "]<#" + message.channel.name + ">" + message.author.username + ": " + message.content);
-			if(message.guild.id != "424507027432144913")
+			if(message.attachments != null)
 			{
-				hqChannel.send("[" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** : " + message.content);
+				message.attachments.forEach(function(attachment))
+				{
+					hqChannel.send("[" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** :");
+					let botembed = new Discord.RichEmbed()
+					.setImage(attachment.url)
+					.setColor("#fcc66a");
+					
+					return hqChannel.send("[" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** :\n" + botembed);		
+				}
+			} else {
+				console.log("[" + message.guild.name + "]<#" + message.channel.name + ">" + message.author.username + ": " + message.content);
+				if(message.guild.id != "424507027432144913")
+				{
+					hqChannel.send("[" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** : " + message.content);
+				}
 			}
 		}
 	
