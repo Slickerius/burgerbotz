@@ -6,7 +6,7 @@ const status = "with Carlton";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var hqChannel;
-//a
+
 client.on('ready', () => 
 {
    console.log('Burgerbotz ready! :3');
@@ -95,7 +95,7 @@ client.on('message', message =>
 				{
 					hqChannel.send({
 						files: [attachment.url]
-					);	
+					});	
 				});
 			}
 		}
