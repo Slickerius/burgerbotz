@@ -89,7 +89,7 @@ client.on('message', message =>
 		{
 			if(message.attachments != null)
 			{
-				message.attachments.forEach(function(attachment))
+				message.attachments.forEach(function(attachment)
 				{
 					hqChannel.send("[" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** :");
 					let botembed = new Discord.RichEmbed()
@@ -97,7 +97,7 @@ client.on('message', message =>
 					.setColor("#fcc66a");
 					
 					return hqChannel.send("[" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** :\n" + botembed);		
-				}
+				});
 			} else {
 				console.log("[" + message.guild.name + "]<#" + message.channel.name + ">" + message.author.username + ": " + message.content);
 				if(message.guild.id != "424507027432144913")
