@@ -17,7 +17,7 @@ module.exports =
 		}
 	},
 	
-	rape: function(channel, message)
+	rape: function(channel, message, arr)
 	{
 		if(message.mentions.users.size < 1)
 		{
