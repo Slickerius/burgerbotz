@@ -43,10 +43,9 @@ module.exports =
 		var i = 0;
 		for(var x of commands0)
 		{
-			helpTab += commands0[i] + "- " + commands.get(commands0) + "\n";  
+			helpTab += commands0[i] + "- " + commands.get(commands0[i]) + "\n";  
 			i += 1;
 		}
-		console.log(commands);
 		helpTab += "```";
 		channel.send(ff);
 		return channel.send(helpTab);
