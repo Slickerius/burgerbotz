@@ -444,7 +444,7 @@ client.on('message', message =>
 				break;
 				
 			case "fx":
-				post(database[message.author.id]);
+				post(database[message.author.id].afk);
 				break;
 					
 			case "dm":
