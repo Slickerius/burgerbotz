@@ -8,6 +8,7 @@ var commands = new Map([
 		['help', 'Shows this help menu!'], 
 		['burger', 'Gives user burger!'],
 		['rape', 'Rapes user!'],
+		['batle', 'Batlebatle'],
 		]);
 		 
 var commandNames = Array.from(commands.keys());
@@ -17,7 +18,7 @@ for(var x of commandNames)
 	ff = y.length;
 	if(y.length < 20)
 	{
-		 for(i = 0; i < 20 - y.length; i++)
+		 for(i = 0; i < (20 - y.length); i++)
 		 {
 			y += " ";
 		 }
