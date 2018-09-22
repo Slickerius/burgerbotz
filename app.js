@@ -464,41 +464,11 @@ client.on('message', message =>
 				break;
 					
 			case "dm":
-				if(message.mentions.users.size < 1)
-				{
-					message.reply("please specify a user to message.");
-				} else {
-					if(!user.bot)
-					{
-						delete msg0[1];
-						let msg1 = msg0.join(" ");
-						user.send(msg1);
-						post(":incoming_envelope: **Message sent!**");
-					} else {
-						post(":octagonal_sign **You can only send direct messages to humans!**");	
-					}
-				}
+				handler.dm(ch, message, msg0);
 				break;
 				
 			case "burger":
-				let yz = randomize(0, burgerGifs.length);
-				
-				if(message.mentions.users.size < 1)
-				{
-					let botembed = new Discord.RichEmbed()
-					.setImage(burgerGifs[yz])
-					.setDescription(`:hamburger: **${sender.username}** is eating a hamburger!`)
-					.setColor("#fcc66a");
-					
-					return message.channel.send(botembed);		
-				} else {
-					let botembed = new Discord.RichEmbed()
-					.setImage(burgerGifs[yz])
-					.setDescription(`:hamburger: **${sender.username}** is feeding a hamburger to **${user.username}**`)
-					.setColor("#fcc66a");
-					
-					return message.channel.send(botembed);		
-				}
+				handler.burger(ch, message, burgerGifs);
 				break;
 				
 			case "nigger":
