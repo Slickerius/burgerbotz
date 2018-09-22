@@ -94,7 +94,7 @@ client.on('message', message =>
 				var day = date.getDate();
 				var month = date.getMonth() + 1;
 				var year = date.getFullYear();
-				hqChannel.send("[" + day + "/" + month + "/" + year + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "][" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** : " + message.content);
+				hqChannel.send("[" + day + "/" + month + "/" + year + " | " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "][" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** : " + message.content);
 				message.attachments.forEach(function(attachment)
 				{
 					hqChannel.send({
