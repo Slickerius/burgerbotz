@@ -19,10 +19,11 @@ for(var x of commandNames)
 {
 	var y = x;
 	ff = y.length;
+	var l = 15 - y.length;
 	if(y.length < 15)
 	{
 		 if(y.length < 5) y += " ";
-		 for(i = 0; i < (15 - y.length); i++)
+		 for(i = 0; i < l; i++)
 		 {
 			y += " ";
 		 }
