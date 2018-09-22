@@ -409,8 +409,6 @@ client.on('message', message =>
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
-	
-		console.log(args[0]);
 		
 		if(database[sender.id].afk && cmd != "afk")
 		{
@@ -488,12 +486,21 @@ client.on('message', message =>
 				{
 					post("You have to mention another user.");
 				} else {
-					if(!database[user.id].burgers)
+					if(args[1] === parseInt(args[1], 10))
 					{
-						database[user.id] = {burgers: 100};
-						database[user.id].burgers += parseInt(msg0[0]);
+						if(!database[user.id].burgers)
+						{
+							database[user.id] = {burgers: 100};
+							database[user.id].burgers += parseInt(args[1]);
+							database[sender.id].burgers -= parseInt(args[1]);
+							post("**Successfully given :hamburger: " + args[1] + " to user " user.username + "!**");
+						} else {
+							database[user.id].burgers += parseInt(args[1]);
+							database[sender.id].burgers -= parseInt(args[1]);
+							post("**Successfully given :hamburger: " + args[1] + " to user " user.username + "!**");
+						}
 					} else {
-						database[user.id].burgers += parseInt(msg0[0]);
+						post("**You have to enter a valid number!**");	
 					}
 				}
 				break;
