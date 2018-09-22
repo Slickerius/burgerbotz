@@ -40,7 +40,8 @@ module.exports =
 	burger: function(channel, message, arr)
 	{
 		let yz = randomize(0, arr.length);
-				
+		var user = message.mentions.users.first();
+		
 		if(message.mentions.users.size < 1)
 		{
 			let botembed = new Discord.RichEmbed()
@@ -51,8 +52,8 @@ module.exports =
 			return channel.send(botembed);		
 		} else {
 			let botembed = new Discord.RichEmbed()
-			.setImage(burgerGifs[yz])
-			.setDescription(`:hamburger: **${sender.username}** is feeding a hamburger to **${user.username}**`)
+			.setImage(arr[yz])
+			.setDescription(`:hamburger: **${message.author.username}** is feeding a hamburger to **${user.username}**`)
 			.setColor("#fcc66a");
 					
 			return channel.send(botembed);		
