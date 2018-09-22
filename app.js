@@ -120,6 +120,7 @@ client.on('message', message =>
 		}
 		
 		let sender = message.author;
+		let ch = message.channel;
 		
 		if(!database[sender.id]) database[sender.id] = {afk: false, afkMessage: ""};
 	
@@ -459,19 +460,7 @@ client.on('message', message =>
 				break;
 					
 			case "rape":
-				if(message.mentions.users.size < 1)
-				{
-					message.reply("please specify a user to *rape*!");
-				} else {
-					let x = randomize(0, rapeGifs.length);
-
-					let botembed = new Discord.RichEmbed()
-					.setImage(rapeGifs[x])
-					.setDescription(`**${user.username}** has been brutally sodomized by **${sender.username}**`)
-					.setColor("#fcc66a");
-					
-					return message.channel.send(botembed);
-				}
+				handler.rape(ch, message);
 				break;
 					
 			case "dm":
@@ -539,13 +528,9 @@ client.on('message', message =>
 					}
 				}
 				break;
-				
-			case "resb":
-				inGame = false;
-				break;
 			
 			case "post":
-				handler.post(message.channel, arg);
+				handler.post(ch, arg);
 				break;
 				
 			case "inf":
