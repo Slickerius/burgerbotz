@@ -19,15 +19,14 @@ module.exports =
 	
 	rape: function(channel, message, arr)
 	{
-		var rapeGifs = arr;
 		if(message.mentions.users.size < 1)
 		{
 			return message.reply("please specify a user to *rape*!");
 		} else {
-			let x = randomize(0, rapeGifs.length);
+			let x = randomize(0, arr.length);
 
 			let botembed = new Discord.RichEmbed()
-			.setImage(rapeGifs[x])
+			.setImage(arr[x])
 			.setDescription(`**${user.username}** has been brutally sodomized by **${sender.username}**`)
 			.setColor("#fcc66a");
 				
