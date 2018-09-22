@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 
+var ff;
+
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var commands = new Map([
 		['help', 'Shows this help menu!'], 
@@ -12,9 +14,10 @@ var commandNames = Array.from(commands.keys());
 for(var x of commandNames)
 {
 	var y = x;
-	if(y.length < 15)
+	ff = y.length;
+	if(y.length < 20)
 	{
-		 for(i = 0; i < 15 - y.length; i++)
+		 for(i = 0; i < 20 - y.length; i++)
 		 {
 			y += " ";
 		 }
@@ -44,6 +47,7 @@ module.exports =
 		}
 		
 		helpTab += "```";
+		channel.send(ff);
 		return channel.send(helpTab);
 	},
 		 
