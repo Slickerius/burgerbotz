@@ -38,7 +38,10 @@ module.exports =
 		 
 		for(var x of commands0)
 		{
-			helpTab += commands0 + "- " + commands.get(commands0) + "\n";  
+			for(i = 0; i < commands0.length; i++)
+			{
+				helpTab += commands0[i] + "- " + commands.get(commands0) + "\n";  
+			}
 		}
 		
 		helpTab += "```";
