@@ -9,6 +9,9 @@ var commands = new Map([
 		['burger', 'Gives user burger!'],
 		['rape', 'Rapes user!'],
 		['batle', 'Batlebatle'],
+		['aaa', 'bbb'],
+		['cc', 'dd'],
+		['eeeeeee', 'fffffff'],
 		]);
 		 
 var commandNames = Array.from(commands.keys());
