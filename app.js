@@ -444,7 +444,7 @@ client.on('message', message =>
 				break;
 				
 			case "fx":
-				for(var x of database)
+				for(var x in database)
 				{
 					post(database[x].burgers);
 				}
