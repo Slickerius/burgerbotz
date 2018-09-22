@@ -102,8 +102,8 @@ module.exports =
 			{
 				delete msg[1];
 				let msg1 = msg.join(" ");
+				channel.send(":incoming_envelope: **Message sent!**");
 				return user.send(msg1);
-				return channel.send(":incoming_envelope: **Message sent!**");
 			} else {
 				return channel.send(":octagonal_sign **You can only send direct messages to humans!**");	
 			}
