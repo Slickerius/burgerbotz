@@ -470,7 +470,7 @@ client.on('message', message =>
 				break;
 			
 			case "burgers":
-				if(message.mentions.users < 1)
+				if(message.mentions.users.size < 1)
 				{
 					if(!database[sender.id].burgers) database[sender.id] = {burgers: 100};
 					post(database[sender.id].burgers);
