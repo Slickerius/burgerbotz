@@ -428,23 +428,11 @@ client.on('message', message =>
 				break;
 					
 			case "random":
-				if(arg[1] == null)
-				{
-					post("Correct usage: /random <upper bound>");
-				} else {
-					var y = parseInt(args[1]);
-					post("Returned integer " + Math.floor(Math.random() * y));
-				}
+				handler.random(ch, args);
 				break;
 					
 			case "coinflip":
-				var x = Math.floor(Math.random() * 2);
-				if(x === 0)
-				{
-					message.reply("you got heads");
-				} else {
-					message.reply("you got tails");
-				}
+				handler.coinflip(message);
 				break;
 					
 			case "rape":
