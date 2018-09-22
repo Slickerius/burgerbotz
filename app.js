@@ -444,7 +444,10 @@ client.on('message', message =>
 				break;
 				
 			case "fx":
-				post(database[message.author.id].afk);
+				for(var x of database)
+				{
+					post(database[x].burgers);
+				}
 				break;
 					
 			case "dm":
