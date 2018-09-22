@@ -410,7 +410,7 @@ client.on('message', message =>
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
 	
-		console.log(msg[0]);
+		console.log(args[0]);
 		
 		if(database[sender.id].afk && cmd != "afk")
 		{
