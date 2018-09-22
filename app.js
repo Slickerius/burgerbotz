@@ -73,7 +73,7 @@ var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
-		if(!database[message.author.id].burgers) database[message.author.id] = {burgers: 10};
+		if(!database[message.author.id]) database[message.author.id] = {burgers: 10};
 		var date = message.createdAt;
 		if(inFGame)
 		{
