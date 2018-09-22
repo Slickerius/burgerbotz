@@ -152,7 +152,7 @@ module.exports =
 	{
 		var x = randomize(0, 5);
 		console.log(msg[0]);
-		if(msg[0] != null)
+		if(msg[1] != null)
 		{
 			if(x > 1)
 			{
