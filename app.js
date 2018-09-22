@@ -54,7 +54,6 @@ function randomize(min, max)
 //a
 
 const prefix = '/';
-const helpTab = unst.help;
 const flags = unst.flags;
 
 const invite = "\uD83C\uDF80\n<https://bit.ly/2KQn8fX>";
