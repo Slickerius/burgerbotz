@@ -417,15 +417,11 @@ client.on('message', message =>
 		switch(cmd)
 		{
 			case "help":
-				post(":hamburger: ***__Burgerbotz Commands__*** :hamburger:\n" + helpTab);
+				handler.help(ch);
 				break;
 			
 			case "s":
 				handler.spit(ch, message, args, arg);
-				break;
-				
-			case "h":
-				handler.help(ch);
 				break;
 				
 			case "ping":
