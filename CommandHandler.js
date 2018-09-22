@@ -6,6 +6,8 @@ module.exports = {flags, burger, rape, help};
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var commands = unst.commandMap;
+
+var ambla = "Wawa";
 		 
 var commandNames = Array.from(commands.keys());
 for(var x of commandNames)
@@ -186,5 +188,15 @@ module.exports =
 			var y = parseInt(args[1]);
 			channel.send("Returned integer " + Math.floor(Math.random() * y));
 		}	
+	},
+	
+	setAmbla: function(x)
+	{
+		ambla = x;	
+	},
+	
+	getAmbla: function()
+	{
+		return ambla;	
 	}
 };
