@@ -73,6 +73,7 @@ var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
+		database[message.author.id] = {burgers: 100};
 		var date = message.createdAt;
 		if(inFGame)
 		{
@@ -481,7 +482,7 @@ client.on('message', message =>
 				break;
 				
 			case "pay":
-				if(msg0[0] == null)
+				if(message.mentions.users.size < 1)
 				{
 					post("You have to mention another user.");
 				} else {
@@ -493,6 +494,7 @@ client.on('message', message =>
 						database[user.id].burgers += 1;
 					}
 				}
+				break;
 			
 			case "inf":
 				var x = 0;
