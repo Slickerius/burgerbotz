@@ -179,7 +179,7 @@ module.exports =
 	
 	random: function(channel, args)
 	{
-		if(arg[1] == null)
+		if(args[1] == null)
 		{
 			channel.send("Correct usage: /random <upper bound>");
 		} else {
