@@ -581,7 +581,7 @@ client.on('guildCreate', guild =>
 	{
 		if(channel.name == "general")
 		{
-			channel.send("\u1F354 __***Burgerbotz***__ \u1F354\nThank you for adding me! Burgerbotz is a practice bot made by A&A Consortium for research purposes. Type /help for the list of commands.");	
+			channel.send(":hamburger: __***Burgerbotz***__ :hamburger:\nThank you for adding me! Burgerbotz is a practice bot made by A&A Consortium for research purposes.\nType /help for the list of commands.");	
 		}
 	});
 });
