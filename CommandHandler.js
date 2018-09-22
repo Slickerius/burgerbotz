@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 module.exports = {flags, burger, rape, help};
-©
+
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var commands = new Map([
 		['/help', 'Shows this help menu'], 
