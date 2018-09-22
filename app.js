@@ -424,6 +424,10 @@ client.on('message', message =>
 				handler.spit(ch, message, args, arg);
 				break;
 				
+			case "h":
+				handler.help(ch);
+				break;
+				
 			case "ping":
 				post("***PONG!*** Returned request in " + (Date.now() - message.createdTimestamp) + " ms");
 				break;
