@@ -163,5 +163,17 @@ module.exports =
 		} else {
 			return channel.send("Use /s to spit on something's grave");	
 		}	
+	},
+	
+	coinflip: function(message)
+	{
+		var x = randomize(0, 1);
+		console.log(x);
+		if(x === 0)
+		{
+			message.reply("you got heads");
+		} else {
+			message.reply("you got tails");
+		}	
 	}
 };
