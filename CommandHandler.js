@@ -19,6 +19,7 @@ module.exports =
 	
 	rape: function(channel, message, arr)
 	{
+		var rapeGifs = arr;
 		if(message.mentions.users.size < 1)
 		{
 			return message.reply("please specify a user to *rape*!");
