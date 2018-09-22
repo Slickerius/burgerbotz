@@ -1,24 +1,30 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 
-var ff;
-
+module.exports = {flags, burger, rape, help};
+©
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var commands = new Map([
-		['help', 'Shows this help menu!'], 
-		['burger', 'Gives user burger!'],
-		['rape', 'Rapes user!'],
-		['batle', 'Batlebatle'],
-		['aaa', 'bbb'],
-		['cc', 'dd'],
-		['eeeeeee', 'fffffff'],
+		['/help', 'Shows this help menu'], 
+		['/afk', 'Sets away from keyboard status'], 
+		['/s', 'Spits on grave'], 
+		['/ping', 'Pong!'], 
+		['/coinflip', 'Flips a coin'], 
+		['/dm', 'Sends DM to user'], 
+		['/random', 'Generates a random number'], 
+		['/post', 'Posts a message'], 
+		['/rape', 'Rapes a user'],
+		['/nigger', 'Calculates the niggerness of a user'],
+		['/battle', 'Challenges another user to a battle'],
+		['/burger', 'A burger a day keeps the doctor away!'],
+		['/invite', 'Invite me to your server!'],
+		['/flags', 'Starts a flag guessing game'],
 		]);
 		 
 var commandNames = Array.from(commands.keys());
 for(var x of commandNames)
 {
 	var y = x;
-	ff = y.length;
 	var l = 15 - y.length;
 	if(y.length < 15)
 	{
@@ -52,7 +58,6 @@ module.exports =
 			i += 1;
 		}
 		helpTab += "```";
-		channel.send(ff);
 		return channel.send(helpTab);
 	},
 		 
