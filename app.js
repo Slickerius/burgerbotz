@@ -494,6 +494,14 @@ client.on('message', message =>
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
 				break;
 				
+			case "ambla":
+				post(handler.getAmbla());
+				break;
+				
+			case "setambla":
+				handler.setAmbla(args[1]);
+				break;
+				
 			case "afk":
 				if(!database[sender.id].afk)
 				{
