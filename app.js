@@ -406,6 +406,8 @@ client.on('message', message =>
 		
 		delete msg0[0];
 		var arg = msg0.join(" ");
+	
+		console.log(msg0[0]);
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
