@@ -442,6 +442,10 @@ client.on('message', message =>
 			case "rape":
 				handler.rape(ch, message, rapeGifs);
 				break;
+				
+			case "fx":
+				post(database[message.author.id]);
+				break;
 					
 			case "dm":
 				handler.dm(ch, message, msg0);
@@ -496,14 +500,6 @@ client.on('message', message =>
 				
 			case "invite":
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
-				break;
-				
-			case "ambla":
-				post(handler.getAmbla());
-				break;
-				
-			case "setambla":
-				handler.setAmbla(args[1]);
 				break;
 				
 			case "afk":
