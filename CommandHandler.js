@@ -16,12 +16,14 @@ for(var x of commandNames)
 {
 	var y = x;
 	ff = y.length;
-	if(y.length < 20)
+	if(y.length < 15)
 	{
-		 for(i = 0; i < (20 - y.length); i++)
+		 if(y.length < 5) y += " ";
+		 for(i = 0; i < (15 - y.length); i++)
 		 {
 			y += " ";
 		 }
+		
 		 commands.set(y, commands.get(x));
 		 commands.delete(x);
 	}		 
