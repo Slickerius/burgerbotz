@@ -151,7 +151,7 @@ module.exports =
 	spit: function(channel, message, msg, arg)
 	{
 		var x = randomize(0, 5);
-		
+		console.log(msg[0]);
 		if(msg[0] != null)
 		{
 			if(x > 1)
