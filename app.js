@@ -428,7 +428,7 @@ client.on('message', message =>
 				break;
 				
 			case "ping":
-				post("***PONG!*** Returned request in " + (Date.now() - message.createdTimestamp) + " ms");
+				handler.ping(ch, messsage);
 				break;
 					
 			case "random":
@@ -468,7 +468,30 @@ client.on('message', message =>
 			case "post":
 				handler.post(ch, arg);
 				break;
+			
+			case "burgers":
+				if(message.mentions.users < 1)
+				{
+					if(!database[sender.id].burgers) database[sender.id] = {burgers: 100};
+				} else {
+					if(!database[user.id].burgers) database[user.id] = {burgers: 100};
+				}
+				break;
 				
+			case "pay":
+				if(msg0[0] == null)
+				{
+					post("You have to mention another user.");
+				} else {
+					if(!database[user.id].burgers)
+					{
+						database[user.id] = {burgers: 100};
+						database[user.id].burgers += 1;
+					} else {
+						database[user.id].burgers += 1;
+					}
+				}
+			
 			case "inf":
 				var x = 0;
 				client.guilds.forEach(function(guild)
