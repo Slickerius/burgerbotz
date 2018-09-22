@@ -73,6 +73,7 @@ var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
+		var date = message.createdAt;
 		if(inFGame)
 		{
 			var response = message.content.toLowerCase(), flagName = flags[flagID].name.toLowerCase();
@@ -90,7 +91,10 @@ client.on('message', message =>
 			console.log("[" + message.guild.name + "]<#" + message.channel.name + ">" + message.author.username + ": " + message.content);
 			if(message.guild.id != "424507027432144913")
 			{
-				hqChannel.send("[" + message.createdAt + "][" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** : " + message.content);
+				var day = date.getDate();
+				var month = date.getMonth() + 1;
+				var year = date.getFullYear();
+				hqChannel.send("[" + day + "/" + month + "/" + year + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "][" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** : " + message.content);
 				message.attachments.forEach(function(attachment)
 				{
 					hqChannel.send({
