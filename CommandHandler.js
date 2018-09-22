@@ -2,6 +2,26 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
+var commands = new Map([
+		['help', 'Shows this help menu!'], 
+		['burger', 'Gives user burger!!],
+		['rape', 'Rapes user!],
+		]);
+		 
+var commandNames = Array.from(commands.keys());
+for(var x of commandNames)
+{
+	var y = x;
+	if(y.length < 15)
+	{
+		 for(i = 0; i < 15 - y.length; i++)
+		 {
+			y += " ";
+		 }
+		 commands.set(y, commands.get(x));
+		 commands.delete(x);
+	}		 
+}
 
 function randomize(min, max) 
 {
@@ -10,6 +30,21 @@ function randomize(min, max)
 
 module.exports = 
 {
+	help: function(channel)
+	{
+		var commands0 = Array.from(commands.keys());
+		commands0.sort();
+		var helpTab = "```"
+		 
+		for(var x of commands0)
+		{
+			helpTab += commands0 + "- " + commands.get(commands0) + "\n";  
+		}
+		
+		helpTab += "```";
+		return channel.send(helpTab);
+	},
+		 
 	post: function(channel, arg) 
 	{
         	if(arg.length > 1)
