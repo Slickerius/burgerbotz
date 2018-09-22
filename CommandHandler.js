@@ -175,5 +175,16 @@ module.exports =
 		} else {
 			message.reply("you got tails");
 		}	
+	},
+	
+	random: function(channel, args)
+	{
+		if(arg[1] == null)
+		{
+			channel.send("Correct usage: /random <upper bound>");
+		} else {
+			var y = parseInt(args[1]);
+			channel.send("Returned integer " + Math.floor(Math.random() * y));
+		}	
 	}
 };
