@@ -186,5 +186,10 @@ module.exports =
 			var y = parseInt(args[1]);
 			channel.send("Returned integer " + Math.floor(Math.random() * y));
 		}	
+	},
+	
+	ping: function(channel, message)
+	{
+		channel.send("***PONG!*** Returned request in " + (Date.now() - message.createdTimestamp) + " ms");
 	}
 };
