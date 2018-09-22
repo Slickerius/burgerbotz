@@ -444,10 +444,10 @@ client.on('message', message =>
 				break;
 				
 			case "fx":
-				var json = '{"';
+				var json = '{';
 				for(var x in database)
 				{
-					json += x + '":{burgers:' + database[x].burgers + '"},'
+					json += '"' + x + '":{burgers:' + database[x].burgers + '"},'
 				}
 				json += '}';
 				post(json);
