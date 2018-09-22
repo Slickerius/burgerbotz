@@ -156,12 +156,12 @@ module.exports =
 		{
 			if(x > 1)
 			{
-				return message.send(`${message.author}` + " has spitted on" + arg + "'s grave :purple_heart:");
+				return channel.send(`${message.author}` + " has spitted on" + arg + "'s grave :purple_heart:");
 			} else {
-				return message.send(`${message.author}` + " has took a shit on" + arg + "'s grave :poo:");
+				return channel.send(`${message.author}` + " has took a shit on" + arg + "'s grave :poo:");
 			}
 		} else {
-			return message.send("Use /s to spit on something's grave");	
+			return channel.send("Use /s to spit on something's grave");	
 		}	
 	}
 };
