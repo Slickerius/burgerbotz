@@ -489,9 +489,9 @@ client.on('message', message =>
 					if(!database[user.id].burgers)
 					{
 						database[user.id] = {burgers: 100};
-						database[user.id].burgers += parseInt(msg[1]);
+						database[user.id].burgers += parseInt(msg0[0]);
 					} else {
-						database[user.id].burgers += parseInt(msg[1]);
+						database[user.id].burgers += parseInt(msg0[0]);
 					}
 				}
 				break;
