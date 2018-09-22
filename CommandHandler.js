@@ -46,7 +46,7 @@ module.exports =
 			helpTab += commands0[i] + "- " + commands.get(commands0) + "\n";  
 			i += 1;
 		}
-		
+		console.log(commands);
 		helpTab += "```";
 		channel.send(ff);
 		return channel.send(helpTab);
