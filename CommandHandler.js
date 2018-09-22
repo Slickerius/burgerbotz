@@ -36,12 +36,11 @@ module.exports =
 		commands0.sort();
 		var helpTab = "```"
 		 
+		var i = 0;
 		for(var x of commands0)
 		{
-			for(i = 0; i < commands0.length; i++)
-			{
-				helpTab += commands0[i] + "- " + commands.get(commands0) + "\n";  
-			}
+			helpTab += commands0[i] + "- " + commands.get(commands0) + "\n";  
+			i += 1;
 		}
 		
 		helpTab += "```";
