@@ -421,18 +421,7 @@ client.on('message', message =>
 				break;
 			
 			case "s":
-				var x = randomize(0, 5);
-				if(args[0] != null)
-				{
-					if(x > 1)
-					{
-						post(`${message.author}` + " has spitted on" + arg + "'s grave :purple_heart:");
-					} else {
-						post(`${message.author}` + " has took a shit on" + arg + "'s grave :poo:");
-					}
-				} else {
-					post("Use /s to spit on something's grave");	
-				}
+				handler.spit(ch, message, args, arg);
 				break;
 				
 			case "ping":
