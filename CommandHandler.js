@@ -37,6 +37,28 @@ module.exports =
 		}
 	},
 	
+	burger: function(channel, message, arr)
+	{
+		let yz = randomize(0, arr.length);
+				
+		if(message.mentions.users.size < 1)
+		{
+			let botembed = new Discord.RichEmbed()
+			.setImage(arr[yz])
+			.setDescription(`:hamburger: **${message.author.username}** is eating a hamburger!`)
+			.setColor("#fcc66a");
+					
+			return channel.send(botembed);		
+		} else {
+			let botembed = new Discord.RichEmbed()
+			.setImage(burgerGifs[yz])
+			.setDescription(`:hamburger: **${sender.username}** is feeding a hamburger to **${user.username}**`)
+			.setColor("#fcc66a");
+					
+			return channel.send(botembed);		
+		}
+	},
+	
 	nigger: function(channel, message)
 	{
 		var user = message.mentions.users.first();
@@ -64,6 +86,26 @@ module.exports =
 				return channel.send("<:dindu:454150474619289602> ***__Niggerator X3000__*** <:dindu:454150474619289602>\n\n:bar_chart: **" + user.username + "** : **" + database[user.id].nigger + "%**\n*Be careful! This person is very likely to be a nigger! Utter not the forbidden word for your own sake!*");	
 			} else {
 				return channel.send("<:dindu:454150474619289602> ***__Niggerator X3000__*** <:dindu:454150474619289602>\n\n:bar_chart: **" + user.username + "** : **" + database[user.id].nigger + "%**\n*This person is almost undoubtedly a nigger.* :watermelon:**OOGA BOOGA DINDU NUFFIN!!1**:basketball:");	
+			}
+		}	
+	},
+	
+	dm: function(channel, message, msg)
+	{
+		var user = message.mentions.users.first();
+		
+		if(message.mentions.users.size < 1)
+		{
+			message.reply("please specify a user to message.");
+		} else {
+			if(!user.bot)
+			{
+				delete msg[1];
+				let msg1 = msg.join(" ");
+				return user.send(msg1);
+				return channel.send(":incoming_envelope: **Message sent!**");
+			} else {
+				return channel.send(":octagonal_sign **You can only send direct messages to humans!**");	
 			}
 		}	
 	}
