@@ -73,7 +73,7 @@ var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
-		database[message.author.id] = {burgers: 100};
+		if(!database[message.author.id].burgers) database[message.author.id] = {burgers: 10};
 		var date = message.createdAt;
 		if(inFGame)
 		{
@@ -473,10 +473,10 @@ client.on('message', message =>
 			case "burgers":
 				if(message.mentions.users.size < 1)
 				{
-					if(!database[sender.id].burgers) database[sender.id] = {burgers: 100};
+					if(!database[sender.id].burgers) database[sender.id] = {burgers: 10};
 					post(database[sender.id].burgers);
 				} else {
-					if(!database[user.id].burgers) database[user.id] = {burgers: 100};
+					if(!database[user.id].burgers) database[user.id] = {burgers: 10};
 					post(database[user.id].burgers);
 				}
 				break;
@@ -489,9 +489,9 @@ client.on('message', message =>
 					if(!database[user.id].burgers)
 					{
 						database[user.id] = {burgers: 100};
-						database[user.id].burgers += 1;
+						database[user.id].burgers += parseInt(msg[1]);
 					} else {
-						database[user.id].burgers += 1;
+						database[user.id].burgers += parseInt(msg[1]);
 					}
 				}
 				break;
