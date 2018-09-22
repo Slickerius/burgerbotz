@@ -1,25 +1,11 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const unst = require('./storage/unstatics.js');
 
 module.exports = {flags, burger, rape, help};
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
-var commands = new Map([
-		['/help', 'Shows this help menu'], 
-		['/afk', 'Sets away from keyboard status'], 
-		['/s', 'Spits on grave'], 
-		['/ping', 'Pong!'], 
-		['/coinflip', 'Flips a coin'], 
-		['/dm', 'Sends DM to user'], 
-		['/random', 'Generates a random number'], 
-		['/post', 'Posts a message'], 
-		['/rape', 'Rapes a user'],
-		['/nigger', 'Calculates the niggerness of a user'],
-		['/battle', 'Challenges another user to a battle'],
-		['/burger', 'A burger a day keeps the doctor away!'],
-		['/invite', 'Invite me to your server!'],
-		['/flags', 'Starts a flag guessing game'],
-		]);
+var commands = unst.commandMap;
 		 
 var commandNames = Array.from(commands.keys());
 for(var x of commandNames)
