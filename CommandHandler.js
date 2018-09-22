@@ -27,7 +27,7 @@ module.exports =
 
 			let botembed = new Discord.RichEmbed()
 			.setImage(arr[x])
-			.setDescription(`**${message.message.mentions.users.first().username}** has been brutally sodomized by **${message.author.username}**`)
+			.setDescription(`**${message.mentions.users.first().username}** has been brutally sodomized by **${message.author.username}**`)
 			.setColor("#fcc66a");
 				
 			return message.channel.send(botembed);
