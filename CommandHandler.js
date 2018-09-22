@@ -22,7 +22,6 @@ for(var x of commandNames)
 	var l = 15 - y.length;
 	if(y.length < 15)
 	{
-		 if(y.length < 5) y += " ";
 		 for(i = 0; i < l; i++)
 		 {
 			y += " ";
