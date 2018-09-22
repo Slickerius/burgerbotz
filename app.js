@@ -460,7 +460,7 @@ client.on('message', message =>
 				break;
 					
 			case "rape":
-				handler.rape(ch, message);
+				handler.rape(ch, message, rapeGifs);
 				break;
 					
 			case "dm":
