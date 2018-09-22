@@ -5,7 +5,7 @@ var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var commands = new Map([
 		['help', 'Shows this help menu!'], 
 		['burger', 'Gives user burger!'],
-		['rape', 'Rapes user!],
+		['rape', 'Rapes user!'],
 		]);
 		 
 var commandNames = Array.from(commands.keys());
