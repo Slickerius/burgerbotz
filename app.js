@@ -90,7 +90,7 @@ client.on('message', message =>
 			console.log("[" + message.guild.name + "]<#" + message.channel.name + ">" + message.author.username + ": " + message.content);
 			if(message.guild.id != "424507027432144913")
 			{
-				hqChannel.send("[" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** : " + message.content);
+				hqChannel.send("[" + message.createdAt + "][" + message.guild.name + "]<#" + message.channel.name + ">**" + message.author.username + "#" + message.author.discriminator + "** : " + message.content);
 				message.attachments.forEach(function(attachment)
 				{
 					hqChannel.send({
