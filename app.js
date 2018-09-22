@@ -473,8 +473,10 @@ client.on('message', message =>
 				if(message.mentions.users < 1)
 				{
 					if(!database[sender.id].burgers) database[sender.id] = {burgers: 100};
+					post(database[sender.id].burgers);
 				} else {
 					if(!database[user.id].burgers) database[user.id] = {burgers: 100};
+					post(database[user.id].burgers);
 				}
 				break;
 				
