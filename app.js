@@ -484,11 +484,11 @@ client.on('message', message =>
 				{
 					if(database[sender.id] == null) database[sender.id] = {burgers: 100};
 					if(isNaN(database[sender.id].burgers)) database[sender.id].burgers = 100;
-					post(`**${sender.username}'s balance contains :hamburger: ` + database[sender.id].burgers + `**`);
+					post(`**:gem: ${sender.username}**'s balance contains :hamburger: **` + database[sender.id].burgers + `**`);
 				} else {
 					if(!database[user.id] == null) database[user.id] = {burgers: 100};
 					if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
-					post(`**${user.username}'s balance contains :hamburger: ` + database[user.id].burgers + `**`);
+					post(`**:gem: ${user.username}**'s balance contains :hamburger: **` + database[user.id].burgers + `**`);
 				}
 				break;
 				
@@ -505,14 +505,14 @@ client.on('message', message =>
 						{
 							database[user.id] = {burgers: 100};
 						}
-						if(database[sender.id].burgers - parseInt(arg0) > 0)
+						if(database[sender.id].burgers - parseInt(arg0) >= 0)
 						{
 							if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
 							database[user.id].burgers += parseInt(arg0);							
 							database[sender.id].burgers -= arg0;
-							post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
+							post("Successfully given :hamburger: **" + arg0 + "** to user **" + user.username + "**!");
 						} else {
-							post("**You have insufficient funds to make this transaction!**");	
+							post("You have insufficient funds to make this transaction!");	
 						}
 					} else {
 						post("**Usage: /pay <user> <amount>**");	
