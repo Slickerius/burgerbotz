@@ -474,9 +474,11 @@ client.on('message', message =>
 				if(message.mentions.users.size < 1)
 				{
 					if(database[sender.id] == null) database[sender.id] = {burgers: 100};
+					if(isNaN(database[sender.id].burgers)) database[sender.id].burgers = 100;
 					post(database[sender.id].burgers);
 				} else {
 					if(!database[user.id] == null) database[user.id] = {burgers: 100};
+					if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
 					post(database[user.id].burgers);
 				}
 				break;
@@ -494,6 +496,7 @@ client.on('message', message =>
 						{
 							database[user.id] = {burgers: 100};
 						}
+						if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
 						database[user.id].burgers += 5;							
 						database[sender.id].burgers -= 5;
 						post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
