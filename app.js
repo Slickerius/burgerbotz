@@ -177,7 +177,7 @@ client.on('message', message =>
 					database[sender.id].burgers += z;
 					temp[sender.id].inGame = 0;
 				} else {
-					post("Guessed incorrectly. You got **heads**!");
+					post("Guessed incorrectly. You got **tails**!");
 					temp[sender.id].inGame = 0;
 				}
 			}
@@ -189,7 +189,7 @@ client.on('message', message =>
 					database[sender.id].burgers += z;
 					temp[sender.id].inGame = 0;
 				} else {
-					post("Guessed incorrectly. You got **tails**!");
+					post("Guessed incorrectly. You got **heads**!");
 					temp[sender.id].inGame = 0;
 				}
 			}
@@ -488,10 +488,15 @@ client.on('message', message =>
 					{
 						post("*Usage: /coinflip <bet amount>*");
 					} else {
-						if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
-						temp[sender.id] = {inGame: true, stake: args[1]};
-						database[sender.id].burgers -= parseInt(args[1]);
-						post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/n)*");
+						if(database[sender.id].burgers - parseInt(args[1]) >= 0)
+						{
+							if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
+							temp[sender.id] = {inGame: true, stake: args[1]};
+							database[sender.id].burgers -= parseInt(args[1]);
+							post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/t)*");
+						} else {
+							post(":octagonal_sign: You have insufficient burgers to do this bet.");	
+						}
 					}
 				}
 				break;
