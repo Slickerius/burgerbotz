@@ -538,10 +538,15 @@ client.on('message', message =>
 				break;
 				
 			case "fy":
+				var y = "```[";
+				var z = 1;
+				
+				var m = [{}];
 				for(var x in database)
 				{
-					console.log(database[x]);	
+					m.push([{x : database[x].burgers}]);
 				}
+				console.log(m);
 				break;
 			
 			case "balance":
