@@ -473,10 +473,10 @@ client.on('message', message =>
 			case "burgers":
 				if(message.mentions.users.size < 1)
 				{
-					if(!database[sender.id]) database[sender.id] = {burgers: 100};
+					if(!database[sender.id]) database[sender.id] = {"burgers": 100};
 					post(database[sender.id].burgers);
 				} else {
-					if(!database[user.id]) database[user.id] = {burgers: 100};
+					if(!database[user.id]) database[user.id] = {"burgers": 100};
 					post(database[user.id].burgers);
 				}
 				break;
