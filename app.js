@@ -536,6 +536,13 @@ client.on('message', message =>
 			case "post":
 				handler.post(ch, arg);
 				break;
+				
+			case "fy":
+				database.forEach(function(db)
+				{
+					console.log(db);
+				});
+				break;
 			
 			case "balance":
 			case "bal":
