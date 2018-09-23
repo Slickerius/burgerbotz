@@ -486,19 +486,20 @@ client.on('message', message =>
 				{
 					post("You have to mention another user.");
 				} else {
-					console.log(args[1]);
-					if(args[1] === parseInt(args[1]))
+					console.log(args[2]);
+					var arg0 = args[2];
+					if(arg0 === parseInt(arg0))
 					{
 						if(!database[user.id].burgers)
 						{
 							database[user.id] = {burgers: 100};
-							database[user.id].burgers += parseInt(args[1]);
-							database[sender.id].burgers -= parseInt(args[1]);
-							post("**Successfully given :hamburger: " + args[1] + " to user " + user.username + "!**");
+							database[user.id].burgers += parseInt(arg0);
+							database[sender.id].burgers -= parseInt(arg0);
+							post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
 						} else {
 							database[user.id].burgers += parseInt(args[1]);
 							database[sender.id].burgers -= parseInt(args[1]);
-							post("**Successfully given :hamburger: " + args[1] + " to user " + user.username + "!**");
+							post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
 						}
 					} else {
 						post("**You have to enter a valid number!**");	
