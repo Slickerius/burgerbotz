@@ -557,10 +557,12 @@ client.on('message', message =>
 					if(z <= 10)
 					{
 						var t;
-						client.fetchUser(m[x].id).then(user =>
+						async () => 
 						{
-							t = user.username;
-						});
+   							 var dx = await client.fetchUser(m[x].id);
+   							 t = dx.username;
+						}
+
 						y += "[" + z + "] " + t + " : :hamburger: " + m[x].burgers + "\n";
 						z++;
 					}
