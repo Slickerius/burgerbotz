@@ -538,7 +538,7 @@ client.on('message', message =>
 				break;
 				
 			case "fy":
-				var y = "```[";
+				var y = "```";
 				var z = 1;
 				
 				var m = [];
@@ -556,8 +556,9 @@ client.on('message', message =>
 				{
 					if(z <= 10)
 					{
-						y += z + "] " + client.fetchUser(m[x].id).username + " : :hamburger: " + m[x].burgers + "\n";
+						y += "[" + z + "] " + client.fetchUser(m[x].id).username + " : :hamburger: " + m[x].burgers + "\n";
 						z++;
+						console.log(client.fetchUser("258263236925718528").username);
 					}
 				}
 				
