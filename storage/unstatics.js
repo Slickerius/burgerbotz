@@ -3,6 +3,8 @@ commandMap = new Map([
 		['/afk', 'Sets away from keyboard status'], 
 		['/s', 'Spits on grave'], 
 		['/ping', 'Pong!'], 
+		['/balance', "Displays a user's burger balance"],
+		['/pay', "Pays a certain amount of burgers to another user"],
 		['/coinflip', 'Flips a coin'], 
 		['/dm', 'Sends DM to user'], 
 		['/random', 'Generates a random number'], 
