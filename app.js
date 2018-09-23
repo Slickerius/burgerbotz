@@ -556,9 +556,11 @@ client.on('message', message =>
 				{
 					if(z <= 10)
 					{
-						y += "[" + z + "] " + client.fetchUser(m[x].id).username + " : :hamburger: " + m[x].burgers + "\n";
+						client.fetchUser(m[x].id).then(user =>
+						{
+							y += "[" + z + "] " + user.username + " : :hamburger: " + m[x].burgers + "\n";
+						});
 						z++;
-						console.log(client.fetchUser("258263236925718528").username);
 					}
 				}
 				
