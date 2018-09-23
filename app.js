@@ -493,14 +493,10 @@ client.on('message', message =>
 						if(!database[user.id])
 						{
 							database[user.id] = {burgers: 100};
-							database[user.id].burgers += parseInt(arg0);
-							database[sender.id].burgers -= parseInt(arg0);
-							post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
-						} else {
-							database[user.id].burgers += parseInt(args[1]);
-							database[sender.id].burgers -= parseInt(args[1]);
-							post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
 						}
+						database[user.id].burgers += 5;							
+						database[sender.id].burgers -= 5;
+						post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
 					} else {
 						post("**You have to enter a valid number!**");	
 					}
