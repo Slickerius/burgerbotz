@@ -474,6 +474,8 @@ client.on('message', message =>
 				handler.post(ch, arg);
 				break;
 			
+			case "balance":
+			case "bal":
 			case "burgers":
 				if(message.mentions.users.size < 1)
 				{
