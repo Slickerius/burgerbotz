@@ -488,7 +488,7 @@ client.on('message', message =>
 				} else {
 					console.log(args[2]);
 					var arg0 = args[2];
-					if(arg0 === parseInt(arg0))
+					if(arg0 == parseInt(arg0))
 					{
 						if(!database[user.id].burgers)
 						{
