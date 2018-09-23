@@ -537,6 +537,10 @@ client.on('message', message =>
 				handler.post(ch, arg);
 				break;
 				
+			case "about":
+				handler.about(ch);
+				break;
+				
 			case "baltop":
 			case "balancetop":
 				var y = "```-=[Burgerbotz World Ranking]=-\n\n";
