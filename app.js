@@ -557,11 +557,10 @@ client.on('message', message =>
 					if(z <= 10)
 					{
 						var t;
-						async () => 
+						client.users.forEach(function(dx)
 						{
-   							 var dx = await client.fetchUser("258263236925718528");
-   							 t = dx.username;
-						}
+							if(dx.id == m[x].id) t = dx.username;	
+						});						)
 
 						y += "[" + z + "] " + t + " : :hamburger: " + m[x].burgers + "\n";
 						z++;
