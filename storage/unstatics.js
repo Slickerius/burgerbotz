@@ -1,11 +1,12 @@
 commandMap = new Map([
 		['/help', 'Shows this help menu'], 
+		['/balancetop', 'Shows the global top 10 users'],
 		['/afk', 'Sets away from keyboard status'], 
 		['/s', 'Spits on grave'], 
 		['/ping', 'Pong!'], 
 		['/balance', "Displays a user's burger balance"],
 		['/pay', "Pays a certain amount of burgers to another user"],
-		['/coinflip', 'Flips a coin'], 
+		['/coinflip', 'Flip a coin and get (or lose) burgers!'], 
 		['/dm', 'Sends DM to user'], 
 		['/random', 'Generates a random number'], 
 		['/post', 'Posts a message'], 
