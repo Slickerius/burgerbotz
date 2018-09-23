@@ -6,6 +6,7 @@ const handler = require('./CommandHandler.js');
 const status = "with Carlton";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
+var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
 var hqChannel;
 
 client.on('ready', () => 
@@ -114,7 +115,7 @@ client.on('message', message =>
 		}
 		function tabScreen(pTurn, p1ID, p2ID, p1Name, p2Name)
 		{		
-			post("```" + pTurn + "'s turn.\n\n" + p1Name + " HP: " + database[p1ID].hp + "/100 Ammo: " + database[p1ID].ammo + "\n" + p2Name + " HP: " + database[p2ID].hp + "/100 Ammo: " + database[p2ID].ammo + "\n\n[1] Punch\n[2] Kick\n[3] Shoot\n[4] Heal\n[5] Run```");	
+			post("```" + pTurn + "'s turn.\n\n" + p1Name + " HP: " + temp[p1ID].hp + "/100 Ammo: " + temp[p1ID].ammo + "\n" + p2Name + " HP: " + temp[p2ID].hp + "/100 Ammo: " + temp[p2ID].ammo + "\n\n[1] Punch\n[2] Kick\n[3] Shoot\n[4] Heal\n[5] Run```");	
 		}
 		
 		function onDefeat(player1, player2, winID)
@@ -132,7 +133,7 @@ client.on('message', message =>
 		let sender = message.author;
 		let ch = message.channel;
 		
-		if(!database[sender.id]) database[sender.id] = {afk: false, afkMessage: ""};
+		if(!temp[sender.id]) temp[sender.id] = {afk: false, afkMessage: ""};
 	
 		var luckPoints = randomize(0, 100);
 	
@@ -145,14 +146,14 @@ client.on('message', message =>
 		{
 			message.mentions.users.forEach(function(userf)
 			{
-				if(!database[userf.id]) database[userf.id] = {afk: false, afkMessage: ""};
-				if(database[userf.id].afk == true)
+				if(!temp[userf.id]) temp[userf.id] = {afk: false, afkMessage: ""};
+				if(temp[userf.id].afk == true)
 				{
-					if(database[userf.id].afkMessage == null)
+					if(temp[userf.id].afkMessage == null)
 					{
 						post(":footprints: **" + userf.username + "** is away from keyboard");	
 					} else {
-						post(":footprints: **" + userf.username + "** is away from keyboard (***" + database[userf.id].afkMessage + "***)");	
+						post(":footprints: **" + userf.username + "** is away from keyboard (***" + temp[userf.id].afkMessage + "***)");	
 					}
 				}
 			})	
@@ -185,16 +186,16 @@ client.on('message', message =>
 				{
 					if(luckPoints > 85)
 					{
-						database[sender.id].ammo += 1;
+						temp[sender.id].ammo += 1;
 						post("***" + sender.username + " grabbed a magazine whilst punching their opponent! +1 ammo***");
 					}
 					var damage = randomize(5, 10);
 					if(sender.id === player1ID)
 					{
-						database[player2ID].hp -= damage;
+						temp[player2ID].hp -= damage;
 						post(":punch: ***" + player1Name + " has punched " + player2Name + ". -" + damage + " HP***");
 						
-						if(database[player2ID].hp > 0)
+						if(temp[player2ID].hp > 0)
 						{
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
@@ -205,10 +206,10 @@ client.on('message', message =>
 					} else {
 						if(!f0)
 						{
-							database[player1ID].hp -= damage;
+							temp[player1ID].hp -= damage;
 							post(":punch: ***" + player2Name + " has punched " + player1Name + ". -" + damage + " HP***");
 							
-							if(database[player1ID].hp > 0)
+							if(temp[player1ID].hp > 0)
 							{
 								turnID = player1ID;
 								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
@@ -254,10 +255,10 @@ client.on('message', message =>
 					var damage = randomize(10, 20);
 					if(sender.id === player1ID)
 					{
-						database[player2ID].hp -= damage;
+						temp[player2ID].hp -= damage;
 						post(":boot: ***" + player1Name + " has kicked " + player2Name + ". -" + damage + " HP***");
 						
-						if(database[player2ID].hp > 0)
+						if(temp[player2ID].hp > 0)
 						{
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
@@ -266,10 +267,10 @@ client.on('message', message =>
 							inGame = false;
 						}
 					} else {
-						database[player1ID].hp -= damage;
+						temp[player1ID].hp -= damage;
 						post(":boot: ***" + player2Name + " has kicked " + player1Name + ". -" + damage + " HP***");
 						
-						if(database[player1ID].hp > 0)
+						if(temp[player1ID].hp > 0)
 						{
 							turnID = player1ID;
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
@@ -285,22 +286,22 @@ client.on('message', message =>
 
 					if(sender.id === player1ID)
 					{
-						if(database[player1ID].ammo > 0)
+						if(temp[player1ID].ammo > 0)
 						{
 							var luck = randomize(0, 10);
 							if(luck > 7)
 							{
 								post(":gun: ***Your shot has missed!***");
-								database[player1ID].ammo -= 1;	
+								temp[player1ID].ammo -= 1;	
 								
 								turnID = player2ID;
 								tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 							} else {
-								database[player2ID].hp -= damage;
-								database[player1ID].ammo -= 1;
+								temp[player2ID].hp -= damage;
+								temp[player1ID].ammo -= 1;
 								post(":gun: ***" + player1Name + " has shot " + player2Name + ", dealing " + damage + " HP***");
 								
-								if(database[player2ID].hp > 0)
+								if(temp[player2ID].hp > 0)
 								{
 									turnID = player2ID;
 									tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
@@ -316,22 +317,22 @@ client.on('message', message =>
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						}
 					} else {
-						if(database[player2ID].ammo > 0)
+						if(temp[player2ID].ammo > 0)
 						{
 							var luck = randomize(0, 10);
 							if(luck > 7)
 							{
 								post(":gun: ***Your shot has missed!***");
-								database[player2ID].ammo -= 1;	
+								temp[player2ID].ammo -= 1;	
 								
 								turnID = player1ID;
 								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 							} else {
-								database[player1ID].hp -= damage;
-								database[player2ID].ammo -= 1;
+								temp[player1ID].hp -= damage;
+								temp[player2ID].ammo -= 1;
 								post(":gun: ***" + player2Name + " has shot " + player1Name + ", dealing " + damage + " HP***");
 								
-								if(database[player1ID].hp > 0)
+								if(temp[player1ID].hp > 0)
 								{
 									turnID = player1ID;
 									tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
@@ -350,20 +351,20 @@ client.on('message', message =>
 				} else if(message.content.startsWith("4")) {
 					var healPoints = randomize(5, 30);
 
-					if(database[sender.id].hp + healPoints >= 100)
+					if(temp[sender.id].hp + healPoints >= 100)
 					{
-						healPoints = 100 - database[sender.id].hp;
+						healPoints = 100 - temp[sender.id].hp;
 					}
 					
 					if(sender.id === player1ID)
 					{
-						database[player1ID].hp += healPoints;
+						temp[player1ID].hp += healPoints;
 						post(":hamburger: ***" + player1Name + " has healed themselves, gaining " + healPoints + " HP***");
 						
 						turnID = player2ID;
 						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 					} else {
-						database[player2ID].hp += healPoints;
+						temp[player2ID].hp += healPoints;
 						post(":hamburger: ***" + player2Name + " has healed themselves, gaining " + healPoints + " HP***");
 						
 						turnID = player1ID;
@@ -377,7 +378,7 @@ client.on('message', message =>
 						post(":footprints: ***" + sender.username + " has left the battlefield!***");
 						inGame = false;
 					} else {
-						database[sender.id].hp -= damage;
+						temp[sender.id].hp -= damage;
 						post(":cartwheel: ***" + sender.username + " tried to run away but slipped and fell! -" + damage + " HP***");
 						
 						if(sender.id === player1ID)
@@ -416,10 +417,10 @@ client.on('message', message =>
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
 		
-		if(database[sender.id].afk && cmd != "afk")
+		if(temp[sender.id].afk && cmd != "afk")
 		{
-			database[sender.id].afk = false;
-			database[sender.id].afkMessage = "";
+			temp[sender.id].afk = false;
+			temp[sender.id].afkMessage = "";
 			
 			post("**" + sender.username + "** is no longer AFK.");
 		}
@@ -559,22 +560,22 @@ client.on('message', message =>
 				break;
 				
 			case "afk":
-				if(!database[sender.id].afk)
+				if(!temp[sender.id].afk)
 				{
-					database[sender.id].afk = true;			
+					temp[sender.id].afk = true;			
 					var a = arg.slice(1);
-					database[sender.id].afkMessage = a;
+					temp[sender.id].afkMessage = a;
 		
 					if(args.length == 1)
 					{
 						post(":footprints: **" + sender.username + "** is now AFK.");
-					database[sender.id].afkMessage = null;
+					temp[sender.id].afkMessage = null;
 					} else {
-						post(":footprints: **" + sender.username + "** is now AFK (***" + database[sender.id].afkMessage + "***)");
+						post(":footprints: **" + sender.username + "** is now AFK (***" + temp[sender.id].afkMessage + "***)");
 					}
 				} else {
-					database[sender.id].afk = false;
-					database[sender.id].afkMessage = "";
+					temp[sender.id].afk = false;
+					temp[sender.id].afkMessage = "";
 			
 					post("**" + sender.username + "** is no longer AFK.");	
 				}
@@ -589,11 +590,11 @@ client.on('message', message =>
 				} else if (inGame) {
 					post("A battle is already ongoing!");
 				} else {
-					if(!database[user.id]) database[user.id] = {hp: 100, ammo: 1};
-					if(!database[sender.id]) database[sender.id] = {hp: 100, ammo: 1};
+					if(!temp[user.id]) temp[user.id] = {hp: 100, ammo: 1};
+					if(!temp[sender.id]) temp[sender.id] = {hp: 100, ammo: 1};
 					
-					database[user.id] = {hp: 100, ammo: 1};
-					database[sender.id] = {hp: 100, ammo: 1};
+					temp[user.id] = {hp: 100, ammo: 1};
+					temp[sender.id] = {hp: 100, ammo: 1};
 					
 					player1ID = sender.id;
 					player2ID = user.id;
@@ -626,6 +627,11 @@ client.on('message', message =>
 
 	}
 		fs.writeFile('userData.json', JSON.stringify(database), (err) =>
+		{
+			if(err) throw err;		
+		});
+	
+		fs.writeFile('temp.json', JSON.stringify(temp), (err) =>
 		{
 			if(err) throw err;		
 		});
