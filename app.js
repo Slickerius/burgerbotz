@@ -161,7 +161,7 @@ client.on('message', message =>
 		
 		if(temp[sender.id].inGame == 1)
 		{
-			var x = randomize(0, 1);
+			var x = randomize(0, 2);
 			var y = message.content.toLowerCase();
 			var z = parseInt(temp[sender.id].stake) * 2;
 			
@@ -169,22 +169,24 @@ client.on('message', message =>
 			*  1 = tails
 			*/
 			
-			if (y == "h" || "heads")
+			if (y == "h" || y == "heads")
 			{
 				if(x == 0)
 				{
 					post("*Guessed correctly! You got **heads***\n*Your prize:* :hamburger: **" + z + "**");
+					database[sender.id].burgers += z;
 					temp[sender.id].inGame = 0;
 				} else {
 					post("Guessed incorrectly. You got **heads**!");
 					temp[sender.id].inGame = 0;
 				}
 			}
-			else if(y == "t" || "tails")
+			else if(y == "t" || y == "tails")
 			{
 				if(x == 1)
 				{
 					post("*Guessed correctly! You got **tails***\n*Your prize:* :hamburger: **" + z + "**");
+					database[sender.id].burgers += z;
 					temp[sender.id].inGame = 0;
 				} else {
 					post("Guessed incorrectly. You got **tails**!");
@@ -488,6 +490,7 @@ client.on('message', message =>
 					} else {
 						if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
 						temp[sender.id] = {inGame: true, stake: args[1]};
+						database[sender.id].burgers -= parseInt(args[1]);
 						post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/n)*");
 					}
 				}
