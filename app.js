@@ -560,7 +560,7 @@ client.on('message', message =>
 						client.users.forEach(function(dx)
 						{
 							if(dx.id == m[x].id) t = dx.username;	
-						});						)
+						});						
 
 						y += "[" + z + "] " + t + " : :hamburger: " + m[x].burgers + "\n";
 						z++;
