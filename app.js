@@ -541,10 +541,10 @@ client.on('message', message =>
 				var y = "```[";
 				var z = 1;
 				
-				var m = [{}];
+				var m;
 				for(var x in database)
 				{
-					m.push([{x : database[x].burgers}]);
+					m.push(`[{${x} : database[x].burgers}]`);
 				}
 				console.log(m);
 				break;
