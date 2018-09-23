@@ -497,8 +497,8 @@ client.on('message', message =>
 							database[user.id] = {burgers: 100};
 						}
 						if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
-						database[user.id].burgers += 5;							
-						database[sender.id].burgers -= 5;
+						database[user.id].burgers += arg0;							
+						database[sender.id].burgers -= arg0;
 						post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
 					} else {
 						post("**You have to enter a valid number!**");	
