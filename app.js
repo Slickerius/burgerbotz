@@ -578,11 +578,11 @@ client.on('message', message =>
 			case "burgers":
 				if(message.mentions.users.size < 1)
 				{
-					if(database[sender.id] == null) database[sender.id] = {burgers: 100};
+					if(isNaN(database[sender.id])) database[sender.id] = {burgers: 100};
 					if(isNaN(database[sender.id].burgers)) database[sender.id].burgers = 100;
 					post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + database[sender.id].burgers + `**`);
 				} else {
-					if(!database[user.id] == null) database[user.id] = {burgers: 100};
+					if(isNaN(database[user.id])) database[user.id] = {burgers: 100};
 					if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
 					post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + database[user.id].burgers + `**`);
 				}
