@@ -556,10 +556,12 @@ client.on('message', message =>
 				{
 					if(z <= 10)
 					{
+						var t;
 						client.fetchUser(m[x].id).then(user =>
 						{
-							y += "[" + z + "] " + user.username + " : :hamburger: " + m[x].burgers + "\n";
+							t = user.username;
 						});
+						y += "[" + z + "] " + t + " : :hamburger: " + m[x].burgers + "\n";
 						z++;
 					}
 				}
