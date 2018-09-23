@@ -486,6 +486,7 @@ client.on('message', message =>
 				{
 					post("You have to mention another user.");
 				} else {
+					console.log(args[1]);
 					if(args[1] === parseInt(args[1]))
 					{
 						if(!database[user.id].burgers)
