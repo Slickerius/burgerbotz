@@ -538,10 +538,10 @@ client.on('message', message =>
 				break;
 				
 			case "fy":
-				database.forEach(function(db)
+				for(var x in database)
 				{
-					console.log(db);
-				});
+					console.log(database[x]);	
+				}
 				break;
 			
 			case "balance":
