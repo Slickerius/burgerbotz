@@ -67,6 +67,8 @@ module.exports =
 		.addField("Developer(s)", "Grass finn (Cursed)#4357")
 		.addField("Special Thanks", "SLiCK_Mx#0459, Annabelle#5819, Crash#5406, Naga#0550, madara#5203")
 		.setColor("#fcc66a");
+		
+		return channel.send(botembed);
 	},
 	
 	rape: function(channel, message, arr)
