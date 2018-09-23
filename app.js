@@ -546,7 +546,25 @@ client.on('message', message =>
 				{
 					m.push({id: x, burgers: database[x].burgers});
 				}
-				console.log(m);
+				
+				m.sort(function (a, b) 
+				{
+					return b.burgers - a.burgers;
+				});
+				
+				for(var x in m)
+				{
+					if(z <= 10)
+					{
+						y += z + "] " + client.fetchUser(m[x].id).username + " : :hamburger: " + m[x].burgers + "\n";
+						z++;
+					}
+				}
+				
+				y += "```";
+				
+				post(y);
+				
 				break;
 			
 			case "balance":
