@@ -466,7 +466,13 @@ client.on('message', message =>
 				break;
 				
 			case "burger":
-				handler.burger(ch, message, burgerGifs);
+				if(database[sender.id].burgers >= 1)
+				{
+					handler.burger(ch, message, burgerGifs);
+					database[sender.id].burgers -= 1;
+				} else {
+					post(":octagonal_sign: You do not have any burgers! :shrug:");	
+				}
 				break;
 				
 			case "nigger":
