@@ -73,7 +73,7 @@ var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
-		if(!database[message.author.id]) database[message.author.id] = {burgers: 10};
+		if(!database[message.author.id]) database[message.author.id] = {burgers: 100};
 		var date = message.createdAt;
 		if(inFGame)
 		{
@@ -490,7 +490,7 @@ client.on('message', message =>
 					var arg0 = args[2];
 					if(arg0 == parseInt(arg0))
 					{
-						if(!database[user.id].burgers)
+						if(!database[user.id])
 						{
 							database[user.id] = {burgers: 100};
 							database[user.id].burgers += parseInt(arg0);
