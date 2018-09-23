@@ -497,7 +497,7 @@ client.on('message', message =>
 							database[user.id] = {burgers: 100};
 						}
 						if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
-						database[user.id].burgers += arg0;							
+						database[user.id].burgers += parseInt(arg0);							
 						database[sender.id].burgers -= arg0;
 						post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
 					} else {
