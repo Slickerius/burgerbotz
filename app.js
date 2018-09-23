@@ -537,8 +537,9 @@ client.on('message', message =>
 				handler.post(ch, arg);
 				break;
 				
-			case "fy":
-				var y = "```";
+			case "baltop":
+			case "balancetop":
+				var y = "```Burgerbotz World Ranking\n\n";
 				var z = 1;
 				
 				var m = [];
@@ -562,7 +563,7 @@ client.on('message', message =>
 							if(dx.id == m[x].id) t = dx.username;	
 						});						
 
-						y += "[" + z + "] " + t + " : :hamburger: " + m[x].burgers + "\n";
+						y += "[" + z + "] " + t + "\nHamburgers: " + m[x].burgers + "\n";
 						z++;
 					}
 				}
