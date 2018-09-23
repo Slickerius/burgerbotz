@@ -81,7 +81,9 @@ client.on('message', message =>
 			
 			if(response.includes(flagName))
 			{
-				post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "***");
+				var x = randomize(15, 50);
+				post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
+				database[message.author.id].burgers += x;
 				clearTimeout(flagTimeout);
 				inFGame = false;
 			}
@@ -115,12 +117,14 @@ client.on('message', message =>
 			post("```" + pTurn + "'s turn.\n\n" + p1Name + " HP: " + database[p1ID].hp + "/100 Ammo: " + database[p1ID].ammo + "\n" + p2Name + " HP: " + database[p2ID].hp + "/100 Ammo: " + database[p2ID].ammo + "\n\n[1] Punch\n[2] Kick\n[3] Shoot\n[4] Heal\n[5] Run```");	
 		}
 		
-		function onDefeat(player1, player2)
+		function onDefeat(player1, player2, winID)
 		{
+			var x = randomize(100, 1000);
 			inGame = false;
 			p1isCrippled = false;
 			p2isCrippled = false;
-			post("***:trophy: " + player1 + " has defeated " + player2 + "!***");
+			post("***:trophy: " + player1 + " has defeated " + player2 + "!\nGiven :hamburger: " + x + " as a prize.***");
+			database[winID].burgers += x;
 		}
 		
 		let sender = message.author;
@@ -193,7 +197,7 @@ client.on('message', message =>
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
-							onDefeat(player1Name, player2Name);
+							onDefeat(player1Name, player2Name, player1ID);
 							inGame = false;
 						}
 					} else {
@@ -207,7 +211,7 @@ client.on('message', message =>
 								turnID = player1ID;
 								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 							} else {
-								onDefeat(player2Name, player1Name);
+								onDefeat(player2Name, player1Name, player2ID);
 								inGame = false;
 							}
 						} else {
@@ -256,7 +260,7 @@ client.on('message', message =>
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
-							onDefeat(player1Name, player2Name);
+							onDefeat(player1Name, player2Name, player1ID);
 							inGame = false;
 						}
 					} else {
@@ -268,7 +272,7 @@ client.on('message', message =>
 							turnID = player1ID;
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
-							onDefeat(player2Name, player1Name);
+							onDefeat(player2Name, player1Name, player2ID);
 							inGame = false;
 						}
 					}
@@ -299,7 +303,7 @@ client.on('message', message =>
 									turnID = player2ID;
 									tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
-									onDefeat(player1Name, player2Name);
+									onDefeat(player1Name, player2Name, player1ID);
 									inGame = false;
 								}
 							}
@@ -330,7 +334,7 @@ client.on('message', message =>
 									turnID = player1ID;
 									tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
-									onDefeat(player2Name, player1Name);
+									onDefeat(player2Name, player1Name, player2ID);
 									inGame = false;
 								}
 							}
@@ -475,11 +479,11 @@ client.on('message', message =>
 				{
 					if(database[sender.id] == null) database[sender.id] = {burgers: 100};
 					if(isNaN(database[sender.id].burgers)) database[sender.id].burgers = 100;
-					post(database[sender.id].burgers);
+					post(`**${sender.username}'s balance contains :hamburger: ` + database[sender.id].burgers + `**`);
 				} else {
 					if(!database[user.id] == null) database[user.id] = {burgers: 100};
 					if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
-					post(database[user.id].burgers);
+					post(`**${user.username}'s balance contains :hamburger: ` + database[user.id].burgers + `**`);
 				}
 				break;
 				
@@ -496,12 +500,17 @@ client.on('message', message =>
 						{
 							database[user.id] = {burgers: 100};
 						}
-						if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
-						database[user.id].burgers += parseInt(arg0);							
-						database[sender.id].burgers -= arg0;
-						post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
+						if(database[sender.id].burgers - parseInt(arg0) > 0)
+						{
+							if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
+							database[user.id].burgers += parseInt(arg0);							
+							database[sender.id].burgers -= arg0;
+							post("**Successfully given :hamburger: " + arg0 + " to user " + user.username + "!**");
+						} else {
+							post("**You have insufficient funds to make this transaction!**");	
+						}
 					} else {
-						post("**You have to enter a valid number!**");	
+						post("**Usage: /pay <user> <amount>**");	
 					}
 				}
 				break;
