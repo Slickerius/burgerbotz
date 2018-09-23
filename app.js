@@ -159,6 +159,40 @@ client.on('message', message =>
 			})	
 		}
 		
+		if(temp[sender.id].inGame == 1)
+		{
+			var x = randomize(0, 1);
+			var y = message.content.toLowerCase();
+			var z = parseInt(temp[sender.id].stake) * 2;
+			
+			/* 0 = heads
+			*  1 = tails
+			*/
+			
+			if (y == "h" || "heads")
+			{
+				if(x == 0)
+				{
+					post("*Guessed correctly! You got **heads***\n*Your prize:* :hamburger: **" + z + "**");
+					temp[sender.id].inGame = 0;
+				} else {
+					post("Guessed incorrectly. You got **heads**!");
+					temp[sender.id].inGame = 0;
+				}
+			}
+			else if(y == "t" || "tails")
+			{
+				if(x == 1)
+				{
+					post("*Guessed correctly! You got **tails***\n*Your prize:* :hamburger: **" + z + "**");
+					temp[sender.id].inGame = 0;
+				} else {
+					post("Guessed incorrectly. You got **tails**!");
+					temp[sender.id].inGame = 0;
+				}
+			}
+		}
+		
 		if(inRequest && reqID === sender.id)
 		{
 			if(message.content.startsWith("1"))
@@ -436,7 +470,7 @@ client.on('message', message =>
 				break;
 				
 			case "ping":
-				handler.ping(ch, messsage);
+				handler.ping(ch, message);
 				break;
 					
 			case "random":
@@ -444,7 +478,19 @@ client.on('message', message =>
 				break;
 					
 			case "coinflip":
-				handler.coinflip(message);
+				if(temp[sender.id].inGame == 1)
+				{
+					post("*A coinflip game is already underway!*");
+				} else {
+					if(args[1] == null || args[1] != parseInt(args[1]))
+					{
+						post("*Usage: /coinflip <bet amount>*");
+					} else {
+						if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
+						temp[sender.id] = {inGame: true, stake: args[1]};
+						post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/n)*");
+					}
+				}
 				break;
 					
 			case "rape":
@@ -490,11 +536,11 @@ client.on('message', message =>
 				{
 					if(database[sender.id] == null) database[sender.id] = {burgers: 100};
 					if(isNaN(database[sender.id].burgers)) database[sender.id].burgers = 100;
-					post(`**:gem: ${sender.username}**'s balance contains :hamburger: **` + database[sender.id].burgers + `**`);
+					post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + database[sender.id].burgers + `**`);
 				} else {
 					if(!database[user.id] == null) database[user.id] = {burgers: 100};
 					if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
-					post(`**:gem: ${user.username}**'s balance contains :hamburger: **` + database[user.id].burgers + `**`);
+					post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + database[user.id].burgers + `**`);
 				}
 				break;
 				
@@ -516,9 +562,9 @@ client.on('message', message =>
 							if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
 							database[user.id].burgers += parseInt(arg0);							
 							database[sender.id].burgers -= arg0;
-							post("Successfully given :hamburger: **" + arg0 + "** to user **" + user.username + "**!");
+							post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + user.username + "**!");
 						} else {
-							post("You have insufficient funds to make this transaction!");	
+							post("You have insufficient burgers to make this transaction!");	
 						}
 					} else {
 						post("**Usage: /pay <user> <amount>**");	
