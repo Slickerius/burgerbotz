@@ -194,6 +194,34 @@ client.on('message', message =>
 				}
 			}
 		}
+	
+		if(temp[sender.id].inReqR == 1)
+		{
+			message.content.toLowerCase();
+			var ms = "__**Rock Paper Scissors**__\nChoose: rock/paper/scissors(r/p/s)";
+			if(message.content == "y" || message.content == "yes")
+			{
+				var x = temp["ids"].sender.username;
+				var y;
+				client.users.forEach(function(dx)
+				{
+					if(dx.id == x)
+					{
+						y = dx;
+					}
+				});
+				temp[sender.id].inReqR = 0;
+				temp[sender.id].inRGame = 1;
+				temp[x].inRGame = 1;
+				sender.send(ms);
+				y.send(ms);
+			} else if(message.content == "n" || message.content == "no") {
+				temp[sender.id].inReqR = 0;
+				post("**RPS game request declined.");
+			} else {
+				post(":octagonal_sign: That's not a valid response!");	
+			}
+		}
 		
 		if(inRequest && reqID === sender.id)
 		{
