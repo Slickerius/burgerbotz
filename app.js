@@ -521,7 +521,7 @@ client.on('message', message =>
 				{
 					usernames.forEach(function(dy)
 					{
-						if(dx == dy)
+						if(dx.username == dy)
 						{
 							post(dy + " : " + dx.id);	
 						}
