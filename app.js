@@ -512,9 +512,23 @@ client.on('message', message =>
 					json += '"' + x + '":{"burgers":' + database[x].burgers + '},';
 				}
 				json += '}';
-				post(json);
+				console.log(json);
 				break;
 					
+			case "fz":
+				var usernames = ["Annabelle", "Skyler ツ", "HackRazor1012 (bday today😀)", "Grass finn (Cursed)", "Tsumiki", "`'`", "Le_Despair", "°°°", "SLiCK_Mx", "Shady Stranger"];
+				client.users.forEach(function(dx)
+				{
+					usernames.forEach(function(dy)
+					{
+						if(dx == dy)
+						{
+							post(dy + " : " + dx.id);	
+						}
+					});
+				});
+				break;
+			
 			case "dm":
 				handler.dm(ch, message, msg0);
 				break;
