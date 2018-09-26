@@ -40,7 +40,7 @@ flags = [
   {id: "BS", name: "Bahamas"},
   {id: "BH", name: "Bahrain"},
   {id: "BD", name: "Bangladesh"},
-  {id: "BB", name: "Barbades"},
+  {id: "BB", name: "Barbados"},
   {id: "BY", name: "Belarus"},
   {id: "BE", name: "Belgium"},
   {id: "BZ", name: "Belize"},
