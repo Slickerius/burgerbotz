@@ -144,7 +144,7 @@ flags = [
   {id: "JE", name: "Jersey"},
   {id: "JO", name: "Jordan"},
   
-  {id: "KZ", name: "Kazahkstan"},
+  {id: "KZ", name: "Kazakhstan"},
   {id: "KE", name: "Kenya"},
   {id: "KI", name: "Kiribati"},
   {id: "KP", name: "North Korea"},
@@ -189,7 +189,6 @@ flags = [
   {id: "NR", name: "Nauru"},
   {id: "NP", name: "Nepal"},
   {id: "NL", name: "Netherlands"},
-  {id: "AN", name: "Netherlands Antilles"},
   {id: "NC", name: "New Caledonia"},
   {id: "NZ", name: "New Zealand"},
   {id: "NI", name: "Nicaragua"},
