@@ -69,14 +69,19 @@ module.exports =
 	
 	calc: function(channel, x, operator, y) 
 	{
-		operator.toLowerCase();
+		if(!isNaN(operator) && !isNaN(x) && !isNaN(y))
+		{
+			operator.toLowerCase();
+		} else {
+			calcErr(channel);	
+		}
 		var dx, dy, z;
 		if(parseInt(x) == x && parseInt(y) == y)
 		{
-			calcErr(channel);
-		} else {
 			dx = parseInt(x);
 			dy = parseInt(y);
+		} else {
+			calcErr(channel);
 		}
 		console.log(dx, operator, dy, x, y);
         	switch(operator)
