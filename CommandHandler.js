@@ -75,13 +75,13 @@ module.exports =
 		}
 		var dx, dy, z;
 		
-		dx = parseInt(x);
-		dy = parseInt(y);
+		dx = parseFloat(x);
+		dy = parseFloat(y);
 		
 		if(dx != x || dy != y)
 		{
 			return calcErr(channel);
-		}
+		} 
         	switch(operator)
 		{
 			case "+":
