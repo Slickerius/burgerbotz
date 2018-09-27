@@ -36,7 +36,7 @@ function calcErr(channel)
 
 function calcRes(channel, x, y, operator, res)
 {
-	channel.send("__**Calculated expression:**__ **" + x + " " + operator + " " + " = " + res + "**");	
+	channel.send("__**Calculated expression:**__ **" + x + " " + operator + " " + y + " = " + res + "**");	
 }
 
 module.exports = 
