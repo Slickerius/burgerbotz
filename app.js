@@ -528,6 +528,10 @@ client.on('message', message =>
 					}
 				}
 				break;
+				
+			case "calc":
+				handler.calc(ch, args[1], args[2], args[3]);
+				break;
 					
 			case "rape":
 				handler.rape(ch, message, rapeGifs);
