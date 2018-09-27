@@ -78,6 +78,7 @@ module.exports =
 			dx = parseInt(x);
 			dy = parseInt(y);
 		}
+		console.log(dx, operator, dy);
         	switch(operator)
 		{
 			case "+":
