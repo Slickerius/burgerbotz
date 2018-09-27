@@ -69,6 +69,8 @@ module.exports =
 	
 	calc: function(channel, x, operator, y) 
 	{
+		console.log(operator, x, y);
+		
 		if(isNaN(x) || isNaN(y) || isNaN(operator))
 		{
 			return calcErr(channel);	
@@ -77,6 +79,8 @@ module.exports =
 		
 		dx = parseInt(x);
 		dy = parseInt(y);
+		
+		console.log(dx, operator, dy, x, y);
 		
 		if(dx != x || dy != y)
 		{
