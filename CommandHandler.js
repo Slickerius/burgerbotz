@@ -74,13 +74,15 @@ module.exports =
 			return calcErr(channel);	
 		}
 		var dx, dy, z;
-		if(parseInt(x) == x && parseInt(y) == y)
+		
+		dx = parseInt(x);
+		dy = parseInt(y);
+		
+		if(dx != x && dy != y)
 		{
-			dx = parseInt(x);
-			dy = parseInt(y);
-		} else {
 			return calcErr(channel);
 		}
+
 		console.log(dx, operator, dy, x, y);
         	switch(operator)
 		{
