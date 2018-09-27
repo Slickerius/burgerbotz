@@ -29,6 +29,16 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function calcErr(channel)
+{
+	channel.send("Usage: /calc <operand 1> <operator> <operand 2>\nExample:/calc 2 + 3\nSupported operators: +, -, *, /, ^");
+}
+
+function calcRes(channel, x, y, operator, res)
+{
+	channel.send("__**Calculated expression:**__ **" + x + " " + operator + " " + " = " + res + "**");	
+}
+
 module.exports = 
 {
 	help: function(channel)
@@ -54,6 +64,45 @@ module.exports =
 			return channel.send(arg);
 		} else {
 			return channel.send("Correct usage: /post <message>");
+		}
+	},
+	
+	calc: function(channel, x, operator, y) 
+	{
+		operator.toLowerCase();
+		var dx, dy, z;
+		if(parseInt(x) == x && parseInt(y) == y)
+		{
+			calcErr(channel);
+		} else {
+			dx = parseInt(x);
+			dy = parseInt(y);
+		}
+        	switch(operator)
+		{
+			case "+":
+				z = dx + dy;
+				return calcRes(channel, dx, operator, dy, z);
+				break;
+			case "-":
+				z = dx - dy;
+				return calcRes(channel, dx, operator, dy, z);
+				break;
+			case "/":
+				z = dx / dy;
+				return calcRes(channel, dx, operator, dy, z);
+				break;
+			case "*":
+				z = dx * dy;
+				return calcRes(channel, dx, operator, dy, z);
+				break;
+			case "^":
+				z = Math.pow(dx, dy);
+				return calcRes(channel, dx, operator, dy, z);
+				break;
+			default:
+				return calcErr(channel);
+				break;
 		}
 	},
 	
