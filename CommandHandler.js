@@ -69,10 +69,8 @@ module.exports =
 	
 	calc: function(channel, x, operator, y) 
 	{
-		if(!isNaN(operator) && !isNaN(x) && !isNaN(y))
+		if(isNaN(x) || isNaN(y) || isNaN(operator))
 		{
-			operator.toLowerCase();
-		} else {
 			return calcErr(channel);	
 		}
 		var dx, dy, z;
