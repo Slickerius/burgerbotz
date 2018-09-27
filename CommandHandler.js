@@ -78,7 +78,7 @@ module.exports =
 		dx = parseInt(x);
 		dy = parseInt(y);
 		
-		if(dx != x && dy != y)
+		if(dx != x || dy != y)
 		{
 			return calcErr(channel);
 		}
