@@ -73,7 +73,7 @@ module.exports =
 		{
 			operator.toLowerCase();
 		} else {
-			calcErr(channel);	
+			return calcErr(channel);	
 		}
 		var dx, dy, z;
 		if(parseInt(x) == x && parseInt(y) == y)
@@ -81,30 +81,30 @@ module.exports =
 			dx = parseInt(x);
 			dy = parseInt(y);
 		} else {
-			calcErr(channel);
+			return calcErr(channel);
 		}
 		console.log(dx, operator, dy, x, y);
         	switch(operator)
 		{
 			case "+":
 				z = dx + dy;
-				return calcRes(channel, dx, operator, dy, z);
+				return calcRes(channel, dx, dy, operator, z);
 				break;
 			case "-":
 				z = dx - dy;
-				return calcRes(channel, dx, operator, dy, z);
+				return calcRes(channel, dx, dy, operator, z);
 				break;
 			case "/":
 				z = dx / dy;
-				return calcRes(channel, dx, operator, dy, z);
+				return calcRes(channel, dx, dy, operator, z);
 				break;
 			case "*":
 				z = dx * dy;
-				return calcRes(channel, dx, operator, dy, z);
+				return calcRes(channel, dx, dy, operator, z);
 				break;
 			case "^":
 				z = Math.pow(dx, dy);
-				return calcRes(channel, dx, operator, dy, z);
+				return calcRes(channel, dx, dy, operator, z);
 				break;
 			default:
 				return calcErr(channel);
