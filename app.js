@@ -614,8 +614,11 @@ client.on('message', message =>
 							if(dx.id == m[x].id) t = dx.username;	
 						});		
 						
-						if(t != p) y += "[" + z + "] " + t + "\nHamburgers: " + m[x].burgers + "\n\n";
-						z++;
+						if(t != p)
+						{
+							y += "[" + z + "] " + t + "\nHamburgers: " + m[x].burgers + "\n\n";
+							z++;
+						}
 						p = t;
 					}
 				}
@@ -654,6 +657,9 @@ client.on('message', message =>
 						{
 							database[user.id] = {burgers: 100};
 						}
+						
+						if(parseInt(arg0) < 0) return post("You must enter a positive number.");
+						
 						if(database[sender.id].burgers - parseInt(arg0) >= 0)
 						{
 							if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
