@@ -516,6 +516,8 @@ client.on('message', message =>
 					{
 						post("*Usage: /coinflip <bet amount>*");
 					} else {
+						if(parseInt(args[1]) < 0) return post("You must enter a positive number.");
+						
 						if(database[sender.id].burgers - parseInt(args[1]) >= 0)
 						{
 							if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
