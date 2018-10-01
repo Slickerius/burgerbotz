@@ -647,12 +647,36 @@ client.on('message', message =>
 				break;
 				
 			case "pay":
+				var arg0 = args[2];
 				if(message.mentions.users.size < 1)
 				{
+					for(var x in database)
+					{
+						if(args[1] == x)
+						{
+							if(parseInt(arg0) < 0) return post("You must enter a positive number.");
+							
+							if(database[sender.id].burgers - parseInt(arg0) >= 0)
+							{
+								if(isNaN(database[x].burgers)) database[x].burgers = 100;
+								database[x].burgers += parseInt(arg0);							
+								database[sender.id].burgers -= arg0;
+								post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + x + "**!");
+								client.users.forEach(function(u)
+								{
+									if(u.id == x)
+									{
+										u.send("User **" + sender.username + "#" + sender.discriminator + "** has sent you a total of :hamburger: **" + arg0 + "**!");	
+									}
+								});
+							} else {
+								post("You have insufficient burgers to make this transaction!");	
+							}
+							return;
+						}
+					}
 					post("You have to mention another user.");
 				} else {
-					console.log(args[2]);
-					var arg0 = args[2];
 					if(arg0 == parseInt(arg0))
 					{
 						if(!database[user.id])
