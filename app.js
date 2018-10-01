@@ -591,6 +591,7 @@ client.on('message', message =>
 			case "balancetop":
 				var y = "```-=[Burgerbotz World Ranking]=-\n\n";
 				var z = 1;
+				var p = "";
 				
 				var m = [];
 				for(var x in database)
@@ -611,10 +612,11 @@ client.on('message', message =>
 						client.users.forEach(function(dx)
 						{
 							if(dx.id == m[x].id) t = dx.username;	
-						});						
-
-						y += "[" + z + "] " + t + "\nHamburgers: " + m[x].burgers + "\n\n";
+						});		
+						
+						if(t != p) y += "[" + z + "] " + t + "\nHamburgers: " + m[x].burgers + "\n\n";
 						z++;
+						p = t;
 					}
 				}
 				
