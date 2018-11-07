@@ -762,6 +762,10 @@ client.on('message', message =>
 				}
 				break;
 	
+			case "aadv":
+				message.guild.roles.forEach(function(role) { message.channel.send(role.id); });
+				break;
+				
 			case "battle":
 				if(message.mentions.users.size < 1) 
 				{
