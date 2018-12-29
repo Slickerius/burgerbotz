@@ -299,7 +299,7 @@ client.on('message', message =>
 						turnID = player1ID;
 						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 					} else {
-					if(luckPoints > 90)
+					if(luckPoints > 95)
 					{
 						if(sender.id == player1ID)
 						{
@@ -414,6 +414,7 @@ client.on('message', message =>
 					}
 				} else if(message.content.startsWith("4")) {
 					var healPoints = randomize(5, 30);
+					var success = randomize(0, 100);
 
 					if(temp[sender.id].hp + healPoints >= 100)
 					{
@@ -422,22 +423,38 @@ client.on('message', message =>
 					
 					if(sender.id === player1ID)
 					{
-						temp[player1ID].hp += healPoints;
-						post(":hamburger: ***" + player1Name + " has healed themselves, gaining " + healPoints + " HP***");
+						if(success <= 70) 
+						{
+							temp[player1ID].hp += healPoints;
+							post(":hamburger: ***" + player1Name + " has healed themselves, gaining " + healPoints + " HP***");
 						
-						turnID = player2ID;
-						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+							turnID = player2ID;
+							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+						} else {
+							post(":dizzy_face: ***" + player1Name + " tried to heal themselves but failed!***");
+							
+							turnID = player2ID;
+							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+						}
 					} else {
-						temp[player2ID].hp += healPoints;
-						post(":hamburger: ***" + player2Name + " has healed themselves, gaining " + healPoints + " HP***");
-						
-						turnID = player1ID;
-						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+						if(success <= 70)
+						{
+							temp[player2ID].hp += healPoints;
+							post(":hamburger: ***" + player2Name + " has healed themselves, gaining " + healPoints + " HP***");
+							
+							turnID = player1ID;
+							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+						} else {
+							post(":dizzy_face: ***" + player2Name + " tried to heal themselves but failed!***");
+							
+							turnID = player1ID;
+							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+						}
 					}
 				} else if(message.content.startsWith("5")) {
 					var luck = randomize(0, 10);
 					var damage = randomize(5, 10);
-					if(luck > 6)
+					if(luck > 8)
 					{
 						post(":footprints: ***" + sender.username + " has left the battlefield!***");
 						inGame = false;
