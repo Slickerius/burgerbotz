@@ -47,6 +47,14 @@ client.on('ready', () =>
    });
 });
 
+client.on('guildMemberAdd', member =>
+{
+	if(member.guild.id == "424507027432144913")
+	{
+		member.user.send("**Hello!**\nWelcome to **Livlisky**! We are a community in which freedom of expression is highly regarded, you are free to be reasonable and friendly or shitpost to your heart's content, it is up to you!\n\n**Enjoy your stay ;)**");
+	}
+});
+
 function randomize(min, max) 
 {
 	return Math.floor(Math.random() * (max - min)) + min;
