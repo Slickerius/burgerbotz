@@ -58,6 +58,7 @@ flags = [
   {id: "BG", name: "Bulgaria"},
   {id: "BF", name: "Burkina Faso"},
   {id: "BI", name: "Burundi"},
+  {id: "BQ", name: "Bonaire"},
   
   {id: "KH", name: "Cambodia"},
   {id: "CM", name: "Cameroon"},
@@ -81,13 +82,18 @@ flags = [
   {id: "CI", name: "Ivory Coast"},
   {id: "HR", name: "Croatia"},
   {id: "CU", name: "Cuba"},
+  {id: "CW", name: "Curacao"},
   {id: "CY", name: "Cyprus"},
   {id: "CZ", name: "Czech Republic"},
+  {id: "CP", name: "Clipperton Island"},
+  {id: "EA", name: "Ceuta and Melilla"},
+  {id: "IC", name: "Canary Islands"},
   
   {id: "DK", name: "Denmark"},
   {id: "DJ", name: "Djibouti"},
   {id: "DM", name: "Dominica"},
   {id: "DO", name: "Dominican Republic"},
+  {id: "DG", name: "Diego Garcia"},
   
   {id: "EC", name: "Ecuador"},
   {id: "EG", name: "Egypt"},
@@ -96,6 +102,7 @@ flags = [
   {id: "ER", name: "Eritrea"},
   {id: "EE", name: "Estonia"},
   {id: "ET", name: "Ethiopia"},
+  {id: "EU", name: "European Union"},
   
   {id: "FK", name: "Falkland Islands"},
   {id: "FO", name: "Faroe Islands"},
@@ -270,6 +277,7 @@ flags = [
   {id: "TM", name: "Turkmenistan"},
   {id: "TC", name: "Turks and Caicos Islands"},
   {id: "TV", name: "Tuvalu"},
+  {id: "TK", name: "Tokelau"},
   
   {id: "UG", name: "Uganda"},
   {id: "UA", name: "Ukraine"},
