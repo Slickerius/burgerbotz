@@ -539,8 +539,9 @@ client.on('message', message =>
 				var b = parseInt(args[2]);
 				var c = parseInt(args[3]);
 				
-				var _a = "";
-				if(a < 0) _a = "-";
+				var _a = a.toString();
+				if(a == -1) _a = "-";
+				if(a == 1) _a = "";
 				
 				var __b = "+ " + b + "x";
 				if(b < 0) __b = "- " + Math.abs(b) + "x";
