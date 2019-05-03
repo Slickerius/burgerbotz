@@ -138,29 +138,6 @@ client.on('message', message =>
 			database[winID].burgers += x;
 		}
 	
-		function getFraction(n)
-		{
-			var gcd = function(a, b)	
-			{
- 				 if (b < 0.0000001) return a;              
-
- 				 return gcd(b, Math.floor(a % b));          
-			};
-
-			var fraction = n;
-			var len = fraction.toString().length - 2;
-
-			var denominator = Math.pow(10, len);
-			var numerator = fraction * denominator;
-
-			var divisor = gcd(numerator, denominator);  
-
-			numerator /= divisor;
-			denominator /= divisor;   
-					
-			return numerator + "/" + denominator;
-		}
-		
 		let sender = message.author;
 		let ch = message.channel;
 		
@@ -584,25 +561,18 @@ client.on('message', message =>
 					return;
 				}
 				
-				var _x1 = Math.abs(x1).toString();
-				var _x2 = Math.abs(x2).toString();
-				
-				if(!Number.isInteger(x1))
-				{
-					_x1 = getFraction(x1);
-				} else if(!Number.isInteger(x2)) {
-					_x2 = getFraction(x2);	
-				}
+				var _x1 = Math.abs(x1);
+				var _x2 = Math.abs(x2);
 				
 				if(x1 > 0 && x2 > 0)
 				{
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " = 0 has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + _x1 + ")(x - " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
+					post("The quadratic equation **" + _a + "x² " + __b + "x" + _c + " = 0** has roots of **" + x1 + "** and **" + x2 + "**.\nThe factors are **(x - " + _x1 + ")(x - " + _x2 + ")**. \nThe root pair is **(" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + "**.");
 				} else if(x1 > 0 && x2 < 0) {
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " = 0 has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + _x1 + ")(x + " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
+					post("The quadratic equation **" + _a + "x² " + __b + "x" + _c + " = 0** has roots of **" + x1 + "** and **" + x2 + "**.\nThe factors are **(x - " + _x1 + ")(x + " + _x2 + ")**. \nThe root pair is **(" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + "**.");
 				} else if(x1 < 0 && x2 > 0) { 
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " = 0 has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + _x1 + ")(x - " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
+					post("The quadratic equation **" + _a + "x² " + __b + "x" + _c + " = 0** has roots of **" + x1 + "** and **" + x2 + "**.\nThe factors are **(x + " + _x1 + ")(x - " + _x2 + ")**. \nThe root pair is **(" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + "**.");
 				} else if(x1 < 0 && x2 < 0) {
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " = 0 has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + _x1 + ")(x + " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
+					post("The quadratic equation **" + _a + "x² " + __b + "x" + _c + " = 0** has roots of **" + x1 + "** and **" + x2 + "**.\nThe factors are **(x + " + _x1 + ")(x + " + _x2 + ")**. \nThe root pair is **(" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + "**.");
 				}
 				return;
 			}
