@@ -137,6 +137,29 @@ client.on('message', message =>
 			console.log(database[winID]);
 			database[winID].burgers += x;
 		}
+	
+		function getFraction(n)
+		{
+			var gcd = function(a, b)	
+			{
+ 				 if (b < 0.0000001) return a;              
+
+ 				 return gcd(b, Math.floor(a % b));          
+			};
+
+			var fraction = n;
+			var len = fraction.toString().length - 2;
+
+			var denominator = Math.pow(10, len);
+			var numerator = fraction * denominator;
+
+			var divisor = gcd(numerator, denominator);  
+
+			numerator /= divisor;
+			denominator /= divisor;   
+					
+			return numerator + "/" + denominator;
+		}
 		
 		let sender = message.author;
 		let ch = message.channel;
@@ -561,8 +584,15 @@ client.on('message', message =>
 					return;
 				}
 				
-				var _x1 = Math.abs(x1);
-				var _x2 = Math.abs(x2);
+				var _x1 = Math.abs(x1).toString();
+				var _x2 = Math.abs(x2).toString();
+				
+				if(!isInteger(x1))
+				{
+					_x1 = getFraction(x1);
+				} else if(!isInteger(x2)) {
+					_x2 = getFraction(x2);	
+				}
 				
 				if(x1 > 0 && x2 > 0)
 				{
