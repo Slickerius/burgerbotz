@@ -566,13 +566,13 @@ client.on('message', message =>
 				
 				if(x1 > 0 && x2 > 0)
 				{
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + _x1 + ")(x - " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " = 0 has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + _x1 + ")(x - " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
 				} else if(x1 > 0 && x2 < 0) {
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + _x1 + ")(x + " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " = 0 has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + _x1 + ")(x + " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
 				} else if(x1 < 0 && x2 > 0) { 
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + _x1 + ")(x - " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " = 0 has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + _x1 + ")(x - " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
 				} else if(x1 < 0 && x2 < 0) {
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + _x1 + ")(x + " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " = 0 has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + _x1 + ")(x + " + _x2 + "). \nThe root pair is (" + _b + " ± √" + (_b2 - _4ac) + ") / " + _2a + ".");
 				}
 				return;
 			}
