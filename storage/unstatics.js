@@ -1,6 +1,7 @@
 commandMap = new Map([
 		['/help', 'Shows this help menu'], 
 		['/balancetop', 'Shows the global top 10 users'],
+		['/q', 'Solve quadratic equations'],
 		['/afk', 'Sets away from keyboard status'], 
 		['/s', 'Spits on grave'], 
 		['/ping', 'Pong!'], 
