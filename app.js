@@ -546,8 +546,8 @@ client.on('message', message =>
 				if(b < 0) __b = "- " + Math.abs(b) + "x";
 				if(b == 0) __b = "";
 				
-				var _c = "+ " + c + "x";
-				if(c < 0) _c = "- " + Math.abs(c) + "x";
+				var _c = "+ " + c;
+				if(c < 0) _c = "- " + Math.abs(c);
 				if(c == 0) _c = "";
 				
 				var _b = b * -1;
