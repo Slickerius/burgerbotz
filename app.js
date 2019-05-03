@@ -539,7 +539,10 @@ client.on('message', message =>
 				var b = parseInt(args[2]);
 				var c = parseInt(args[3]);
 				
-				var _b = "+ " + b;
+				var _a = "";
+				if(a < 0) _a = "-";
+				
+				var __b = "+ " + b;
 				if(b > 0) b1 = "- " + b;
 				var _c = "+ " + c;
 				if(c > 0) c1 = "- " + c;
@@ -554,13 +557,13 @@ client.on('message', message =>
 				
 				if(x1 > 0 && x2 > 0)
 				{
-					post("The quadratic equation " + a + "x²" + _b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + a + ")(x - " + b + " ");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + x1 + ")(x - " + x2 + ") ");
 				} else if(x1 > 0 && x2 < 0) {
-					post("The quadratic equation " + a + "x²" + _b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + a + ")(x + " + b + " ");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + x1 + ")(x + " + x2 + ") ");
 				} else if(x1 < 0 && x2 > 0) { 
-					post("The quadratic equation " + a + "x²" + _b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + a + ")(x - " + b + " ");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + x1 + ")(x - " + x2 + ") ");
 				} else if(x1 < 0 && x2 < 0) {
-					post("The quadratic equation " + a + "x²" + _b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + a + ")(x + " + b + " ");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + x1 + ")(x + " + x2 + ") ");
 				}
 				return;
 			}
