@@ -555,15 +555,18 @@ client.on('message', message =>
 				var x1 = (_b + Math.sqrt(_b2 - _4ac)) / _2a;
 				var x2 = (_b - Math.sqrt(_b2 - _4ac)) / _2a;
 				
+				var _x1 = Math.abs(x1);
+				var _x2 = Math.abs(x2);
+				
 				if(x1 > 0 && x2 > 0)
 				{
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + x1 + ")(x - " + x2 + ") ");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + _x1 + ")(x - " + _x2 + ") ");
 				} else if(x1 > 0 && x2 < 0) {
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + x1 + ")(x + " + x2 + ") ");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + _x1 + ")(x + " + _x2 + ") ");
 				} else if(x1 < 0 && x2 > 0) { 
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + x1 + ")(x - " + x2 + ") ");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + _x1 + ")(x - " + _x2 + ") ");
 				} else if(x1 < 0 && x2 < 0) {
-					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + x1 + ")(x + " + x2 + ") ");
+					post("The quadratic equation " + _a + "x² " + __b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + _x1 + ")(x + " + _x2 + ") ");
 				}
 				return;
 			}
