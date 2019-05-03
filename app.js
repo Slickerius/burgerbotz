@@ -555,6 +555,12 @@ client.on('message', message =>
 				var x1 = (_b + Math.sqrt(_b2 - _4ac)) / _2a;
 				var x2 = (_b - Math.sqrt(_b2 - _4ac)) / _2a;
 				
+				if(isNaN(x1) || isNaN(x2))
+				{
+					post("Only rational roots are currently computable. Please try again.");
+					return;
+				}
+				
 				var _x1 = Math.abs(x1);
 				var _x2 = Math.abs(x2);
 				
@@ -570,7 +576,7 @@ client.on('message', message =>
 				}
 				return;
 			}
-				ch.send({files: ['https://cdn.discordapp.com/attachments/563998568940306437/573785938443108352/unknown.png']});
+				ch.send({files: ['https://cdn.discordapp.com/attachments/563998568940306437/573793996694880256/unknown.png']});
 				post(":symbols: *Find roots, factors for quadratic equations using Burgerbotz quadratic equation solver!*\n**Usage: /q <a> <b> <c>**");
 				break;
 					
