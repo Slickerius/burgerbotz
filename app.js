@@ -533,9 +533,16 @@ client.on('message', message =>
 				break;
 				
 			case "q":
+			if(args[1] == parseInt(args[1]) && args[2] == parseInt(args[2]) && args[3] == parseInt(args[3]))
+			{
 				var a = parseInt(args[1]);
 				var b = parseInt(args[2]);
 				var c = parseInt(args[3]);
+				
+				var _b = "+ " + b;
+				if(b > 0) b1 = "- " + b;
+				var _c = "+ " + c;
+				if(c > 0) c1 = "- " + c;
 				
 				var _b = b * -1;
 				var _b2 = b * b;
@@ -545,7 +552,19 @@ client.on('message', message =>
 				var x1 = (_b + Math.sqrt(_b2 - _4ac)) / _2a;
 				var x2 = (_b - Math.sqrt(_b2 - _4ac)) / _2a;
 				
-				post("The quadratic equation " + a + "x²" + b + "x" + c + " has roots of " + x1 + " and " + x2 + ".");
+				if(x1 > 0 && x2 > 0)
+				{
+					post("The quadratic equation " + a + "x²" + _b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + a + ")(x - " + b + " ");
+				} else if(x1 > 0 && x2 < 0) {
+					post("The quadratic equation " + a + "x²" + _b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x - " + a + ")(x + " + b + " ");
+				} else if(x1 < 0 && x2 > 0) { 
+					post("The quadratic equation " + a + "x²" + _b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + a + ")(x - " + b + " ");
+				} else if(x1 < 0 && x2 < 0) {
+					post("The quadratic equation " + a + "x²" + _b + "x" + _c + " has roots of " + x1 + " and " + x2 + ".\nThe factors are (x + " + a + ")(x + " + b + " ");
+				}
+				return;
+			}
+				post("Usage: /q <a> <b> <c>");
 				break;
 					
 			case "coinflip":
