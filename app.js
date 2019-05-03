@@ -571,7 +571,7 @@ client.on('message', message =>
 				return;
 			}
 				ch.send({files: ['https://cdn.discordapp.com/attachments/563998568940306437/573785938443108352/unknown.png']});
-				post(":symbols:*Find roots, factors for quadratic equations using Burgerbotz quadratic equation solver!*\n**Usage: /q <a> <b> <c>**");
+				post(":symbols: *Find roots, factors for quadratic equations using Burgerbotz quadratic equation solver!*\n**Usage: /q <a> <b> <c>**");
 				break;
 					
 			case "coinflip":
