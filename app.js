@@ -531,6 +531,22 @@ client.on('message', message =>
 			case "random":
 				handler.random(ch, args);
 				break;
+				
+			case "q":
+				var a = parseInt(args[1]);
+				var b = parseInt(args[2]);
+				var c = parseInt(args[3]);
+				
+				var _b = b * -1;
+				var _b2 = b * b;
+				var _4ac = 4 * a * c;
+				var _2a = 2 * a;
+				
+				var x1 = (_b + Math.sqrt(_b2 - _4ac)) / _2a;
+				var x2 = (_b - Math.sqrt(_b2 - _4ac)) / _2a;
+				
+				post("The quadratic equation " + a + "x²" + b + "x" + c + " has roots of " + x1 + " and " + x2 + ".");
+				break;
 					
 			case "coinflip":
 				if(temp[sender.id].inGame == 1)
