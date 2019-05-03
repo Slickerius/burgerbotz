@@ -566,7 +566,7 @@ client.on('message', message =>
 				
 				if(isNaN(x1) || isNaN(x2))
 				{
-					post("The quadratic equation **" + _a + "x² " + __b + " " + _c + " = 0** has the root pair of **(" + _b + " ± i√" + Math.abs((_b2 - _4ac)) + ") / " + _2a + "**.";
+					post("The quadratic equation **" + _a + "x² " + __b + " " + _c + " = 0** has the root pair of **(" + _b + " ± i√" + Math.abs((_b2 - _4ac)) + ") / " + _2a + "**.");
 					return;
 				}
 				
