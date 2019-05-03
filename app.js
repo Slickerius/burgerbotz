@@ -587,10 +587,10 @@ client.on('message', message =>
 				var _x1 = Math.abs(x1).toString();
 				var _x2 = Math.abs(x2).toString();
 				
-				if(!isInteger(x1))
+				if(!Number.isInteger(x1))
 				{
 					_x1 = getFraction(x1);
-				} else if(!isInteger(x2)) {
+				} else if(!Number.isInteger(x2)) {
 					_x2 = getFraction(x2);	
 				}
 				
