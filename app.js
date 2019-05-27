@@ -633,7 +633,7 @@ client.on('message', message =>
 				break;
 					
 			case "fz":
-				var usernames = ["Annabelle", "Skyler ツ", "HackRazor1012", "Grass finn (Cursed)", "Tsumiki", "`'`", "Le_Despair", "°°°", "SLiCK_Mx", "Shady Stranger"];
+				var usernames = ["Annabelle", "Skyler ツ", "HackRazor1012", "Grass finn (Cursed)", "Tsumiki", "`'`", "Le_Despair", "°°°", "Shady Stranger"];
 				client.users.forEach(function(dx)
 				{
 					usernames.forEach(function(dy)
