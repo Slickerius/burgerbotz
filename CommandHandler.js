@@ -117,8 +117,8 @@ module.exports =
 		.setThumbnail(url)
 		.setAuthor("Burgerbotz", url)
 		.setDescription("Burgerbotz is an experimental bot created for research purposes made by A&A Consortium. Over time they decided to make the bot invite link public due to surging external interest in the bot. Albeit being public, the Burgerbotz team is committed at keeping the politically incorrect nature of the bot intact, for teh maximum intensity of lulz.")
-		.addField("Developer(s)", "-🥔-#5843")
-		.addField("Special Thanks", "Annabelle#5819, Cheese 3000#1154")
+		.addField("Developer(s)", "-🥔-#5843, Cheese 3000#1154")
+		.addField("Special Thanks", "Annabelle#5819, Skulldragon89#6969")
 		.setColor("#fcc66a");
 		
 		return channel.send(botembed);
