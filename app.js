@@ -827,7 +827,7 @@ client.on('message', message =>
 					return;
 				}
 				
-				if(args.length < 1 && phoneRoom[message.channel.id] == "")
+				if(args.length < 2 && phoneRoom[message.channel.id] == "")
 				{
 					post(":octagonal_sign: **Usage:** /burgerphone <room ID>");
 					return;
