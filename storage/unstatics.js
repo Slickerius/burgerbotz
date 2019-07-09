@@ -17,6 +17,7 @@ commandMap = new Map([
 		['/battle', 'Challenges another user to a battle'],
 		['/burger', 'A burger a day keeps the doctor away!'],
 		['/invite', 'Invite me to your server!'],
+		['/bp', 'Burgerphone! Connect to a Burgerphone room and chat with others.'],
 		['/flags', 'Starts a flag guessing game'],
 		]);
 
