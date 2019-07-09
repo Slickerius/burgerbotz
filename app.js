@@ -828,6 +828,16 @@ client.on('message', message =>
 				
 				phoneRoom[message.channel.id] = args[1];
 				post(":telephone: **Successfully connected to room '" + phoneRoom[message.channel.id] + "'! Say hello!**");
+				for(var key in phoneRoom)
+				{
+					client.channels.forEach(function(channel)
+					{
+						if(channel.id == key && phoneRoom[message.channel.id] == phoneRoom[channel.id])
+						{
+							channel.send(":door: **Someone new has joined the room! Say hi!**");
+						}
+					});
+				}
 				break;
 				
 			case "flags":
