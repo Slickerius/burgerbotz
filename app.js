@@ -813,6 +813,7 @@ client.on('message', message =>
 			case "burgerphone":
 			case "bp":
 				console.log(phoneRoom[message.channel.id]);
+				if(phoneRoom[message.channel.id] == null) phoneRoom[message.channel.id] = "";
 				if(phoneRoom[message.channel.id] != "")
 				{
 					post(":telephone: **Successfully disconnected from room '" + phoneRoom[message.channel.id] + "'.**");
