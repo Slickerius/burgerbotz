@@ -525,6 +525,12 @@ client.on('message', message =>
 					{
 						if(sender.id == "477763761629954060" || channel.id == message.channel.id) return;
 						channel.send("**[" + phoneRoom[channel.id] + "]" + sender.username + "#" + sender.discriminator + ":** " + message.content);
+						message.attachments.forEach(function(attachment)
+						{
+							channel.send({
+							files: [attachment.url]
+							});	
+						});	
 					}
 				});
 			}
@@ -832,7 +838,7 @@ client.on('message', message =>
 				{
 					client.channels.forEach(function(channel)
 					{
-						if(channel.id == key && phoneRoom[message.channel.id] == phoneRoom[channel.id])
+						if(channel.id == key && phoneRoom[message.channel.id] == phoneRoom[channel.id] && channel.id != message.channel.id)
 						{
 							channel.send(":door: **Someone new has joined the room! Say hi!**");
 						}
