@@ -522,7 +522,7 @@ client.on('message', message =>
 				console.log(key);
 				client.channels.forEach(function(channel)
 				{
-					if(channel.id == key)
+					if(channel.id == key && phoneRoom[message.channel.id] == phoneRoom[channel.id])
 					{
 						if(sender.id == "477763761629954060") return;
 						channel.send("**[" + phoneRoom[channel.id] + "]" + sender.username + "#" + sender.discriminator + ":** " + message.content);
