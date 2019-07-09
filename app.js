@@ -519,6 +519,7 @@ client.on('message', message =>
 		{
 			for(var key in phoneRoom)
 			{
+				console.log(key);
 				client.channels.forEach(function(channel)
 				{
 					if(channel.id == key)
@@ -827,6 +828,7 @@ client.on('message', message =>
 				}
 				
 				phoneRoom[message.channel.id] = args[1];
+				post(":telephone: **Successfully connected to room '" + phoneRoom[message.channel.id] + "'! Say hello!");
 				break;
 				
 			case "flags":
