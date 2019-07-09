@@ -519,7 +519,6 @@ client.on('message', message =>
 		{
 			for(var key in phoneRoom)
 			{
-				console.log(key);
 				client.channels.forEach(function(channel)
 				{
 					if(channel.id == key && phoneRoom[message.channel.id] == phoneRoom[channel.id])
