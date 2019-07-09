@@ -7,6 +7,7 @@ const status = "with Carlton";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
+var phoneRoom;
 var hqChannel;
 
 client.on('ready', () => 
@@ -514,6 +515,20 @@ client.on('message', message =>
 			post("**" + sender.username + "** is no longer AFK.");
 		}
 		
+		if(phoneRoom[message.channel.id] != "")
+		{
+			for(var key in phoneRoom)
+			{
+				client.channels.forEach(function(channel)
+				{
+					if(channel.id == key)
+					{
+						channel.send("**[" + phoneRoom[channel.id] + "]" + message.user.username + "#" + message.user.discriminator + ":** " + message.content);
+					}
+				});
+			}
+		}
+		
 		switch(cmd)
 		{
 			case "help":
@@ -792,6 +807,23 @@ client.on('message', message =>
 					post("**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator + " - " + guild.memberCount + " members");
 				});
 				post("Total: " + x + " servers");
+				break;
+				
+			case "burgerphone":
+			case "bp":
+				if(phoneRoom[message.channel.id] != "")
+				{
+					post(":telephone: **Successfully disconnected from room '" + phoneRoom[message.channel.id] + "'.**");
+					phoneRoom[message.channel.id] = "";
+					return;
+				}
+				
+				if(args.length < 1)
+				{
+					post(":octagonal_sign: **Usage:** /burgerphone <room ID>");
+				}
+				
+				phoneRoom[message.channel.id] = args[1];
 				break;
 				
 			case "flags":
