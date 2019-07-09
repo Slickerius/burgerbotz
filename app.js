@@ -524,7 +524,7 @@ client.on('message', message =>
 				{
 					if(channel.id == key && phoneRoom[message.channel.id] == phoneRoom[channel.id])
 					{
-						if(sender.id == "477763761629954060") return;
+						if(sender.id == "477763761629954060" || channel.id == message.channel.id) return;
 						channel.send("**[" + phoneRoom[channel.id] + "]" + sender.username + "#" + sender.discriminator + ":** " + message.content);
 					}
 				});
@@ -828,7 +828,7 @@ client.on('message', message =>
 				}
 				
 				phoneRoom[message.channel.id] = args[1];
-				post(":telephone: **Successfully connected to room '" + phoneRoom[message.channel.id] + "'! Say hello!");
+				post(":telephone: **Successfully connected to room '" + phoneRoom[message.channel.id] + "'! Say hello!**");
 				break;
 				
 			case "flags":
