@@ -7,7 +7,7 @@ const status = "with Carlton";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
-var phoneRoom;
+var phoneRoom = {"foo": "bar"};
 var hqChannel;
 
 client.on('ready', () => 
