@@ -706,7 +706,7 @@ client.on('message', message =>
 					const content = JSON.parse(body);
 					var cont = content['Time Series (Daily)'];
 					console.log(cont);
-					post(content[cont);
+					post(cont);
 				});
 				break;
 				
