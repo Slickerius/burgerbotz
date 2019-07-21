@@ -767,9 +767,9 @@ client.on('message', message =>
 					
 					if(parseInt(content['Time Series (Daily)'][date]['4. close']) > content['Time Series (Daily)'][prevDate]['4. close'])
 					{
-						post("__**" + args[1] + "**__: **" + close + "** :small_red_triangle: \nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** :small_red_triangle: \nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
 					} else {
-						post("__**" + args[1] + "**__: **" + close + " :small_red_triangle_down: \nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + " :small_red_triangle_down: \nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
 					}
 				});
 				break;
