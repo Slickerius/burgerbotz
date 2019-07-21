@@ -749,7 +749,7 @@ client.on('message', message =>
 					var high = content['Time Series (Daily)'][date]['2. high'];
 					var low = content['Time Series (Daily)'][date]['3. low'];
 					
-					if(parseInt(content['Time Series (Daily)'][date]['4. close']) > 'Time Series (Daily)'][prevDate]['4. close')
+					if(parseInt(content['Time Series (Daily)'][date]['4. close']) > content['Time Series (Daily)'][prevDate]['4. close'])
 					{
 						post("__**" + args[1] + "**__: **" + close + "** :small_red_triangle: \nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
 					} else {
