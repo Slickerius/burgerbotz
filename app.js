@@ -707,7 +707,7 @@ client.on('message', message =>
 				var date;
 				var prevDate;
 				
-				if(today.getDay() > 0 && today.getDay < 6)
+				if(today.getDay() > 0 && today.getDay() < 6)
 				{
 					console.log("a");
 					if(today.getMonth() + 1 < 10)
@@ -718,7 +718,7 @@ client.on('message', message =>
 						date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 						prevDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
 					}
-				} else if(today.getDay == 0) {
+				} else if(today.getDay() == 0) {
 					console.log("b");
 					if(todayMin2.getMonth() + 1 < 10)
 					{
@@ -728,7 +728,7 @@ client.on('message', message =>
 						date = todayMin2.getFullYear() + '-' + (todayMin2.getMonth() + 1) + '-' + todayMin2.getDate();
 						prevDate = todayMin2.getFullYear() + '-' + (todayMin2.getMonth() + 1) + '-' + (todayMin2.getDate() - 1);
 					}
-				} else if(today.getDay == 6) {
+				} else if(today.getDay() == 6) {
 					console.log("c");
 					if(todayMin1.getMonth() + 1 < 10)
 					{
@@ -739,9 +739,6 @@ client.on('message', message =>
 						prevDate = todayMin1.getFullYear() + '-' + (todayMin1.getMonth() + 1) + '-' + (todayMin1.getDate() - 1);
 					}
 				}
-				
-				console.log(date + " " + prevDate);
-				console.log(today.getDay());
 				
 				request(req, function(error, response, body) 
 				{
