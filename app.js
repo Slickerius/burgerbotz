@@ -771,9 +771,9 @@ client.on('message', message =>
 					
 					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
 					{
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull_:602373998214512670> +" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull_:602373998214512670>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
 					} else {
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear_:602374398959288321> -" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear_:602374398959288321>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
 					}
 				});
 				break;
