@@ -741,6 +741,7 @@ client.on('message', message =>
 				}
 				
 				console.log(date + " " + prevDate);
+				console.log(today.getDay());
 				
 				request(req, function(error, response, body) 
 				{
