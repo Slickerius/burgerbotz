@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
+const request = require('request');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const status = "with Carlton";
