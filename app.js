@@ -767,6 +767,9 @@ client.on('message', message =>
 					
 					var change = ((parseInt(content['Time Series (Daily)'][prevDate]['4. close']) - parseInt(content['Time Series (Daily)'][date]['4. close'])) / parseInt(content['Time Series (Daily)'][prevDate]['4. close'])) * 100;
 					change = change.toFixed(2);
+					change = Math.abs(change);
+					
+					console.log(change + " " + parseInt(content['Time Series (Daily)'][prevDate]['4. close']) + " " + parseInt(content['Time Series (Daily)'][date]['4. close']));
 					
 					if(parseInt(content['Time Series (Daily)'][date]['4. close']) > parseInt(content['Time Series (Daily)'][prevDate]['4. close']))
 					{
