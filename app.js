@@ -702,10 +702,11 @@ client.on('message', message =>
 				{
 					console.log('error:', error);
 					console.log('statusCode:', response && response.statusCode);
-					console.log('body:', body);
 					
 					const content = JSON.parse(body);
-					post(content['Meta Data']);
+					var cont = content['Time Series (Daily)'];
+					console.log(cont);
+					post(content[cont);
 				});
 				break;
 				
