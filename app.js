@@ -698,15 +698,63 @@ client.on('message', message =>
 				
 			case "stock":
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
+				var today = new Date();
+				var todayMin1 = new Date(today);
+				todayMin1.setDate(today.getDate() - 1);
+				var todayMin2 = new Date(today);
+				todayMin2.setDate(today.getDate() - 2);
+				
+				var date;
+				var prevDate;
+				
+				if(today.getDay() > 0 && today.getDay < 6)
+				{
+					if(today.getMonth() + 1 < 10)
+					{
+						date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
+						prevDate = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
+					} else if(today.getMonth >= 10) {
+						date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+						prevDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
+					}
+				} else if(today.getDay == 0) {
+					if(todayMin2.getMonth() + 1 < 10)
+					{
+						date = todayMin2.getFullYear() + '-0' + (todayMin2.getMonth() + 1) + '-' + todayMin2.getDate();
+						prevDate = todayMin2.getFullYear() + '-0' + (todayMin2.getMonth() + 1) + '-' + (todayMin2.getDate() - 1);
+					} else if(today.getMonth >= 10) {
+						date = todayMin2.getFullYear() + '-' + (todayMin2.getMonth() + 1) + '-' + todayMin2.getDate();
+						prevDate = todayMin2.getFullYear() + '-' + (todayMin2.getMonth() + 1) + '-' + (todayMin2.getDate() - 1);
+					}
+				} else if(today.getDay == 6) {
+					if(todayMin1.getMonth() + 1 < 10)
+					{
+						date = todayMin1.getFullYear() + '-0' + (todayMin1.getMonth() + 1) + '-' + todayMin1.getDate();
+						prevDate = todayMin1.getFullYear() + '-0' + (todayMin1.getMonth() + 1) + '-' + (todayMin1.getDate() - 1);
+					} else if(today.getMonth >= 10) {
+						date = todayMin1.getFullYear() + '-' + (todayMin1.getMonth() + 1) + '-' + todayMin1.getDate();
+						prevDate = todayMin1.getFullYear() + '-' + (todayMin1.getMonth() + 1) + '-' + (todayMin1.getDate() - 1);
+					}
+				}
+				
 				request(req, function(error, response, body) 
 				{
 					console.log('error:', error);
 					console.log('statusCode:', response && response.statusCode);
 					
 					const content = JSON.parse(body);
-					var cont = content['Time Series (Daily)']['2019-07-19']['4. close'];
-					console.log(cont);
-					post(cont);
+					var close = content['Time Series (Daily)'][date]['4. close'];
+					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
+					var open = content['Time Series (Daily)'][date]['1. open'];
+					var high = content['Time Series (Daily)'][date]['2. high'];
+					var low = content['Time Series (Daily)'][date]['3. low'];
+					
+					if(parseInt(content['Time Series (Daily)'][date]['4. close']) > 'Time Series (Daily)'][prevDate]['4. close')
+					{
+						post("__**" + args[1] + "**__: **" + close + "** :small_red_triangle: \nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
+					} else {
+						post("__**" + args[1] + "**__: **" + close + " :small_red_triangle_down: \nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
+					}
 				});
 				break;
 				
