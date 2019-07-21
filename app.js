@@ -697,6 +697,12 @@ client.on('message', message =>
 				break;
 				
 			case "stock":
+				if(args.length < 1)
+				{
+					post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
+					return;	
+				}
+				
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
 				var today = new Date();
 				var todayMin1 = new Date(today);
