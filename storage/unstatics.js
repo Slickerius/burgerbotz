@@ -5,6 +5,7 @@ commandMap = new Map([
 		['/afk', 'Sets away from keyboard status'], 
 		['/s', 'Spits on grave'], 
 		['/ping', 'Pong!'], 
+		['/stock', 'Displays information about the specified ticker symbol'],
 		['/about', 'About Burgerbotz!'],
 		['/balance', "Displays a user's burger balance"],
 		['/pay', "Pays a certain amount of burgers to another user"],
