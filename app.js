@@ -704,7 +704,7 @@ client.on('message', message =>
 					console.log('statusCode:', response && response.statusCode);
 					
 					const content = JSON.parse(body);
-					var cont = content['Time Series (Daily)'];
+					var cont = content['Time Series (Daily)']['2019-07-19']['4. close'];
 					console.log(cont);
 					post(cont);
 				});
