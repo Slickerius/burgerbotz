@@ -5,6 +5,7 @@ const request = require('request');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const status = "with Carlton";
+const stockApiKey = "4MAQ744ZHW6LDYAK";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
@@ -693,6 +694,19 @@ client.on('message', message =>
 				
 			case "about":
 				handler.about(ch);
+				break;
+				
+			case "stock":
+				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
+				request(req, function(error, response, body) 
+				{
+					console.log('error:', error);
+					console.log('statusCode:', response && response.statusCode);
+					console.log('body:', body);
+					
+					const content = JSON.parse(body);
+					post(content['Meta Data']);
+				});
 				break;
 				
 			case "baltop":
