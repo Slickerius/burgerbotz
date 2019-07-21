@@ -750,6 +750,7 @@ client.on('message', message =>
 					if(content['Time Series (Daily)'] == null)
 					{
 						post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
+						return;
 					}
 					
 					var close = content['Time Series (Daily)'][date]['4. close'];
