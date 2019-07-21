@@ -764,6 +764,7 @@ client.on('message', message =>
 					var open = content['Time Series (Daily)'][date]['1. open'];
 					var high = content['Time Series (Daily)'][date]['2. high'];
 					var low = content['Time Series (Daily)'][date]['3. low'];
+					var volume = content['Time Series (Daily)'][date]['5. volume'];
 					
 					var change = ((parseFloat(content['Time Series (Daily)'][prevDate]['4. close']) - parseFloat(content['Time Series (Daily)'][date]['4. close'])) / parseFloat(content['Time Series (Daily)'][prevDate]['4. close'])) * 100;
 					change = change.toFixed(2);
@@ -771,9 +772,9 @@ client.on('message', message =>
 					
 					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
 					{
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull_:602373998214512670>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull_:602373998214512670>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					} else {
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear_:602374398959288321>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**");
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear_:602374398959288321>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					}
 				});
 				break;
