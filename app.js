@@ -703,6 +703,8 @@ client.on('message', message =>
 					return;	
 				}
 				
+				console.log(args[1]);
+				
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
 				var today = new Date();
 				
