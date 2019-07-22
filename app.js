@@ -716,26 +716,21 @@ client.on('message', message =>
 					
 					const content = JSON.parse(body);
 					
+					date = content['Meta Data']['3. Last Refreshed'];
+					prevDate = new Date(date);
+					prevDate.setDate(prevDate.getDate() - 1);
+					if(prevDate.getMonth() < 9)
+					{
+						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+					} else if(prevDate.getMonth() >= 9) {
+						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+					}
+					
 					if(content['Time Series (Daily)'] == null)
 					{
 						post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
 						return;
 					}
-					
-					date = content['Meta Data']['3. Last Refreshed'];
-					prevDate = new Date(date);						
-					prevDate.setDate(prevDate.getDate() - 1);					
-					prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);	
-					
-					var ac = prevDate.getMonth();
-					
-					if(ac < 9)
-					{
-						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
-					} else if(ac >= 9) {
-						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
-					}
-				
 					
 					var close = content['Time Series (Daily)'][date]['4. close'];
 					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
