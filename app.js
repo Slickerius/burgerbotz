@@ -723,12 +723,14 @@ client.on('message', message =>
 				var rus2000_change;
 				var rus2000_dir;
 				
+				console.log("a");
 				
 				request(req_dji_val, function(error, response, body) 
 				{
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = content['Time Series (1min)'][lastRef]['3. close'];
+					console.log(content['Time Series (1min)'][lastRef]['3. close']);
 				});
 				
 				request(req_sp500_val, function(error, response, body) 
