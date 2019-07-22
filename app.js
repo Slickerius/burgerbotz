@@ -705,45 +705,20 @@ client.on('message', message =>
 				
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
 				var today = new Date();
-				var todayMin1 = new Date(today);
-				todayMin1.setDate(today.getDate() - 1);
-				var todayMin2 = new Date(today);
-				todayMin2.setDate(today.getDate() - 2);
 				
 				var date;
 				var prevDate;
 				
-				if(today.getDay() > 0 && today.getDay() < 6)
+				date = content['Meta Data']['3. Last Refreshed'];
+				prevDate = new Date(date);						
+				prevDate.setDate(prevDate.getDate() - 1);					
+				prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);	
+				
+				if(prevDate.getMonth() < 9)
 				{
-					console.log("a");
-					if(today.getMonth() + 1 < 10)
-					{
-						date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
-						prevDate = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
-					} else if(today.getMonth >= 10) {
-						date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-						prevDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
-					}
-				} else if(today.getDay() == 0) {
-					console.log("b");
-					if(todayMin2.getMonth() + 1 < 10)
-					{
-						date = todayMin2.getFullYear() + '-0' + (todayMin2.getMonth() + 1) + '-' + todayMin2.getDate();
-						prevDate = todayMin2.getFullYear() + '-0' + (todayMin2.getMonth() + 1) + '-' + (todayMin2.getDate() - 1);
-					} else if(today.getMonth >= 10) {
-						date = todayMin2.getFullYear() + '-' + (todayMin2.getMonth() + 1) + '-' + todayMin2.getDate();
-						prevDate = todayMin2.getFullYear() + '-' + (todayMin2.getMonth() + 1) + '-' + (todayMin2.getDate() - 1);
-					}
-				} else if(today.getDay() == 6) {
-					console.log("c");
-					if(todayMin1.getMonth() + 1 < 10)
-					{
-						date = todayMin1.getFullYear() + '-0' + (todayMin1.getMonth() + 1) + '-' + todayMin1.getDate();
-						prevDate = todayMin1.getFullYear() + '-0' + (todayMin1.getMonth() + 1) + '-' + (todayMin1.getDate() - 1);
-					} else if(today.getMonth >= 10) {
-						date = todayMin1.getFullYear() + '-' + (todayMin1.getMonth() + 1) + '-' + todayMin1.getDate();
-						prevDate = todayMin1.getFullYear() + '-' + (todayMin1.getMonth() + 1) + '-' + (todayMin1.getDate() - 1);
-					}
+					prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+				} else if(prevDate.getMonth() >= 9) {
+					prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
 				}
 				
 				request(req, function(error, response, body) 
