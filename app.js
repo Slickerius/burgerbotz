@@ -698,9 +698,9 @@ client.on('message', message =>
 				
 			case "markets":
 				var req_dji_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^DJI&interval=1min&apikey=" + stockApiKey;
-				var req_sp500_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^DJI&interval=1min&apikey=" + stockApiKey;
-				var req_nasdaq_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^DJI&interval=1min&apikey=" + stockApiKey;
-				var req_rus2000_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^DJI&interval=1min&apikey=" + stockApiKey;
+				var req_sp500_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^INX&interval=1min&apikey=" + stockApiKey;
+				var req_nasdaq_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=NASDAQ:^IXIC&interval=1min&apikey=" + stockApiKey;
+				var req_rus2000_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^RUT&interval=1min&apikey=" + stockApiKey;
 				
 				var req_dji = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=^DJI&apikey=" + stockApiKey;
 				var req_sp500 = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=^INX&apikey=" + stockApiKey;
