@@ -727,10 +727,12 @@ client.on('message', message =>
 					prevDate.setDate(prevDate.getDate() - 1);					
 					prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);	
 					
-					if(prevDate.getMonth() < 9)
+					var ac = prevDate.getMonth();
+					
+					if(ac < 9)
 					{
 						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
-					} else if(prevDate.getMonth() >= 9) {
+					} else if(ac >= 9) {
 						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
 					}
 				
