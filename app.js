@@ -726,7 +726,7 @@ client.on('message', message =>
 					prevDate = new Date(date);						
 					prevDate.setDate(prevDate.getDate() - 1);					
 					prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);	
-				
+					
 					if(prevDate.getMonth() < 9)
 					{
 						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
