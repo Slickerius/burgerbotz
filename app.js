@@ -752,6 +752,8 @@ client.on('message', message =>
 					rus2000 = content['Time Series (1min)'][lastRef]['3. close'];
 				});
 				
+				console.log(dji + " " + rus2000);
+				
 				//
 				
 				request(req_dji, function(error, response, body) 
