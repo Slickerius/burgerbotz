@@ -713,45 +713,17 @@ client.on('message', message =>
 				var date;
 				var prevDate;
 				
-				if(today.getDay() > 0 && today.getDay() < 6)
-				{
-					console.log("a");
-					if(today.getMonth() + 1 < 10)
-					{
-						date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
-						prevDate = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
-					} else if(today.getMonth >= 10) {
-						date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-						prevDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + (today.getDate() - 1);
-					}
-				} else if(today.getDay() == 0) {
-					console.log("b");
-					if(todayMin2.getMonth() + 1 < 10)
-					{
-						date = todayMin2.getFullYear() + '-0' + (todayMin2.getMonth() + 1) + '-' + todayMin2.getDate();
-						prevDate = todayMin2.getFullYear() + '-0' + (todayMin2.getMonth() + 1) + '-' + (todayMin2.getDate() - 1);
-					} else if(today.getMonth >= 10) {
-						date = todayMin2.getFullYear() + '-' + (todayMin2.getMonth() + 1) + '-' + todayMin2.getDate();
-						prevDate = todayMin2.getFullYear() + '-' + (todayMin2.getMonth() + 1) + '-' + (todayMin2.getDate() - 1);
-					}
-				} else if(today.getDay() == 6) {
-					console.log("c");
-					if(todayMin1.getMonth() + 1 < 10)
-					{
-						date = todayMin1.getFullYear() + '-0' + (todayMin1.getMonth() + 1) + '-' + todayMin1.getDate();
-						prevDate = todayMin1.getFullYear() + '-0' + (todayMin1.getMonth() + 1) + '-' + (todayMin1.getDate() - 1);
-					} else if(today.getMonth >= 10) {
-						date = todayMin1.getFullYear() + '-' + (todayMin1.getMonth() + 1) + '-' + todayMin1.getDate();
-						prevDate = todayMin1.getFullYear() + '-' + (todayMin1.getMonth() + 1) + '-' + (todayMin1.getDate() - 1);
-					}
-				}
-				
 				request(req, function(error, response, body) 
 				{
 					console.log('error:', error);
 					console.log('statusCode:', response && response.statusCode);
 					
 					const content = JSON.parse(body);
+					
+					date = content['Meta Data']['3. Last Refreshed'];
+					prevDate = new Date(date);
+					prevDate.setDate(prevDate.getDate() - 1);
+					prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
 					
 					if(content['Time Series (Daily)'] == null)
 					{
