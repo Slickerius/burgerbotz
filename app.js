@@ -758,7 +758,7 @@ client.on('message', message =>
 				{
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					var lastClose = parseFloat(content[Time Series (Daily)][lastRef]['4. close']);
+					var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
 					dji_change = ((dji - lastClose) / lastClose) * 100;
 					if(dji > lastClose)
 					{
@@ -773,7 +773,7 @@ client.on('message', message =>
 				{
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					var lastClose = parseFloat(content[Time Series (Daily)][lastRef]['4. close']);
+					var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
 					sp500_change = ((sp500 - lastClose) / lastClose) * 100;
 					if(sp500 > lastClose)
 					{
@@ -788,7 +788,7 @@ client.on('message', message =>
 				{
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					var lastClose = parseFloat(content[Time Series (Daily)][lastRef]['4. close']);
+					var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
 					nasdaq_change = ((dji - lastClose) / lastClose) * 100;
 					if(nasdaq > lastClose)
 					{
@@ -803,7 +803,7 @@ client.on('message', message =>
 				{
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					var lastClose = parseFloat(content[Time Series (Daily)][lastRef]['4. close']);
+					var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
 					rus2000_change = ((dji - lastClose) / lastClose) * 100;
 					if(rus2000 > lastClose)
 					{
