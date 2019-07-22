@@ -705,10 +705,6 @@ client.on('message', message =>
 				
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
 				var today = new Date();
-				var todayMin1 = new Date(today);
-				todayMin1.setDate(today.getDate() - 1);
-				var todayMin2 = new Date(today);
-				todayMin2.setDate(today.getDate() - 2);
 				
 				var date;
 				var prevDate;
@@ -723,7 +719,12 @@ client.on('message', message =>
 					date = content['Meta Data']['3. Last Refreshed'];
 					prevDate = new Date(date);
 					prevDate.setDate(prevDate.getDate() - 1);
-					prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+					if(prevDate.getMonth() < 9)
+					{
+						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+					} else if(prevDate.getMonth() >= 9) {
+						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+					}
 					
 					if(content['Time Series (Daily)'] == null)
 					{
