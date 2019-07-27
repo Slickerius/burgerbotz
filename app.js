@@ -705,26 +705,10 @@ client.on('message', message =>
 				var req_nasdaq_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=NASDAQ:^IXIC&interval=1min&apikey=" + stockApiKey;
 				var req_rus2000_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^RUT&interval=1min&apikey=" + stockApiKey;
 				
-				var req_dji = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=^DJI&apikey=" + stockApiKey;
-				var req_sp500 = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=^INX&apikey=" + stockApiKey;
-				var req_nasdaq = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=NASDAQ:^IXIC&apikey=" + stockApiKey;
-				var req_rus2000 = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=^RUT&apikey=" + stockApiKey;
-				
 				var dji;
-				var dji_change;
-				var dji_dir;
-				
 				var sp500;
-				var sp500_change;
-				var sp500_dir;
-				
 				var nasdaq;
-				var nasdaq_change;
-				var nasdaq_dir;
-				
 				var rus2000;
-				var rus2000_change;
-				var rus2000_dir;
 				
 				request(req_dji_val, function(error, response, body) 
 				{
@@ -740,13 +724,14 @@ client.on('message', message =>
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 					dji = dji.toFixed(2);
 					
-					out += "**(1)** Dow Jones Industrial Average (**^DJI**) : **" + dji + "** ";
+					out += "**(1)** Dow Jones Industrial Average (**^DJI**) : **" + dji + "** \n";
 					request(req_sp500_val, function(error, response, body) 
 					{
 						const content = JSON.parse(body);
 						if(content['Meta Data'] == null)
 						{
 							post(out);
+							console.log("b");
 							return;
 						}
 							
@@ -754,13 +739,14 @@ client.on('message', message =>
 						sp500 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 						sp500 = sp500.toFixed(2);
 						
-						out += "**(2)** S&P 500 (**^INX**) : **" + sp500 + "** ";
+						out += "**(2)** S&P 500 (**^INX**) : **" + sp500 + "** \n";
 						request(req_nasdaq_val, function(error, response, body) 
 						{
 							const content = JSON.parse(body);
 							if(content['Meta Data'] == null)
 							{
 								post(out);
+								console.log("c");
 								return;
 							}
 									
@@ -768,13 +754,14 @@ client.on('message', message =>
 							nasdaq = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 							nasdaq = nasdaq.toFixed(2);
 									
-							out += "**(3)** NASDAQ Composite (**^IXIC**) : **" + nasdaq + "** ";
+							out += "**(3)** NASDAQ Composite (**^IXIC**) : **" + nasdaq + "** \n";
 							request(req_rus2000_val, function(error, response, body) 
 							{
 								const content = JSON.parse(body);
 								if(content['Meta Data'] == null)
 								{
 									post(out);
+									console.log("d");
 									return;
 								}
 											
@@ -782,7 +769,8 @@ client.on('message', message =>
 								rus2000 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 								rus2000 = rus2000.toFixed(2);
 											
-								out += "**(4)** Russell 2000 (**^RUT**) : **" + rus2000 + "** ";
+								out += "**(4)** Russell 2000 (**^RUT**) : **" + rus2000 + "** \n";
+								post(out);
 							});
 						});
 					});
