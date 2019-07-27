@@ -778,7 +778,7 @@ client.on('message', message =>
 								{
 									const content = JSON.parse(body);
 									var lastRef = content['Meta Data']['3. Last Refreshed'];
-									nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
+									nasdaq = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 									nasdaq = nasdaq.toFixed(2);
 									
 									out += "***** NASDAQ Composite : **" + nasdaq + "** ";
@@ -801,7 +801,7 @@ client.on('message', message =>
 										{
 											const content = JSON.parse(body);
 											var lastRef = content['Meta Data']['3. Last Refreshed'];
-											rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
+											rus2000 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 											rus2000 = rus2000.toFixed(2);
 											
 											out += "***** Russell 2000 : **" + rus2000 + "** ";
