@@ -754,17 +754,11 @@ client.on('message', message =>
 								rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
 								
 								out += rus2000 + "\n";
+								post(out);
 							});
 						});
 					});
 				});
-				
-				
-				
-				
-			
-				
-				
 				break;
 				
 			case "stock":
