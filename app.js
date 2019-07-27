@@ -732,31 +732,24 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 					
-					out += dji + "\n";
-					request(req_sp500_val, function(error, response, body) 
+					out += dji + " ";
+					request(req_dji, function(error, response, body) 
 					{
 						const content = JSON.parse(body);
 						var lastRef = content['Meta Data']['3. Last Refreshed'];
-						sp500 = content['Time Series (1min)'][lastRef]['4. close'];
+						var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
+						dji_change = ((dji - lastClose) / lastClose) * 100;
+						dji_change = Math.abs(dji_change);
 						
-						out += sp500 + "\n";
-						request(req_nasdaq_val, function(error, response, body) 
+						if(dji > lastClose)
 						{
-							const content = JSON.parse(body);
-							var lastRef = content['Meta Data']['3. Last Refreshed'];
-							nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
-							
-							out += nasdaq + "\n";
-							request(req_rus2000_val, function(error, response, body) 
-							{
-								const content = JSON.parse(body);
-								var lastRef = content['Meta Data']['3. Last Refreshed'];
-								rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
-								
-								out += rus2000 + "\n";
-								post(out);
-							});
-						});
+							out += "+" + dji_change + "%";
+						} else {
+							out += "-" + dji_change + "%";
+						}
+						
+						post(out);
+						
 					});
 				});
 				break;
