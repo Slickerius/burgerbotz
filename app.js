@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const request = require('request');
-const https = require('https');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const status = "with Carlton";
@@ -727,48 +726,44 @@ client.on('message', message =>
 				var rus2000_change;
 				var rus2000_dir;
 				
-				var dj = getIndex(req_dji_val);
-				var dj_a = dj['Meta Data']['3. Last Refreshed'];
-				var dj_b = parseFloat(dj_a['Time Series (1min)'][dj_a]['4. close']);
-				
-				console.log(dj_b);
-				
 				request(req_dji_val, function(error, response, body) 
 				{
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
-					console.log(dji);
-					indices["dji"] = dji;
-				});
-				
-				request(req_sp500_val, function(error, response, body) 
-				{
-					const content = JSON.parse(body);
-					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					sp500 = content['Time Series (1min)'][lastRef]['4. close'];
+					
+					out += dji + "\n";
+					request(req_sp500_val, function(error, response, body) 
+					{
+						const content = JSON.parse(body);
+						var lastRef = content['Meta Data']['3. Last Refreshed'];
+						sp500 = content['Time Series (1min)'][lastRef]['4. close'];
+						
+						out += sp500 + "\n";
+						request(req_nasdaq_val, function(error, response, body) 
+						{
+							const content = JSON.parse(body);
+							var lastRef = content['Meta Data']['3. Last Refreshed'];
+							nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
 							
-					indices["sp500"] = sp500;
-				});
-				
-				request(req_nasdaq_val, function(error, response, body) 
-				{
-					const content = JSON.parse(body);
-					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
-							
-					indices["nasdaq"] = nasdaq;	
-				});
-			
-				request(req_rus2000_val, function(error, response, body) 
-				{
-					const content = JSON.parse(body);
-					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
+							out += nasdaq + "\n";
+							request(req_rus2000_val, function(error, response, body) 
+							{
+								const content = JSON.parse(body);
+								var lastRef = content['Meta Data']['3. Last Refreshed'];
+								rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
 								
-					indices["rus2000"] = rus2000;
+								out += rus2000 + "\n";
+							});
+						});
+					});
 				});
-				post("DJI: " + indices["dji"] + "\n" + "S&P500: " + indices["sp500"]);
+				
+				
+				
+				
+			
+				
 				
 				break;
 				
@@ -1104,23 +1099,5 @@ client.on('guildCreate', guild =>
 		}
 	});
 });
-
-function getIndex(url)
-{
-	var x;
-	
-	https.get(url, (resp) => 
-	{
-	  	let data = '';
-	  	resp.on('data', (chunk) => 
-		{
-	 	   data += chunk;
-	  	})
-		x = JSON.parse(data);
-		console.log(x);
-	});
-	
-	return JSON.parse(x);
-}
 
 client.login(process.env.BOT_TOKEN);
