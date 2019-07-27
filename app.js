@@ -726,6 +726,10 @@ client.on('message', message =>
 				var rus2000_change;
 				var rus2000_dir;
 				
+				var dj = httpGet(req_dji_val);
+				var dj_ref = dj['Meta Data']['3. Last Refreshed'];
+				var dj_a = dj['Time Series (1min)'][dj_ref]['4. close'];
+				
 				request(req_dji_val, function(error, response, body) 
 				{
 					const content = JSON.parse(body);
@@ -1097,5 +1101,13 @@ client.on('guildCreate', guild =>
 		}
 	});
 });
+
+function httpGet(url)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", url, false); // false for synchronous request
+    xmlHttp.send(null);
+    return JSON.parse(xmlHttp.responseText);
+}
 
 client.login(process.env.BOT_TOKEN);
