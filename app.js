@@ -733,13 +733,13 @@ client.on('message', message =>
 					out += dji;
 				});
 				
-				request(req_nasdaq_val, function(error, response, body) 
+				request(req_sp500_val, function(error, response, body) 
 				{
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
+					sp500 = content['Time Series (1min)'][lastRef]['4. close'];
 							
-					out += " " + nasdaq;	
+					out += " " + sp500;	
 				});
 				
 				request(req_nasdaq_val, function(error, response, body) 
