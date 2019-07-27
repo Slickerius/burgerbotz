@@ -697,7 +697,7 @@ client.on('message', message =>
 				break;
 				
 			case "stock":
-				if(args.length < 1)
+				if(args.length < 2)
 				{
 					post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
 					return;	
