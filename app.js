@@ -1117,6 +1117,7 @@ function getIndex(url)
 	 	   data += chunk;
 	  	})
 		x = JSON.parse(data);
+		console.log(x);
 	});
 	
 	return JSON.parse(x);
