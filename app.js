@@ -731,8 +731,9 @@ client.on('message', message =>
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
+					dji = dji.toFixed(2);
 					
-					out += dji + " ";
+					out += "***** Dow Jones Industrial Average : **" + dji + "** ";
 					request(req_dji, function(error, response, body) 
 					{
 						const content = JSON.parse(body);
@@ -748,7 +749,84 @@ client.on('message', message =>
 						} else {
 							out += "<:_bear_:602374398959288321>-" + dji_change + "%\n";
 						}
-						post(out);
+						
+						request(req_sp500_val, function(error, response, body) 
+						{
+							const content = JSON.parse(body);
+							var lastRef = content['Meta Data']['3. Last Refreshed'];
+							sp500 = content['Time Series (1min)'][lastRef]['4. close'];
+							sp500 = sp500.toFixed(2);
+						
+							out += "***** S&P 500 : **" + sp500 + "** ";
+							request(req_sp500, function(error, response, body) 
+							{
+								const content = JSON.parse(body);
+								var lastRef = content['Meta Data']['3. Last Refreshed'];
+								var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
+								sp500_change = ((sp500 - lastClose) / lastClose) * 100;
+								sp500_change = Math.abs(sp500_change);
+								sp500_change = sp500_change.toFixed(2);
+								
+								if(sp500 > lastClose)
+								{
+									out += "<:_bull_:602373998214512670>+" + sp500_change + "%\n";
+								} else {
+									out += "<:_bear_:602374398959288321>-" + sp500_change + "%\n";
+								}
+
+								request(req_nasdaq_val, function(error, response, body) 
+								{
+									const content = JSON.parse(body);
+									var lastRef = content['Meta Data']['3. Last Refreshed'];
+									nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
+									nasdaq = nasdaq.toFixed(2);
+									
+									out += "***** NASDAQ Composite : **" + nasdaq + "** ";
+									request(req_nasdaq, function(error, response, body) 
+									{
+										const content = JSON.parse(body);
+										var lastRef = content['Meta Data']['3. Last Refreshed'];
+										var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
+										nasdaq_change = ((dji - lastClose) / lastClose) * 100;
+										nasdaq_change = Math.abs(nasdaq_change);
+										
+										if(nasdaq > lastClose)
+										{
+											out += "<:_bull_:602373998214512670>+" + nasdaq_change + "%\n";
+										} else {
+											out += "<:_bear_:602374398959288321>-" + nasdaq_change + "%\n";
+										}
+										
+										request(req_rus2000_val, function(error, response, body) 
+										{
+											const content = JSON.parse(body);
+											var lastRef = content['Meta Data']['3. Last Refreshed'];
+											rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
+											rus2000 = rus2000.toFixed(2);
+											
+											out += "***** Russell 2000 : **" + rus2000 + "** ";
+											request(req_rus2000, function(error, response, body) 
+											{
+												const content = JSON.parse(body);
+												var lastRef = content['Meta Data']['3. Last Refreshed'];
+												var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
+												rus2000_change = ((dji - lastClose) / lastClose) * 100;
+												rus2000_change = Math.abs(rus2000_change);
+												rus2000_change = rus2000_change.toFixed(2);
+												
+												if(rus2000 > lastClose)
+												{
+													out += "<:_bull_:602373998214512670>+" + nasdaq_change + "%";	
+												} else {
+													out += "<:_bear_:602374398959288321>-" + nasdaq_change + "%";	
+												}
+
+											});
+										});
+									});
+								});
+							});
+						});
 					});
 				});
 				break;
