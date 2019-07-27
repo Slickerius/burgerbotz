@@ -730,6 +730,8 @@ client.on('message', message =>
 				var dj_ref = dj['Meta Data']['3. Last Refreshed'];
 				var dj_a = dj['Time Series (1min)'][dj_ref]['4. close'];
 				
+				console.log(dj_a);
+				
 				request(req_dji_val, function(error, response, body) 
 				{
 					const content = JSON.parse(body);
