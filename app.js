@@ -707,7 +707,7 @@ client.on('message', message =>
 				var req_nasdaq = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=NASDAQ:^IXIC&apikey=" + stockApiKey;
 				var req_rus2000 = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=^RUT&apikey=" + stockApiKey;
 				
-				var dji;
+				let dji;
 				var dji_change;
 				var dji_dir;
 				
