@@ -731,9 +731,9 @@ client.on('message', message =>
 					const content = JSON.parse(body);
 					console.log(content);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					dji = content['Time Series (1min)'][lastRef]['3. close'];
+					dji = content['Time Series (1min)'][lastRef]['4. close'];
 					console.log(lastRef);
-					console.log(content['Time Series (1min)'][lastRef]['3. close']);
+					console.log(content['Time Series (1min)'][lastRef]['4. close']);
 				});
 			break;
 				
