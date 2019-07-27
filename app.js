@@ -723,8 +723,6 @@ client.on('message', message =>
 				var rus2000_change;
 				var rus2000_dir;
 				
-				console.log("a");
-				
 				request(req_dji_val, function(error, response, body) 
 				{
 					const content = JSON.parse(body);
@@ -755,8 +753,6 @@ client.on('message', message =>
 					consoloe.log(rus2000);
 				});
 				
-				console.log(dji + " " + rus2000);
-				
 				//
 				
 				request(req_dji, function(error, response, body) 
@@ -765,6 +761,7 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
 					dji_change = ((dji - lastClose) / lastClose) * 100;
+					console.log(lastClose);
 					if(dji > lastClose)
 					{
 						dji_dir = 1;	
