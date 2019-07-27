@@ -10,6 +10,7 @@ const stockApiKey = "4MAQ744ZHW6LDYAK";
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
 var phoneRoom = {"foo": "bar"};
+var indices = {"foo": "bar"};
 var hqChannel;
 
 client.on('ready', () => 
@@ -731,7 +732,7 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 					console.log(dji);
-					out += dji + "\n";
+					indices["dji"] = dji;
 				});
 				
 				request(req_sp500_val, function(error, response, body) 
@@ -740,7 +741,7 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					sp500 = content['Time Series (1min)'][lastRef]['4. close'];
 							
-					out += " " + sp500 + "\n";	
+					indices["sp500"] = sp500;
 				});
 				
 				request(req_nasdaq_val, function(error, response, body) 
@@ -749,7 +750,7 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
 							
-					out += " " + nasdaq + "\n";	
+					indices["nasdaq"] = nasdaq;	
 				});
 			
 				request(req_rus2000_val, function(error, response, body) 
@@ -758,10 +759,10 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
 								
-					out += " " + rus2000 + "\n";
-					post(out);
+					indices["rus2000"] = rus2000;
 				});
-				post("a" + out);
+				post("DJI: " + indices["dji"] + "\n" + "S&P500: " + indices["sp500"])
+);
 				break;
 				
 			case "stock":
