@@ -734,6 +734,7 @@ client.on('message', message =>
 					dji = content['Time Series (1min)'][lastRef]['4. close'];
 					console.log(lastRef);
 					console.log(content['Time Series (1min)'][lastRef]['4. close']);
+					post("DJI (" + lastRef + ") : " + dji);
 				});
 			break;
 				
