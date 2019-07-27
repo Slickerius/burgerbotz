@@ -1107,12 +1107,14 @@ client.on('guildCreate', guild =>
 
 function getIndex(url)
 {
-	https.get(url, (resp) => {
-  	let data = '';
-  	resp.on('data', (chunk) => 
+	https.get(url, (resp) => 
 	{
- 	   data += chunk;
-  	});
+	  	let data = '';
+	  	resp.on('data', (chunk) => 
+		{
+	 	   data += chunk;
+	  	})
+	});
 	
 	return(JSON.parse(data));
 }
