@@ -729,12 +729,12 @@ client.on('message', message =>
 				request(req_dji_val, function(error, response, body) 
 				{
 					const content = JSON.parse(body);
-					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					if(content['Meta Data'] == null) 
 					{
-						post(out);
 						return;
 					}
+					
+					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 					dji = dji.toFixed(2);
