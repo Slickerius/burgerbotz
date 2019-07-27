@@ -697,7 +697,7 @@ client.on('message', message =>
 				break;
 			
 			case "markets":
-				var = "Values: ";
+				var out = "Values: ";
 				
 				var req_dji_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^DJI&interval=1min&apikey=" + stockApiKey;
 				var req_sp500_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^INX&interval=1min&apikey=" + stockApiKey;
