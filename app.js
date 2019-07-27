@@ -739,7 +739,7 @@ client.on('message', message =>
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 					dji = dji.toFixed(2);
 					
-					out += "***** Dow Jones Industrial Average : **" + dji + "** ";
+					out += "**(1)** Dow Jones Industrial Average (**^DJI**) : **" + dji + "** ";
 					request(req_dji, function(error, response, body) 
 					{
 						const content = JSON.parse(body);
@@ -775,7 +775,7 @@ client.on('message', message =>
 							sp500 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 							sp500 = sp500.toFixed(2);
 						
-							out += "***** S&P 500 : **" + sp500 + "** ";
+							out += "**(2)** S&P 500 (**^INX**) : **" + sp500 + "** ";
 							request(req_sp500, function(error, response, body) 
 							{
 								const content = JSON.parse(body);
@@ -811,7 +811,7 @@ client.on('message', message =>
 									nasdaq = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 									nasdaq = nasdaq.toFixed(2);
 									
-									out += "***** NASDAQ Composite : **" + nasdaq + "** ";
+									out += "**(3)** NASDAQ Composite (**^IXIC**) : **" + nasdaq + "** ";
 									request(req_nasdaq, function(error, response, body) 
 									{
 										const content = JSON.parse(body);
@@ -846,7 +846,7 @@ client.on('message', message =>
 											rus2000 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 											rus2000 = rus2000.toFixed(2);
 											
-											out += "***** Russell 2000 : **" + rus2000 + "** ";
+											out += "**(3)** Russell 2000 (**^RUT**) : **" + rus2000 + "** ";
 											request(req_rus2000, function(error, response, body) 
 											{
 												const content = JSON.parse(body);
