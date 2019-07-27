@@ -761,8 +761,8 @@ client.on('message', message =>
 								
 					indices["rus2000"] = rus2000;
 				});
-				post("DJI: " + indices["dji"] + "\n" + "S&P500: " + indices["sp500"])
-);
+				post("DJI: " + indices["dji"] + "\n" + "S&P500: " + indices["sp500"]);
+				
 				break;
 				
 			case "stock":
