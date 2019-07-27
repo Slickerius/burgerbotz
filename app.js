@@ -725,8 +725,8 @@ client.on('message', message =>
 				
 				request(req_dji_val, function(error, response, body) 
 				{
-					console.log("A");
 					const content = JSON.parse(body);
+					console.log(content);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = content['Time Series (1min)'][lastRef]['3. close'];
 					console.log(content['Time Series (1min)'][lastRef]['3. close']);
