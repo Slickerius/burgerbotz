@@ -731,15 +731,15 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 					out += dji;
-					
-					request(req_sp500_val, function(error, response, body) 
-					{
-						const content = JSON.parse(body);
-						var lastRef = content['Meta Data']['3. Last Refreshed'];
-						sp500 = content['Time Series (1min)'][lastRef]['4. close'];
-						out += " " + sp500;
-						console.log(out);
-					});
+				});
+				
+				request(req_nasdaq_val, function(error, response, body) 
+				{
+					const content = JSON.parse(body);
+					var lastRef = content['Meta Data']['3. Last Refreshed'];
+					nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
+							
+					out += " " + nasdaq;	
 				});
 				
 				request(req_nasdaq_val, function(error, response, body) 
