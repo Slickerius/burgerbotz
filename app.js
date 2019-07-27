@@ -729,7 +729,10 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = content['Time Series (1min)'][lastRef]['4. close'];
 					console.log(content['Time Series (1min)'][lastRef]['4. close']);
+					post(dji);
 				});
+				
+				post(dji);
 				
 				request(req_sp500_val, function(error, response, body) 
 				{
@@ -752,8 +755,6 @@ client.on('message', message =>
 					rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
 					console.log(rus2000);
 				});
-				
-				post(dji);
 			break;
 				
 			case "stock":
