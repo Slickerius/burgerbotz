@@ -1107,6 +1107,8 @@ client.on('guildCreate', guild =>
 
 function getIndex(url)
 {
+	var x;
+	
 	https.get(url, (resp) => 
 	{
 	  	let data = '';
@@ -1114,9 +1116,10 @@ function getIndex(url)
 		{
 	 	   data += chunk;
 	  	})
+		x = JSON.parse(data);
 	});
 	
-	return(JSON.parse(data));
+	return JSON.parse(x);
 }
 
 client.login(process.env.BOT_TOKEN);
