@@ -748,6 +748,7 @@ client.on('message', message =>
 						} else {
 							out += "<:_bear_:602374398959288321>-" + dji_change + "%\n";
 						}
+						post(out);
 					});
 				});
 				break;
