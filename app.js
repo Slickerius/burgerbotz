@@ -698,7 +698,7 @@ client.on('message', message =>
 				break;
 			
 			case "markets":
-				var out = "Dow Jones: ";
+				var out = ":chart_with_downwards_trend: __**Markets Indices**__ :chart_with_upwards_trend:\n";
 				
 				var req_dji_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^DJI&interval=1min&apikey=" + stockApiKey;
 				var req_sp500_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^INX&interval=1min&apikey=" + stockApiKey;
@@ -730,6 +730,12 @@ client.on('message', message =>
 				{
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
+					if(content['Meta Data'] == null) 
+					{
+						post(out);
+						return;
+					}
+					
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 					dji = dji.toFixed(2);
 					
