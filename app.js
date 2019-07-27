@@ -754,7 +754,7 @@ client.on('message', message =>
 						{
 							const content = JSON.parse(body);
 							var lastRef = content['Meta Data']['3. Last Refreshed'];
-							sp500 = content['Time Series (1min)'][lastRef]['4. close'];
+							sp500 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 							sp500 = sp500.toFixed(2);
 						
 							out += "***** S&P 500 : **" + sp500 + "** ";
