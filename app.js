@@ -697,6 +697,8 @@ client.on('message', message =>
 				break;
 			
 			case "markets":
+				var = "Values: ";
+				
 				var req_dji_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^DJI&interval=1min&apikey=" + stockApiKey;
 				var req_sp500_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^INX&interval=1min&apikey=" + stockApiKey;
 				var req_nasdaq_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=NASDAQ:^IXIC&interval=1min&apikey=" + stockApiKey;
@@ -707,7 +709,7 @@ client.on('message', message =>
 				var req_nasdaq = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=NASDAQ:^IXIC&apikey=" + stockApiKey;
 				var req_rus2000 = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=^RUT&apikey=" + stockApiKey;
 				
-				let dji;
+				var dji;
 				var dji_change;
 				var dji_dir;
 				
@@ -729,9 +731,8 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 					post(dji);
+					out += dji;
 				});
-				
-				console.log(dji);
 				
 				request(req_sp500_val, function(error, response, body) 
 				{
@@ -754,6 +755,8 @@ client.on('message', message =>
 					rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
 					console.log(rus2000);
 				});
+				
+				post(out);
 			break;
 				
 			case "stock":
