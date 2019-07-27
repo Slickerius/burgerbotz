@@ -818,6 +818,7 @@ client.on('message', message =>
 										if(content['Meta Data'] == null)
 										{
 											post(out);
+											console.log("a");
 											return;
 										}		
 										
@@ -840,6 +841,7 @@ client.on('message', message =>
 											{
 												post(out);
 												return;
+												console.log("b");
 											}
 											
 											var lastRef = content['Meta Data']['3. Last Refreshed'];
