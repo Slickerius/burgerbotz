@@ -730,6 +730,7 @@ client.on('message', message =>
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
+					console.log(dji);
 					out += dji + "\n";
 				});
 				
