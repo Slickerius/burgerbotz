@@ -703,53 +703,6 @@ client.on('message', message =>
 					return;	
 				}
 				
-				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
-				var today = new Date();
-				
-				var date;
-				var prevDate;
-				
-				request(req, function(error, response, body) 
-				{
-					console.log('error:', error);
-					console.log('statusCode:', response && response.statusCode);
-					
-					const content = JSON.parse(body);
-					
-					date = content['Meta Data']['3. Last Refreshed'];
-					prevDate = new Date(date);
-					prevDate.setDate(prevDate.getDate() - 1);
-					if(prevDate.getMonth() < 9)
-					{
-						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
-					} else if(prevDate.getMonth() >= 9) {
-						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
-					}
-					
-					if(content['Time Series (Daily)'] == null)
-					{
-						post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
-						return;
-					}
-					
-					var close = content['Time Series (Daily)'][date]['4. close'];
-					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
-					var open = content['Time Series (Daily)'][date]['1. open'];
-					var high = content['Time Series (Daily)'][date]['2. high'];
-					var low = content['Time Series (Daily)'][date]['3. low'];
-					var volume = content['Time Series (Daily)'][date]['5. volume'];
-					
-					var change = ((parseFloat(content['Time Series (Daily)'][prevDate]['4. close']) - parseFloat(content['Time Series (Daily)'][date]['4. close'])) / parseFloat(content['Time Series (Daily)'][prevDate]['4. close'])) * 100;
-					change = change.toFixed(2);
-					change = Math.abs(change);
-					
-					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
-					{
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull_:602373998214512670>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
-					} else {
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear_:602374398959288321>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
-					}
-				});
 				break;
 				
 			case "baltop":
