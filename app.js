@@ -731,6 +731,7 @@ client.on('message', message =>
 					const content = JSON.parse(body);
 					if(content['Meta Data'] == null) 
 					{
+						console.log("a");
 						return;
 					}
 					
