@@ -740,16 +740,14 @@ client.on('message', message =>
 						var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
 						dji_change = ((dji - lastClose) / lastClose) * 100;
 						dji_change = Math.abs(dji_change);
+						dji_change = dji_change.toFixed(2);
 						
 						if(dji > lastClose)
 						{
-							out += "+" + dji_change + "%";
+							out += "<:_bull_:602373998214512670>+" + dji_change + "%\n";
 						} else {
-							out += "-" + dji_change + "%";
+							out += "<:_bear_:602374398959288321>-" + dji_change + "%\n";
 						}
-						
-						post(out);
-						
 					});
 				});
 				break;
