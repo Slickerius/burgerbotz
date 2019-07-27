@@ -751,7 +751,7 @@ client.on('message', message =>
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
-					consoloe.log(rus2000);
+					console.log(rus2000);
 				});
 				
 				post(dji);
