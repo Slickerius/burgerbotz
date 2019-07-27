@@ -697,7 +697,7 @@ client.on('message', message =>
 				break;
 			
 			case "markets":
-				var out = "Values: ";
+				var out = "Dow Jones: ";
 				
 				var req_dji_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^DJI&interval=1min&apikey=" + stockApiKey;
 				var req_sp500_val = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=^INX&interval=1min&apikey=" + stockApiKey;
@@ -730,7 +730,7 @@ client.on('message', message =>
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
-					out += dji;
+					out += dji + "\n";
 				});
 				
 				request(req_sp500_val, function(error, response, body) 
@@ -739,7 +739,7 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					sp500 = content['Time Series (1min)'][lastRef]['4. close'];
 							
-					out += " " + sp500;	
+					out += " " + sp500 + "\n";	
 				});
 				
 				request(req_nasdaq_val, function(error, response, body) 
@@ -748,7 +748,7 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
 							
-					out += " " + nasdaq;	
+					out += " " + nasdaq + "\n";	
 				});
 			
 				request(req_rus2000_val, function(error, response, body) 
@@ -757,9 +757,10 @@ client.on('message', message =>
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
 								
-					out += " " + rus2000;
-					console.log(out);
+					out += " " + rus2000 + "\n";
+					post(out);
 				});
+				post("a" + out);
 				break;
 				
 			case "stock":
