@@ -730,33 +730,34 @@ client.on('message', message =>
 					const content = JSON.parse(body);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
-					post(dji);
 					out += dji;
-				});
-				
-				request(req_sp500_val, function(error, response, body) 
-				{
-					const content = JSON.parse(body);
-					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					sp500 = content['Time Series (1min)'][lastRef]['4. close'];
-				});
-				
-				request(req_nasdaq_val, function(error, response, body) 
-				{
-					const content = JSON.parse(body);
-					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
-				});
-				
-				request(req_rus2000_val, function(error, response, body) 
-				{
-					const content = JSON.parse(body);
-					var lastRef = content['Meta Data']['3. Last Refreshed'];
-					rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
-					console.log(rus2000);
-				});
-				
-				post(out);
+					
+					request(req_sp500_val, function(error, response, body) 
+					{
+						const content = JSON.parse(body);
+						var lastRef = content['Meta Data']['3. Last Refreshed'];
+						sp500 = content['Time Series (1min)'][lastRef]['4. close'];
+						out += " " + sp500;
+						
+						request(req_nasdaq_val, function(error, response, body) 
+						{
+							const content = JSON.parse(body);
+							var lastRef = content['Meta Data']['3. Last Refreshed'];
+							nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
+							
+							out += " " + nasdaq;
+							request(req_rus2000_val, function(error, response, body) 
+							{
+								const content = JSON.parse(body);
+								var lastRef = content['Meta Data']['3. Last Refreshed'];
+								rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
+								
+								out += " " + rus2000;
+								
+								post(out);
+							});
+						});
+					});
 			break;
 				
 			case "stock":
