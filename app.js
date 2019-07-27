@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
 const request = require('request');
+const https = requires('https');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const status = "with Carlton";
@@ -726,11 +727,11 @@ client.on('message', message =>
 				var rus2000_change;
 				var rus2000_dir;
 				
-				var dj = httpGet(req_dji_val);
-				var dj_ref = dj['Meta Data']['3. Last Refreshed'];
-				var dj_a = dj['Time Series (1min)'][dj_ref]['4. close'];
+				var dj = getIndex(req_dji_val);
+				var dj_a = dj['Meta Data']['3. Last Refreshed'];
+				var dj_b = parseFloat(dj_a['Time Series (1min)'][dj_a]['4. close']);
 				
-				console.log(dj_a);
+				console.log(dj_b);
 				
 				request(req_dji_val, function(error, response, body) 
 				{
@@ -1104,12 +1105,16 @@ client.on('guildCreate', guild =>
 	});
 });
 
-function httpGet(url)
+function getIndex(url)
 {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", url, false); // false for synchronous request
-    xmlHttp.send(null);
-    return JSON.parse(xmlHttp.responseText);
+	https.get(url, (resp) => {
+  	let data = '';
+  	resp.on('data', (chunk) => 
+	{
+ 	   data += chunk;
+  	});
+	
+	return(JSON.parse(data));
 }
 
 client.login(process.env.BOT_TOKEN);
