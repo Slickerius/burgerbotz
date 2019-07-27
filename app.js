@@ -737,7 +737,11 @@ client.on('message', message =>
 					request(req_dji, function(error, response, body) 
 					{
 						const content = JSON.parse(body);
-						if(content['Meta Data'] == null) post(out);
+						if(content['Meta Data'] == null) 
+						{
+							post(out);
+							return;
+						}
 						
 						var lastRef = content['Meta Data']['3. Last Refreshed'];
 						var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
@@ -755,7 +759,11 @@ client.on('message', message =>
 						request(req_sp500_val, function(error, response, body) 
 						{
 							const content = JSON.parse(body);
-							if(content['Meta Data'] == null) post(out);
+							if(content['Meta Data'] == null)
+							{
+								post(out);
+								return;
+							}
 							
 							var lastRef = content['Meta Data']['3. Last Refreshed'];
 							sp500 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
@@ -765,7 +773,11 @@ client.on('message', message =>
 							request(req_sp500, function(error, response, body) 
 							{
 								const content = JSON.parse(body);
-								if(content['Meta Data'] == null) post(out);
+								if(content['Meta Data'] == null)
+								{
+									post(out);
+									return;
+								}
 								
 								var lastRef = content['Meta Data']['3. Last Refreshed'];
 								var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
@@ -783,7 +795,11 @@ client.on('message', message =>
 								request(req_nasdaq_val, function(error, response, body) 
 								{
 									const content = JSON.parse(body);
-									if(content['Meta Data'] == null) post(out);
+									if(content['Meta Data'] == null)
+									{
+										post(out);
+										return;
+									}
 									
 									var lastRef = content['Meta Data']['3. Last Refreshed'];
 									nasdaq = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
@@ -793,7 +809,11 @@ client.on('message', message =>
 									request(req_nasdaq, function(error, response, body) 
 									{
 										const content = JSON.parse(body);
-										if(content['Meta Data'] == null) post(out);
+										if(content['Meta Data'] == null)
+										{
+											post(out);
+											return;
+										}		
 										
 										var lastRef = content['Meta Data']['3. Last Refreshed'];
 										var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
@@ -810,7 +830,11 @@ client.on('message', message =>
 										request(req_rus2000_val, function(error, response, body) 
 										{
 											const content = JSON.parse(body);
-											if(content['Meta Data'] == null) post(out);
+											if(content['Meta Data'] == null)
+											{
+												post(out);
+												return;
+											}
 											
 											var lastRef = content['Meta Data']['3. Last Refreshed'];
 											rus2000 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
@@ -820,7 +844,11 @@ client.on('message', message =>
 											request(req_rus2000, function(error, response, body) 
 											{
 												const content = JSON.parse(body);
-												if(content['Meta Data'] == null) post(out);
+												if(content['Meta Data'] == null)
+												{
+													post(out);
+													return;
+												}		
 												
 												var lastRef = content['Meta Data']['3. Last Refreshed'];
 												var lastClose = parseFloat(content['Time Series (Daily)'][lastRef]['4. close']);
