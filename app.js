@@ -732,6 +732,7 @@ client.on('message', message =>
 					console.log(content);
 					var lastRef = content['Meta Data']['3. Last Refreshed'];
 					dji = content['Time Series (1min)'][lastRef]['3. close'];
+					console.log(lastRef);
 					console.log(content['Time Series (1min)'][lastRef]['3. close']);
 				});
 			break;
