@@ -738,26 +738,29 @@ client.on('message', message =>
 						var lastRef = content['Meta Data']['3. Last Refreshed'];
 						sp500 = content['Time Series (1min)'][lastRef]['4. close'];
 						out += " " + sp500;
-						
-						request(req_nasdaq_val, function(error, response, body) 
-						{
-							const content = JSON.parse(body);
-							var lastRef = content['Meta Data']['3. Last Refreshed'];
-							nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
-							
-							out += " " + nasdaq;
-							request(req_rus2000_val, function(error, response, body) 
-							{
-								const content = JSON.parse(body);
-								var lastRef = content['Meta Data']['3. Last Refreshed'];
-								rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
-								
-								out += " " + rus2000;
-								console.log(out);
-							});
-						});
+						console.log(out);
 					});
-			break;
+				});
+				
+				request(req_nasdaq_val, function(error, response, body) 
+				{
+					const content = JSON.parse(body);
+					var lastRef = content['Meta Data']['3. Last Refreshed'];
+					nasdaq = content['Time Series (1min)'][lastRef]['4. close'];
+							
+					out += " " + nasdaq;	
+				});
+			
+				request(req_rus2000_val, function(error, response, body) 
+				{
+					const content = JSON.parse(body);
+					var lastRef = content['Meta Data']['3. Last Refreshed'];
+					rus2000 = content['Time Series (1min)'][lastRef]['4. close'];
+								
+					out += " " + rus2000;
+					console.log(out);
+				});
+				break;
 				
 			case "stock":
 				console.log(args.length + " " + args);
