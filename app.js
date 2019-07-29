@@ -790,7 +790,6 @@ client.on('message', message =>
 				
 				var date;
 				var prevDate;
-				var pDate;
 				
 				request(req, function(error, response, body) 
 				{
@@ -811,26 +810,29 @@ client.on('message', message =>
 					
 					prevDate = new Date(date);
 					prevDate.setDate(prevDate.getDate() - 1);
-					pDate = content['Time Series (Daily)'][2];
 					if(prevDate.getMonth() < 9)
 					{
 						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+						if(prevDate.getDate() == 0) prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 3);
+						if(prevDate.getDate() == 0) prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 2);
 					} else if(prevDate.getMonth() >= 9) {
 						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+						if(prevDate.getDate() == 0) prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 3);
+						if(prevDate.getDate() == 0) prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 2);
 					}
-					console.log(pDate);
+					console.log(prevDate);
 					var close = content['Time Series (Daily)'][date]['4. close'];
-					var prevClose = content['Time Series (Daily)'][pDate]['4. close'];
+					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
 					var open = content['Time Series (Daily)'][date]['1. open'];
 					var high = content['Time Series (Daily)'][date]['2. high'];
 					var low = content['Time Series (Daily)'][date]['3. low'];
 					var volume = content['Time Series (Daily)'][date]['5. volume'];
 					
-					var change = ((parseFloat(content['Time Series (Daily)'][pDate]['4. close']) - parseFloat(content['Time Series (Daily)'][date]['4. close'])) / parseFloat(content['Time Series (Daily)'][prevDate]['4. close'])) * 100;
+					var change = ((parseFloat(content['Time Series (Daily)'][prevDate]['4. close']) - parseFloat(content['Time Series (Daily)'][date]['4. close'])) / parseFloat(content['Time Series (Daily)'][prevDate]['4. close'])) * 100;
 					change = change.toFixed(2);
 					change = Math.abs(change);
 					
-					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][pDate]['4. close']))
+					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
 					{
 						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull_:602373998214512670>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					} else {
