@@ -813,12 +813,8 @@ client.on('message', message =>
 					if(prevDate.getMonth() < 9)
 					{
 						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
-						if(prevDate.getDay() == 0) prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 3);
-						if(prevDate.getDay() == 0) prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 2);
 					} else if(prevDate.getMonth() >= 9) {
 						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
-						if(prevDate.getDay() == 0) prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 3);
-						if(prevDate.getDay() == 0) prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 2);
 					}
 					console.log(prevDate);
 					var close = content['Time Series (Daily)'][date]['4. close'];
