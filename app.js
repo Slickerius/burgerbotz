@@ -805,6 +805,9 @@ client.on('message', message =>
 					}
 					
 					date = content['Meta Data']['3. Last Refreshed'];
+					var d0 = date.split(" ");
+					date = d0[0];
+					
 					prevDate = new Date(date);
 					prevDate.setDate(prevDate.getDate() - 1);
 					if(prevDate.getMonth() < 9)
@@ -814,7 +817,6 @@ client.on('message', message =>
 						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
 					}
 					console.log(date);
-					date.setHours(0, 0, 0, 0);
 					var close = content['Time Series (Daily)'][date]['4. close'];
 					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
 					var open = content['Time Series (Daily)'][date]['1. open'];
