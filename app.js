@@ -992,6 +992,15 @@ client.on('message', message =>
 				}
 				break;
 				
+			case "inactive":
+				var timestamps = [];
+				target.users.forEach(function(user)
+				{
+					if(user.bot) return;
+					post(user.username + " : " + user.lastMessage.createdTimestamp);
+				});
+				break;
+				
 			case "flags":
 				if(inFGame)
 				{
