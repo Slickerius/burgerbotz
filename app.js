@@ -998,7 +998,7 @@ client.on('message', message =>
 				{
 					var user = member.user;
 					if(user.bot || user.lastMessage == null) console.log("Cancelled analysis for user " + user.username);
-					console.log(user.username + " : " + user.lastMessage.createdTimestamp);
+					console.log(user.username + " : " + member.lastMessage.createdTimestamp);
 				});
 				break;
 				
