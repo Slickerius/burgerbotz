@@ -1003,7 +1003,7 @@ client.on('message', message =>
 						console.log("Failed to analyse user " + member.user.username);
 						return;
 					}	
-					users.push(member.user);
+					users.push(member.user.username + "#" + member.user.discriminator);
 					dates.push(member.joinedAt);
 				});
 				
@@ -1013,6 +1013,17 @@ client.on('message', message =>
 				{
 					userDates[users[i]] = dates[i];	
 				}
+				
+				userDates.sort((a, b) => a.getTime() - b.getTime());
+				var text = "``Earliest Server Members Leaderboard\n";
+				
+				for(i = 0; i < 9; i++)
+				{
+					text += "[" + (i + 1) + "] " + userDates[i] + "\n";
+				}
+				
+				post(text);
+				
 				console.log(userDates);
 				break;
 				
