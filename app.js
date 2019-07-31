@@ -1013,7 +1013,7 @@ client.on('message', message =>
 				{
 					userDates[users[i]] = dates[i];	
 				}
-				console.log(i);
+				console.log(userDates);
 				break;
 				
 			case "flags":
