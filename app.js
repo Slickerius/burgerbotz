@@ -996,9 +996,7 @@ client.on('message', message =>
 				var timestamps = [];
 				target.members.forEach(function(member)
 				{
-					var user = member.user;
-					if(user.bot || user.lastMessage == null) return;
-					post(user.username + " : " + member.lastMessage.createdTimestamp);
+					console.log(member.user.username);
 				});
 				break;
 				
