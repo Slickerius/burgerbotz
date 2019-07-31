@@ -1001,6 +1001,7 @@ client.on('message', message =>
 						console.log("Failed to analyse user " + member.user.username);
 						return;
 					}	
+					dates.push(member.user.username);
 					dates[member.user.username].push(member.joinedAt);
 				});
 				dates.sort((a,b) => a.getTime() - b.getTime());
