@@ -993,7 +993,7 @@ client.on('message', message =>
 				break;
 				
 			case "inactive":
-				var dates = [];
+				var dates = {"foo": "bar"};
 				target.members.forEach(function(member)
 				{
 					if(member.user.bot || member.joinedAt == null)
@@ -1001,7 +1001,7 @@ client.on('message', message =>
 						console.log("Failed to analyse user " + member.user.username);
 						return;
 					}	
-					dates.push(member.user.username);
+					//dates.push(member.user.username);
 					dates[member.user.username].push(member.joinedAt);
 				});
 				dates.sort((a,b) => a.getTime() - b.getTime());
