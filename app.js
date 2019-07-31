@@ -994,8 +994,9 @@ client.on('message', message =>
 				
 			case "inactive":
 				var timestamps = [];
-				target.users.forEach(function(user)
+				target.members.forEach(function(member)
 				{
+					var user = member.user;
 					if(user.bot) return;
 					post(user.username + " : " + user.lastMessage.createdTimestamp);
 				});
