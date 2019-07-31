@@ -816,6 +816,7 @@ client.on('message', message =>
 					} else if(prevDate.getMonth() >= 9) {
 						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
 					}
+					console.log("date : " + date);
 					console.log("prevDate : " + prevDate);
 					var close = content['Time Series (Daily)'][date]['4. close'];
 					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
