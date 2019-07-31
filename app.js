@@ -998,7 +998,8 @@ client.on('message', message =>
 				{
 					var user = member.user;
 					if(user.bot) return;
-					post(user.username + " : " + user.lastMessage.createdTimestamp);
+					post(user.username + " : " + user.discriminator);
+					//post(user.username + " : " + user.lastMessage.createdTimestamp);
 				});
 				break;
 				
