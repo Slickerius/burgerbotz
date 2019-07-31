@@ -993,16 +993,18 @@ client.on('message', message =>
 				break;
 				
 			case "inactive":
-				var timestamps = [];
+				var dates = [];
 				target.members.forEach(function(member)
 				{
-					if(member.user.bot || member.lastMessageID == null)
+					if(member.user.bot || member.joinedAt == null)
 					{
 						console.log("Failed to analyse user " + member.user.username);
 						return;
 					}	
-					console.log("User: " + member.user.username + "Last Message : " + member.lastMessageID);
+					dates[member.user.username].push(member.joinedAt);
 				});
+				dates.sort((a,b) => a.getTime() - b.getTime());
+				console.log(dates);
 				break;
 				
 			case "flags":
