@@ -1006,12 +1006,14 @@ client.on('message', message =>
 					users.push(member.user);
 					dates.push(member.joinedAt);
 				});
+				
+				var userDates = [{}];
+				
 				for(i = 0; i < dates.length; i++)
 				{
-					//	
+					userDates[users[i]] = dates[i];	
 				}
-				dates.sort();
-				console.log(dates);
+				console.log(i);
 				break;
 				
 			case "flags":
