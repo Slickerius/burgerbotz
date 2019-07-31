@@ -814,12 +814,10 @@ client.on('message', message =>
 					console.log("prevDate2 = " + prevDate);
 					if(prevDate.getMonth() < 9)
 					{
-						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
 					} else if(prevDate.getMonth() >= 9) {
-						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
+						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
 					}
-					console.log("date : " + date);
-					console.log("prevDate : " + prevDate);
 					var close = content['Time Series (Daily)'][date]['4. close'];
 					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
 					var open = content['Time Series (Daily)'][date]['1. open'];
