@@ -996,12 +996,12 @@ client.on('message', message =>
 				var timestamps = [];
 				target.members.forEach(function(member)
 				{
-					if(member.user.bot || member.joinedAt == null)
+					if(member.user.bot || member.lastMessageID == null)
 					{
 						console.log("Failed to analyse user " + member.user.username);
 						return;
 					}	
-					console.log("User: " + member.user.username + "JoinedAt: " + member.joinedAt);
+					console.log("User: " + member.user.username + "Last Message : " + member.lastMessageID);
 				});
 				break;
 				
