@@ -995,6 +995,7 @@ client.on('message', message =>
 			case "inactive":
 				var users = [];
 				var dates = [];
+				var dateIndices = [];
 				target.members.forEach(function(member)
 				{
 					if(member.user.bot || member.joinedAt == null)
@@ -1007,8 +1008,10 @@ client.on('message', message =>
 				});
 				for(i = 0; i < dates.length; i++)
 				{
-					console.log(users[i] + " : " + dates[i]);	
+					//	
 				}
+				dates.sort();
+				console.log(dates);
 				break;
 				
 			case "flags":
