@@ -809,7 +809,9 @@ client.on('message', message =>
 					date = d0[0];
 					
 					prevDate = new Date(date);
+					console.log("prevDate1 = " + prevDate);
 					prevDate.setDate(prevDate.getDate() - 1);
+					console.log("prevDate2 = " + prevDate);
 					if(prevDate.getMonth() < 9)
 					{
 						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate() - 1);
