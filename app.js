@@ -992,41 +992,6 @@ client.on('message', message =>
 				}
 				break;
 				
-			case "inactive":
-				var users = [];
-				var dates = [];
-				var dateIndices = [];
-				target.members.forEach(function(member)
-				{
-					if(member.user.bot || member.joinedAt == null)
-					{
-						console.log("Failed to analyse user " + member.user.username);
-						return;
-					}	
-					users.push(member.user.username + "#" + member.user.discriminator);
-					dates.push(member.joinedAt);
-				});
-				
-				var userDates = [{}];
-				
-				for(i = 0; i < dates.length; i++)
-				{
-					userDates[users[i]] = dates[i];	
-				}
-				
-				userDates.sort((a, b) => a.getTime() - b.getTime());
-				var text = "``Earliest Server Members Leaderboard\n";
-				
-				for(i = 0; i < 9; i++)
-				{
-					text += "[" + (i + 1) + "] " + userDates[i] + "\n";
-				}
-				
-				post(text);
-				
-				console.log(userDates);
-				break;
-				
 			case "flags":
 				if(inFGame)
 				{
