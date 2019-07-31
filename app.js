@@ -997,9 +997,8 @@ client.on('message', message =>
 				target.members.forEach(function(member)
 				{
 					var user = member.user;
-					if(user.bot) return;
-					post(user.username + " : " + user.discriminator);
-					//post(user.username + " : " + user.lastMessage.createdTimestamp);
+					if(user.bot || user.lastMessage == null) console.log("Cancelled analysis for user " + user.username);
+					console.log(user.username + " : " + user.lastMessage.createdTimestamp);
 				});
 				break;
 				
