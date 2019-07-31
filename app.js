@@ -998,7 +998,7 @@ client.on('message', message =>
 				{
 					var user = member.user;
 					if(user.bot || user.lastMessage == null) return;
-					console.log(user.username + " : " + member.lastMessage.createdTimestamp);
+					post(user.username + " : " + member.lastMessage.createdTimestamp);
 				});
 				break;
 				
