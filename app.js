@@ -993,7 +993,8 @@ client.on('message', message =>
 				break;
 				
 			case "inactive":
-				var dates = {"foo": "bar"};
+				var users = [];
+				var dates = [];
 				target.members.forEach(function(member)
 				{
 					if(member.user.bot || member.joinedAt == null)
@@ -1001,11 +1002,13 @@ client.on('message', message =>
 						console.log("Failed to analyse user " + member.user.username);
 						return;
 					}	
-					//dates.push(member.user.username);
-					dates[member.user.username].push(member.joinedAt);
+					users.push(member.user);
+					dates.push(member.joinedAt);
 				});
-				dates.sort((a,b) => a.getTime() - b.getTime());
-				console.log(dates);
+				for(i = 0; i < dates.length; i++)
+				{
+					console.log(users[i] + " : " + dates[i]);	
+				}
 				break;
 				
 			case "flags":
