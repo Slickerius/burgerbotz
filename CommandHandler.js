@@ -248,7 +248,7 @@ module.exports =
 	{
 		if(parseFloat(height) != height || parseFloat(weight) != weight)
 		{
-			channel.send("**Correct usage: /bmi <height> <weight>**\nWith height in centimeters(cm), weight in kilograms(kg). Decimal points allowed.");
+			channel.send(":scales: Correct usage: /bmi <height> <weight>**\nWith height in centimeters(cm), weight in kilograms(kg). Decimal points allowed.");
 			return;
 		}
 		var h = parseFloat(height) / 100;
