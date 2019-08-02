@@ -248,7 +248,7 @@ module.exports =
 	{
 		if(parseFloat(height) != height || parseFloat(weight) != weight)
 		{
-			channel.send(":scales: **Correct usage: /bmi <height> <weight>**\nWith height in centimeters (cm), weight in kilograms (kg). Decimal points allowed.\n*BMI (abbrev. **body mass index**) is a convenient rule of thumb used to broadly categorize a person as underweight, normal weight, overweight, or obese based on tissue mass (muscle, fat, and bone) and height");
+			channel.send(":scales: **Correct usage: /bmi <height> <weight>**\nWith height in centimeters (cm), weight in kilograms (kg). Decimal points allowed.\n*BMI (abbrev. **body mass index**) is a convenient rule of thumb used to broadly categorize a person as underweight, normal weight, overweight, or obese based on tissue mass (muscle, fat, and bone) and height*");
 			return;
 		}
 		var h = parseFloat(height) / 100;
