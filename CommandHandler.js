@@ -254,7 +254,20 @@ module.exports =
 		var h = parseFloat(height) / 100;
 		var w = parseFloat(weight);
 		var bmi_value = w / (h * h);
-		channel.send(":scales: **Your BMI is: " + bmi_value + "**");
+		bmi_value = bmi_value.toFixed(2);
+		
+		var out = ":scales: **Your BMI is: " + bmi_value + "**\nYour classification is: ";
+		if(bmi_value < 18.50)
+		{
+			out += "**Underweight**.";	
+		} else if(bmi_value >= 18.50 && bmi_value < 25.00) {
+			out += "**Normal**.";
+		} else if(bmi_value >= 25.00 && bmi_value < 30.00) {
+			out += "**Overweight**";
+		} else if(bmi_value >= 30.00) {
+			out += "**Obese**";	
+		}
+		channel.send(out);
 	},
 	
 	random: function(channel, args)
