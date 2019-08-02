@@ -696,6 +696,11 @@ client.on('message', message =>
 			case "about":
 				handler.about(ch);
 				break;
+				
+			case "bmi":
+				if(args.length < 2) return;
+				handler.bmi(ch, args[1], args[2]);
+				break;
 			
 			case "markets":
 				var out = ":chart_with_downwards_trend: __**Markets Indices**__ :chart_with_upwards_trend:\n";
