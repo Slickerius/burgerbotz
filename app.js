@@ -698,7 +698,7 @@ client.on('message', message =>
 				break;
 				
 			case "bmi":
-				if(args.length < 2) return;
+				if(args.length < 2) post(":scales: Correct usage: /bmi <height> <weight>**\nWith height in centimeters(cm), weight in kilograms(kg). Decimal points allowed.");
 				handler.bmi(ch, args[1], args[2]);
 				break;
 			
