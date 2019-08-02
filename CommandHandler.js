@@ -253,7 +253,7 @@ module.exports =
 		}
 		var h = parseFloat(height) / 100;
 		var w = parseFloat(weight);
-		var bmi_value = w / (h * h));
+		var bmi_value = w / (h * h);
 		channel.send(":scales: **Your BMI is: " + bmi_value + "**");
 	},
 	
