@@ -819,6 +819,7 @@ client.on('message', message =>
 						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
 					}
 					var close = content['Time Series (Daily)'][date]['4. close'];
+					console.log(prevDate);
 					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
 					var open = content['Time Series (Daily)'][date]['1. open'];
 					var high = content['Time Series (Daily)'][date]['2. high'];
