@@ -814,9 +814,19 @@ client.on('message', message =>
 					console.log("prevDate2 = " + prevDate);
 					if(prevDate.getMonth() < 9)
 					{
-						prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+						if(prevDate.getDate() < 10)
+						{
+							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
+						} else {
+							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+						}
 					} else if(prevDate.getMonth() >= 9) {
-						prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+						if(prevDate.getDate() < 10)
+						{
+							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
+						} else {
+							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+						}
 					}
 					var close = content['Time Series (Daily)'][date]['4. close'];
 					console.log(prevDate);
