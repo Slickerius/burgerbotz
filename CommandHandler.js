@@ -244,11 +244,24 @@ module.exports =
 		}	
 	},
 	
+	bmi: function(channel, height, weight)
+	{
+		if(parseFloat(height) != height || parseFloat(weight) != weight)
+		{
+			channel.send("**Correct usage: /bmi <height> <weight>**\nWith height in centimeters(cm), weight in kilograms(kg). Decimal points allowed.");
+			return;
+		}
+		var h = parseFloat(height) / 100;
+		var w = parseFloat(weight);
+		var bmi_value = w / (h * h));
+		channel.send(":scales: **Your BMI is: " + bmi_value + "**");
+	},
+	
 	random: function(channel, args)
 	{
 		if(args[1] == null)
 		{
-			channel.send("Correct usage: /random <upper bound>");
+			channel.send("**Correct usage: /random <upper bound>**");
 		} else {
 			var y = parseInt(args[1]);
 			channel.send("Returned integer " + Math.floor(Math.random() * y));
