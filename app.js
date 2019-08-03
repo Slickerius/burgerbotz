@@ -680,8 +680,8 @@ client.on('message', message =>
 						{
 							delete msg0[1];
 							let msg1 = msg0.join(" ");
-							channel.send(":incoming_envelope: **Message sent!**");
 							user.send(msg1);	
+							ch.send(":incoming_envelope: **Message sent!**");
 							return;
 						} else {
 							post(":octagonal_sign: **You can only send direct messages to humans!**");
