@@ -672,6 +672,7 @@ client.on('message', message =>
 				break;
 			
 			case "dm":
+				var userExists = false;
 				client.users.forEach(function(user)
 				{
 					if(user.id == args[1])
@@ -682,14 +683,13 @@ client.on('message', message =>
 							let msg1 = msg0.join(" ");
 							user.send(msg1);	
 							ch.send(":incoming_envelope: **Message sent!**");
-							return;
 						} else {
 							post(":octagonal_sign: **You can only send direct messages to humans!**");
-							return;
 						}
+						userExists = true;
 					}
 				});
-				handler.dm(ch, message, msg0);
+				handler.dm(ch, message, msg0, userExists);
 				break;
 				
 			case "burger":
