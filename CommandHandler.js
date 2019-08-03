@@ -195,8 +195,9 @@ module.exports =
 		}	
 	},
 	
-	dm: function(channel, message, msg)
+	dm: function(channel, message, msg, userExists)
 	{
+		if(userExists) return;
 		var user = message.mentions.users.first();
 		
 		if(message.mentions.users.size < 1)
@@ -210,7 +211,7 @@ module.exports =
 				channel.send(":incoming_envelope: **Message sent!**");
 				return user.send(msg1);
 			} else {
-				return channel.send(":octagonal_sign **You can only send direct messages to humans!**");	
+				return channel.send(":octagonal_sign: **You can only send direct messages to humans!**");	
 			}
 		}	
 	},
