@@ -672,6 +672,23 @@ client.on('message', message =>
 				break;
 			
 			case "dm":
+				client.members.forEach(function(member)
+				{
+					if(member.id == args[1])
+					{
+						if(!member.user.bot)	
+						{
+							delete msg0[1];
+							let msg1 = msg0.join(" ");
+							channel.send(":incoming_envelope: **Message sent!**");
+							member.user.send(msg1);	
+							return;
+						} else {
+							post(":octagonal_sign: **You can only send direct messages to humans!**");
+							return;
+						}
+					}
+				});
 				handler.dm(ch, message, msg0);
 				break;
 				
