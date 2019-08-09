@@ -1095,6 +1095,12 @@ client.on('message', message =>
 					db = JSON.parse(body);
 					db[sender.id].burgers += 1;
 					post(db[sender.id].burgers);
+					request(
+					{
+  						method: "PUT",
+  						uri: req,
+  						json: db
+ 					});
 				});
 				//request({
   				//	method: "PUT",
