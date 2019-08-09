@@ -95,6 +95,7 @@ client.on('message', message =>
 			
 			if(response.includes(flagName))
 			{
+				var req = dbURL;
 				var db;
 				request(req, function(error, response, body) 
 				{
@@ -105,12 +106,12 @@ client.on('message', message =>
 					request(
 					{
   						method: "PUT",
-  						uri: dbURL,
+  						uri: req,
   						json: db
  					});
-					clearTimeout(flagTimeout);
-					inFGame = false;
 				});
+				clearTimeout(flagTimeout);
+				inFGame = false;
 			}
 		}
 		
