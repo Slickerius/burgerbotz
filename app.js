@@ -930,7 +930,7 @@ client.on('message', message =>
 					{
 						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-						post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + database[sender.id].burgers + `**`);
+						post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + db[sender.id].burgers + `**`);
 						request(
 						{
   							method: "PUT",
@@ -940,7 +940,7 @@ client.on('message', message =>
 					} else {
 						if(db[user.id] == null) db[user.id] = {burgers: 100};
 						if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
-						post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + database[user.id].burgers + `**`);
+						post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + db[user.id].burgers + `**`);
 						request(
 						{
   							method: "PUT",
