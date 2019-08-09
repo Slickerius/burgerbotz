@@ -6,6 +6,7 @@ const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const status = "with Carlton";
 const stockApiKey = "4MAQ744ZHW6LDYAK";
+const dbURL = process.env.DBURL;
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
@@ -1074,18 +1075,9 @@ client.on('message', message =>
 					post("**" + sender.username + "** is no longer AFK.");	
 				}
 				break;
-	
-			case "aady":
-				var req = "https://api.myjson.com/bins/hptd9";
-				request({
-  					method: "PUT",
-  					uri: req,
-  					json: body
- 				});
-				break;
 				
 			case "aadv":
-				var req = "https://api.myjson.com/bins/hptd9";
+				var req = dbURL;
 				var db;
 				request(req, function(error, response, body) 
 				{
