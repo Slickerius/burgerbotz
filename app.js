@@ -146,13 +146,24 @@ client.on('message', message =>
 		function onDefeat(player1, player2, winID)
 		{
 			var x = randomize(100, 1000);
+			var req = dbURL;
 			inGame = false;
 			p1isCrippled = false;
 			p2isCrippled = false;
 			post("***:trophy: " + player1 + " has defeated " + player2 + "!\nGiven :hamburger: " + x + " as a prize.***");
 			console.log(database[winID].burgers);
 			console.log(database[winID]);
-			database[winID].burgers += x;
+			request(req, function(error, response, body) 
+			{
+				db = JSON.parse(body);
+				db[winID].burgers += x;
+				request(
+				{
+  					method: "PUT",
+  					uri: req,
+  					json: db
+ 				});
+			});
 		}
 	
 		let sender = message.author;
