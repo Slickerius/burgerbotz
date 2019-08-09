@@ -1093,8 +1093,9 @@ client.on('message', message =>
 					console.log('statusCode:', response && response.statusCode);
 					
 					db = JSON.parse(body);
+					db[sender.id].burgers += 1;
+					post(db[sender.id].burgers);
 				});
-				post(db[sender.id].burgers);
 				//request({
   				//	method: "PUT",
   				//	uri: req,
