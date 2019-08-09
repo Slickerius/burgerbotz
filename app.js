@@ -874,59 +874,81 @@ client.on('message', message =>
 				
 			case "baltop":
 			case "balancetop":
-				var y = "```-=[Burgerbotz World Ranking]=-\n\n";
-				var z = 1;
-				var p = "";
-				
-				var m = [];
-				for(var x in database)
+				var req = dbURL;
+				var db;
+				request(req, function(error, response, body) 
 				{
-					m.push({id: x, burgers: database[x].burgers});
-				}
+					var y = "```-=[Burgerbotz World Ranking]=-\n\n";
+					var z = 1;
+					var p = "";
 				
-				m.sort(function (a, b) 
-				{
-					return b.burgers - a.burgers;
-				});
-				
-				for(var x in m)
-				{
-					if(z <= 10)
+					var m = [];
+					for(var x in db)
 					{
-						var t;
-						client.users.forEach(function(dx)
-						{
-							if(dx.id == m[x].id) t = dx.username;	
-						});		
-						
-						if(t != p)
-						{
-							y += "[" + z + "] " + t + "\nHamburgers: " + m[x].burgers + "\n\n";
-							z++;
-						}
-						p = t;
+						m.push({id: x, burgers: db[x].burgers});
 					}
-				}
-				
-				y += "```";
-				
-				post(y);
-				
+					
+					m.sort(function (a, b) 
+					{
+						return b.burgers - a.burgers;
+					});
+					
+					for(var x in m)
+					{
+						if(z <= 10)
+						{
+							var t;
+							client.users.forEach(function(dx)
+							{
+								if(dx.id == m[x].id) t = dx.username;	
+							});		
+							
+							if(t != p)
+							{
+								y += "[" + z + "] " + t + "\nHamburgers: " + m[x].burgers + "\n\n";
+								z++;
+							}
+							p = t;
+						}
+					}
+					
+					y += "```";
+						
+					post(y);
+				});	
 				break;
 			
 			case "balance":
 			case "bal":
 			case "burgers":
-				if(message.mentions.users.size < 1)
+				var req = dbURL;
+				var db;
+				request(req, function(error, response, body) 
 				{
-					if(database[sender.id] == null) database[sender.id] = {burgers: 100};
-					if(isNaN(database[sender.id].burgers)) database[sender.id].burgers = 100;
-					post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + database[sender.id].burgers + `**`);
-				} else {
-					if(database[user.id] == null) database[user.id] = {burgers: 100};
-					if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
-					post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + database[user.id].burgers + `**`);
-				}
+					db = JSON.parse(body);
+					if(message.mentions.users.size < 1)
+					{
+						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
+						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+						post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + database[sender.id].burgers + `**`);
+						request(
+						{
+  							method: "PUT",
+  							uri: req,
+  							json: db
+ 						});
+					} else {
+						if(db[user.id] == null) db[user.id] = {burgers: 100};
+						if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
+						post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + database[user.id].burgers + `**`);
+						request(
+						{
+  							method: "PUT",
+  							uri: req,
+  							json: db
+ 						});
+					}
+				});
 				break;
 				
 			case "pay":
