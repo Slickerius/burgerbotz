@@ -95,11 +95,22 @@ client.on('message', message =>
 			
 			if(response.includes(flagName))
 			{
-				var x = randomize(15, 50);
-				post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
-				database[message.author.id].burgers += x;
-				clearTimeout(flagTimeout);
-				inFGame = false;
+				var db;
+				request(req, function(error, response, body) 
+				{
+					db = JSON.parse(body);
+					var x = randomize(15, 50);
+					post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
+					db[message.author.id].burgers += x;
+					request(
+					{
+  						method: "PUT",
+  						uri: dbURL,
+  						json: db
+ 					});
+					clearTimeout(flagTimeout);
+					inFGame = false;
+				});
 			}
 		}
 		
@@ -878,6 +889,7 @@ client.on('message', message =>
 				var db;
 				request(req, function(error, response, body) 
 				{
+					db = JSON.parse(body);
 					var y = "```-=[Burgerbotz World Ranking]=-\n\n";
 					var z = 1;
 					var p = "";
