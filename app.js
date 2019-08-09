@@ -1075,7 +1075,7 @@ client.on('message', message =>
 				}
 				break;
 	
-			case "aady"":
+			case "aady":
 				var req = "https://api.myjson.com/bins/hptd9";
 				request({
   					method: "PUT",
