@@ -930,58 +930,76 @@ client.on('message', message =>
 				break;
 				
 			case "pay":
-				var arg0 = args[2];
-				if(message.mentions.users.size < 1)
+				var req = dbURL;
+				var db;
+				request(req, function(error, response, body) 
 				{
-					for(var x in database)
+					db = JSON.parse(body);
+					var arg0 = args[2];
+					if(message.mentions.users.size < 1)
 					{
-						if(args[1] == x)
+						for(var x in db)
 						{
+							if(args[1] == x)
+							{
+								if(parseInt(arg0) < 0) return post("You must enter a positive number.");
+							
+								if(db[sender.id].burgers - parseInt(arg0) >= 0)
+								{
+									if(isNaN(db[x].burgers)) db[x].burgers = 100;
+									db[x].burgers += parseInt(arg0);							
+									db[sender.id].burgers -= arg0;
+									request(
+									{
+  										method: "PUT",
+  										uri: req,
+  										json: db
+ 									});
+									post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + x + "**!");
+									client.users.forEach(function(u)
+									{
+										if(u.id == x)
+										{
+											u.send("User **" + sender.username + "#" + sender.discriminator + "** has sent you a total of :hamburger: **" + arg0 + "**!");	
+										}
+									});
+								} else {
+									post("You have insufficient burgers to make this transaction!");	
+								}
+								return;
+							}
+						}	
+						post("You have to mention another user.");
+					} else {
+						if(arg0 == parseInt(arg0))
+						{
+							if(!db[user.id])
+							{
+								db[user.id] = {burgers: 100};
+							}
+							
 							if(parseInt(arg0) < 0) return post("You must enter a positive number.");
 							
-							if(database[sender.id].burgers - parseInt(arg0) >= 0)
+							if(db[sender.id].burgers - parseInt(arg0) >= 0)
 							{
-								if(isNaN(database[x].burgers)) database[x].burgers = 100;
-								database[x].burgers += parseInt(arg0);							
-								database[sender.id].burgers -= arg0;
-								post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + x + "**!");
-								client.users.forEach(function(u)
+								if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
+								db[user.id].burgers += parseInt(arg0);							
+								db[sender.id].burgers -= arg0;
+								request(
 								{
-									if(u.id == x)
-									{
-										u.send("User **" + sender.username + "#" + sender.discriminator + "** has sent you a total of :hamburger: **" + arg0 + "**!");	
-									}
-								});
+  									method: "PUT",
+  									uri: req,
+  									json: db
+ 								});
+								post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + user.username + "**!");
 							} else {
 								post("You have insufficient burgers to make this transaction!");	
 							}
-							return;
-						}
-					}
-					post("You have to mention another user.");
-				} else {
-					if(arg0 == parseInt(arg0))
-					{
-						if(!database[user.id])
-						{
-							database[user.id] = {burgers: 100};
-						}
-						
-						if(parseInt(arg0) < 0) return post("You must enter a positive number.");
-						
-						if(database[sender.id].burgers - parseInt(arg0) >= 0)
-						{
-							if(isNaN(database[user.id].burgers)) database[user.id].burgers = 100;
-							database[user.id].burgers += parseInt(arg0);							
-							database[sender.id].burgers -= arg0;
-							post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + user.username + "**!");
 						} else {
-							post("You have insufficient burgers to make this transaction!");	
+							post("**Usage: /pay <user> <amount>**");	
 						}
-					} else {
-						post("**Usage: /pay <user> <amount>**");	
 					}
-				}
+				});
 				break;
 			
 			case "inf":
