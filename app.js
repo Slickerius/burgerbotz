@@ -1076,7 +1076,7 @@ client.on('message', message =>
 				break;
 	
 			case "aadv":
-				var req = "http://myjson.com/hptd9";
+				var req = "https://api.myjson.com/bins/hptd9";
 				request(req, function(error, response, body) 
 				{
 					var db = JSON.parse(req);
