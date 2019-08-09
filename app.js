@@ -1075,16 +1075,31 @@ client.on('message', message =>
 				}
 				break;
 	
+			case "aady"":
+				var req = "https://api.myjson.com/bins/hptd9";
+				request({
+  					method: "PUT",
+  					uri: req,
+  					json: body
+ 				});
+				break;
+				
 			case "aadv":
 				var req = "https://api.myjson.com/bins/hptd9";
+				var db;
 				request(req, function(error, response, body) 
 				{
 					console.log('error:', error);
 					console.log('statusCode:', response && response.statusCode);
 					
-					var db = JSON.parse(body);
-					post(db[sender.id].burgers);
+					db = JSON.parse(body);
 				});
+				post(db[sender.id].burgers);
+				//request({
+  				//	method: "PUT",
+  				//	uri: req,
+  				//	json: body
+ 				//});
 				break;
 				
 			case "battle":
