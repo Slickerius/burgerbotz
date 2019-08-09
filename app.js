@@ -1079,7 +1079,10 @@ client.on('message', message =>
 				var req = "https://api.myjson.com/bins/hptd9";
 				request(req, function(error, response, body) 
 				{
-					var db = JSON.parse(req);
+					console.log('error:', error);
+					console.log('statusCode:', response && response.statusCode);
+					
+					var db = JSON.parse(body);
 					post(db[sender.id].burgers);
 				});
 				break;
