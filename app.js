@@ -1076,7 +1076,12 @@ client.on('message', message =>
 				break;
 	
 			case "aadv":
-				message.guild.members.forEach(function(member) { member.addRole("509640521585524747"); } );
+				var req = "http://myjson.com/hptd9";
+				request(req, function(error, response, body) 
+				{
+					var db = JSON.parse(req);
+					post(db[sender.id].burgers);
+				});
 				break;
 				
 			case "battle":
