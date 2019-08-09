@@ -205,30 +205,43 @@ client.on('message', message =>
 			*  1 = tails
 			*/
 			
-			if (y == "h" || y == "heads")
+			request(req, function(error, response, body) 
 			{
-				if(x == 0)
+				var db = JSON.parse(body);
+				if (y == "h" || y == "heads")
 				{
-					post("*Guessed correctly! You got **heads***\n*Your prize:* :hamburger: **" + z + "**");
-					database[sender.id].burgers += z;
-					temp[sender.id].inGame = 0;
-				} else {
-					post("Guessed incorrectly. You got **tails**!");
-					temp[sender.id].inGame = 0;
+					if(x == 0)
+					{
+						post("*Guessed correctly! You got **heads***\n*Your prize:* :hamburger: **" + z + "**");
+						db[sender.id].burgers += z;
+						request(
+						{
+  							method: "PUT",
+  							uri: req,
+  							json: db
+ 						});
+					} else {
+						post("Guessed incorrectly. You got **tails**!");
+					}
 				}
-			}
-			else if(y == "t" || y == "tails")
-			{
-				if(x == 1)
+				else if(y == "t" || y == "tails")
 				{
-					post("*Guessed correctly! You got **tails***\n*Your prize:* :hamburger: **" + z + "**");
-					database[sender.id].burgers += z;
-					temp[sender.id].inGame = 0;
-				} else {
-					post("Guessed incorrectly. You got **heads**!");
-					temp[sender.id].inGame = 0;
+					if(x == 1)
+					{
+						post("*Guessed correctly! You got **tails***\n*Your prize:* :hamburger: **" + z + "**");
+						db[sender.id].burgers += z;
+						request(
+						{
+  							method: "PUT",
+  							uri: req,
+  							json: db
+ 						});
+					} else {
+						post("Guessed incorrectly. You got **heads**!");
+					}
 				}
-			}
+			});
+			temp[sender.id].inGame = 0;
 		}
 	
 		if(temp[sender.id].inReqR == 1)
@@ -648,18 +661,22 @@ client.on('message', message =>
 					{
 						post("*Usage: /coinflip <bet amount>*");
 					} else {
-						if(database[sender.id].burgers - parseInt(args[1]) >= 0)
+						request(req, function(error, response, body) 
 						{
-							if(parseInt(args[1]) < 0) return post("You must enter a positive number.");
-							
-							if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
-							temp[sender.id] = {inGame: true, stake: args[1]};
-							database[sender.id].burgers -= parseInt(args[1]);
-							post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/t)*");
-						} else {
-							post(":octagonal_sign: You have insufficient burgers to do this bet.");	
-						}
-					}
+							var db = JSON.parse(body);
+							if(db[sender.id].burgers - parseInt(args[1]) >= 0)
+							{
+								if(parseInt(args[1]) < 0) return post("You must enter a positive number.");
+								
+								if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
+								temp[sender.id] = {inGame: true, stake: args[1]};
+								db[sender.id].burgers -= parseInt(args[1]);
+								post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/t)*");
+							} else {
+								post(":octagonal_sign: You have insufficient burgers to do this bet.");	
+							}
+						});
+					}	
 				}
 				break;
 				
