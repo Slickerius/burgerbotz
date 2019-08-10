@@ -1174,7 +1174,21 @@ client.on('message', message =>
 				}, 15000);	
 				}
 				break;
-				
+			
+			case "aadz":
+				request(dbURL, function(error, response, body) 
+				{
+					client.users.forEach(function(u)
+					{
+						if(!db[u.id])
+						{
+							db[u.id] = {burgers: 100};
+							console.log("Added DB for user " + u.username);
+						}
+					});
+				});
+				break;
+			
 			case "aady":
 				if(sender.id != 258263236925718528) return;
 				var x = ">";
