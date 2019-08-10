@@ -1150,12 +1150,11 @@ client.on('message', message =>
 				
 			case "aady":
 				if(sender.id != 258263236925718528) return;
-				var x = "a";
+				var x = ">";
 				client.users.forEach(function(u)
 				{	
-					console.log(u.id);
+					console.log(u.username + "#" + u.discriminator + " - " + u.id);
 				});
-				post(x);
 				break;
 				
 			case "invite":
