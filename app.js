@@ -1000,13 +1000,13 @@ client.on('message', message =>
 						{
 							client.users.forEach(function(u)
 							{
-								if(u.id = x)
+								if(u.id == x)
 								{
 									post(`**:diamond_shape_with_a_dot_inside: ${u.username}**'s *balance contains* :hamburger: **` + db[x].burgers + `**`);
+									return;
 								}
 							});
 						}
-						return;
 					}
 					if(message.mentions.users.size < 1)
 					{
