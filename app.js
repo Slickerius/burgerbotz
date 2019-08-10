@@ -994,6 +994,20 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
+					for(var x in db)
+					{
+						if(args[1] == x)
+						{
+							client.users.forEach(function(u)
+							{
+								if(u.id = x)
+								{
+									post(`**:diamond_shape_with_a_dot_inside: ${u.username}**'s *balance contains* :hamburger: **` + db[sender.id].burgers + `**`);
+									return;
+								}
+							});
+						}
+					}
 					if(message.mentions.users.size < 1)
 					{
 						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
