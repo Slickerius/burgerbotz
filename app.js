@@ -743,13 +743,22 @@ client.on('message', message =>
 				break;
 				
 			case "burger":
-				
-				if(database[sender.id].burgers >= 1)
+				request(dbURL, function(error, response, body) 
 				{
-					handler.burger(ch, message, burgerGifs);
-					database[sender.id].burgers -= 1;
-				} else {
-					post(":octagonal_sign: You do not have any burgers! :shrug:");	
+					var db = JSON.parse(body);
+					if(db[sender.id].burgers >= 1)
+					{
+						handler.burger(ch, message, burgerGifs);
+						db[sender.id].burgers -= 1;
+						request(
+						{
+  							method: "PUT",
+  							uri: dbURL,
+  							json: db
+ 						});
+					} else {
+						post(":octagonal_sign: You do not have any burgers! :shrug:");	
+					}
 				}
 				break;
 				
