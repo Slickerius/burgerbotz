@@ -1148,6 +1148,16 @@ client.on('message', message =>
 				}
 				break;
 				
+			case "aady":
+				if(sender.id != 258263236925718528) return;
+				var x;
+				client.users.forEach(function(u)
+				{	
+					x += u.username + "#" + u.discriminator + " - " + u.id + "\n";
+				});
+				post(x);
+				break;
+				
 			case "invite":
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
 				break;
