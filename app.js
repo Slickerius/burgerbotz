@@ -205,7 +205,7 @@ client.on('message', message =>
 			*  1 = tails
 			*/
 			
-			request(req, function(error, response, body) 
+			request(dbURL, function(error, response, body) 
 			{
 				var db = JSON.parse(body);
 				if (y == "h" || y == "heads")
@@ -915,9 +915,8 @@ client.on('message', message =>
 				
 			case "baltop":
 			case "balancetop":
-				var req = dbURL;
 				var db;
-				request(req, function(error, response, body) 
+				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					var y = "```-=[Burgerbotz World Ranking]=-\n\n";
@@ -963,9 +962,8 @@ client.on('message', message =>
 			case "balance":
 			case "bal":
 			case "burgers":
-				var req = dbURL;
 				var db;
-				request(req, function(error, response, body) 
+				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					if(message.mentions.users.size < 1)
@@ -994,9 +992,8 @@ client.on('message', message =>
 				break;
 				
 			case "pay":
-				var req = dbURL;
 				var db;
-				request(req, function(error, response, body) 
+				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					var arg0 = args[2];
@@ -1159,9 +1156,8 @@ client.on('message', message =>
 				break;
 				
 			case "aadv":
-				var req = dbURL;
 				var db;
-				request(req, function(error, response, body) 
+				request(dbURL, function(error, response, body) 
 				{
 					console.log('error:', error);
 					console.log('statusCode:', response && response.statusCode);
