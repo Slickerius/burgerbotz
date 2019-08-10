@@ -1005,8 +1005,8 @@ client.on('message', message =>
 									post(`**:diamond_shape_with_a_dot_inside: ${u.username}**'s *balance contains* :hamburger: **` + db[x].burgers + `**`);
 								}
 							});
-							return;
 						}
+						return;
 					}
 					if(message.mentions.users.size < 1)
 					{
