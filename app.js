@@ -1022,6 +1022,7 @@ client.on('message', message =>
   							json: db
  						});
 					} else {
+						var user = message.mentions.users.first;
 						if(db[user.id] == null) db[user.id] = {burgers: 100};
 						if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
 						post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + db[user.id].burgers + `**`);
