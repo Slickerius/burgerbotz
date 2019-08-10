@@ -1012,6 +1012,7 @@ client.on('message', message =>
 					}
 					if(message.mentions.users.size < 1 && !userFound)
 					{
+						post("A");
 						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
 						post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + db[sender.id].burgers + `**`);
@@ -1022,6 +1023,7 @@ client.on('message', message =>
   							json: db
  						});
 					} else {
+						post("B");
 						var user = message.mentions.users.first;
 						if(db[user.id] == null) db[user.id] = {burgers: 100};
 						if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
