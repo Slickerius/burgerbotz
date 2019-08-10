@@ -661,7 +661,7 @@ client.on('message', message =>
 					{
 						post("*Usage: /coinflip <bet amount>*");
 					} else {
-						request(req, function(error, response, body) 
+						request(dbURL, function(error, response, body) 
 						{
 							var db = JSON.parse(body);
 							if(db[sender.id].burgers - parseInt(args[1]) >= 0)
@@ -734,6 +734,7 @@ client.on('message', message =>
 				break;
 				
 			case "burger":
+				
 				if(database[sender.id].burgers >= 1)
 				{
 					handler.burger(ch, message, burgerGifs);
