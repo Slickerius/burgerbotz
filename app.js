@@ -674,6 +674,12 @@ client.on('message', message =>
 								if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
 								temp[sender.id] = {inGame: true, stake: args[1]};
 								db[sender.id].burgers -= parseInt(args[1]);
+								request(
+								{
+  									method: "PUT",
+  									uri: dbURL,
+  									json: db
+ 								});
 								post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/t)*");
 							} else {
 								post(":octagonal_sign: You have insufficient burgers to do this bet.");	
