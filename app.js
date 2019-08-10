@@ -977,7 +977,7 @@ client.on('message', message =>
 						request(
 						{
   							method: "PUT",
-  							uri: req,
+  							uri: dbURL,
   							json: db
  						});
 					} else {
@@ -987,7 +987,7 @@ client.on('message', message =>
 						request(
 						{
   							method: "PUT",
-  							uri: req,
+  							uri: dbURL,
   							json: db
  						});
 					}
@@ -1016,7 +1016,7 @@ client.on('message', message =>
 									request(
 									{
   										method: "PUT",
-  										uri: req,
+  										uri: dbURL,
   										json: db
  									});
 									post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + x + "**!");
@@ -1052,7 +1052,7 @@ client.on('message', message =>
 								request(
 								{
   									method: "PUT",
-  									uri: req,
+  									uri: dbURL,
   									json: db
  								});
 								post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + user.username + "**!");
@@ -1171,7 +1171,7 @@ client.on('message', message =>
 					request(
 					{
   						method: "PUT",
-  						uri: req,
+  						uri: dbURL,
   						json: db
  					});
 				});
