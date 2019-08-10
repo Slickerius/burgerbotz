@@ -1001,7 +1001,7 @@ client.on('message', message =>
 						{
 							client.users.forEach(function(u)
 							{
-								if(u.id == x)
+								if(u.id == x && !u.bot)
 								{
 									post(`**:diamond_shape_with_a_dot_inside: ${u.username}**'s *balance contains* :hamburger: **` + db[x].burgers + `**`);
 									userFound = true;
@@ -1024,6 +1024,7 @@ client.on('message', message =>
 					} else {
 						if(userFound) return;
 						var user = message.mentions.users.first;
+						if(user.bot) post(":octagonal_sign: **Semi-sentient beings are barred from Burgerbotz participation!**");
 						if(db[user.id] == null) db[user.id] = {burgers: 100};
 						if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
 						post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + db[user.id].burgers + `**`);
