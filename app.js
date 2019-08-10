@@ -92,6 +92,15 @@ var inFGame = false, flagID, flagTimeout;
 client.on('message', message => 
 {
 		if(!database[message.author.id]) database[message.author.id] = {burgers: 100};
+		request(dbURL, function(error, response, body) 
+		{
+			var db = JSON.parse(body);
+			if(!db[message.author.id]) 
+			{
+				db[message.author.id] = {burgers: 100};
+				console.log("Created new DB data for user: " + message.author.name + "#" + message.author.discriminator);
+			}
+		});
 		var date = message.createdAt;
 		if(inFGame)
 		{
