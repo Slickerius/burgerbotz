@@ -1,17 +1,20 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
 const fs = require('fs');
 const request = require('request');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
+
+const client = new Discord.Client();
+
+const dbURL = process.env.DBURL;
 const status = "with Carlton";
 const stockApiKey = "4MAQ744ZHW6LDYAK";
-const dbURL = process.env.DBURL;
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
-var phoneRoom = {"foo": "bar"};
-var indices = {"foo": "bar"};
+var phoneRoom = {"x": "y"};
+var indices = {"x": "y"};
+
 var hqChannel;
 
 client.on('ready', () => 
