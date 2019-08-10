@@ -760,7 +760,7 @@ client.on('message', message =>
 					} else {
 						post(":octagonal_sign: You do not have any burgers! :shrug:");	
 					}
-				}
+				});
 				break;
 				
 			case "nigger":
