@@ -1178,6 +1178,7 @@ client.on('message', message =>
 			case "aadz":
 				request(dbURL, function(error, response, body) 
 				{
+					var db = JSON.parse(body);
 					client.users.forEach(function(u)
 					{
 						if(!db[u.id])
