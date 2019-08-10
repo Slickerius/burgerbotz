@@ -220,7 +220,7 @@ client.on('message', message =>
 						request(
 						{
   							method: "PUT",
-  							uri: req,
+  							uri: dbURL,
   							json: db
  						});
 					} else {
@@ -236,7 +236,7 @@ client.on('message', message =>
 						request(
 						{
   							method: "PUT",
-  							uri: req,
+  							uri: dbURL,
   							json: db
  						});
 					} else {
