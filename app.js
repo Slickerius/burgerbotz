@@ -1187,6 +1187,12 @@ client.on('message', message =>
 							console.log("Added DB for user " + u.username);
 						}
 					});
+					request(
+					{
+  						method: "PUT",
+  						uri: dbURL,
+  						json: db
+ 					});
 				});
 				break;
 			
