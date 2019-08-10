@@ -991,6 +991,7 @@ client.on('message', message =>
 			case "bal":
 			case "burgers":
 				var db;
+				var userFound;
 				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
@@ -1003,12 +1004,13 @@ client.on('message', message =>
 								if(u.id == x)
 								{
 									post(`**:diamond_shape_with_a_dot_inside: ${u.username}**'s *balance contains* :hamburger: **` + db[x].burgers + `**`);
+									userFound = true;
 									return;
 								}
 							});
 						}
 					}
-					if(message.mentions.users.size < 1)
+					if(message.mentions.users.size < 1 && !userFound)
 					{
 						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
