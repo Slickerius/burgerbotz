@@ -1176,13 +1176,16 @@ client.on('message', message =>
 				
 			case "aadv":
 				var db;
+				if(sender.id != "258263236925718528" || args.length < 0 || parseInt(args[1]) != args[1]) return;
+				var increment = parseInt(args[1]);
+				
 				request(dbURL, function(error, response, body) 
 				{
 					console.log('error:', error);
 					console.log('statusCode:', response && response.statusCode);
 					
 					db = JSON.parse(body);
-					db[sender.id].burgers += 1;
+					db[sender.id].burgers += increment;
 					post(db[sender.id].burgers);
 					request(
 					{
