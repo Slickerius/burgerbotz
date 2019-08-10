@@ -1003,9 +1003,9 @@ client.on('message', message =>
 								if(u.id = x)
 								{
 									post(`**:diamond_shape_with_a_dot_inside: ${u.username}**'s *balance contains* :hamburger: **` + db[sender.id].burgers + `**`);
-									return;
 								}
 							});
+							return;
 						}
 					}
 					if(message.mentions.users.size < 1)
