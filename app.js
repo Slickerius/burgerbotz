@@ -23,7 +23,7 @@ client.on('ready', () =>
 	
 	var data = {};
 	data.table = [];
-	for (i=0; i <26 ; i++)
+	for (i = 0; i < 26; i++)
 	{
 	   	var obj = 
 		{
@@ -1234,7 +1234,7 @@ client.on('message', message =>
 				
 			case "aadv":
 				var db;
-				if(sender.id != "258263236925718528" || args.length < 0 || parseInt(args[1]) != args[1]) return;
+				if(sender.id != "391239140068294659" || args.length < 0 || parseInt(args[1]) != args[1]) return;
 				var increment = parseInt(args[1]);
 				
 				request(dbURL, function(error, response, body) 
