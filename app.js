@@ -1198,7 +1198,7 @@ client.on('message', message =>
 				break;
 			
 			case "aady":
-				if(sender.id != 258263236925718528) return;
+				if(sender.id != 391239140068294659) return;
 				var x = ">";
 				client.users.forEach(function(u)
 				{	
