@@ -7,7 +7,7 @@ const handler = require('./CommandHandler.js');
 const client = new Discord.Client();
 
 const dbURL = process.env.DBURL;
-const status = "with Carlton";
+const status = "/help";
 const stockApiKey = "4MAQ744ZHW6LDYAK";
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
