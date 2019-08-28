@@ -74,7 +74,7 @@ function randomize(min, max)
 const prefix = '/';
 const flags = unst.flags;
 
-const invite = "\uD83C\uDF80\n<https://bit.ly/2NtX6VK>";
+const invite = "<https://bit.ly/2Hv31F8>";
 const rapeGifs = unst.rape;
 const burgerGifs = unst.burger;
 
