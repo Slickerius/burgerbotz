@@ -131,7 +131,7 @@ client.on('message', message =>
 		if(message.guild != null && message.channel != null && message.content != null)
 		{
 			console.log("[" + message.guild.name + "]<#" + message.channel.name + ">" + message.author.username + ": " + message.content);
-			if(message.guild.id != "424507027432144913")
+			if(message.guild.id != "616246848868450335")
 			{
 				var day = date.getDate();
 				var month = date.getMonth() + 1;
