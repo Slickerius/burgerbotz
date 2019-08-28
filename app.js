@@ -43,11 +43,11 @@ client.on('ready', () =>
    client.user.setGame(status);
    client.guilds.forEach(function(guild)
    {
-	if(guild.id === "424507027432144913")
+	if(guild.id === "616246848868450335")
 	{
 		guild.channels.forEach(function(channel)
 		{
-			if(channel.id === "478887378929451009")
+			if(channel.id === "616246849367441428")
 			{
 				hqChannel = channel;	
 			}
