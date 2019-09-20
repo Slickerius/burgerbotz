@@ -937,8 +937,12 @@ client.on('message', message =>
 					} else {
 						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					}
+					
 					var uri = "https://finviz.com/chart.ashx?t=" + args[1];
-					ch.send({files: [uri]});
+					request(uri, function(error, response, body) 
+					{
+						ch.send(body);
+					});
 				});
 				
 				break;
