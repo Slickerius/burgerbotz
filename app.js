@@ -833,19 +833,19 @@ client.on('message', message =>
 						out += "**(2)** S&P 500 (**^INX**) : **" + sp500 + "** \n";
 						request(req_nasdaq_val, function(error, response, body) 
 						{
-							const content = JSON.parse(body);
-							if(content['Meta Data'] == null)
-							{
-								post(out);
-								console.log("c");
-								return;
-							}
+							//const content = JSON.parse(body);
+							//if(content['Meta Data'] == null)
+							//{
+							//	post(out);
+							//	console.log("c");
+							//	return;
+							//}
 									
-							var lastRef = content['Meta Data']['3. Last Refreshed'];
-							nasdaq = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
-							nasdaq = nasdaq.toFixed(2);
+							//var lastRef = content['Meta Data']['3. Last Refreshed'];
+							//nasdaq = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
+							//nasdaq = nasdaq.toFixed(2);
 									
-							out += "**(3)** NASDAQ Composite (**^IXIC**) : **" + nasdaq + "** \n";
+							//out += "**(3)** NASDAQ Composite (**^IXIC**) : **" + nasdaq + "** \n";
 							request(req_rus2000_val, function(error, response, body) 
 							{
 								const content = JSON.parse(body);
@@ -933,9 +933,9 @@ client.on('message', message =>
 					
 					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
 					{
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull_:602373998214512670>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull:624633081302876160>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					} else {
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear_:602374398959288321>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					}
 				});
 				
