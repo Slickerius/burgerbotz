@@ -860,7 +860,7 @@ client.on('message', message =>
 								rus2000 = parseFloat(content['Time Series (1min)'][lastRef]['4. close']);
 								rus2000 = rus2000.toFixed(2);
 											
-								out += "**(4)** Russell 2000 (**^RUT**) : **" + rus2000 + "** \n";
+								out += "**(3)** Russell 2000 (**^RUT**) : **" + rus2000 + "** \n";
 								post(out);
 							});
 						});
@@ -937,6 +937,8 @@ client.on('message', message =>
 					} else {
 						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					}
+					var uri = "https://finviz.com/chart.ashx?t=" + args[1];
+					ch.send({files: [uri]});
 				});
 				
 				break;
