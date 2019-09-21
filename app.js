@@ -931,18 +931,19 @@ client.on('message', message =>
 					change = change.toFixed(2);
 					change = Math.abs(change);
 					
-					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
-					{
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull:624633081302876160>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
-					} else {
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
-					}
-					
 					var uri = "https://finviz.com/chart.ashx?t=" + args[1];
-					let botembed = new Discord.RichEmbed()
+					var botembed = new Discord.RichEmbed()
 					.setImage(uri)
 					.setColor("#fcc66a");
-					return ch.send(botembed);
+					
+					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
+					{
+						ch.send(botembed);
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull:624633081302876160>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
+					} else {
+						ch.send(botembed);
+						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
+					}
 				});
 				
 				break;
