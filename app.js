@@ -939,10 +939,10 @@ client.on('message', message =>
 					}
 					
 					var uri = "https://finviz.com/chart.ashx?t=" + args[1];
-					request(uri, function(error, response, body) 
-					{
-						ch.send(body);
-					});
+					let botembed = new Discord.RichEmbed()
+					.setImage(uri)
+					.setColor("#fcc66a");
+					return ch.send(botembed);
 				});
 				
 				break;
