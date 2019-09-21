@@ -935,13 +935,12 @@ client.on('message', message =>
 					var botembed = new Discord.RichEmbed()
 					.setImage(uri)
 					.setColor("#fcc66a");
+					ch.send(botembed);
 					
 					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
 					{
-						ch.send(botembed);
 						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull:624633081302876160>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					} else {
-						ch.send(botembed);
 						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					}
 				});
