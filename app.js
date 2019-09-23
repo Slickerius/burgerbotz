@@ -927,6 +927,12 @@ client.on('message', message =>
 					var low = content['Time Series (Daily)'][date]['3. low'];
 					var volume = content['Time Series (Daily)'][date]['5. volume'];
 					
+					close = close.toFixed(2);
+					prevClose = prevClose.toFixed(2);
+					open = open.toFixed(2);
+					high = high.toFixed(2);
+					low = low.toFixed(2);
+					
 					var change = ((parseFloat(content['Time Series (Daily)'][prevDate]['4. close']) - parseFloat(content['Time Series (Daily)'][date]['4. close'])) / parseFloat(content['Time Series (Daily)'][prevDate]['4. close'])) * 100;
 					change = change.toFixed(2);
 					change = Math.abs(change);
