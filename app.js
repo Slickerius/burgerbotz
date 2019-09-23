@@ -919,13 +919,13 @@ client.on('message', message =>
 							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
 						}
 					}
-					var close = content['Time Series (Daily)'][date]['4. close'];
+					var close = parseFloat(content['Time Series (Daily)'][date]['4. close']);
 					console.log(prevDate);
-					var prevClose = content['Time Series (Daily)'][prevDate]['4. close'];
-					var open = content['Time Series (Daily)'][date]['1. open'];
-					var high = content['Time Series (Daily)'][date]['2. high'];
-					var low = content['Time Series (Daily)'][date]['3. low'];
-					var volume = content['Time Series (Daily)'][date]['5. volume'];
+					var prevClose = parseFloat(content['Time Series (Daily)'][prevDate]['4. close']);
+					var open = parseFloat(content['Time Series (Daily)'][date]['1. open']);
+					var high = parseFloat(content['Time Series (Daily)'][date]['2. high']);
+					var low = parseFloat(content['Time Series (Daily)'][date]['3. low']);
+					var volume = parseFloat(content['Time Series (Daily)'][date]['5. volume']);
 					
 					close = close.toFixed(2);
 					prevClose = prevClose.toFixed(2);
