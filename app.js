@@ -1072,12 +1072,12 @@ client.on('message', message =>
 						{
 							if(args[1] == x)
 							{
-								if(parseInt(arg0) < 0) return post("You must enter a positive number.");
+								if(parseFloat(arg0) < 0) return post("You must enter a positive number.");
 							
-								if(db[sender.id].burgers - parseInt(arg0) >= 0)
+								if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 								{
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
-									db[x].burgers += parseInt(arg0);							
+									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= arg0;
 									request(
 									{
@@ -1101,19 +1101,19 @@ client.on('message', message =>
 						}	
 						post("You have to mention another user.");
 					} else {
-						if(arg0 == parseInt(arg0))
+						if(arg0 == parseFloat(arg0))
 						{
 							if(!db[user.id])
 							{
 								db[user.id] = {burgers: 100};
 							}
 							
-							if(parseInt(arg0) < 0) return post("You must enter a positive number.");
+							if(parseFloat(arg0) < 0) return post("You must enter a positive number.");
 							
-							if(db[sender.id].burgers - parseInt(arg0) >= 0)
+							if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 							{
 								if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
-								db[user.id].burgers += parseInt(arg0);							
+								db[user.id].burgers += parseFloat(arg0);							
 								db[sender.id].burgers -= arg0;
 								request(
 								{
