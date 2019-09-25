@@ -1101,6 +1101,7 @@ client.on('message', message =>
 						}	
 						post("You have to mention another user.");
 					} else {
+						if(user.bot) return post(":octagonal_sign: **Semi-sentient beings are barred from Burgerbotz participation!**");
 						if(arg0 == parseFloat(arg0))
 						{
 							if(!db[user.id])
