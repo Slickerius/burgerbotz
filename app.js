@@ -871,25 +871,20 @@ client.on('message', message =>
 			case "stock":
 				console.log(args.length + " " + args);
 				var code, i, len, toThrow;
+				var invalid = "__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
 
-				if(args.length < 2) toThrow = true;
+				if(args.length < 2) return post(invalid);
 				
- 				for (i = 0, len = args[1].length; i < len; i++) 
+ 				for(i = 0, len = args[1].length; i < len; i++) 
 				{
    					code = args[1].charCodeAt(i);
    					if (!(code > 47 && code < 58) && 
      					    !(code > 64 && code < 91) && 
      					    !(code > 96 && code < 123)) 
 					{ 
-     						toThrow = true;
+     						return post(invalid);
    					}	
   				}
-				
-				if(toThrow)
-				{
-					post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
-					return;	
-				}
 				
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
 				var today = new Date();
