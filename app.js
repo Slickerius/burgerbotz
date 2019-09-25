@@ -872,9 +872,9 @@ client.on('message', message =>
 				console.log(args.length + " " + args);
 				var code, i, len, containsSymbols;
 
- 				for (i = 0, len = str.length; i < len; i++) 
+ 				for (i = 0, len = args[1].length; i < len; i++) 
 				{
-   					code = str.charCodeAt(i);
+   					code = args[1].charCodeAt(i);
    					if (!(code > 47 && code < 58) && 
      					    !(code > 64 && code < 91) && 
      					    !(code > 96 && code < 123)) 
