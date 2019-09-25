@@ -870,8 +870,10 @@ client.on('message', message =>
 				
 			case "stock":
 				console.log(args.length + " " + args);
-				var code, i, len, containsSymbols;
+				var code, i, len, toThrow;
 
+				if(args.length < 2) toThrow = true;
+				
  				for (i = 0, len = args[1].length; i < len; i++) 
 				{
    					code = args[1].charCodeAt(i);
@@ -879,11 +881,11 @@ client.on('message', message =>
      					    !(code > 64 && code < 91) && 
      					    !(code > 96 && code < 123)) 
 					{ 
-     						containsSymbols = true;
+     						toThrow = true;
    					}	
   				}
 				
-				if(args.length < 2 || containsSymbols)
+				if(toThrow)
 				{
 					post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
 					return;	
