@@ -1100,7 +1100,7 @@ client.on('message', message =>
 					{
 						x += 1;
 						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
-						post("**[" + x + "] __" + i + "__** : " + db[sender.id]['stocks'][i]);
+						var k = "**[" + x + "] __" + i + "__** : " + db[sender.id]['stocks'][i];
 						request(req, function(error, response, body) 
 						{
 							const content = JSON.parse(body);
@@ -1108,7 +1108,8 @@ client.on('message', message =>
 							var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
 							price.toFixed(2);
 							var j = (db[sender.id]['stocks'][i] * price);
-							post("Price: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
+							k += "Price: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**";
+							post(k);
 						});
 					}
 				});
