@@ -1026,7 +1026,7 @@ client.on('message', message =>
 						{
 							post("You do not have sufficient money to buy " + amount + " " + ticker + " stocks.");	
 						} else {
-							delete db[sender.id]['ticker'];
+							delete db[sender.id]['stocks']['ticker'];
 							var x = db[sender.id].burgers - (amount * price);
 							var y;
 							if(db[sender.id]['stocks'][ticker] != null)
