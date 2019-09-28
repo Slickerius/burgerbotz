@@ -1146,7 +1146,9 @@ client.on('message', message =>
 						request(req, function(error, response, body) 
 						{
 							const content = JSON.parse(body);
-							var price = parseFloat(content['Time Series (Daily)'][0]['4. close']);
+							var date = content['Meta Data']['3. Last Refreshed'];
+							console.log(date);
+							var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
 							var j = (db[sender.id]['stocks'][i] * price);
 							post("Value: " + j);
 						});
