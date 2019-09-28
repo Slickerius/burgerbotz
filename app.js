@@ -963,7 +963,7 @@ client.on('message', message =>
 				
 				break;
 				
-			case "buy":
+			case "stock buy":
 				if(args.length < 2)
 				{
 					post("Usage: /buy <stock> <amount>");
@@ -1095,24 +1095,47 @@ client.on('message', message =>
 					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
 					var x = 0;
-					post("__**" + sender.username + "'s Stock Portfolio**__");
+					var k = "__**" + sender.username + "'s Stock Portfolio**__";
 					for(var i in db[sender.id]['stocks'])
 					{
 						x += 1;
 						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
-						var k = "**[" + x + "] __" + i + "__** : " + db[sender.id]['stocks'][i];
-						request(req, function(error, response, body) 
-						{
-							const content = JSON.parse(body);
-							var date = content['Meta Data']['3. Last Refreshed'];
-							var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
-							price.toFixed(2);
-							var j = (db[sender.id]['stocks'][i] * price);
-							k += "Price: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**";
-							post(k);
-						});
+						k += "**[" + x + "] __" + i + "__**\nAmount : **" + db[sender.id]['stocks'][i] + ":scroll:**";
 					}
+					k += "*For more information regarding a specific stock in your portfolio, kindly type /check <stock>.*";
+					post(k);
 				});
+				break;
+				
+			case "check":
+				if(args.length < 2)
+				{
+					post("Usage: /check <stock>");
+					return;
+				}
+				var ticker = args[1].toUpperCase();
+				request(dbURL, function(error, response, body) 
+				{
+					db = JSON.parse(body);
+					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
+					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;'
+					if(isNaN(db[sender]['stocks'][ticker]))
+					{
+						post("**You do not own any " + ticker + "stock!**");
+						return;
+					}
+					var amount = db[sender]['stocks'][ticker];
+					var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
+					request(req, function(error, response, body) 
+					{
+						const content = JSON.parse(body);
+						var date = content['Meta Data']['3. Last Refreshed'];
+						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+						price.toFixed(2);
+						var j = (db[sender.id]['stocks'][i] * price);
+						post("__**" + ticker + "**__\nAmount In Portfolio: **" + amount + "**\nPrice: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
+					});
+				}
 				break;
 				
 			case "baltop":
