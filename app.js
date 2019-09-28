@@ -1027,7 +1027,7 @@ client.on('message', message =>
 							post("You do not have sufficient money to buy " + amount + " " + ticker + " stocks.");	
 						} else {
 							var x = db[sender.id].burgers - (amount * price);
-							db[sender.id] = {burgers: `${x}`, stocks: {`${ticker}`: `${amount}`}};
+							db[sender.id] = {burgers: `${x}`, stocks: {`${args[1].toUpperCase()}`: `${amount}`}};
 							post("Successfully bought " + amount + " shares of " + ticker + " for **:hamburger: " + price + "**.");
 							request(
 							{
