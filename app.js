@@ -1095,20 +1095,21 @@ client.on('message', message =>
 					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
 					var x = 0;
+					post("__**" + sender.username + "'s Stock Portfolio**__");
 					for(var i in db[sender.id]['stocks'])
 					{
 						x += 1;
 						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
-						post(i + " : " + db[sender.id]['stocks'][i]);
-						//request(req, function(error, response, body) 
-						//{
-						//	const content = JSON.parse(body);
-						//	var date = content['Meta Data']['3. Last Refreshed'];
-						//	var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
-						//	price.toFixed(2);
-						//	var j = (db[sender.id]['stocks'][i] * price);
-						//	post("**[" + x + "] __" + i + "__** : " + db[sender.id]['stocks'][i] + "\nPrice: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
-						//});
+						post("**[" + x + "] __" + i + "__** : " + db[sender.id]['stocks'][i]);
+						request(req, function(error, response, body) 
+						{
+							const content = JSON.parse(body);
+							var date = content['Meta Data']['3. Last Refreshed'];
+							var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+							price.toFixed(2);
+							var j = (db[sender.id]['stocks'][i] * price);
+							post("Price: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
+						});
 					}
 				});
 				break;
