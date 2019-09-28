@@ -1102,7 +1102,7 @@ client.on('message', message =>
 						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
 						k += "\n**[" + x + "] __" + i + "__**\nAmount : **" + db[sender.id]['stocks'][i] + ":scroll:**";
 					}
-					k += "*For more information regarding a specific stock in your portfolio, kindly type /check <stock>.*";
+					k += "\n*For more information regarding a specific stock in your portfolio, kindly type /check <stock>.*";
 					post(k);
 				});
 				break;
