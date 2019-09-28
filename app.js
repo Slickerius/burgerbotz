@@ -986,7 +986,7 @@ client.on('message', message =>
 					
 					if(content['Meta Data'] == null || content['Time Series (Daily)'] == null)
 					{
-						post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
+						post(":octagonal_sign: **Ticker not found: '" + ticker + "'**");
 						return;
 					}
 					
@@ -1002,7 +1002,7 @@ client.on('message', message =>
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
 						if(db[sender.id].burgers < (amount * price))
 						{
-							post("You do not have sufficient money to buy " + amount + " " + ticker + " stocks.");	
+							post(":octagonal_sign: **You do not have sufficient money to buy " + amount + " " + ticker + " stock(s).**");	
 							return;
 						} else {
 							var x = db[sender.id].burgers - (amount * price);
@@ -1066,7 +1066,7 @@ client.on('message', message =>
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
 						if(db[sender.id]['stocks'][ticker] < amount || db[sender.id]['stocks'][ticker] == null)
 						{
-							post("You do not own " + amount + " " + ticker + " stocks.");
+							post(":octagonal_sign: You do not own any " + amount + " " + ticker + " stock.");
 							return;
 						} else {
 							var x = db[sender.id].burgers + (amount * price);
