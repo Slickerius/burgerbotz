@@ -1022,7 +1022,7 @@ client.on('message', message =>
 							post("You do not have sufficient money to buy " + amount + " " + ticker + " stocks.");	
 						} else {
 							db[sender.id] = {burgers: db[sender.id].burgers, stocks: {ticker: amount}};
-							post("Successfully bought " + amount + " shares of " + ticker ".");
+							post("Successfully bought " + amount + " shares of " + ticker + ".");
 							request(
 							{
   								method: "PUT",
