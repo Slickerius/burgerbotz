@@ -1149,7 +1149,7 @@ client.on('message', message =>
 							var price = parseFloat(content['Time Series (Daily)'][0]['4. close']);
 							var j = (db[sender.id]['stocks'][i] * price);
 							post("Value: " + j);
-						}
+						});
 					}
 				});
 				break;
