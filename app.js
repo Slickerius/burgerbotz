@@ -877,7 +877,7 @@ client.on('message', message =>
 				var code, i, len, toThrow;
 				var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
 
-				if(args.length < 3) return post(invalid);
+				if(args.length < 2) return post(invalid);
 				
  				for(i = 0, len = args[2].length; i < len; i++) 
 				{
@@ -951,7 +951,7 @@ client.on('message', message =>
 					change = change.toFixed(2);
 					change = Math.abs(change);
 					
-					var uri = "https://finviz.com/chart.ashx?t=" + args[1];
+					var uri = "https://finviz.com/chart.ashx?t=" + args[3];
 					var botembed = new Discord.RichEmbed()
 					.setImage(uri)
 					.setColor("#fcc66a");
@@ -959,9 +959,9 @@ client.on('message', message =>
 					
 					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
 					{
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bull:624633081302876160>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
+						post("__**" + args[3].toUpperCase() + "**__: **" + close + "** <:_bull:624633081302876160>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					} else {
-						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
+						post("__**" + args[3].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					}
 				});
 				}
@@ -1135,7 +1135,7 @@ client.on('message', message =>
 					db = JSON.parse(body);
 					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-					if(isNaN(db[sender.id]['stocks'][ticker]))
+					if(db[sender.id]['stocks'][ticker] == null)
 					{
 						post(":octagonal_sign:  **You do not own any " + ticker + " stock!**");
 						return;
