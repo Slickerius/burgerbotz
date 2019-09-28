@@ -1121,7 +1121,7 @@ client.on('message', message =>
 					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
 					if(isNaN(db[sender.id]['stocks'][ticker]))
 					{
-						post("**You do not own any " + ticker + "stock!**");
+						post(":octagonal_sign:  **You do not own any " + ticker + " stock!**");
 						return;
 					}
 					var amount = db[sender.id]['stocks'][ticker];
@@ -1133,7 +1133,7 @@ client.on('message', message =>
 						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
 						price.toFixed(2);
 						var j = (db[sender.id]['stocks'][ticker] * price);
-						post(":bar_chart: __**" + ticker + "**__\n:file_folder: Amount In Portfolio: **" + amount + "**\n:dollar: Price: :hamburger: **" + price + "**\n:moneybag: Value: :hamburger: **" + j + "**");
+						post(":bar_chart: __**" + ticker + "**__\n:file_folder: Amount In Portfolio: **" + amount + "**\n- Price: :hamburger: **" + price + "**\n- Value Total: :hamburger: **" + j + "**");
 					});
 				});
 				break;
