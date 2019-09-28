@@ -1119,7 +1119,7 @@ client.on('message', message =>
 					db = JSON.parse(body);
 					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-					if(isNaN(db[sender]['stocks'][ticker]))
+					if(isNaN(db[sender.id]['stocks'][ticker]))
 					{
 						post("**You do not own any " + ticker + "stock!**");
 						return;
