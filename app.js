@@ -1141,7 +1141,15 @@ client.on('message', message =>
 					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
 					for(var i in db[sender.id]['stocks'])
 					{
+						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
 						post(i + " : " + db[sender.id]['stocks'][i]);
+						request(req, function(error, response, body) 
+						{
+							const content = JSON.parse(body);
+							var price = parseFloat(content['Time Series (Daily)'][0]['4. close']);
+							var j = (db[sender.id]['stocks'][i] * price);
+							post("Value: " + j);
+						}
 					}
 				});
 				break;
