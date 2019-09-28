@@ -1135,7 +1135,7 @@ client.on('message', message =>
 						var j = (db[sender.id]['stocks'][i] * price);
 						post("__**" + ticker + "**__\nAmount In Portfolio: **" + amount + "**\nPrice: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
 					});
-				}
+				});
 				break;
 				
 			case "baltop":
