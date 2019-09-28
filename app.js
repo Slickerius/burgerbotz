@@ -868,9 +868,9 @@ client.on('message', message =>
 				});
 				break;
 				
-			case "stock lookup":
-			case "stock check":
-			case "stock info":
+			case "stock":
+				if(args[1] == "lookup" || args[1] == "check" || args[1] == "info")
+				{
 				console.log(args.length + " " + args);
 				var code, i, len, toThrow;
 				var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
@@ -962,10 +962,10 @@ client.on('message', message =>
 						post("__**" + args[1].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 					}
 				});
+				}
 				
-				break;
-				
-			case "stock buy":
+				if(args[1] == "buy")
+				{
 				if(args.length < 3 || parseInt(args[3]) != args[3])
 				{
 					post("__**Usage:**__ /stock buy <stock> <amount>");
@@ -1027,9 +1027,11 @@ client.on('message', message =>
 						}
 					});
 				});
-				break;
+				return;
+				}
 				
-			case "stock sell":
+				if(args[1] == "sell")
+				{
 				if(args.length < 3 || parseInt(args[3]) != args[3])
 				{
 					post("__**Usage:**__ /stock sell <stock> <amount>");
@@ -1091,10 +1093,10 @@ client.on('message', message =>
 						}
 					});
 				});
-				break;
+				return;
+				}
 				
-			case "stock pf":
-			case "stock portfolio":
+				if(args[1] == "portfolio" || args[1] == "pf")
 				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
@@ -1115,9 +1117,11 @@ client.on('message', message =>
 					k += "\n*For more information regarding a specific stock in your portfolio, kindly type /stock details <stock>.*";
 					post(k);
 				});
+				return;
 				break;
 				
-			case "stock details":
+				if(args[1] == "details")
+				{
 				if(args.length < 3)
 				{
 					post("__**Usage:**__ /stock details <stock>");
@@ -1146,9 +1150,9 @@ client.on('message', message =>
 						post(":bar_chart: __**" + ticker + "**__\n:file_folder: Amount In Portfolio: **" + amount + "**\n- Price: :hamburger: **" + price + "**\n- Value Total: :hamburger: **" + j + "**");
 					});
 				});
-				break;
+				return;
+				}
 				
-			case "stock":
 				let botembed = new Discord.RichEmbed()
        				.setAuthor(":chart_with_downwards_trend: __**Burgerbotz Stock Market Simulator Game**__ :chart_with_upwards_trend:")
         			.setDescription("***Commands:***\n**/stock buy** - Buys a stock.\n**/stock details** - Displays your position on a stock.\n**/stock info/lookup/check** - Looks up information regarding a specific stock.\n**/stock portfolio/pf** - Displays your stock portfolio.\n**/stock sell** - Sells a stock.")
