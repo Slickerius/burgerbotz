@@ -869,6 +869,7 @@ client.on('message', message =>
 				break;
 				
 			case "stock":
+				console.log(args.length);
 				if(args[1] == "lookup" || args[1] == "check" || args[1] == "info")
 				{
 				console.log(args.length + " " + args);
