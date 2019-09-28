@@ -1027,8 +1027,15 @@ client.on('message', message =>
 							post("You do not have sufficient money to buy " + amount + " " + ticker + " stocks.");	
 						} else {
 							var x = db[sender.id].burgers - (amount * price);
+							var y;
+							if(db[sender.id]['stocks'][ticker] != null)
+							{
+								y = db[sender.id]['stocks'][ticker] + amount;
+							} else {
+								y = amount;
+							}
 							db[sender.id]['burgers'] = x;
-							db[sender.id]['stocks'][ticker] = amount;
+							db[sender.id]['stocks'][ticker] = y;
 							post("Successfully bought " + amount + " shares of " + ticker + " for **:hamburger: " + (amount * price) + "**.");
 							request(
 							{
