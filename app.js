@@ -870,6 +870,7 @@ client.on('message', message =>
 				
 			case "stock":
 				console.log(args.length);
+				console.log(args[0], args[1], args[2], args[3]);
 				if(args[1] == "lookup" || args[1] == "check" || args[1] == "info")
 				{
 				console.log(args.length + " " + args);
@@ -889,7 +890,7 @@ client.on('message', message =>
    					}	
   				}
 				
-				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[2] + "&apikey=" + stockApiKey;
+				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[3] + "&apikey=" + stockApiKey;
 				var today = new Date();
 				
 				var date;
