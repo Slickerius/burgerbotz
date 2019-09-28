@@ -962,6 +962,77 @@ client.on('message', message =>
 				});
 				
 				break;
+			case "buy":
+				var ticker = args[1].toUpperCase();
+				var amount = parseInt(args[2]);
+				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
+				
+				var today = new Date();
+				
+				var date;
+				var prevDate;
+				
+				request(req, function(error, response, body) 
+				{
+					console.log('error:', error);
+					console.log('statusCode:', response && response.statusCode);
+				
+					const content = JSON.parse(body);
+					
+					if(content['Meta Data'] == null || content['Time Series (Daily)'] == null)
+					{
+						post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
+						return;
+					}
+					
+					date = content['Meta Data']['3. Last Refreshed'];
+					var d0 = date.split(" ");
+					date = d0[0];
+					
+					prevDate = new Date(date);
+					console.log("prevDate1 = " + prevDate);
+					prevDate.setDate(prevDate.getDate() - 1);
+					console.log("prevDate2 = " + prevDate);
+					if(prevDate.getMonth() < 9)
+					{
+						if(prevDate.getDate() < 10)
+						{
+							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
+						} else {
+							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+						}
+					} else if(prevDate.getMonth() >= 9) {
+						if(prevDate.getDate() < 10)
+						{
+							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
+						} else {
+							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+						}
+					}
+					
+					var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+					
+					request(dbURL, function(error, response, body) 
+					{
+						db = JSON.parse(body);
+						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
+						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+						if(db[sender.id].burgers < (amount * price))
+						{
+							post("You do not have sufficient money to buy " + amount + " " + ticker + " stocks.");	
+						} else {
+							db[sender.id] = {burgers: db[sender.id].burgers, stocks: ticker: amount};
+							post("Successfully bought " + amount + " shares of " + ticker ".");
+							request(
+							{
+  								method: "PUT",
+  								uri: dbURL,
+  								json: db
+ 							});	
+						}
+					});
+				});
+				break;
 				
 			case "baltop":
 			case "balancetop":
@@ -1008,7 +1079,7 @@ client.on('message', message =>
 					post(y);
 				});	
 				break;
-			
+				
 			case "balance":
 			case "bal":
 			case "burgers":
