@@ -963,7 +963,11 @@ client.on('message', message =>
 				
 				break;
 			case "buy":
-				if(args.length < 2) post("Usage: /buy <stock> <amount>");
+				if(args.length < 2)
+				{
+					post("Usage: /buy <stock> <amount>");
+					return;
+				}
 				var ticker = args[1].toUpperCase();
 				var amount = parseInt(args[2]);
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
