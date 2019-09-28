@@ -1132,8 +1132,8 @@ client.on('message', message =>
 						var date = content['Meta Data']['3. Last Refreshed'];
 						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
 						price.toFixed(2);
-						var j = (db[sender.id]['stocks'][i] * price);
-						post("__**" + ticker + "**__\nAmount In Portfolio: **" + amount + "**\nPrice: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
+						var j = (db[sender.id]['stocks'][ticker] * price);
+						post(":bar_chart: __**" + ticker + "**__\n:file_folder: Amount In Portfolio: **" + amount + "**\n:dollar: Price: :hamburger: **" + price + "**\n:moneybag: Value: :hamburger: **" + j + "**");
 					});
 				});
 				break;
