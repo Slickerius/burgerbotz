@@ -1120,6 +1120,7 @@ client.on('message', message =>
 							
 							db[sender.id]['burgers'] = x;
 							db[sender.id]['stocks'][ticker] = y;
+							if(db[sender.id]['stocks'][ticker] == 0) delete db[sender.id]['stocks'][ticker];
 							post("Successfully sold " + amount + " shares of " + ticker + " for **:hamburger: " + (amount * price) + "**.");
 							request(
 							{
@@ -1129,6 +1130,19 @@ client.on('message', message =>
  							});	
 						}
 					});
+				});
+				break;
+				
+			case "portfolio":
+				request(dbURL, function(error, response, body) 
+				{
+					db = JSON.parse(body);
+					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
+					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+					for(var i in db[sender.id]['stocks'])
+					{
+						post(i + " : " + db[sender.id]['stocks'][i]);
+					}
 				});
 				break;
 				
