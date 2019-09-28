@@ -963,10 +963,10 @@ client.on('message', message =>
 				
 				break;
 				
-			case "stock buy":
-				if(args.length < 2)
+			case "buy":
+				if(args.length < 2 || parseInt(args[2]) != args[2])
 				{
-					post("Usage: /buy <stock> <amount>");
+					post("__**Usage:**__ /buy <stock> <amount>");
 					return;
 				}
 				var ticker = args[1].toUpperCase();
@@ -1028,9 +1028,9 @@ client.on('message', message =>
 				break;
 				
 			case "sell":
-				if(args.length < 2)
+				if(args.length < 2 || parseInt(args[2]) != args[2])
 				{
-					post("Usage: /sell <stock> <amount>");
+					post("__**Usage:**__ /sell <stock> <amount>");
 					return;
 				}
 				var ticker = args[1].toUpperCase();
