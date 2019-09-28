@@ -976,7 +976,6 @@ client.on('message', message =>
 				var today = new Date();
 				
 				var date;
-				var prevDate;
 				
 				request(req, function(error, response, body) 
 				{
@@ -992,31 +991,9 @@ client.on('message', message =>
 					}
 					
 					date = content['Meta Data']['3. Last Refreshed'];
-					var d0 = date.split(" ");
-					date = d0[0];
-					
-					prevDate = new Date(date);
-					console.log("prevDate1 = " + prevDate);
-					prevDate.setDate(prevDate.getDate() - 1);
-					console.log("prevDate2 = " + prevDate);
-					if(prevDate.getMonth() < 9)
-					{
-						if(prevDate.getDate() < 10)
-						{
-							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
-						} else {
-							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
-						}
-					} else if(prevDate.getMonth() >= 9) {
-						if(prevDate.getDate() < 10)
-						{
-							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
-						} else {
-							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
-						}
-					}
 					
 					var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+					price.toFixed(2);
 					
 					request(dbURL, function(error, response, body) 
 					{
@@ -1063,7 +1040,6 @@ client.on('message', message =>
 				var today = new Date();
 				
 				var date;
-				var prevDate;
 				
 				request(req, function(error, response, body) 
 				{
@@ -1079,31 +1055,9 @@ client.on('message', message =>
 					}
 					
 					date = content['Meta Data']['3. Last Refreshed'];
-					var d0 = date.split(" ");
-					date = d0[0];
-					
-					prevDate = new Date(date);
-					console.log("prevDate1 = " + prevDate);
-					prevDate.setDate(prevDate.getDate() - 1);
-					console.log("prevDate2 = " + prevDate);
-					if(prevDate.getMonth() < 9)
-					{
-						if(prevDate.getDate() < 10)
-						{
-							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
-						} else {
-							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
-						}
-					} else if(prevDate.getMonth() >= 9) {
-						if(prevDate.getDate() < 10)
-						{
-							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
-						} else {
-							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
-						}
-					}
 					
 					var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+					price.toFixed(2);
 					
 					request(dbURL, function(error, response, body) 
 					{
@@ -1139,18 +1093,20 @@ client.on('message', message =>
 					db = JSON.parse(body);
 					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+					var x = 0;
 					for(var i in db[sender.id]['stocks'])
 					{
+						x += 1;
 						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
-						post(i + " : " + db[sender.id]['stocks'][i]);
+						post();
 						request(req, function(error, response, body) 
 						{
 							const content = JSON.parse(body);
 							var date = content['Meta Data']['3. Last Refreshed'];
-							console.log(date);
 							var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+							price.toFixed(2);
 							var j = (db[sender.id]['stocks'][i] * price);
-							post("Value: " + j);
+							post("**[" + x + "] __" + i + "__** : " + db[sender.id]['stocks'][i] + "\nPrice: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
 						});
 					}
 				});
