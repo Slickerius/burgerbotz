@@ -1027,8 +1027,9 @@ client.on('message', message =>
 							post("You do not have sufficient money to buy " + amount + " " + ticker + " stocks.");	
 						} else {
 							var x = db[sender.id].burgers - (amount * price);
-							db[sender.id] = {burgers: `${x}`, stocks: {ticker: `${amount}`}};
-							post("Successfully bought " + amount + " shares of " + ticker + " for **:hamburger: " + price + "**.");
+							db[sender.id]['burgers'] = x;
+							db[sender.id]['stocks'][ticker] = amount;
+							post("Successfully bought " + amount + " shares of " + ticker + " for **:hamburger: " + (amount * price) + "**.");
 							request(
 							{
   								method: "PUT",
