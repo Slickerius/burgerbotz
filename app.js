@@ -868,16 +868,18 @@ client.on('message', message =>
 				});
 				break;
 				
-			case "stock":
+			case "stock lookup":
+			case "stock check":
+			case "stock info":
 				console.log(args.length + " " + args);
 				var code, i, len, toThrow;
-				var invalid = "__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
+				var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
 
-				if(args.length < 2) return post(invalid);
+				if(args.length < 3) return post(invalid);
 				
- 				for(i = 0, len = args[1].length; i < len; i++) 
+ 				for(i = 0, len = args[2].length; i < len; i++) 
 				{
-   					code = args[1].charCodeAt(i);
+   					code = args[2].charCodeAt(i);
    					if (!(code > 47 && code < 58) && 
      					    !(code > 64 && code < 91) && 
      					    !(code > 96 && code < 123)) 
@@ -886,7 +888,7 @@ client.on('message', message =>
    					}	
   				}
 				
-				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[1] + "&apikey=" + stockApiKey;
+				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[2] + "&apikey=" + stockApiKey;
 				var today = new Date();
 				
 				var date;
@@ -963,14 +965,14 @@ client.on('message', message =>
 				
 				break;
 				
-			case "buy":
-				if(args.length < 2 || parseInt(args[2]) != args[2])
+			case "stock buy":
+				if(args.length < 3 || parseInt(args[3]) != args[3])
 				{
-					post("__**Usage:**__ /buy <stock> <amount>");
+					post("__**Usage:**__ /stock buy <stock> <amount>");
 					return;
 				}
-				var ticker = args[1].toUpperCase();
-				var amount = parseInt(args[2]);
+				var ticker = args[2].toUpperCase();
+				var amount = parseInt(args[3]);
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
 				
 				var today = new Date();
@@ -1015,7 +1017,7 @@ client.on('message', message =>
 							}
 							db[sender.id]['burgers'] = x;
 							db[sender.id]['stocks'][ticker] = y;
-							post("Successfully bought " + amount + " shares of " + ticker + " for **:hamburger: " + (amount * price) + "**.");
+							post("Successfully bought " + amount + " shares of **" + ticker + "** for **:hamburger: " + (amount * price) + "**.");
 							request(
 							{
   								method: "PUT",
@@ -1027,14 +1029,14 @@ client.on('message', message =>
 				});
 				break;
 				
-			case "sell":
-				if(args.length < 2 || parseInt(args[2]) != args[2])
+			case "stock sell":
+				if(args.length < 3 || parseInt(args[3]) != args[3])
 				{
-					post("__**Usage:**__ /sell <stock> <amount>");
+					post("__**Usage:**__ /stock sell <stock> <amount>");
 					return;
 				}
-				var ticker = args[1].toUpperCase();
-				var amount = parseInt(args[2]);
+				var ticker = args[2].toUpperCase();
+				var amount = parseInt(args[3]);
 				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
 				
 				var today = new Date();
@@ -1078,25 +1080,30 @@ client.on('message', message =>
 							db[sender.id]['burgers'] = x;
 							db[sender.id]['stocks'][ticker] = y;
 							if(db[sender.id]['stocks'][ticker] == 0) delete db[sender.id]['stocks'][ticker];
-							post("Successfully sold " + amount + " shares of " + ticker + " for **:hamburger: " + (amount * price) + "**.");
+							
 							request(
 							{
   								method: "PUT",
   								uri: dbURL,
   								json: db
  							});	
+							post("Successfully sold " + amount + " shares of **" + ticker + "** for **:hamburger: " + (amount * price) + "**.");
 						}
 					});
 				});
 				break;
 				
-			case "pf":
-			case "portfolio":
+			case "stock pf":
+			case "stock portfolio":
 				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+					if(isNaN(db[sender.id]['stock'])) 
+					{
+						post(":octagonal_sign: **Your stock portfolio is empty!**");
+					}
 					var x = 0;
 					var k = "__**" + sender.username + "'s Stock Portfolio**__";
 					for(var i in db[sender.id]['stocks'])
@@ -1105,18 +1112,18 @@ client.on('message', message =>
 						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
 						k += "\n**[" + x + "] __" + i + "__**\nAmount : **" + db[sender.id]['stocks'][i] + ":scroll:**";
 					}
-					k += "\n*For more information regarding a specific stock in your portfolio, kindly type /check <stock>.*";
+					k += "\n*For more information regarding a specific stock in your portfolio, kindly type /stock details <stock>.*";
 					post(k);
 				});
 				break;
 				
-			case "check":
-				if(args.length < 2)
+			case "stock details":
+				if(args.length < 3)
 				{
-					post("Usage: /check <stock>");
+					post("__**Usage:**__ /stock details <stock>");
 					return;
 				}
-				var ticker = args[1].toUpperCase();
+				var ticker = args[2].toUpperCase();
 				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
@@ -1139,6 +1146,16 @@ client.on('message', message =>
 						post(":bar_chart: __**" + ticker + "**__\n:file_folder: Amount In Portfolio: **" + amount + "**\n- Price: :hamburger: **" + price + "**\n- Value Total: :hamburger: **" + j + "**");
 					});
 				});
+				break;
+				
+			case "stock":
+				let botembed = new Discord.RichEmbed()
+       				.setAuthor(":chart_with_downwards_trend: __**Burgerbotz Stock Market Simulator Game**__ :chart_with_upwards_trend:")
+        			.setDescription("***Commands:***\n**/stock buy** - Buys a stock.\n**/stock details** - Displays your position on a stock.\n**/stock info/lookup/check** - Looks up information regarding a specific stock.\n**/stock portfolio/pf** - Displays your stock portfolio.\n**/stock sell** - Sells a stock."")
+        			.setColor("#fcc66a");
+        
+        			return ch.send(botembed);
+				//var out = ":chart_with_downwards_trend: __**Burgerbotz Stock Market Simulator Game**__ :chart_with_upwards_trend:\n***Commands:***\n**/stock buy** - Buys a stock.\n**/stock details** - Displays your position on a stock.\n**/stock info/lookup/check** - Looks up information regarding a specific stock.\n**/stock portfolio/pf** - Displays your stock portfolio.\n**/stock sell** - Sells a stock.";
 				break;
 				
 			case "baltop":
