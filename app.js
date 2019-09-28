@@ -1124,7 +1124,7 @@ client.on('message', message =>
 						post("**You do not own any " + ticker + "stock!**");
 						return;
 					}
-					var amount = db[sender]['stocks'][ticker];
+					var amount = db[sender.id]['stocks'][ticker];
 					var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
 					request(req, function(error, response, body) 
 					{
