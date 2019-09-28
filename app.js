@@ -1087,6 +1087,7 @@ client.on('message', message =>
 				});
 				break;
 				
+			case "pf":
 			case "portfolio":
 				request(dbURL, function(error, response, body) 
 				{
@@ -1098,16 +1099,16 @@ client.on('message', message =>
 					{
 						x += 1;
 						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
-						post();
-						request(req, function(error, response, body) 
-						{
-							const content = JSON.parse(body);
-							var date = content['Meta Data']['3. Last Refreshed'];
-							var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
-							price.toFixed(2);
-							var j = (db[sender.id]['stocks'][i] * price);
-							post("**[" + x + "] __" + i + "__** : " + db[sender.id]['stocks'][i] + "\nPrice: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
-						});
+						post(i + " : " + db[sender.id]['stocks'][i]);
+						//request(req, function(error, response, body) 
+						//{
+						//	const content = JSON.parse(body);
+						//	var date = content['Meta Data']['3. Last Refreshed'];
+						//	var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+						//	price.toFixed(2);
+						//	var j = (db[sender.id]['stocks'][i] * price);
+						//	post("**[" + x + "] __" + i + "__** : " + db[sender.id]['stocks'][i] + "\nPrice: :hamburger: **" + price + "**\nValue: :hamburger: **" + j + "**");
+						//});
 					}
 				});
 				break;
