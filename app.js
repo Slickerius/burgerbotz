@@ -1005,11 +1005,7 @@ client.on('message', message =>
 							db = JSON.parse(body);
 							if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 							if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-							if(db[sender.id]['stocks'] == null) 
-							{
-								db[sender.id]['stocks'] = {};
-								console.log("X51");
-							}
+							if(db[sender.id]['stocks'] == null) db[sender.id]['stocks'] = {};
 							if(db[sender.id].burgers < (amount * price))
 							{
 								post(":octagonal_sign: **You do not have sufficient money to buy " + amount + " " + ticker + " stock(s).**");	
@@ -1144,7 +1140,8 @@ client.on('message', message =>
 						db = JSON.parse(body);
 						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-						if(db[sender.id]['stocks'][ticker])
+						if(db[sender.id] == null) db[sender.id]['stocks'] = {};
+						if(db[sender.id]['stocks'][ticker] == null)
 						{
 							post(":octagonal_sign:  **You do not own any " + ticker + " stock!**");
 							return;
@@ -1165,7 +1162,7 @@ client.on('message', message =>
 				}
 			
 				var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
-				var url_ = "https://www.dsij.in/Portals/0/EasyDNNnews/6632/img-data-original.jpg";
+				var url_ = "http://pngimages.net/sites/default/files/stockmarket-png-image-24631.png";
 				let botembed = new Discord.RichEmbed()
        				.setAuthor("📉 Burgerbotz Stock Market Simulator Game 📈", url)
 				.setThumbnail(url_)
