@@ -882,7 +882,7 @@ client.on('message', message =>
 
 					for(i = 0, len = args[2].length; i < len; i++) 
 					{
-						code = args[3].charCodeAt(i);
+						code = args[2].charCodeAt(i);
 						if (!(code > 47 && code < 58) && 
 						    !(code > 64 && code < 91) && 
 						    !(code > 96 && code < 123)) 
@@ -891,7 +891,7 @@ client.on('message', message =>
 						}	
 					}
 
-					var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[3] + "&apikey=" + stockApiKey;
+					var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[2] + "&apikey=" + stockApiKey;
 					var today = new Date();
 
 					var date;
