@@ -878,11 +878,11 @@ client.on('message', message =>
 					console.log(args.length + " " + args);
 					var code, i, len, toThrow;
 					var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
-					if(args.length < 2) return post(invalid);
+					if(args.length < 3) return post(invalid);
 
 					for(i = 0, len = args[2].length; i < len; i++) 
 					{
-						code = args[2].charCodeAt(i);
+						code = args[3].charCodeAt(i);
 						if (!(code > 47 && code < 58) && 
 						    !(code > 64 && code < 91) && 
 						    !(code > 96 && code < 123)) 
