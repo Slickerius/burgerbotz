@@ -1108,7 +1108,7 @@ client.on('message', message =>
 						db = JSON.parse(body);
 						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-						if(db[sender.id]['stocks'] == null) 
+						if(db[sender.id]['stocks'].length == 0) 
 						{
 							post(":octagonal_sign: **Your stock portfolio is empty!**");
 							return;
