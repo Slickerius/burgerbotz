@@ -1077,7 +1077,7 @@ client.on('message', message =>
 							db = JSON.parse(body);
 							if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 							if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-							if(isNaN(db[sender.id]['stocks'])) db[sender.id]['stocks'] = {};
+							if(db[sender.id]['stocks'] == null) db[sender.id]['stocks'] = {};
 							if(db[sender.id]['stocks'][ticker] < amount)
 							{
 								post(":octagonal_sign: **You do not own " + amount + " " + ticker + " stock(s).**");
