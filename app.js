@@ -871,234 +871,235 @@ client.on('message', message =>
 			case "stock":
 				console.log(args.length);
 				console.log(args[0], args[1], args[2], args[3]);
-				var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
-				if(args.length < 2) return post(invalid);
 				
 				if(args[1] == "lookup" || args[1] == "check" || args[1] == "info")
 				{
-				console.log(args.length + " " + args);
-				var code, i, len, toThrow;
+					console.log(args.length + " " + args);
+					var code, i, len, toThrow;
+					var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
+					if(args.length < 2) return post(invalid);
 
-				if(args.length < 2) return post(invalid);
-				
- 				for(i = 0, len = args[2].length; i < len; i++) 
-				{
-   					code = args[2].charCodeAt(i);
-   					if (!(code > 47 && code < 58) && 
-     					    !(code > 64 && code < 91) && 
-     					    !(code > 96 && code < 123)) 
-					{ 
-     						return post(invalid);
-   					}	
-  				}
-				
-				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[3] + "&apikey=" + stockApiKey;
-				var today = new Date();
-				
-				var date;
-				var prevDate;
-				
-				request(req, function(error, response, body) 
-				{
-					console.log('error:', error);
-					console.log('statusCode:', response && response.statusCode);
-				
-					const content = JSON.parse(body);
-					
-					if(content['Meta Data'] == null || content['Time Series (Daily)'] == null)
+					if(args.length < 2) return post(invalid);
+
+					for(i = 0, len = args[2].length; i < len; i++) 
 					{
-						post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
-						return;
+						code = args[2].charCodeAt(i);
+						if (!(code > 47 && code < 58) && 
+						    !(code > 64 && code < 91) && 
+						    !(code > 96 && code < 123)) 
+						{ 
+							return post(invalid);
+						}	
 					}
-					
-					date = content['Meta Data']['3. Last Refreshed'];
-					var d0 = date.split(" ");
-					date = d0[0];
-					
-					prevDate = new Date(date);
-					console.log("prevDate1 = " + prevDate);
-					prevDate.setDate(prevDate.getDate() - 1);
-					console.log("prevDate2 = " + prevDate);
-					if(prevDate.getMonth() < 9)
+
+					var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + args[3] + "&apikey=" + stockApiKey;
+					var today = new Date();
+
+					var date;
+					var prevDate;
+
+					request(req, function(error, response, body) 
 					{
-						if(prevDate.getDate() < 10)
+						console.log('error:', error);
+						console.log('statusCode:', response && response.statusCode);
+
+						const content = JSON.parse(body);
+
+						if(content['Meta Data'] == null || content['Time Series (Daily)'] == null)
 						{
-							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
-						} else {
-							prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+							post("__**Usage:**__ /stock <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.");
+							return;
 						}
-					} else if(prevDate.getMonth() >= 9) {
-						if(prevDate.getDate() < 10)
+
+						date = content['Meta Data']['3. Last Refreshed'];
+						var d0 = date.split(" ");
+						date = d0[0];
+
+						prevDate = new Date(date);
+						console.log("prevDate1 = " + prevDate);
+						prevDate.setDate(prevDate.getDate() - 1);
+						console.log("prevDate2 = " + prevDate);
+						if(prevDate.getMonth() < 9)
 						{
-							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
-						} else {
-							prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+							if(prevDate.getDate() < 10)
+							{
+								prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
+							} else {
+								prevDate = prevDate.getFullYear() + '-0' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+							}
+						} else if(prevDate.getMonth() >= 9) {
+							if(prevDate.getDate() < 10)
+							{
+								prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-0' + (prevDate.getDate());
+							} else {
+								prevDate = prevDate.getFullYear() + '-' + (prevDate.getMonth() + 1) + '-' + (prevDate.getDate());
+							}
 						}
-					}
-					var close = parseFloat(content['Time Series (Daily)'][date]['4. close']);
-					console.log(prevDate);
-					var prevClose = parseFloat(content['Time Series (Daily)'][prevDate]['4. close']);
-					var open = parseFloat(content['Time Series (Daily)'][date]['1. open']);
-					var high = parseFloat(content['Time Series (Daily)'][date]['2. high']);
-					var low = parseFloat(content['Time Series (Daily)'][date]['3. low']);
-					var volume = parseFloat(content['Time Series (Daily)'][date]['5. volume']);
-					
-					close = close.toFixed(2);
-					prevClose = prevClose.toFixed(2);
-					open = open.toFixed(2);
-					high = high.toFixed(2);
-					low = low.toFixed(2);
-					
-					var change = ((parseFloat(content['Time Series (Daily)'][prevDate]['4. close']) - parseFloat(content['Time Series (Daily)'][date]['4. close'])) / parseFloat(content['Time Series (Daily)'][prevDate]['4. close'])) * 100;
-					change = change.toFixed(2);
-					change = Math.abs(change);
-					
-					var uri = "https://finviz.com/chart.ashx?t=" + args[3];
-					var botembed = new Discord.RichEmbed()
-					.setImage(uri)
-					.setColor("#fcc66a");
-					ch.send(botembed);
-					
-					if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
-					{
-						post("__**" + args[3].toUpperCase() + "**__: **" + close + "** <:_bull:624633081302876160>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
-					} else {
-						post("__**" + args[3].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
-					}
-				});
+						var close = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+						console.log(prevDate);
+						var prevClose = parseFloat(content['Time Series (Daily)'][prevDate]['4. close']);
+						var open = parseFloat(content['Time Series (Daily)'][date]['1. open']);
+						var high = parseFloat(content['Time Series (Daily)'][date]['2. high']);
+						var low = parseFloat(content['Time Series (Daily)'][date]['3. low']);
+						var volume = parseFloat(content['Time Series (Daily)'][date]['5. volume']);
+
+						close = close.toFixed(2);
+						prevClose = prevClose.toFixed(2);
+						open = open.toFixed(2);
+						high = high.toFixed(2);
+						low = low.toFixed(2);
+
+						var change = ((parseFloat(content['Time Series (Daily)'][prevDate]['4. close']) - parseFloat(content['Time Series (Daily)'][date]['4. close'])) / parseFloat(content['Time Series (Daily)'][prevDate]['4. close'])) * 100;
+						change = change.toFixed(2);
+						change = Math.abs(change);
+
+						var uri = "https://finviz.com/chart.ashx?t=" + args[3];
+						var botembed = new Discord.RichEmbed()
+						.setImage(uri)
+						.setColor("#fcc66a");
+						ch.send(botembed);
+
+						if(parseFloat(content['Time Series (Daily)'][date]['4. close']) > parseFloat(content['Time Series (Daily)'][prevDate]['4. close']))
+						{
+							post("__**" + args[3].toUpperCase() + "**__: **" + close + "** <:_bull:624633081302876160>+" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
+						} else {
+							post("__**" + args[3].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
+						}
+					});
 				}
 				
 				if(args[1] == "buy")
 				{
-				if(args.length < 3 || parseInt(args[3]) != args[3])
-				{
-					post("__**Usage:**__ /stock buy <stock> <amount>");
-					return;
-				}
-				var ticker = args[2].toUpperCase();
-				var amount = parseInt(args[3]);
-				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
-				
-				var today = new Date();
-				
-				var date;
-				
-				request(req, function(error, response, body) 
-				{
-					console.log('error:', error);
-					console.log('statusCode:', response && response.statusCode);
-				
-					const content = JSON.parse(body);
-					
-					if(content['Meta Data'] == null || content['Time Series (Daily)'] == null)
+					if(args.length < 3 || parseInt(args[3]) != args[3])
 					{
-						post(":octagonal_sign: **Ticker not found: '" + ticker + "'**");
+						post("__**Usage:**__ /stock buy <stock> <amount>");
 						return;
 					}
-					
-					date = content['Meta Data']['3. Last Refreshed'];
-					
-					var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
-					price.toFixed(2);
-					
-					request(dbURL, function(error, response, body) 
+					var ticker = args[2].toUpperCase();
+					var amount = parseInt(args[3]);
+					var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
+
+					var today = new Date();
+
+					var date;
+
+					request(req, function(error, response, body) 
 					{
-						db = JSON.parse(body);
-						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-						if(isNaN(db[sender.id]['stocks'])) db[sender.id]['stocks'] = {};
-						if(db[sender.id].burgers < (amount * price))
+						console.log('error:', error);
+						console.log('statusCode:', response && response.statusCode);
+
+						const content = JSON.parse(body);
+
+						if(content['Meta Data'] == null || content['Time Series (Daily)'] == null)
 						{
-							post(":octagonal_sign: **You do not have sufficient money to buy " + amount + " " + ticker + " stock(s).**");	
+							post(":octagonal_sign: **Ticker not found: '" + ticker + "'**");
 							return;
-						} else {
-							var x = db[sender.id].burgers - (amount * price);
-							var y;
-							if(db[sender.id]['stocks'][ticker] != null)
-							{
-								y = db[sender.id]['stocks'][ticker] + amount;
-							} else {
-								y = amount;
-							}
-							db[sender.id]['burgers'] = x;
-							db[sender.id]['stocks'][ticker] = y;
-							post("Successfully bought " + amount + " shares of **" + ticker + "** for **:hamburger: " + (amount * price) + "**.");
-							request(
-							{
-  								method: "PUT",
-  								uri: dbURL,
-  								json: db
- 							});	
 						}
+
+						date = content['Meta Data']['3. Last Refreshed'];
+
+						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+						price.toFixed(2);
+
+						request(dbURL, function(error, response, body) 
+						{
+							db = JSON.parse(body);
+							if(db[sender.id] == null) db[sender.id] = {burgers: 100};
+							if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+							if(isNaN(db[sender.id]['stocks'])) db[sender.id]['stocks'] = {};
+							if(db[sender.id].burgers < (amount * price))
+							{
+								post(":octagonal_sign: **You do not have sufficient money to buy " + amount + " " + ticker + " stock(s).**");	
+								return;
+							} else {
+								var x = db[sender.id].burgers - (amount * price);
+								var y;
+								if(db[sender.id]['stocks'][ticker] != null)
+								{
+									y = db[sender.id]['stocks'][ticker] + amount;
+								} else {
+									y = amount;
+								}
+								db[sender.id]['burgers'] = x;
+								db[sender.id]['stocks'][ticker] = y;
+								post("Successfully bought " + amount + " shares of **" + ticker + "** for **:hamburger: " + (amount * price) + "**.");
+								request(
+								{
+									method: "PUT",
+									uri: dbURL,
+									json: db
+								});	
+							}
+						});
 					});
-				});
-				return;
+					return;
 				}
 				
 				if(args[1] == "sell")
 				{
-				if(args.length < 3 || parseInt(args[3]) != args[3])
-				{
-					post("__**Usage:**__ /stock sell <stock> <amount>");
-					return;
-				}
-				var ticker = args[2].toUpperCase();
-				var amount = parseInt(args[3]);
-				var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
-				
-				var today = new Date();
-				
-				var date;
-				
-				request(req, function(error, response, body) 
-				{
-					console.log('error:', error);
-					console.log('statusCode:', response && response.statusCode);
-				
-					const content = JSON.parse(body);
-					
-					if(content['Meta Data'] == null || content['Time Series (Daily)'] == null)
+					if(args.length < 3 || parseInt(args[3]) != args[3])
 					{
-						post(":octagonal_sign: **Ticker not found: '" + ticker + "'**");
+						post("__**Usage:**__ /stock sell <stock> <amount>");
 						return;
 					}
-					
-					date = content['Meta Data']['3. Last Refreshed'];
-					
-					var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
-					price.toFixed(2);
-					
-					request(dbURL, function(error, response, body) 
+					var ticker = args[2].toUpperCase();
+					var amount = parseInt(args[3]);
+					var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
+
+					var today = new Date();
+
+					var date;
+
+					request(req, function(error, response, body) 
 					{
-						db = JSON.parse(body);
-						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-						if(db[sender.id]['stocks'][ticker] < amount)
+						console.log('error:', error);
+						console.log('statusCode:', response && response.statusCode);
+
+						const content = JSON.parse(body);
+
+						if(content['Meta Data'] == null || content['Time Series (Daily)'] == null)
 						{
-							post(":octagonal_sign: **You do not own " + amount + " " + ticker + " stock(s).**");
+							post(":octagonal_sign: **Ticker not found: '" + ticker + "'**");
 							return;
-						} else if (db[sender.id]['stocks'][ticker] == null) {
-							post(":octagonal_sign: **You do not own any " + ticker + " stock.**");
-							return;	
-						} else {
-							var x = db[sender.id].burgers + (amount * price);
-							var y = db[sender.id]['stocks'][ticker] - amount;
-							
-							db[sender.id]['burgers'] = x;
-							db[sender.id]['stocks'][ticker] = y;
-							if(db[sender.id]['stocks'][ticker] == 0) delete db[sender.id]['stocks'][ticker];
-							
-							request(
-							{
-  								method: "PUT",
-  								uri: dbURL,
-  								json: db
- 							});	
-							post("Successfully sold " + amount + " shares of **" + ticker + "** for **:hamburger: " + (amount * price) + "**.");
 						}
+
+						date = content['Meta Data']['3. Last Refreshed'];
+
+						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+						price.toFixed(2);
+
+						request(dbURL, function(error, response, body) 
+						{
+							db = JSON.parse(body);
+							if(db[sender.id] == null) db[sender.id] = {burgers: 100};
+							if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+							if(isNaN(db[sender.id]['stocks'])) db[sender.id]['stocks'] = {};
+							if(db[sender.id]['stocks'][ticker] < amount)
+							{
+								post(":octagonal_sign: **You do not own " + amount + " " + ticker + " stock(s).**");
+								return;
+							} else if (db[sender.id]['stocks'][ticker] == null) {
+								post(":octagonal_sign: **You do not own any " + ticker + " stock.**");
+								return;	
+							} else {
+								var x = db[sender.id].burgers + (amount * price);
+								var y = db[sender.id]['stocks'][ticker] - amount;
+
+								db[sender.id]['burgers'] = x;
+								db[sender.id]['stocks'][ticker] = y;
+								if(db[sender.id]['stocks'][ticker] == 0) delete db[sender.id]['stocks'][ticker];
+
+								request(
+								{
+									method: "PUT",
+									uri: dbURL,
+									json: db
+								});	
+								post("Successfully sold " + amount + " shares of **" + ticker + "** for **:hamburger: " + (amount * price) + "**.");
+							}
+						});
 					});
-				});
-				return;
+					return;
 				}
 				
 				if(args[1] == "portfolio" || args[1] == "pf")
@@ -1124,40 +1125,39 @@ client.on('message', message =>
 					post(k);
 				});
 				return;
-				break;
 				
 				if(args[1] == "details")
 				{
-				if(args.length < 3)
-				{
-					post("__**Usage:**__ /stock details <stock>");
-					return;
-				}
-				console.log("A");
-				var ticker = args[2].toUpperCase();
-				request(dbURL, function(error, response, body) 
-				{
-					db = JSON.parse(body);
-					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-					if(db[sender.id]['stocks'][ticker])
+					if(args.length < 3)
 					{
-						post(":octagonal_sign:  **You do not own any " + ticker + " stock!**");
+						post("__**Usage:**__ /stock details <stock>");
 						return;
 					}
-					var amount = db[sender.id]['stocks'][ticker];
-					var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
-					request(req, function(error, response, body) 
+					console.log("A");
+					var ticker = args[2].toUpperCase();
+					request(dbURL, function(error, response, body) 
 					{
-						const content = JSON.parse(body);
-						var date = content['Meta Data']['3. Last Refreshed'];
-						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
-						price.toFixed(2);
-						var j = (db[sender.id]['stocks'][ticker] * price);
-						post(":bar_chart: __**" + ticker + "**__\n:file_folder: Amount In Portfolio: **" + amount + "**\n- Price: :hamburger: **" + price + "**\n- Value Total: :hamburger: **" + j + "**");
+						db = JSON.parse(body);
+						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
+						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+						if(db[sender.id]['stocks'][ticker])
+						{
+							post(":octagonal_sign:  **You do not own any " + ticker + " stock!**");
+							return;
+						}
+						var amount = db[sender.id]['stocks'][ticker];
+						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + ticker + "&apikey=" + stockApiKey;
+						request(req, function(error, response, body) 
+						{
+							const content = JSON.parse(body);
+							var date = content['Meta Data']['3. Last Refreshed'];
+							var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
+							price.toFixed(2);
+							var j = (db[sender.id]['stocks'][ticker] * price);
+							post(":bar_chart: __**" + ticker + "**__\n:file_folder: Amount In Portfolio: **" + amount + "**\n- Price: :hamburger: **" + price + "**\n- Value Total: :hamburger: **" + j + "**");
+						});
 					});
-				});
-				return;
+					return;
 				}
 				
 				let botembed = new Discord.RichEmbed()
