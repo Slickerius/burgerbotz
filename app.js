@@ -874,11 +874,10 @@ client.on('message', message =>
 				
 				if(args[1] == "lookup" || args[1] == "check" || args[1] == "info")
 				{
+					console.log("ABXV");
 					console.log(args.length + " " + args);
 					var code, i, len, toThrow;
 					var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
-					if(args.length < 2) return post(invalid);
-
 					if(args.length < 2) return post(invalid);
 
 					for(i = 0, len = args[2].length; i < len; i++) 
