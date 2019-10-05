@@ -1106,28 +1106,30 @@ client.on('message', message =>
 				}
 				
 				if(args[1] == "portfolio" || args[1] == "pf")
-				request(dbURL, function(error, response, body) 
 				{
-					db = JSON.parse(body);
-					if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-					if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
-					if(db[sender.id]['stocks'] == null) 
+					request(dbURL, function(error, response, body) 
 					{
-						post(":octagonal_sign: **Your stock portfolio is empty!**");
-						return;
-					}
-					var x = 0;
-					var k = "__**" + sender.username + "'s Stock Portfolio**__";
-					for(var i in db[sender.id]['stocks'])
-					{
-						x += 1;
-						var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
-						k += "\n**[" + x + "] __" + i + "__**\nAmount : **" + db[sender.id]['stocks'][i] + ":scroll:**";
-					}
-					k += "\n*For more information regarding a specific stock in your portfolio, kindly type /stock details <stock>.*";
-					post(k);
-				});
-				return;
+						db = JSON.parse(body);
+						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
+						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+						if(db[sender.id]['stocks'] == null) 
+						{
+							post(":octagonal_sign: **Your stock portfolio is empty!**");
+							return;
+						}
+						var x = 0;
+						var k = "__**" + sender.username + "'s Stock Portfolio**__";
+						for(var i in db[sender.id]['stocks'])
+						{
+							x += 1;
+							var req = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + i + "&apikey=" + stockApiKey;
+							k += "\n**[" + x + "] __" + i + "__**\nAmount : **" + db[sender.id]['stocks'][i] + ":scroll:**";
+						}
+						k += "\n*For more information regarding a specific stock in your portfolio, kindly type /stock details <stock>.*";
+						post(k);
+					});
+					return;
+				}
 				
 				if(args[1] == "details")
 				{
