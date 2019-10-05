@@ -874,7 +874,6 @@ client.on('message', message =>
 				
 				if(args[1] == "lookup" || args[1] == "check" || args[1] == "info")
 				{
-					console.log("ABXV");
 					console.log(args.length + " " + args);
 					var code, i, len, toThrow;
 					var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
@@ -965,6 +964,7 @@ client.on('message', message =>
 							post("__**" + args[2].toUpperCase() + "**__: **" + close + "** <:_bear:624633128228749312>-" + change + "%\nOpen: **" + open + "**\nDay High: **" + high + "**\nDay Low: **" + low + "**\nPrevious Close: **" + prevClose + "**\nVolume: **" + volume + "**");
 						}
 					});
+					return;
 				}
 				
 				if(args[1] == "buy")
@@ -1135,8 +1135,7 @@ client.on('message', message =>
 				{
 					if(args.length < 3)
 					{
-						post("__**Usage:**__ /stock details <stock>");
-						return;
+						return post("__**Usage:**__ /stock details <stock>");
 					}
 					console.log("A");
 					var ticker = args[2].toUpperCase();
@@ -1164,9 +1163,12 @@ client.on('message', message =>
 					});
 					return;
 				}
-				
+			
+				var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
+				var url_ = "https://www.dsij.in/Portals/0/EasyDNNnews/6632/img-data-original.jpg";
 				let botembed = new Discord.RichEmbed()
-       				.setAuthor(":chart_with_downwards_trend: __**Burgerbotz Stock Market Simulator Game**__ :chart_with_upwards_trend:")
+       				.setAuthor("📉 Burgerbotz Stock Market Simulator Game 📈", url)
+				.setThumbnail(url_)
         			.setDescription("***Commands:***\n**/stock buy** - Buys a stock.\n**/stock details** - Displays your position on a stock.\n**/stock info/lookup/check** - Looks up information regarding a specific stock.\n**/stock portfolio/pf** - Displays your stock portfolio.\n**/stock sell** - Sells a stock.")
         			.setColor("#fcc66a");
         
