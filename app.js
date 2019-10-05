@@ -871,11 +871,13 @@ client.on('message', message =>
 			case "stock":
 				console.log(args.length);
 				console.log(args[0], args[1], args[2], args[3]);
+				var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
+				if(args.length < 2) return post(invalid);
+				
 				if(args[1] == "lookup" || args[1] == "check" || args[1] == "info")
 				{
 				console.log(args.length + " " + args);
 				var code, i, len, toThrow;
-				var invalid = "__**Usage:**__ /stock info <ticker>\n*A ticker is an abbreviation used to uniquely identify publicly traded shares of a particular stock on a particular stock market.*\nExamples: **MSFT** - Microsoft Corporation, **JPM** - JP Morgan Chase & Co.";
 
 				if(args.length < 2) return post(invalid);
 				
@@ -1004,6 +1006,7 @@ client.on('message', message =>
 						db = JSON.parse(body);
 						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+						if(isNaN(db[sender.id]['stocks'])) db[sender.id]['stocks'] = {};
 						if(db[sender.id].burgers < (amount * price))
 						{
 							post(":octagonal_sign: **You do not have sufficient money to buy " + amount + " " + ticker + " stock(s).**");	
