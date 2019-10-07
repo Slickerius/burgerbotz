@@ -996,6 +996,7 @@ client.on('message', message =>
 						}
 
 						date = content['Meta Data']['3. Last Refreshed'];
+                                                date = date.slice(0,10);
 
 						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
 						price.toFixed(2);
