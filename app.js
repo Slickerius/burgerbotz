@@ -916,7 +916,7 @@ client.on('message', message =>
 
 						prevDate = new Date(date);
 						console.log("prevDate1 = " + prevDate);
-                                                if(date.getDay() == 1)
+                                                if(prevDate.getDay() == 1)
                                                 {
                                                          prevDate.setDate(prevDate.getDate() - 3);
                                                 } else {
