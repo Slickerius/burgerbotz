@@ -916,7 +916,12 @@ client.on('message', message =>
 
 						prevDate = new Date(date);
 						console.log("prevDate1 = " + prevDate);
-						prevDate.setDate(prevDate.getDate() - 1);
+                                                if(date.getDay() == 1)
+                                                {
+                                                         prevDate.setDate(prevDate.getDate() - 3);
+                                                } else {
+						         prevDate.setDate(prevDate.getDate() - 1);
+                                                }
 						console.log("prevDate2 = " + prevDate);
 						if(prevDate.getMonth() < 9)
 						{
