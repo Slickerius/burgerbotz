@@ -1405,7 +1405,7 @@ client.on('message', message =>
 				console.log(args);
 				for(var x in args)
 				{
-					if(args[x].length != 3) return post("Invalid codon");
+					if(args[x].length != 3) return post("_**Usage:**__ /transcribe <sense strand>\n*Example: /transcribe CAT CTT CCA ACC TGA AGA GAA AGA*");
 					
 					z = args[x].toUpperCase();
 					sense += z + " ";
@@ -1431,7 +1431,7 @@ client.on('message', message =>
 							mRNA += "C";
 							tRNA += "G";
 						} else {
-							return post("Invalid codon.");	
+							return post("_**Usage:**__ /transcribe <sense strand>\n*Example: /transcribe CAT CTT CCA ACC TGA AGA GAA AGA*");
 						}
 					}
 					antisense += " ";
@@ -1577,20 +1577,10 @@ client.on('message', message =>
 							aminoAcid += " (Gly/G) Glycine -";
 							break;
 					}
-					//if(_mRNA[k] == "UUU" || _mRNA[k] == "UUC")
-					//{
-					//	aminoAcid += "(Phe/F) Phenylalanine";
-				//	} else if(_mRNA[k] == "UUA" || _mRNA[k] == "UUG" || _mRNA[k] == "CUU" || _mRNA[k] == "CUC" || _mRNA[k] == "CUA" || _mRNA[k] == "CUG") {
-				//		aminoAcid += "(Leu/L) Leucine";
-				//	} else if(_mRNA[k] == "ATC" || _mRNA[k] == "ATT" || _mRNA[k] == "ATA") {
-				//		aminoAcid += "(Ile/I) Isoleucine";
-				//	} else if(_mRNA[k] == "UUU") {
-				//		aminoAcid += "(Met/M) Methionine";
-				//	} else if()
 				}
 				
 				aminoAcid = aminoAcid.substring(0, aminoAcid.length - 1);
-				result += sense + "\n**Antisense** : " + antisense + "\n**mRNA** : " + mRNA + "\n**tRNA** : " + tRNA + "\n**Amino Acids/Polypeptide Chain** : " + aminoAcid;
+				result += sense + "\n**Antisense** : " + antisense + "\n**mRNA** : " + mRNA + "\n**tRNA** : " + tRNA + "\n**Amino Acids/Polypeptide Chain** :" + aminoAcid;
 				post(result);
 				break;
 				
