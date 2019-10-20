@@ -1394,32 +1394,40 @@ client.on('message', message =>
 				break;
 				
 			case "translate":
+				var result = "__**DNA Transcription**__\n**Sense** : ";
+				var sense = "";
+				var antisense = "";
+				var mRNA = "";
+				var
+				
 				args.shift();
-				var result = "";
 				console.log(args);
 				for(var x in args)
 				{
-					console.log(args[x] + " " + args[x].length);
 					if(args[x].length != 3) return post("Invalid codon");
+					
 					z = args[x].toUpperCase();
+					sense += z + " ";
+					
 					var y = z.split('');
 					for(var i in y)
 					{
 						if(y[i] == "A")
 						{
-							result += "U";	
+							antisense += "U";	
 						} else if(y[i] == "G") {
-							result += "C";	
+							antisense += "C";	
 						} else if(y[i] == "T") {
-							result += "A"	
+							antisense += "A"	
 						} else if(y[i] == "C") {
-							result += "G";	
+							antisense += "G";	
 						} else {
 							return post("Invalid codon.");	
 						}
 					}
-					result += " ";
+					antisense += " ";
 				}
+				result += sense + "\n**Antisense** : " + antisense;
 				post(result);
 				break;
 				
