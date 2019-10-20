@@ -1394,7 +1394,7 @@ client.on('message', message =>
 				break;
 				
 			case "translate":
-				delete args[0];
+				args.shift();
 				var result = "";
 				console.log(args);
 				for(var x in args)
