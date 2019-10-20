@@ -1398,7 +1398,6 @@ client.on('message', message =>
 				var sense = "";
 				var antisense = "";
 				var mRNA = "";
-				var
 				
 				args.shift();
 				console.log(args);
