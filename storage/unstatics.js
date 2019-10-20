@@ -6,7 +6,7 @@ commandMap = new Map([
 		['/s', 'Spits on grave'], 
 		['/ping', 'Pong!'], 
 		['/bmi', 'Calculate body mass index!'],
-		['/stock', 'Displays information about the specified ticker symbol'],
+		['/stock', 'The Burgerbotz stock market simulator game! Also includes real time stock data'],
 		['/about', 'About Burgerbotz!'],
 		['/balance', "Displays a user's burger balance"],
 		['/pay', "Pays a certain amount of burgers to another user"],
@@ -21,6 +21,7 @@ commandMap = new Map([
 		['/invite', 'Invite me to your server!'],
 		['/bp', 'Burgerphone! Connect to a Burgerphone room and chat with others.'],
 		['/flags', 'Starts a flag guessing game'],
+		['/transcribe', 'DNA codon triplet transcription tool']
 		]);
 
 flags = [
