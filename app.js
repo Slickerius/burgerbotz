@@ -1399,7 +1399,7 @@ client.on('message', message =>
 				console.log(args);
 				for(var x in args)
 				{
-					console.log(x.length);
+					console.log(x + " " + x.length);
 					if(x.length != 3) return post("Invalid codon");
 					console.log(args);
 					x = x.toUpperCase();
