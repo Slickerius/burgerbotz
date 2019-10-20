@@ -1396,9 +1396,11 @@ client.on('message', message =>
 			case "translate":
 				delete args[0];
 				var result = "";
+				console.log(args);
 				for(var x in args)
 				{
 					if(x.length != 3) return post("Invalid codon");
+					console.log(args);
 					x = x.toUpperCase();
 					var y = x.split('');
 					for(var i in y)
@@ -1413,7 +1415,7 @@ client.on('message', message =>
 						} else if(i == "C") {
 							result += "G";	
 						} else {
-							return post("Invalid codon");	
+							return post("Invalid codon.");	
 						}
 						result += " ";
 					}
