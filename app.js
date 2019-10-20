@@ -1405,7 +1405,7 @@ client.on('message', message =>
 				console.log(args);
 				for(var x in args)
 				{
-					if(args[x].length != 3 || args.length < 2) return post("__**Usage:**__ /transcribe <sense strand>\n*Example: /transcribe CAT CTT CCA ACC TGA AGA GAA AGA*");
+					if(args[x].length != 3 || args.length == 0) return post("__**Usage:**__ /transcribe <sense strand>\n*Example: /transcribe CAT CTT CCA ACC TGA AGA GAA AGA*");
 					
 					z = args[x].toUpperCase();
 					sense += z + " ";
