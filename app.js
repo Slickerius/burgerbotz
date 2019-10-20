@@ -1399,11 +1399,10 @@ client.on('message', message =>
 				console.log(args);
 				for(var x in args)
 				{
-					console.log(x + " " + x.length);
-					if(x.length != 3) return post("Invalid codon");
-					console.log(args);
-					x = x.toUpperCase();
-					var y = x.split('');
+					console.log(args[x] + " " + x.length);
+					if(args[x].length != 3) return post("Invalid codon");
+					z = args[x].toUpperCase();
+					var y = z.split('');
 					for(var i in y)
 					{
 						if(i == "A")
