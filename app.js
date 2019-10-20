@@ -1393,11 +1393,13 @@ client.on('message', message =>
 				}
 				break;
 				
-			case "translate":
+			case "transcribe":
 				var result = "__**DNA Transcription**__\n**Sense** : ";
 				var sense = "";
 				var antisense = "";
 				var mRNA = "";
+				var tRNA = "";
+				var aminoAcid = "";
 				
 				args.shift();
 				console.log(args);
@@ -1413,20 +1415,182 @@ client.on('message', message =>
 					{
 						if(y[i] == "A")
 						{
-							antisense += "U";	
+							antisense += "T";
+							mRNA += "A";
+							tRNA += "U";
 						} else if(y[i] == "G") {
-							antisense += "C";	
+							antisense += "C";
+							mRNA += "G";
+							tRNA += "C";
 						} else if(y[i] == "T") {
-							antisense += "A"	
+							antisense += "A";
+							mRNA += "U";
+							tRNA += "A";
 						} else if(y[i] == "C") {
-							antisense += "G";	
+							antisense += "G";
+							mRNA += "C";
+							tRNA += "G";
 						} else {
 							return post("Invalid codon.");	
 						}
 					}
 					antisense += " ";
+					mRNA += " ";
+					tRNA += " ";
 				}
-				result += sense + "\n**Antisense** : " + antisense;
+				
+				var _mRNA = mRNA.split(' ');
+				for(var k in _mRNA)
+				{
+					switch(_mRNA[k])
+					{
+						case "UUU":
+						case "UUC":
+							aminoAcid += " (Phe/F) Phenylalanine -";
+							break;
+							
+						case "UUA":
+						case "UUG":
+						case "CUU":
+						case "CUC":
+						case "CUA":
+						case "CUG":
+							aminoAcid += " (Leu/L) Leucine -";
+							break;
+							
+						case "AUC":
+						case "AUU":
+						case "AUA":
+							aminoAcid += " (Ile/I) Isoleucine -";
+							break;
+						
+						case "AUG":
+							aminoAcid += " (Met/M) Methionine -";
+							break;
+						
+						case "GUU":
+						case "GUC":
+						case "GUA":
+						case "GUG":
+							aminoAcid += " (Val/V) Valine -";
+							break;
+							
+						case "UCU":
+						case "UCC":
+						case "UCA":
+						case "UCG":
+							aminoAcid += " (Ser/S) Serine -";
+							break;
+							
+						case "CCU":
+						case "CCC":
+						case "CCA":
+						case "CCG":
+							aminoAcid += " (Pro/P) Proline -";
+							break;
+						
+						case "ACU":
+						case "ACC":
+						case "ACA":
+						case "ACG":
+							aminoAcid += " (Thr/T) Threonine -";
+							break;
+						
+						case "GCU":
+						case "GCC":
+						case "GCA":
+						case "GCG":
+							aminoAcid += " (Ala/A) Alanine -";
+							break;
+							
+						case "UAU":
+						case "UAC":
+							aminoAcid += " (Tyr/Y) Tyrosine -";
+							break;
+							
+						case "UAA":
+						case "UAG":
+						case "UGA":
+							aminoAcid += " Stop -";
+							break;
+							
+						case "CAU":
+						case "CAC":
+							aminoAcid += " (His/H) Histidine -";
+							break;
+							
+						case "CAA":
+						case "CAG":
+							aminoAcid += " (Gln/Q) Glutamine -";
+							break;
+						
+						case "AAU":
+						case "AAC":
+							aminoAcid += " (Asn/N) Asparagine -";
+							break;
+							
+						case "AAA":
+						case "AAG":
+							aminoAcid += " (Lys/K) Lysine -";
+							break;
+							
+						case "GAU":
+						case "GAC":
+							aminoAcid += " (Asp/D) Aspartic acid -";
+							break;
+							
+						case "GAA":
+						case "GAG":
+							aminoAcid += " (Glu/E) Glutamic acid -";
+							break;
+							
+						case "UGU":
+						case "UGC":
+							aminoAcid += " (Cys/C) Cysteine -";
+							break;
+							
+						case "UGG":
+							aminoAcid += " (Trp/W) Tryptophan -";
+							break;
+							
+						case "CGU":
+						case "CGC":
+						case "CGA":
+						case "CGG":
+							aminoAcid += " (Arg/R) Arginine -";
+							break;
+							
+						case "AGU":
+						case "AGC":
+							aminoAcid += " (Ser/S) Serine -";
+							break;
+							
+						case "AGA":
+						case "AGG":
+							aminoAcid += " (Arg/R) Arginine -";
+							break;
+							
+						case "GGU":
+						case "GGC":
+						case "GGA":
+						case "GGG":
+							aminoAcid += " (Gly/G) Glycine -";
+							break;
+					}
+					//if(_mRNA[k] == "UUU" || _mRNA[k] == "UUC")
+					//{
+					//	aminoAcid += "(Phe/F) Phenylalanine";
+				//	} else if(_mRNA[k] == "UUA" || _mRNA[k] == "UUG" || _mRNA[k] == "CUU" || _mRNA[k] == "CUC" || _mRNA[k] == "CUA" || _mRNA[k] == "CUG") {
+				//		aminoAcid += "(Leu/L) Leucine";
+				//	} else if(_mRNA[k] == "ATC" || _mRNA[k] == "ATT" || _mRNA[k] == "ATA") {
+				//		aminoAcid += "(Ile/I) Isoleucine";
+				//	} else if(_mRNA[k] == "UUU") {
+				//		aminoAcid += "(Met/M) Methionine";
+				//	} else if()
+				}
+				
+				aminoAcid = aminoAcid.substring(0, aminoAcid.length - 1);
+				result += sense + "\n**Antisense** : " + antisense + "\n**mRNA** : " + mRNA + "\n**tRNA** : " + tRNA + "\n**Amino Acids/Polypeptide Chain** : " + aminoAcid;
 				post(result);
 				break;
 				
