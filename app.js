@@ -1417,8 +1417,8 @@ client.on('message', message =>
 						} else {
 							return post("Invalid codon.");	
 						}
-						result += " ";
 					}
+					result += " ";
 				}
 				post(result);
 				break;
