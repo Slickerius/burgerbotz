@@ -1393,6 +1393,34 @@ client.on('message', message =>
 				}
 				break;
 				
+			case "translate":
+				delete args[0];
+				var result = "";
+				for(var x in args)
+				{
+					if(x.length != 3) return post("Invalid codon");
+					x = x.toUpperCase();
+					var y = x.split('');
+					for(var i in y)
+					{
+						if(i == "A")
+						{
+							result += "U";	
+						} else if(i == "G") {
+							result += "C";	
+						} else if(i == "T") {
+							result += "A"	
+						} else if(i == "C") {
+							result += "G";	
+						} else {
+							return post("Invalid codon");	
+						}
+						result += " ";
+					}
+				}
+				post(result);
+				break;
+				
 			case "flags":
 				if(inFGame)
 				{
