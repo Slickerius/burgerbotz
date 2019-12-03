@@ -727,6 +727,13 @@ client.on('message', message =>
 				break;
 			
 			case "permute":
+				if(args.length < 1 || args[1] != parseInt(args[1]) || args[2] != parseInt(args[2])) return post("Usage: /permute <n> <k>");
+				var n = parseInt(args[1]);
+				var k = parseInt(args[2]);
+				if(n < k) return post("The value of n cannot be smaller than k.");
+				var nK = n - k;
+				var result = factorial(n) / factorial(nK);
+				post("P(" + n + ", " + k + ") = " + result);
 				break;
 				
 			case "combine":
@@ -735,7 +742,7 @@ client.on('message', message =>
 				var k = parseInt(args[2]);
 				if(n < k) return post("The value of n cannot be smaller than k.");
 				var nK = n - k;
-				var result = factorial(n) / factorial(nK);
+				var result = factorial(n) / (factorial(nK) * factorial(k));
 				post("C(" + n + ", " + k + ") = " + result);
 				break;
 			
