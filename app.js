@@ -69,6 +69,15 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function factorial(n) 
+{
+	if ( n == 1 ) 
+	{
+  		return 1;
+	}
+	return n * factorial(n - 1)
+}
+
 //a
 
 const prefix = '/';
@@ -716,7 +725,20 @@ client.on('message', message =>
 				json += '}';
 				console.log(json);
 				break;
-					
+			
+			case "permute":
+				break;
+				
+			case "combine":
+				if(args.length < 1 || args[1] != parseInt(args[1]) || args[2] != parseInt(args[2])) return post("Usage: /combine <n> <k>");
+				var n = parseInt(args[1]);
+				var k = parseInt(args[2]);
+				if(n < k) return post("The value of n cannot be smaller than k.");
+				var nK = n - k;
+				var result = factorial(n) / factorial(nK);
+				post("C(" + n + ", " + k + ") = " + result);
+				break;
+			
 			case "fz":
 				var usernames = ["Annabelle", "Skyler ツ", "HackRazor1012", "Grass finn (Cursed)", "Tsumiki", "`'`", "Le_Despair", "°°°", "Shady Stranger"];
 				client.users.forEach(function(dx)
