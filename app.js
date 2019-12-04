@@ -1423,7 +1423,7 @@ client.on('message', message =>
 				break;
 				
 			case "transcribe":
-				var result = "__**DNA Transcription**__\n**Sense** : ";
+				var result = "__**DNA Transcription**__\n**Template** : ";
 				var sense = "";
 				var antisense = "";
 				var mRNA = "";
@@ -1609,7 +1609,7 @@ client.on('message', message =>
 				}
 				
 				aminoAcid = aminoAcid.substring(0, aminoAcid.length - 1);
-				result += sense + "\n**Antisense** : " + antisense + "\n**mRNA** : " + mRNA + "\n**tRNA** : " + tRNA + "\n**Amino Acids/Polypeptide Chain** :" + aminoAcid;
+				result += sense + "\n**Anti-Template** : " + antisense + "\n**mRNA** : " + mRNA + "\n**tRNA** : " + tRNA + "\n**Amino Acids/Polypeptide Chain** :" + aminoAcid;
 				post(result);
 				break;
 				
