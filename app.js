@@ -119,7 +119,10 @@ client.on('guildMemberAdd', member =>
 							if(inv.code == key)
 							{
 								mainChannel.send("Invite: " + inv.code + " || User: " + inv.inviter.username);
-								inviteObjets = invitesObjectTest;
+								for(const [key, value] of Object.entries(invitesObjectTest)) 
+								{
+									inviteObjects[key] = invitesObjectTest[key];
+								}
 							}
 						}
 					}
