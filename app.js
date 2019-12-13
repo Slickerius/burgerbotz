@@ -1293,7 +1293,7 @@ client.on('message', message =>
 						{
 							var inv = invArr[i];
 							var no = i + 1;
-							message.channel.send("[" + no + "] " + inv.uses);
+							message.channel.send("[" + no + "] " + inv.uses + " - " + inv.inviter.username + " - " + inv.code);
 						}
 					});
 				break;
