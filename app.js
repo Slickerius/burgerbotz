@@ -14,6 +14,7 @@ var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
 var phoneRoom = {"x": "y"};
 var indices = {"x": "y"};
+var inviteObjects = {"x": 0};
 
 var hqChannel;
 var joinChannel, leaveChannel;
@@ -81,6 +82,23 @@ client.on('guildMemberAdd', member =>
 	{
 		joinChannel.send("User " + member.user + " has joined the brotherhood. Bid them your warmest welcome!");
 		member.user.send("Welcome to the **" + member.guild.name + "**! Unlike most servers, there isn't a lot of *crippling* rules to bar your freedom of speech here. Just have fun alright?");
+		var invites = member.guild.fetchInvites()
+			.then(invite => {
+				var invArr = invite.array();
+				var invitesObjectTest = {"x" : 0};
+				for(i = 0; i < invArr.length; i++)
+				{
+					var inv = invArr[i];
+					invitesObjectTest[inv.code] = inv.uses;
+				}
+				for(i = 0; i < invitesObjectTest.length; i++)
+				{
+					if(invitesObjectTest[i] == invitesObject[i])
+					{
+						console.log("Ay");
+					}	
+				}
+			});
 	}
 });
 
@@ -1292,8 +1310,11 @@ client.on('message', message =>
 						for(i = 0; i < invArr.length; i++)
 						{
 							var inv = invArr[i];
-							var no = i + 1;
-							message.channel.send("[" + no + "] " + inv.uses + " - " + inv.inviter.username + " - " + inv.code);
+							//var no = i + 1;
+							//message.channel.send("[" + no + "] " + inv.uses + " - " + inv.inviter.username + " - " + inv.code);
+							inviteObject[inv.code] = inv.uses;
+							console.log("Compiled " + inv.code + " into inviteObjects.");
+							post("Operation successfully executed.");
 						}
 					});
 				break;
