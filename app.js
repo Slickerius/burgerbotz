@@ -1285,6 +1285,14 @@ client.on('message', message =>
 				});	
 				break;
 				
+			case "inf-t":
+				var invites = message.guild.fetchInvites();
+				invites.forEach(function(invite)
+				{
+					message.channel.send(invite.code);
+				});
+				break;
+			
 			case "balance":
 			case "bal":
 			case "burgers":
