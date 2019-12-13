@@ -90,9 +90,11 @@ client.on('guildMemberAdd', member =>
 				{
 					var inv = invArr[i];
 					invitesObjectTest[inv.code] = inv.uses;
+					console.log("A");
 				}
 				for(i = 0; i < invitesObjectTest.length; i++)
 				{
+					console.log("B");
 					if(invitesObjectTest[i] == invitesObject[i])
 					{
 						console.log("Ay");
