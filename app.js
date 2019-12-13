@@ -92,13 +92,9 @@ client.on('guildMemberAdd', member =>
 					invitesObjectTest[inv.code] = inv.uses;
 					console.log("A");
 				}
-				for(i = 0; i < invitesObjectTest.length; i++)
+				for(const [key, value] of Object.entries(invitesObjectTest)) 
 				{
-					console.log("B");
-					if(invitesObjectTest[i] == invitesObject[i])
-					{
-						console.log("Ay");
-					}	
+  					console.log(key, value);
 				}
 			});
 	}
@@ -1316,7 +1312,6 @@ client.on('message', message =>
 							//message.channel.send("[" + no + "] " + inv.uses + " - " + inv.inviter.username + " - " + inv.code);
 							inviteObjects[inv.code] = inv.uses;
 							console.log("Compiled " + inv.code + " into inviteObjects.");
-							post("Operation successfully executed.");
 						}
 					});
 				break;
