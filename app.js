@@ -1312,7 +1312,7 @@ client.on('message', message =>
 							var inv = invArr[i];
 							//var no = i + 1;
 							//message.channel.send("[" + no + "] " + inv.uses + " - " + inv.inviter.username + " - " + inv.code);
-							inviteObject[inv.code] = inv.uses;
+							inviteObjects[inv.code] = inv.uses;
 							console.log("Compiled " + inv.code + " into inviteObjects.");
 							post("Operation successfully executed.");
 						}
