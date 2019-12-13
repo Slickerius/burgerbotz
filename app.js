@@ -61,7 +61,9 @@ client.on('ready', () =>
 			if(channel.id === "620578833225220106")
 			{
 				joinChannel = channel;	
-			} else if(channel.id === "620578888610873355") {
+			} 
+			if(channel.id === "620578888610873355") 
+			{
 				leaveChannel = channel;	
 			}
 		});
@@ -85,6 +87,7 @@ client.on('guildMemberRemove', member =>
 {	
 	if(member.guild.id == "613500872839921675")
 	{
+		console.log("User left.");
 		leaveChannel.send("**" + member.user.username + "#" + member.user.discriminator + "** has withdrawn their presence from the brotherhood. Until next time.");
 	}
 });
