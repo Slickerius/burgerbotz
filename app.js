@@ -16,6 +16,7 @@ var phoneRoom = {"x": "y"};
 var indices = {"x": "y"};
 
 var hqChannel;
+var joinChannel, leaveChannel;
 
 client.on('ready', () => 
 {
@@ -53,6 +54,18 @@ client.on('ready', () =>
 			}
 		});
 	}
+	if(guild.id === "613500872839921675")
+	{
+		guild.channels.forEach(function(channel)
+		{
+			if(channel.id === "620578833225220106")
+			{
+				joinChannel = channel;	
+			} else if(channel.id === "620578888610873355") {
+				leaveChannel = channel;	
+			}
+		});
+	}
    });
 });
 
@@ -61,6 +74,18 @@ client.on('guildMemberAdd', member =>
 	if(member.guild.id == "424507027432144913")
 	{
 		member.user.send("**Hello!**\nWelcome to **Livlisky**! We are a community in which freedom of expression is highly regarded, you are free to be reasonable and friendly or shitpost to your heart's content, it is up to you!\n\n**Enjoy your stay ;)**");
+	}
+	if(member.guild.id == "613500872839921675")
+	{
+		joinChannel.send("User " + member.user + " has joined the brotherhood. Bid them your warmest welcome!");
+	}
+});
+
+client.on('guildMemberRemove', member =>
+{	
+	if(member.guild.id == "613500872839921675")
+	{
+		leaveChannel.send("**" + member.user.username + "#" + member.user.discriminator + "** has withdrawn their presence from the brotherhood. Until next time.");
 	}
 });
 
