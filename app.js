@@ -72,6 +72,18 @@ client.on('ready', () =>
 				mainChannel = channel;	
 			}
 		});
+		var invites = guild.fetchInvites()
+			.then(invite => {
+				var invArr = invite.array();
+				for(i = 0; i < invArr.length; i++)
+				{
+					var inv = invArr[i];
+					//var no = i + 1;
+					//message.channel.send("[" + no + "] " + inv.uses + " - " + inv.inviter.username + " - " + inv.code);
+					inviteObjects[inv.code] = inv.uses;
+					console.log("Compiled " + inv.code + " into inviteObjects.");
+				}
+			});
 	}
    });
 });
@@ -107,6 +119,7 @@ client.on('guildMemberAdd', member =>
 							if(inv.code == key)
 							{
 								mainChannel.send("Invite: " + inv.code + " || User: " + inv.inviter.username);
+								inviteObjets = invitesObjectTest;
 							}
 						}
 					}
@@ -1314,21 +1327,6 @@ client.on('message', message =>
 						
 					post(y);
 				});	
-				break;
-				
-			case "inf-t":
-				var invites = message.guild.fetchInvites()
-					.then(invite => {
-						var invArr = invite.array();
-						for(i = 0; i < invArr.length; i++)
-						{
-							var inv = invArr[i];
-							//var no = i + 1;
-							//message.channel.send("[" + no + "] " + inv.uses + " - " + inv.inviter.username + " - " + inv.code);
-							inviteObjects[inv.code] = inv.uses;
-							console.log("Compiled " + inv.code + " into inviteObjects.");
-						}
-					});
 				break;
 			
 			case "balance":
