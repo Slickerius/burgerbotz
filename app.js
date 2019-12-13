@@ -118,7 +118,7 @@ client.on('guildMemberAdd', member =>
 							var inv = invArr[i];
 							if(inv.code == key)
 							{
-								mainChannel.send("Invite: " + inv.code + " || User: " + inv.inviter.username);
+								joinChannel.send("User " + member.user + " has joined the brotherhood. Bid them your warmest welcome!\nInvited by: **" + inv.inviter.username + "#" + inv.inviter.discriminator + "** using the invite code **" + inv.code + "**.");
 								for(const [key, value] of Object.entries(invitesObjectTest)) 
 								{
 									inviteObjects[key] = invitesObjectTest[key];
