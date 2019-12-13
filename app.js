@@ -87,7 +87,7 @@ client.on('guildMemberRemove', member =>
 {	
 	if(member.guild.id == "613500872839921675")
 	{
-		console.log("User left.");
+		member.user.send("Welcome to the **" + member.guild.name + "**! Unlike most servers, there isn't a lot of *crippling* rules to bar your freedom of speech here. Just have fun alright?");
 		leaveChannel.send("**" + member.user.username + "#" + member.user.discriminator + "** has withdrawn their presence from the brotherhood. Until next time.");
 	}
 });
