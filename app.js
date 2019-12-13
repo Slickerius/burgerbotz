@@ -1287,10 +1287,7 @@ client.on('message', message =>
 				
 			case "inf-t":
 				var invites = message.guild.fetchInvites();
-				invites.forEach(function(invite)
-				{
-					message.channel.send(invite.code);
-				});
+				console.log(invites);
 				break;
 			
 			case "balance":
