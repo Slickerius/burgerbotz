@@ -98,7 +98,7 @@ client.on('guildMemberAdd', member =>
 				}
 				for(const [key, value] of Object.entries(invitesObjectTest)) 
 				{
-  					if(invitesObjectTest[key] !== invitesObjects(key))
+  					if(invitesObjectTest[key] !== inviteObjects(key))
 					{
 						console.log("Found!");
 						for(i = 0; i < invArr.length; i++)
