@@ -17,7 +17,7 @@ var indices = {"x": "y"};
 var inviteObjects = {"x": 0};
 
 var hqChannel;
-var joinChannel, leaveChannel;
+var joinChannel, leaveChannel, mainChannel;
 
 client.on('ready', () => 
 {
@@ -67,6 +67,10 @@ client.on('ready', () =>
 			{
 				leaveChannel = channel;	
 			}
+			if(channel.id === "620395189940387871") 
+			{
+				mainChannel = channel;	
+			}
 		});
 	}
    });
@@ -94,7 +98,18 @@ client.on('guildMemberAdd', member =>
 				}
 				for(const [key, value] of Object.entries(invitesObjectTest)) 
 				{
-  					console.log(key, value);
+  					if(invitesObjectTest[key] !== invitesObject(key))
+					{
+						console.log("Found!");
+						for(i = 0; i < invArr.length; i++)
+						{
+							var inv = invArr[i];
+							if(inv.code == key)
+							{
+								mainChannel.send("Invite: " + inv.code + " || User: " + inv.inviter.username);
+							}
+						}
+					}
 				}
 			});
 	}
