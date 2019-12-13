@@ -1288,8 +1288,13 @@ client.on('message', message =>
 			case "inf-t":
 				var invites = message.guild.fetchInvites()
 					.then(invite => {
-						var inviteArray = invite.array();
-						message.channel.send(inviteArray);
+						var invArr = invite.array();
+						for(i = 0; i < invArr.length; i++)
+						{
+							var inv = invArr[i];
+							var no = i + 1;
+							message.channel.send("[" + no + "] " + inv.uses);
+						}
 					});
 				break;
 			
