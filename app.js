@@ -1288,7 +1288,8 @@ client.on('message', message =>
 			case "inf-t":
 				var invites = message.guild.fetchInvites()
 					.then(invite => {
-						message.channel.send(invite);
+						var inviteArray = invite.array();
+						message.channel.send(inviteArray);
 					});
 				break;
 			
