@@ -1286,8 +1286,10 @@ client.on('message', message =>
 				break;
 				
 			case "inf-t":
-				var invites = message.guild.fetchInvites();
-				console.log(invites);
+				var invites = message.guild.fetchInvites()
+					.then(invite => {
+						message.channel.send(invite);
+					});
 				break;
 			
 			case "balance":
