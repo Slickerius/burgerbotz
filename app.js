@@ -1401,7 +1401,8 @@ client.on('message', message =>
 								{
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
 									db[x].burgers += parseFloat(arg0);							
-									db[sender.id].burgers -= arg0;
+									db[sender.id].burgers -= parseFloat(arg0);
+									db[gdp] = parseFloat(arg0);
 									request(
 									{
   										method: "PUT",
