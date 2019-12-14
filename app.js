@@ -1730,7 +1730,7 @@ client.on('message', message =>
 					var battle = db["gdp"].battle;
 					var coinflip = db["gdp"].coinflip;
 					var consumption = db["gdp"].consumption;
-					var transaction = db["gdp"].transaction;
+					var transaction = db["gdp"].transactions;
 					
 					var flagsPercent = (flags / gdp) * 100;
 					var battlePercent = (battle / gdp) * 100;
