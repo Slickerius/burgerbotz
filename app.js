@@ -1450,7 +1450,7 @@ client.on('message', message =>
 								if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
 								db[user.id].burgers += parseFloat(arg0);							
 								db[sender.id].burgers -= arg0;
-								db["gdp"].transactions += parseFloat(arg0) + 500;
+								db["gdp"].transactions += parseFloat(arg0);
 								db["gdp"].total += parseFloat(arg0);
 								request(
 								{
