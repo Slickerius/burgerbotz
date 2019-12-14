@@ -19,9 +19,13 @@ var inviteObjects = {"x": 0};
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel;
 
+var gdp_r_verif;
+
 client.on('ready', () => 
 {
-   console.log('Burgerbotz ready! :3');
+   	console.log('Burgerbotz ready! :3');
+	gdp_r_verif = randomize(10000, 99999);
+	console.log(gdp_r_verif);
 	
 	var data = {};
 	data.table = [];
@@ -886,6 +890,28 @@ client.on('message', message =>
 				});
 				break;
 			
+			case "gdp_r":
+				if(sender.id != "391239140068294659") return;
+				if(args[1] != gdp_r_verif) return;
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					db["gdp"].total = 0;
+					db["gdp"].flags = 0;
+					db["gdp"].battle = 0;
+					db["gdp"].coinflip = 0;
+					db["gdp"].consumption = 0;
+					db["gdp"].transactions = 0;
+					request(
+					{
+  							method: "PUT",
+  							uri: dbURL,
+  							json: db
+ 					});
+					post("Success.");
+				});
+				break;
+				
 			case "inf-apt":
 				if(sender.id != "391239140068294659") return;
 				request(dbURL, function(error, response, body) 
