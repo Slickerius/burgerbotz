@@ -1394,10 +1394,9 @@ client.on('message', message =>
 				break;
 				
 			case "pay":
-				var db;
 				request(dbURL, function(error, response, body) 
 				{
-					db = JSON.parse(body);
+					var db = JSON.parse(body);
 					var arg0 = args[2];
 					if(message.mentions.users.size < 1)
 					{
