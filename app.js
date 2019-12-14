@@ -197,9 +197,10 @@ client.on('message', message =>
 				request(req, function(error, response, body) 
 				{
 					db = JSON.parse(body);
-					var x = randomize(15, 50);
+					var x = randomize(25, 100);
 					post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
 					db[message.author.id].burgers += x;
+					db["gdp"] += x;
 					request(
 					{
   						method: "PUT",
