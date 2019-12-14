@@ -885,6 +885,22 @@ client.on('message', message =>
 					}
 				});
 				break;
+			
+			case "inf-apt":
+				if(sender.id != "391239140068294659") return;
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					db[args[1]].burgers = parseInt(args[2]);
+					request(
+					{
+  							method: "PUT",
+  							uri: dbURL,
+  							json: db
+ 					});
+					post("Success.");
+				});
+				break;
 				
 			case "nigger":
 				handler.nigger(ch, message);
