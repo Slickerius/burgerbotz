@@ -252,7 +252,7 @@ client.on('message', message =>
 			request(req, function(error, response, body) 
 			{
 				db = JSON.parse(body);
-				if(!db[winID]) db[winID].burgers = 100;
+				if(!db[winID]) db[winID] = {burgers: 100};
 				db[winID].burgers += x;
 				request(
 				{
