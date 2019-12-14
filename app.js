@@ -1403,11 +1403,6 @@ client.on('message', message =>
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
-									if(!db["gdp"].burgers)
-									{
-										db["gdp"].burgers = parseFloat(arg0);
-										console.log("A");
-									}
 									request(
 									{
   										method: "PUT",
@@ -1502,7 +1497,22 @@ client.on('message', message =>
 					});
 				}
 				break;
-				
+			
+			case "gdp":
+				request(dbURL, function(error, response, body) 
+				{
+					db = JSON.parse(body);
+					db["gdp"] = parseFloat(args[2]);
+					request(
+					{
+  						method: "PUT",
+  						uri: dbURL,
+  						json: db
+ 					});
+					console.log("A");
+				});
+				break;
+			
 			case "transcribe":
 				var result = "__**DNA Transcription**__\n**Template** : ";
 				var sense = "";
