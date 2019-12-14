@@ -1404,8 +1404,7 @@ client.on('message', message =>
 									db[sender.id].burgers -= parseFloat(arg0);
 									if(isNaN(db["gdp"]))
 									{
-										db["gdp"] = parseFloat(arg0);
-										console.log("A");
+										console.log("CCX");
 									}
 									request(
 									{
