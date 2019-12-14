@@ -1697,7 +1697,7 @@ client.on('message', message =>
 					var totalPerAmount;
 					for(var key in db)
 					{
-						total += parseFloat(db[key]);
+						total += parseFloat(db[key].burgers);
 						amount++;
 					}
 					totalPerAmount = total / amount;
