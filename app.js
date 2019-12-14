@@ -774,7 +774,7 @@ client.on('message', message =>
 								if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
 								temp[sender.id] = {inGame: true, stake: args[1]};
 								db[sender.id].burgers -= parseInt(args[1]);
-								if(!db["gdp"].coinflip) db["gdp"].coinflip = parseInt(args[1]);
+								db["gdp"].coinflip += parseInt(args[1]);
 								db["gdp"].total += parseInt(args[1]);
 								request(
 								{
@@ -872,6 +872,8 @@ client.on('message', message =>
 					{
 						handler.burger(ch, message, burgerGifs);
 						db[sender.id].burgers -= 1;
+						if(!db["gdp"].consumption) db["gdp"].consumption = 1;
+						db["gdp"].total += 1;
 						request(
 						{
   							method: "PUT",
