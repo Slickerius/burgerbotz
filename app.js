@@ -1758,9 +1758,10 @@ client.on('message', message =>
 					battlePercent = battlePercent.toFixed(2);
 					coinflipPercent = coinflipPercent.toFixed(2);
 					consumptionPercent = consumptionPercent.toFixed(2);
+					transaction = transaction.toFixed(2);
 					transactionPercent = transactionPercent.toFixed(2);
 					
-					post(":chart: __**Burgerbotz Economic Outlook**__ :chart:\n__Total Burgers in Circulation:__\n:hamburger: **" + total + "**\n__Burgers Per Capita:__\n**:hamburger: " + totalPerAmount + "**\n\n__**Gross Domestic Product/Burger Flow**__\n__GDP:__\n:hamburger: **" + gdp + "**\n__GDP Per Capita:__\n:hamburger: **" + gdpPerAmount + "**\n\n__**Sectoral Flow**__\n__Battles:__\n:hamburger: **" + battle + "** (" + battlePercent + "% of GDP)\n__Burger Consumptions:__\n:hamburger: **" + consumption + "** (" + consumptionPercent + "% of GDP)\n__Coinflips:__\n:hamburger: **" + coinflip + "** (" + coinflipPercent + "% of GDP)\n__Flags:__\n:hamburger: **" + flags + "** (" + flagsPercent + "% of GDP)\n__Inter-User Transactions:__\n:hamburger: **" + transaction + "** (" + transactionPercent + "% of GDP)");
+					post(":chart: __**Burgerbotz Economic Outlook**__ :chart:\n__Total Burgers in Circulation:__\n:hamburger: **" + total + "**\n__Population__\n:busts_in_silhouette: **" + amount + "**\n__Burgers Per Capita:__\n**:hamburger: " + totalPerAmount + "**\n\n__**Gross Domestic Product/Burger Flow**__\n__GDP:__\n:hamburger: **" + gdp + "**\n__GDP Per Capita:__\n:hamburger: **" + gdpPerAmount + "**\n\n__**Sectoral Flow**__\n__Battles:__\n:hamburger: **" + battle + "** (" + battlePercent + "% of GDP)\n__Burger Consumptions:__\n:hamburger: **" + consumption + "** (" + consumptionPercent + "% of GDP)\n__Coinflips:__\n:hamburger: **" + coinflip + "** (" + coinflipPercent + "% of GDP)\n__Flags:__\n:hamburger: **" + flags + "** (" + flagsPercent + "% of GDP)\n__Inter-User Transactions:__\n:hamburger: **" + transaction + "** (" + transactionPercent + "% of GDP)");
 				});
 				break;
 				
