@@ -1402,7 +1402,7 @@ client.on('message', message =>
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
-									if(!db["gdp"])
+									if(isNaN(db["gdp"]))
 									{
 										db["gdp"] = parseFloat(arg0);
 										console.log("A");
