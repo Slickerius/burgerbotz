@@ -1409,10 +1409,10 @@ client.on('message', message =>
 								if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 								{
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
-									if(!db["gdp"].transactions) db["gdp"].transactions = args[2];
-									db["gdp"].total += args[2];
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
+									db["gdp"].transactions += parseFloat(arg0);
+									db["gdp"].total += parseFloat(arg0);
 									request(
 									{
   										method: "PUT",
@@ -1450,6 +1450,8 @@ client.on('message', message =>
 								if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
 								db[user.id].burgers += parseFloat(arg0);							
 								db[sender.id].burgers -= arg0;
+								if(!db["gdp"].transactions) db["gdp"].transactions = parseFloat(arg0);
+								db["gdp"].total += parseFloat(arg0);
 								request(
 								{
   									method: "PUT",
