@@ -872,7 +872,7 @@ client.on('message', message =>
 					{
 						handler.burger(ch, message, burgerGifs);
 						db[sender.id].burgers -= 1;
-						if(!db["gdp"].consumption) db["gdp"].consumption = 1;
+						db["gdp"].consumption += 1;
 						db["gdp"].total += 1;
 						request(
 						{
@@ -1406,10 +1406,12 @@ client.on('message', message =>
 							if(args[1] == x)
 							{
 								if(parseFloat(arg0) < 0) return post("You must enter a positive number.");
-							
+								
 								if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 								{
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
+									if(!db["gdp"].transactions) db["gdp"].transactions = parseFloat(arg0);
+									db["gdp"].total += parseFloat(arg0);
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
 									request(
