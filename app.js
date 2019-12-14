@@ -41,7 +41,7 @@ client.on('ready', () =>
 	    console.log('complete');
 	    }
 	);
-		
+	
    client.user.setGame(status);
    client.guilds.forEach(function(guild)
    {
@@ -72,6 +72,18 @@ client.on('ready', () =>
 				mainChannel = channel;	
 			}
 		});
+		
+		request(dbURL, function(error, response, body) 
+		{
+			db = JSON.parse(body);
+			if(!db["gdp"]) 
+			{
+				console.log("CCX");	
+			} else {
+				console.log("CCY");
+			}
+		});
+		
 		var invites = guild.fetchInvites()
 			.then(invite => {
 				var invArr = invite.array();
@@ -1402,12 +1414,6 @@ client.on('message', message =>
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
-									if(db["gdp"] == null)
-									{
-										console.log("CCX");
-									} else {
-										console.log("CCY");	
-									}
 									request(
 									{
   										method: "PUT",
