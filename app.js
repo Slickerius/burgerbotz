@@ -73,22 +73,6 @@ client.on('ready', () =>
 			}
 		});
 		
-		request(dbURL, function(error, response, body) 
-		{
-			db = JSON.parse(body);
-			if(!db["gdp"]) 
-			{
-				db["gdp"] = 0;
-				request(
-				{
-  					method: "PUT",
-  					uri: dbURL,
-  					json: db
- 				});
-				console.log("Successfully created GDP variable.");
-			}
-		});
-		
 		var invites = guild.fetchInvites()
 			.then(invite => {
 				var invArr = invite.array();
@@ -1419,6 +1403,7 @@ client.on('message', message =>
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
+									db["gdp"] += parseFloat(arg0);
 									request(
 									{
   										method: "PUT",
