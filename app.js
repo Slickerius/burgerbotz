@@ -200,7 +200,7 @@ client.on('message', message =>
 					var x = randomize(25, 100);
 					post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
 					db[message.author.id].burgers += x;
-					db["gdp"] += x;
+					db["gdp"] = {"total": x, "flags": x};
 					request(
 					{
   						method: "PUT",
