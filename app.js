@@ -1687,6 +1687,23 @@ client.on('message', message =>
 				result += sense + "\n**Anti-Template** : " + antisense + "\n**mRNA** : " + mRNA + "\n**tRNA** : " + tRNA + "\n**Amino Acids/Polypeptide Chain** :" + aminoAcid;
 				post(result);
 				break;
+			
+			case "economy":
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					var total = 0;
+					var amount = 0;
+					var totalPerAmount;
+					for(var key in db)
+					{
+						total += parseFloat(db[key]);
+						amount++;
+					}
+					totalPerAmount = total / amount;
+					post(":chart: __**Burgerbotz Economic Outlook**__ :chart:\nTotal Burgers in Circulation: :hamburger: **" + total + "**\nBurgers Per Capita: **:hamburger: " + totalPerAmount + "**");
+				});
+				break;
 				
 			case "flags":
 				if(inFGame)
