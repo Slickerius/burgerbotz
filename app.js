@@ -1750,17 +1750,17 @@ client.on('message', message =>
 					gdpPerAmount = gdp / amount;
 					totalPerAmount = total / amount;
 					
-					total.toFixed(2);
-					totalPerAmount.toFixed(2);
-					gdp.toFixed(2);
-					gdpPerAmount.toFixed(2);
-					flagsPercent.toFixed(2);
-					battlePercent.toFixed(2);
-					coinflipPercent.toFixed(2);
-					consumptionPercent.toFixed(2);
-					transactionPercent.toFixed(2);
+					total = total.toFixed(2);
+					totalPerAmount = totalPerAmount.toFixed(2);
+					gdp = gdp.toFixed(2);
+					gdpPerAmount = gdpPerAmount.toFixed(2);
+					flagsPercent = flagsPercent.toFixed(2);
+					battlePercent = battlePercent.toFixed(2);
+					coinflipPercent = coinflipPercent.toFixed(2);
+					consumptionPercent = consumptionPercent.toFixed(2);
+					transactionPercent = transactionPercent.toFixed(2);
 					
-					post(":chart: __**Burgerbotz Economic Outlook**__ :chart:\nTotal Burgers in Circulation:\n:hamburger: **" + total + "**\nBurgers Per Capita:\n**:hamburger: " + totalPerAmount + "**\n__**Gross Domestic Product/Burger Flow**__\nGDP:\n:hamburger: **" + gdp + "**\nGDP Per Capita:\n:hamburger: **" + gdpPerAmount + "**\n__**Sectoral Flow**__\nBattles\n:hamburger: **" + battle + "** (" + battlePercent + "% of GDP)\nBurger Consumptions:\n:hamburger: **" + consumption + "** (" + consumptionPercent + "% of GDP)\nCoinflips:\n:hamburger: **" + coinflip + "** (" + coinflipPercent + "% of GDP)\nFlags:\n:hamburger: **" + flags + "** (" + flagsPercent + "% of GDP)\nInter-User Transactions:\n:hamburger: **" + transaction + "** (" + transactionPercent + "% of GDP)");
+					post(":chart: __**Burgerbotz Economic Outlook**__ :chart:\n__Total Burgers in Circulation:__\n:hamburger: **" + total + "**\n__Burgers Per Capita:__\n**:hamburger: " + totalPerAmount + "**\n\n__**Gross Domestic Product/Burger Flow**__\n__GDP:__\n:hamburger: **" + gdp + "**\n__GDP Per Capita:__\n:hamburger: **" + gdpPerAmount + "**\n\n__**Sectoral Flow**__\n__Battles:__\n:hamburger: **" + battle + "** (" + battlePercent + "% of GDP)\n__Burger Consumptions:__\n:hamburger: **" + consumption + "** (" + consumptionPercent + "% of GDP)\n__Coinflips:__\n:hamburger: **" + coinflip + "** (" + coinflipPercent + "% of GDP)\n__Flags:__\n:hamburger: **" + flags + "** (" + flagsPercent + "% of GDP)\n__Inter-User Transactions:__\n:hamburger: **" + transaction + "** (" + transactionPercent + "% of GDP)");
 				});
 				break;
 				
