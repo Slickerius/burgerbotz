@@ -1502,7 +1502,7 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
-					db["gdp"] = parseFloat(args[2]);
+					db["gdp"] += parseFloat(args[1]);
 					request(
 					{
   						method: "PUT",
