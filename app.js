@@ -1720,6 +1720,7 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
+					db["gdp"].total += 500;
 					var total = 0;
 					var amount = 0;
 					var totalPerAmount;
