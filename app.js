@@ -200,7 +200,8 @@ client.on('message', message =>
 					var x = randomize(25, 100);
 					post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
 					db[message.author.id].burgers += x;
-					db["gdp"] = {"total": x, "flags": x};
+					db["gdp"].total += x;
+					db["gdp"].flags += x;
 					request(
 					{
   						method: "PUT",
@@ -256,6 +257,8 @@ client.on('message', message =>
 				db = JSON.parse(body);
 				if(!db[winID]) db[winID] = {burgers: 100};
 				db[winID].burgers += x;
+				if(!db["gdp"].battle) db["gdp"].battle = x;
+				db["gdp"].total += x;
 				request(
 				{
   					method: "PUT",
@@ -1714,6 +1717,7 @@ client.on('message', message =>
 					var totalPerAmount;
 					for(var key in db)
 					{
+						if(key == "gdp") return;
 						total += parseFloat(db[key].burgers);
 						amount++;
 					}
