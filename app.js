@@ -774,6 +774,8 @@ client.on('message', message =>
 								if(!temp[sender.id]) temp[sender.id] = {inGame: 1, stake: args[1]};
 								temp[sender.id] = {inGame: true, stake: args[1]};
 								db[sender.id].burgers -= parseInt(args[1]);
+								if(!db["gdp"].coinflip) db["gdp"].coinflip = parseInt(args[1]);
+								db["gdp"].total += parseInt(args[1]);
 								request(
 								{
   									method: "PUT",
