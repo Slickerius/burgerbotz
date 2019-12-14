@@ -1405,6 +1405,8 @@ client.on('message', message =>
 									if(db["gdp"] == null)
 									{
 										console.log("CCX");
+									} else {
+										console.log("CCY");	
 									}
 									request(
 									{
