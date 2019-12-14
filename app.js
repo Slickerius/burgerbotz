@@ -78,9 +78,14 @@ client.on('ready', () =>
 			db = JSON.parse(body);
 			if(!db["gdp"]) 
 			{
-				console.log("CCX");	
-			} else {
-				console.log("CCY");
+				db["gdp"] = 0;
+				request(
+				{
+  					method: "PUT",
+  					uri: dbURL,
+  					json: db
+ 				});
+				console.log("Successfully created GDP variable.");
 			}
 		});
 		
