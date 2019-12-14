@@ -257,7 +257,8 @@ client.on('message', message =>
 				db = JSON.parse(body);
 				if(!db[winID]) db[winID] = {burgers: 100};
 				db[winID].burgers += x;
-				if(!db["gdp"].battle) db["gdp"].battle = x;
+				
+				db["gdp"].battle += x;
 				db["gdp"].total += x;
 				request(
 				{
@@ -1717,9 +1718,11 @@ client.on('message', message =>
 					var totalPerAmount;
 					for(var key in db)
 					{
-						if(key == "gdp") return;
-						total += parseFloat(db[key].burgers);
-						amount++;
+						if(key != "gdp")
+						{
+							total += parseFloat(db[key].burgers);
+							amount++;
+						}
 					}
 					totalPerAmount = total / amount;
 					post(":chart: __**Burgerbotz Economic Outlook**__ :chart:\nTotal Burgers in Circulation: :hamburger: **" + total + "**\nBurgers Per Capita: **:hamburger: " + totalPerAmount + "**");
