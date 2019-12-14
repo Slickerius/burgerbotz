@@ -1402,7 +1402,7 @@ client.on('message', message =>
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
-									if(isNaN(db["gdp"]))
+									if(db["gdp"] == null)
 									{
 										console.log("CCX");
 									}
