@@ -1409,8 +1409,8 @@ client.on('message', message =>
 								if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 								{
 									if(isNaN(db[x].burgers)) db[x].burgers = 100;
-									if(!db["gdp"].transactions) db["gdp"].transactions = parseFloat(arg0);
-									db["gdp"].total += parseFloat(arg0);
+									if(!db["gdp"].transactions) db["gdp"].transactions = parseFloat(args[2]);
+									db["gdp"].total += parseFloat(args[2]);
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
 									request(
