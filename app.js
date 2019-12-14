@@ -1723,6 +1723,21 @@ client.on('message', message =>
 					var total = 0;
 					var amount = 0;
 					var totalPerAmount;
+					
+					var gdp = db["gdp"].total;
+					var gdpPerAmount;
+					var flags = db["gdp"].flags;
+					var battle = db["gdp"].battle;
+					var coinflip = db["gdp"].coinflip;
+					var consumption = db["gdp"].consumption;
+					var transaction = db["gdp"].transaction;
+					
+					var flagsPercent = (flags / gdp) * 100;
+					var battlePercent = (battle / gdp) * 100;
+					var coinflipPercent = (coinflip / gdp) * 100;
+					var consumptionPercent = (consumption / gdp) * 100;
+					var transactionPercent = (transaction / gdp) * 100;
+					
 					for(var key in db)
 					{
 						if(key != "gdp")
@@ -1731,8 +1746,11 @@ client.on('message', message =>
 							amount++;
 						}
 					}
+					
+					gdpPerAmount = gdp / amount;
 					totalPerAmount = total / amount;
-					post(":chart: __**Burgerbotz Economic Outlook**__ :chart:\nTotal Burgers in Circulation: :hamburger: **" + total + "**\nBurgers Per Capita: **:hamburger: " + totalPerAmount + "**");
+					
+					post(":chart: __**Burgerbotz Economic Outlook**__ :chart:\nTotal Burgers in Circulation: :hamburger: **" + total + "**\nBurgers Per Capita: **:hamburger: " + totalPerAmount + "**\n__**Gross Domestic Product/Burger Flow**__\nGDP: :hamburger: **" + gdp + "**\nGDP Per Capita: :hamburger: **" + gdpPerAmount + "**\n__**Sectoral Data**__\nBattles: :hamburger: **" + battle + "** + (" + battlePercent + "% of GDP)\nBurger Consumptions: :hamburger: **" + consumption + "** (" + consumptionPercent + "% of GDP)\nCoinflips: :hamburger: **" + coinflip + "** (" + coinflipPercent + "% of GDP)\nFlags: :hamburger: **" + flags + "** (" + flagsPercent + "% of GDP)\nInter-User Transactions: :hamburger: **" + transactions + "** (" + transactionsPercent + "% of GDP)");
 				});
 				break;
 				
@@ -1765,7 +1783,6 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					db["gdp"].total += 500;
 					client.users.forEach(function(u)
 					{
 						if(!db[u.id])
