@@ -68,7 +68,7 @@ module.exports =
                                 msg = x1_msg_4;  
                         } else if(stage == 5) {
                                 msg = x1_msg_5 + value + " as a bonus.**";
-                        } else if(stage == 5) {
+                        } else if(stage == 6) {
                                 msg = x1_msg_6;
                         }
                         channel.send(msg);
