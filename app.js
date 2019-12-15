@@ -215,13 +215,13 @@ client.on('message', message =>
 							randomEvents.call(ch, 0, stage, value);	
 							if(stage == 1) return;
 						} else if(message.content.startsWith("2")) {
-							var stage = randomize(5, 6);
+							var stage = randomize(3, 4);
 							randomEvents.call(ch, 0, stage, value);	
-							if(stage == 5) return;
+							if(stage == 3) return;
 						} else if(message.content.startsWith("3")) {
 							randomEvents.call(ch, 0, 5, value);	
 						}
-						request(req, function(error, response, body) 
+						request(dbURL, function(error, response, body) 
 						{
 							db = JSON.parse(body);
 							db[message.author.id].burgers -= value;
