@@ -2026,7 +2026,7 @@ client.on('message', message =>
  						});
 					} else {
 						var dailyDate = new Date(db[sender.id].dailyDate);
-						var timeRemaining = new Date(dailyDate.getDate() - date.getDate());
+						var timeRemaining = new Date(dailyDate - date);
 						post(timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s left.");
 					}
 				});
