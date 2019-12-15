@@ -231,6 +231,7 @@ client.on('message', message =>
   								uri: req,
   								json: db
  							});
+						});
 					}
 				}
 			}
