@@ -251,7 +251,6 @@ client.on('message', message =>
 						});
 					}
 				} else if(eventTracker[key] == 1) {
-					console.log("AVVA");
 					var value = randomize(50, 2500);
 					var fine = randomize(50, 500);
 					if(eventStage[key] == 0)
@@ -267,6 +266,7 @@ client.on('message', message =>
 							{
 								randomEvents.call(ch, 1, stage, fine);
 							} else {
+								console.log(stage);
 								randomEvents.call(ch, 1, stage, value);	
 							}
 						} else if(message.content.startsWith("2")) {
