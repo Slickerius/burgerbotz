@@ -2015,7 +2015,8 @@ client.on('message', message =>
 					var date = new Date();
 					if(!db[sender.id].dailyDate || date > db[sender.id].dailyDate)
 					{
-						post("Working!");
+						var output = randomize(250, 1001);
+						post(":calendar: **You have claimed your daily dose of burgers worth :hamburger: " + output + "!**");
 						date.setDate(date.getDate() + 1);
 						db[sender.id].dailyDate = date;
 						request(
@@ -2027,7 +2028,7 @@ client.on('message', message =>
 					} else {
 						var dailyDate = new Date(db[sender.id].dailyDate);
 						var timeRemaining = new Date(dailyDate - date);
-						post(timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s left.");
+						post(":calendar: **You have claimed your daily dose of burgers today. It will be available again in " + timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s.**");
 					}
 				});
 				break;
