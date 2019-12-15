@@ -251,6 +251,7 @@ client.on('message', message =>
 						});
 					}
 				} else if(eventTracker[key] == 1) {
+					console.log("A");
 					var value = randomize(50, 2500);
 					var fine = randomize(50, 500);
 					if(eventStage[key] == 0)
