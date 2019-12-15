@@ -208,7 +208,7 @@ client.on('message', message =>
 					{
 						randomEvents.call(ch, 0, 0, value);
 						eventStage[key] = 1;
-					} else if(eventStage[key == 1]) {
+					} else if(eventStage[key] == 1) {
 						if(message.startsWith("1"))
 						{
 							var stage = randomize(1, 2);
