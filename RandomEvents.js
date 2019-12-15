@@ -8,7 +8,7 @@ var msg;
 var x0_msg_0 = "**:dagger: You have been approached by a mugger! Do you:**\n**[1]** Confront\n**[2]** Cry for help\n**[3]** Flee";
 
 var x0_msg_1 = "**:punch: You chose to confront the mugger and succeeded. They begged for your mercy.**";
-var x0_msg_2 = "**:dizzy: You chose to confront the mugger but they overpowered you. You lost :hamburger: ";
+var x0_msg_2 = "**:dizzy_face: You chose to confront the mugger but they overpowered you. You lost :hamburger: ";
 
 var x0_msg_3 = "**:speaking_head: You yelled for help and others rushed to the rescue. The mugger fled the scene.**";
 var x0_msg_4 = "**:speak_no_evil: You tried to yell for help but the mugger threatened to hurt you. You stopped and watched as the mugger fled with your :hamburger: ";
