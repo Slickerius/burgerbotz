@@ -209,18 +209,23 @@ client.on('message', message =>
 						randomEvents.call(ch, 0, 0, value);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
+						var stage;
 						if(message.content.startsWith("1"))
 						{
-							var stage = randomize(1, 3);
+							stage = randomize(1, 3);
 							randomEvents.call(ch, 0, stage, value);	
-							if(stage == 1) return;
 						} else if(message.content.startsWith("2")) {
-							var stage = randomize(3, 5);
+							stage = randomize(3, 5);
 							randomEvents.call(ch, 0, stage, value);	
-							if(stage == 3) return value = 0;
 						} else if(message.content.startsWith("3")) {
 							randomEvents.call(ch, 0, 5, value);	
 						}
+						
+						delete eventTracker[key];
+						delete eventStage[key];
+						
+						if(stage == 1 || stage == 3) return;
+						
 						request(dbURL, function(error, response, body) 
 						{
 							db = JSON.parse(body);
@@ -232,8 +237,6 @@ client.on('message', message =>
   								json: db
  							});
 						});
-						delete eventTracker[key];
-						delete eventStage[key];
 					}
 				}
 			}
