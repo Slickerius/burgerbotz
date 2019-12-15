@@ -199,7 +199,7 @@ client.on('message', message =>
 	
 		for(var key in eventTracker)
 		{
-			if(key == message.user.id)
+			if(key == message.author.id)
 			{
 				if(eventTracker[key] == 0)
 				{
