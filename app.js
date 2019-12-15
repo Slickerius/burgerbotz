@@ -203,7 +203,7 @@ client.on('message', message =>
 			{
 				if(eventTracker[key] == 0)
 				{
-					var value = randomize(5, 100);
+					var value = randomize(5, 250);
 					if(eventStage[key] == 0)
 					{
 						randomEvents.call(ch, 0, 0, value);
@@ -212,14 +212,25 @@ client.on('message', message =>
 						if(message.content.startsWith("1"))
 						{
 							var stage = randomize(1, 2);
-							console.log(stage);
 							randomEvents.call(ch, 0, stage, value);	
+							if(stage == 1) return;
 						} else if(message.content.startsWith("2")) {
 							var stage = randomize(5, 6);
 							randomEvents.call(ch, 0, stage, value);	
+							if(stage == 5) return;
 						} else if(message.content.startsWith("3")) {
 							randomEvents.call(ch, 0, 5, value);	
 						}
+						request(req, function(error, response, body) 
+						{
+							db = JSON.parse(body);
+							db[message.author.id].burgers -= value;
+							request(
+							{
+  								method: "PUT",
+  								uri: req,
+  								json: db
+ 							});
 					}
 				}
 			}
@@ -1418,6 +1429,11 @@ client.on('message', message =>
 				});	
 				break;
 			
+			case "xxl":
+				eventTracker[sender.id] = 0;
+				eventStage[sender.id] = 0;
+				break;
+				
 			case "balance":
 			case "bal":
 			case "burgers":
