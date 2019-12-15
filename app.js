@@ -209,15 +209,15 @@ client.on('message', message =>
 						randomEvents.call(ch, 0, 0, value);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
-						if(message.startsWith("1"))
+						if(message.content.startsWith("1"))
 						{
 							var stage = randomize(1, 2);
 							console.log(stage);
 							randomEvents.call(ch, 0, stage, value);	
-						} else if(message.startsWith("2")) {
+						} else if(message.content.startsWith("2")) {
 							var stage = randomize(5, 6);
 							randomEvents.call(ch, 0, stage, value);	
-						} else if(message.startsWith("3")) {
+						} else if(message.content.startsWith("3")) {
 							randomEvents.call(ch, 0, 5, value);	
 						}
 					}
