@@ -188,6 +188,7 @@ client.on('message', message =>
 		let ch = message.channel;
 	
 		var randomEventOccurring = randomize(0, 75);
+		console.log(randomEventOccurring);
 		if(randomEventOccurring == 10) 
 		{
 			eventTracker[sender.id] = 0;
