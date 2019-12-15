@@ -211,13 +211,13 @@ client.on('message', message =>
 					} else if(eventStage[key] == 1) {
 						if(message.content.startsWith("1"))
 						{
-							var stage = randomize(1, 2);
+							var stage = randomize(1, 3);
 							randomEvents.call(ch, 0, stage, value);	
 							if(stage == 1) return;
 						} else if(message.content.startsWith("2")) {
-							var stage = randomize(3, 4);
+							var stage = randomize(3, 5);
 							randomEvents.call(ch, 0, stage, value);	
-							if(stage == 3) return;
+							if(stage == 3) return value = 0;
 						} else if(message.content.startsWith("3")) {
 							randomEvents.call(ch, 0, 5, value);	
 						}
