@@ -2017,6 +2017,12 @@ client.on('message', message =>
 					{
 						post("Working!");
 						db[sender.id].dailyDate = date + 1;
+						request(
+						{
+  							method: "PUT",
+  							uri: dbURL,
+  							json: db
+ 						});
 					} else {
 						var timeRemaining = db[sender.id] - date;
 						post(timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s left.");
