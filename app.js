@@ -219,6 +219,8 @@ client.on('message', message =>
 							randomEvents.call(ch, 0, stage, value);	
 						} else if(message.content.startsWith("3")) {
 							randomEvents.call(ch, 0, 5, value);	
+						} else {
+							return;	
 						}
 						
 						delete eventTracker[key];
