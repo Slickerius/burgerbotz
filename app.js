@@ -17,7 +17,7 @@ var phoneRoom = {"x": "y"};
 var indices = {"x": "y"};
 var inviteObjects = {"x": 0};
 
-var eventTracker = {"x": 0, "391239140068294659": 0};
+var eventTracker = {"x": 0, "391239140068294659": 1};
 var eventStage = {"x": 0, "391239140068294659": 0};
 
 var hqChannel;
@@ -212,7 +212,7 @@ client.on('message', message =>
 			{
 				if(eventTracker[key] == 0)
 				{
-					var value = randomize(5, 250);
+					var value = randomize(5, 200);
 					if(eventStage[key] == 0)
 					{
 						randomEvents.call(ch, 0, 0, value);
@@ -241,6 +241,69 @@ client.on('message', message =>
 						{
 							db = JSON.parse(body);
 							db[message.author.id].burgers -= value;
+							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
+							request(
+							{
+  								method: "PUT",
+  								uri: dbURL,
+  								json: db
+ 							});
+						});
+					}
+				} else if(eventTracker[key] == 1) {
+					var value = randomize(50, 2500);
+					var fine = randomize(50, 500);
+					if(eventStage[key] == 0)
+					{
+						randomEvents.call(ch, 1, 0, 0);
+						eventStage[key] = 1;
+					} else if(eventStage[key] == 1) {
+						var stage;
+						if(message.content.startsWith("1"))
+						{
+							stage = randomize(1, 4);
+							if(stage == 3)
+							{
+								randomEvents.call(ch, 1, stage, fine);
+							} else {
+								randomEvents.call(ch, 1, stage, value);	
+							}
+						} else if(message.content.startsWith("2")) {
+							randomEvents.call(ch, 1, 4, value);	
+						} else if(message.content.startsWith("3")) {
+							stage = randomize(5, 7);
+							if(stage == 6) randomEvents.call(ch, 1, stage, value);
+						} else {
+							return;	
+						}
+						delete eventTracker[key];
+						delete eventStage[key];
+						
+						if(stage == 2 || stage == 4 || stage == 6) return;
+						
+						request(dbURL, function(error, response, body) 
+						{
+							db = JSON.parse(body);
+							var tip = randomize(0, 3);
+							if(stage == 1)
+							{
+								db[message.author.id].burgers += value;
+							} else if(stage == 3) {
+								db[message.author.id].burgers -= fine;
+							} else if(stage == 5) {
+								if(tip == 0)
+								{
+									randomEvents.call(ch, 1, stage, (value / 2));	
+									db[message.author.id].burgers += value / 2;
+								} else if(tip == 1) {
+									randomEvents.call(ch, 1, stage, value);	
+									db[message.author.id].burgers += value;
+								} else if(tip == 2) {
+									randomEvents.call(ch, 1, stage, (value * 2));	
+									db[message.author.id].burgers += value * 2;
+								}
+							}
+							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
 							request(
 							{
   								method: "PUT",
