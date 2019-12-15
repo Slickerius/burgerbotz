@@ -2008,6 +2008,22 @@ client.on('message', message =>
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
 				break;
 				
+			case "daily":
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					var date = new Date();
+					if(!db[sender.id].dailyDate || date > db[sender.id].dailyDate)
+					{
+						post("Working!");
+						db[sender.id].dailyDate = date + 1;
+					} else {
+						var timeRemaining = db[sender.id] - date;
+						post(timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s left.");
+					}
+				});
+				break;
+				
 			case "afk":
 				if(!temp[sender.id].afk)
 				{
