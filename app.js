@@ -2016,8 +2016,9 @@ client.on('message', message =>
 					if(!db[sender.id].dailyDate || date > db[sender.id].dailyDate)
 					{
 						var output = randomize(250, 1001);
-						post(":calendar: **You have claimed your daily dose of burgers worth :hamburger: " + output + "!**");
 						date.setDate(date.getDate() + 1);
+						db[sender.id].burgers += output;
+						post(":calendar: **You have claimed your daily dose of burgers worth :hamburger: " + output + "!**");
 						db[sender.id].dailyDate = date;
 						request(
 						{
