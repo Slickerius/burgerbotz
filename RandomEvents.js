@@ -26,15 +26,15 @@ module.exports =
                         } else if(stage == 1) {
                                 channel.send(x0_msg_1);
                         } else if(stage == 2) {
-                                0_msg_2 += value + "**";
+                                x0_msg_2 += value + "**";
                                 channel.send(x0_msg_2);       
                         } else if(stage == 3) {
                                 channel.send(x0_msg_3);      
                         } else if(stage == 4) {
-                                0_msg_4 += value + "**";
+                                x0_msg_4 += value + "**";
                                 channel.send(x0_msg_4);       
                         } else if(stage == 5) {
-                                0_msg_5 += value + "** and fled the scene";
+                                x0_msg_5 += value + "** and fled the scene";
                                 channel.send(x0_msg_5);
                         }
                 }
