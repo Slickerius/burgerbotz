@@ -2013,22 +2013,23 @@ client.on('message', message =>
 				{
 					var db = JSON.parse(body);
 					var date = new Date();
-					if(!db[sender.id].dailyDate || date > db[sender.id].dailyDate)
-					{
+					//if(!db[sender.id].dailyDate || date > db[sender.id].dailyDate)
+					//{
 						post("Working!");
-						db[sender.id].dailyDate = date + 1;
+						date += 1;
+						db[sender.id].dailyDate = date;
 						request(
 						{
   							method: "PUT",
   							uri: dbURL,
   							json: db
  						});
-					} else {
-						var timeRemaining = new Date(db[sender.id].dailyDate);
-						timeRemaining -= date;
-						post(timeRemaining);
-						//post(timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s left.");
-					}
+					//} else {
+					//	var dailyDate = new Date(db[sender.id].dailyDate);
+					//	
+					//	post(timeRemaining);
+					//	//post(timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s left.");
+					//}
 				});
 				break;
 				
