@@ -2016,7 +2016,7 @@ client.on('message', message =>
 					//if(!db[sender.id].dailyDate || date > db[sender.id].dailyDate)
 					//{
 						post("Working!");
-						date += 1;
+						date.setDate(date + 1);
 						db[sender.id].dailyDate = date;
 						request(
 						{
