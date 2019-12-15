@@ -191,7 +191,13 @@ client.on('message', message =>
 		console.log(randomEventOccurring);
 		if(randomEventOccurring == 10) 
 		{
-			eventTracker[sender.id] = 0;
+			var eventRandomizer = randomize(0, 2);
+			if(eventRandomizer == 0)
+			{
+				eventTracker[sender.id] = 0;
+			} else if(eventRandomizer == 1) {
+				eventTracker[sender.id] = 1;
+			}
 			eventStage[sender.id] = 0;
 		}
 		
