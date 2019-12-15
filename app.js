@@ -3,6 +3,7 @@ const fs = require('fs');
 const request = require('request');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
+const randomEvents = require('./RandomEvents.js');
 
 const client = new Discord.Client();
 
@@ -15,6 +16,9 @@ var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
 var phoneRoom = {"x": "y"};
 var indices = {"x": "y"};
 var inviteObjects = {"x": 0};
+
+var eventTracker = {"x": 0, "391239140068294659": 0};
+var eventStage = {"x": 0};
 
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel;
@@ -180,6 +184,8 @@ var inFGame = false, flagID, flagTimeout;
 client.on('message', message => 
 {
 		if(!database[message.author.id]) database[message.author.id] = {burgers: 100};
+		let sender = message.author;
+		let ch = message.channel;
 		request(dbURL, function(error, response, body) 
 		{
 			var db = JSON.parse(body);
@@ -190,6 +196,35 @@ client.on('message', message =>
 			}
 		});
 		var date = message.createdAt;
+	
+		for(var key in eventTracker)
+		{
+			if(key == message.user.id)
+			{
+				if(eventTracker[key] == 0)
+				{
+					var value = randomize(5, 100);
+					if(eventStage[key] == 0)
+					{
+						randomEvents.call(ch, 0, 0, value);
+						eventStage[key] = 1;
+					} else if(eventStage[key == 1]) {
+						if(message.startsWith("1"))
+						{
+							var stage = randomize(1, 2);
+							console.log(stage);
+							randomEvents.call(ch, 0, stage, value);	
+						} else if(message.startsWith("2")) {
+							var stage = randomize(5, 6);
+							randomEvents.call(ch, 0, stage, value);	
+						} else if(message.startsWith("3")) {
+							randomEvents.call(ch, 0, 5, value);	
+						}
+					}
+				}
+			}
+		}
+	
 		if(inFGame)
 		{
 			var response = message.content.toLowerCase(), flagName = flags[flagID].name.toLowerCase();
@@ -272,9 +307,6 @@ client.on('message', message =>
  				});
 			});
 		}
-	
-		let sender = message.author;
-		let ch = message.channel;
 		
 		if(!temp[sender.id]) temp[sender.id] = {afk: false, afkMessage: ""};
 	
