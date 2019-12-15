@@ -19,7 +19,7 @@ var x0_msg_5 = "**You let the mugger take :hamburger: ";
 
 // Event 1
 
-var x1_msg_0 = "**:briefcase: You have found a briefcase! Do you: **[1]** Take it\n**[2]** Ignore it\n**[3]** Return it";
+var x1_msg_0 = "**:briefcase: You have found a briefcase! Do you:**\n**[1]** Take it\n**[2]** Ignore it\n**[3]** Return it";
 
 var x1_msg_1 = "**:money_mouth: You decided to take the briefcase and found that it contains :hamburger: ";
 var x1_msg_2 = "**:confused: You decided to take the briefcase which turned out to be empty.**";
