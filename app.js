@@ -186,6 +186,14 @@ client.on('message', message =>
 		if(!database[message.author.id]) database[message.author.id] = {burgers: 100};
 		let sender = message.author;
 		let ch = message.channel;
+	
+		var randomEventOccurring = randomize(0, 75);
+		if(randomEventOccurring == 10) 
+		{
+			eventTracker[sender.id] = 0;
+			eventStage[sender.id] = 0;
+		}
+		
 		request(dbURL, function(error, response, body) 
 		{
 			var db = JSON.parse(body);
