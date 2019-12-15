@@ -3,6 +3,8 @@ const fs = require('fs');
 const unst = require('./storage/unstatics.js');
 
 //Messages
+var msg;
+
 var x0_msg_0 = "**:dagger: You have been approached by a mugger! Do you:**\n**[1]** Confront\n**[2]** Cry for help\n**[3]** Flee";
 
 var x0_msg_1 = "**:punch: You chose to confront the mugger and succeeded. They begged for your mercy.**";
@@ -12,6 +14,7 @@ var x0_msg_3 = "**:speaking_head: You yelled for help and others rushed to the r
 var x0_msg_4 = "**:speak_no_evil: You tried to yell for help but the mugger threatened to hurt you. You stopped and watched as the mugger fled with your :hamburger: ";
 
 var x0_msg_5 = "**You let the mugger take :hamburger: ";
+
 //
 
 module.exports =
@@ -22,21 +25,20 @@ module.exports =
                 {
                         if(stage == 0)
                         {
-                                channel.send(x0_msg_0);
+                                msg = x0_msg_0;
                         } else if(stage == 1) {
-                                channel.send(x0_msg_1);
+                                msg = x0_msg_1;
                         } else if(stage == 2) {
-                                x0_msg_2 += value + "**";
-                                channel.send(x0_msg_2);       
+                                msg = x0_msg_2 + value + "**";     
                         } else if(stage == 3) {
-                                channel.send(x0_msg_3);      
+                                msg = x0_msg_3;    
                         } else if(stage == 4) {
-                                x0_msg_4 += value + "**";
-                                channel.send(x0_msg_4);       
+                                msg = x0_msg_4 + value + "**";  
                         } else if(stage == 5) {
-                                x0_msg_5 += value + "** and fled the scene";
-                                channel.send(x0_msg_5);
+                                msg = x0_msg_5 + value + "** and fled the scene";
                         }
+                        channel.send(msg);
+                        msg = "";
                 }
         }
 };
