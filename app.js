@@ -231,6 +231,8 @@ client.on('message', message =>
   								uri: dbURL,
   								json: db
  							});
+							delete eventTracker[key];
+							delete eventStage[key];
 						});
 					}
 				}
