@@ -251,7 +251,7 @@ client.on('message', message =>
 						});
 					}
 				} else if(eventTracker[key] == 1) {
-					console.log("A");
+					console.log("AVVA");
 					var value = randomize(50, 2500);
 					var fine = randomize(50, 500);
 					if(eventStage[key] == 0)
@@ -1512,6 +1512,11 @@ client.on('message', message =>
 			
 			case "xxl":
 				eventTracker[sender.id] = 0;
+				eventStage[sender.id] = 0;
+				break;
+			
+			case "xxy":
+				eventTracker[sender.id] = 1;
 				eventStage[sender.id] = 0;
 				break;
 				
