@@ -187,7 +187,7 @@ client.on('message', message =>
 		let sender = message.author;
 		let ch = message.channel;
 	
-		var randomEventOccurring = randomize(0, 75);
+		var randomEventOccurring = randomize(0, 100);
 		console.log(randomEventOccurring);
 		if(randomEventOccurring == 10) 
 		{
@@ -221,19 +221,19 @@ client.on('message', message =>
 					var value = randomize(1, 25);
 					if(eventStage[key] == 0)
 					{
-						randomEvents.call(ch, 0, 0, value);
+						randomEvents.call(ch, sender, 0, 0, value);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
 						var stage;
 						if(message.content.startsWith("1"))
 						{
 							stage = randomize(1, 3);
-							randomEvents.call(ch, 0, stage, value);	
+							randomEvents.call(ch, sender, 0, stage, value);	
 						} else if(message.content.startsWith("2")) {
 							stage = randomize(3, 5);
-							randomEvents.call(ch, 0, stage, value);	
+							randomEvents.call(ch, sender, 0, stage, value);	
 						} else if(message.content.startsWith("3")) {
-							randomEvents.call(ch, 0, 5, value);	
+							randomEvents.call(ch, sender, 0, 5, value);	
 						} else {
 							return;	
 						}
@@ -261,7 +261,7 @@ client.on('message', message =>
 					var fine = randomize(5, 50);
 					if(eventStage[key] == 0)
 					{
-						randomEvents.call(ch, 1, 0, 0);
+						randomEvents.call(ch, sender, 1, 0, 0);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
 						var stage;
@@ -270,16 +270,16 @@ client.on('message', message =>
 							stage = randomize(1, 4);
 							if(stage == 3)
 							{
-								randomEvents.call(ch, 1, stage, fine);
+								randomEvents.call(ch, sender, 1, stage, fine);
 							} else {
 								console.log(stage);
-								randomEvents.call(ch, 1, stage, value);	
+								randomEvents.call(ch, sender, 1, stage, value);	
 							}
 						} else if(message.content.startsWith("2")) {
-							randomEvents.call(ch, 1, 4, value);	
+							randomEvents.call(ch, sender, 1, 4, value);	
 						} else if(message.content.startsWith("3")) {
 							stage = randomize(5, 7);
-							if(stage == 6) randomEvents.call(ch, 1, stage, value);
+							if(stage == 6) randomEvents.call(ch, sender, 1, stage, value);
 						} else {
 							return;	
 						}
@@ -300,13 +300,13 @@ client.on('message', message =>
 							} else if(stage == 5) {
 								if(tip == 0)
 								{
-									randomEvents.call(ch, 1, stage, (value / 2));	
+									randomEvents.call(ch, sender, 1, stage, (value / 2));	
 									db[message.author.id].burgers += value / 2;
 								} else if(tip == 1) {
-									randomEvents.call(ch, 1, stage, value);	
+									randomEvents.call(ch, sender, 1, stage, value);	
 									db[message.author.id].burgers += value;
 								} else if(tip == 2) {
-									randomEvents.call(ch, 1, stage, (value * 2));	
+									randomEvents.call(ch, sender, 1, stage, (value * 2));	
 									db[message.author.id].burgers += value * 2;
 								}
 							}
@@ -2033,7 +2033,7 @@ client.on('message', message =>
 					var date = new Date();
 					if(!db[sender.id].dailyDate || date > db[sender.id].dailyDate)
 					{
-						var output = randomize(250, 1001);
+						var output = randomize(10, 15);
 						date.setDate(date.getDate() + 1);
 						db[sender.id].burgers += output;
 						post(":calendar: **You have claimed your daily dose of burgers worth :hamburger: " + output + "!**");
