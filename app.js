@@ -1753,8 +1753,12 @@ client.on('message', message =>
 				{
 					var db = JSON.parse(body);
 					var id = db['items'][0]['id']['videoId'];
-					console.log(id);
-					if(!musicServers[message.guild.id]) addServer(message);
+					var title = db['items'][0]['snippet']['title'];
+					if(!musicServers[message.guild.id]) 
+					{
+						addServer(message);
+						post(":notes: Playing **" + title + "**.");
+					} 
 					addToQueue(message, "https://www.youtube.com/watch?v=" + id);
 				});
 				
@@ -1768,6 +1772,7 @@ client.on('message', message =>
 			case "skip":
 				var server = musicServers[message.guild.id];
 				if(server.dispatcher) server.dispatcher.end();
+				post(":next_track: *Skipped.*");
 				break;
 				
 			case "stop":
@@ -1779,7 +1784,7 @@ client.on('message', message =>
 						server.queue.splice(i, 1);	
 					}
 					server.dispatcher.end();
-					post("**Stopping.**");
+					post(":stop_button: *Stopped.**");
 				}
 				
 				if(message.guild.connection) message.guild.voiceConnection.disconnect();
