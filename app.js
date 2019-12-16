@@ -330,10 +330,10 @@ client.on('message', message =>
 						if(message.content.startsWith("1"))
 						{
 							stage = randomize(1, 4);
-							randomEvents.call(ch, sender, 1, stage, value);	
+							randomEvents.call(ch, sender, 2, stage, value);	
 						} else if(message.content.startsWith("2")) {
 							stage = 4;
-							randomEvents.call(ch, sender, 1, 4, value);	
+							randomEvents.call(ch, sender, 2, 4, value);	
 						} else {
 							return;	
 						}
