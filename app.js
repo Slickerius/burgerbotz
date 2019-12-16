@@ -381,7 +381,7 @@ client.on('message', message =>
 							randomEvents.call(ch, sender, 3, 3, value);	
 						} else if(message.content.startsWith("3")) {
 							stage = randomize(4, 9);
-							if(stage == 6 || stage == 8) randomEvents.call(ch, sender, 3, stage, value);
+							randomEvents.call(ch, sender, 3, stage, value);
 						} else {
 							return;	
 						}
