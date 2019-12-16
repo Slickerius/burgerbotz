@@ -190,6 +190,7 @@ client.on('message', message =>
 		var randomEventOccurring = randomize(0, 100);
 		if(randomEventOccurring == 10) 
 		{
+			if(sender.bot) return;
 			var eventRandomizer = randomize(0, 3);
 			if(eventRandomizer == 0)
 			{
