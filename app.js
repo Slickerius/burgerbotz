@@ -2030,7 +2030,7 @@ client.on('message', message =>
 				{
 					var db = JSON.parse(body);
 					var date = new Date();
-					if(!db[sender.id].dailyDate || date > db[sender.id].dailyDate)
+					if(!db[sender.id].ee || date.getTime() > db[sender.id].dailyDate.getTime())
 					{
 						var output = randomize(10, 15);
 						date.setDate(date.getDate() + 1);
