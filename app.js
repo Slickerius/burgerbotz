@@ -1723,7 +1723,7 @@ client.on('message', message =>
 				request(url, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					console.log(db);
+					console.log(db['items']);
 				});
 				break;
 				
