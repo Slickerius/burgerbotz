@@ -11,7 +11,6 @@
     "discord.js": "11.4.0",
     "request": "2.81.0",
     "ytdl-core": "1.0.3",
-    "ffmpeg": "0.0.4",
-    "extra-ffmpeg": "4.0.3"
+    "opusscript": "0.0.7"
   }
 }
