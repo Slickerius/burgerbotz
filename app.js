@@ -2045,6 +2045,7 @@ client.on('message', message =>
  						});
 					} else {
 						var dailyDate = new Date(db[sender.id].dailyDate);
+						console.log(date + " " + dailyDate);
 						var timeRemaining = new Date(dailyDate - date);
 						post(":calendar: **You have claimed your daily dose of burgers today. It will be available again in " + timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s.**");
 					}
