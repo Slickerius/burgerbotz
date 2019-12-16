@@ -196,15 +196,8 @@ client.on('message', message =>
 		if(randomEventOccurring == 10) 
 		{
 			if(sender.bot) return;
-			var eventRandomizer = randomize(0, 3);
-			if(eventRandomizer == 0)
-			{
-				eventTracker[sender.id] = 0;
-			} else if(eventRandomizer == 1) {
-				eventTracker[sender.id] = 1;
-			} else if(eventRandomizer == 2) {
-				eventTracker[sender.id] = 2;
-			}
+			var eventRandomizer = randomize(0, 4);
+			eventTracker[sender.id] = eventRandomizer;
 			eventStage[sender.id] = 0;
 		}
 		
