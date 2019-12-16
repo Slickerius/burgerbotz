@@ -5,13 +5,7 @@ const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const randomEvents = require('./RandomEvents.js');
 
-const ytSearch = require('youtube-search');
-const ytSearchOpts = 
-{
-	maxResults: 2,
-	key: "a",
-	type: "video"
-};
+const ytdl = require('ytdl-core');
 
 const client = new Discord.Client();
 
@@ -30,6 +24,8 @@ var eventStage = {"x": 0, "391239140068294659": 0};
 
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel;
+
+var musicServers = {};
 
 var gdp_r_verif;
 
@@ -1719,6 +1715,36 @@ client.on('message', message =>
 				break;
 				
 			case "ytx":
+				function addServer(message)
+				{
+					musicServers[message.guild.id] =
+					{
+						queue: []
+					};	
+				}
+				
+				function play(connection, message)
+				{
+					var server = musicServers[message.guild.id];
+					server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
+					server.queue.shift();
+					
+					server.dispatcher.on("end", function()
+					{
+						if(server.queue[0])
+						{
+							play(connection, message);
+						} else {
+							connection.disconnect();
+						}
+					});
+				}
+				
+				function addToQueue(message, url)
+				{
+					musicServers[message.guild.id].queue.push(url);	
+				}
+				
 				args.shift();
 				var query = args.join(" ");
 				var url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAhx-tA7JcIMYEqWcx1hiNVAB9f3_xok8g&part=id,snippet&type=video&maxResults=1&q=" + query;
@@ -1727,8 +1753,15 @@ client.on('message', message =>
 					var db = JSON.parse(body);
 					var id = db['items'][0]['id']['videoId'];
 					console.log(id);
-					post("https://www.youtube.com/watch?v=" + id);
+					if(!musicServers[message.guild.id]) addServer(message);
+					addToQueue("https://www.youtube.com/watch?v=" + id);
 				});
+				
+				if(!message.guild.voiceConnection) message.member.voiceChannel.join()
+					.then(function(connection)
+					{
+						play(connection, message);
+					});
 				break;
 				
 			case "burgerphone":
