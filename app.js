@@ -188,7 +188,6 @@ client.on('message', message =>
 		let ch = message.channel;
 	
 		var randomEventOccurring = randomize(0, 100);
-		console.log(randomEventOccurring);
 		if(randomEventOccurring == 10) 
 		{
 			var eventRandomizer = randomize(0, 2);
