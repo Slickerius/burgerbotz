@@ -1719,8 +1719,11 @@ client.on('message', message =>
 				break;
 				
 			case "ytx":
-				var result = await ytSearch(args[1], ytSearchOpts).catch(err => console.err(err));
-				console.log(result.results);
+				var results = ytSearch(args[1], ytSearchOpts)
+					.then(result => 
+					{
+						console.log(result.results);
+					});
 				break;
 				
 			case "burgerphone":
