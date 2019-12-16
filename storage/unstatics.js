@@ -4,6 +4,7 @@ commandMap = new Map([
 		['/q', 'Solve quadratic equations'],
 		['/afk', 'Sets away from keyboard status'], 
 		['/s', 'Spits on grave'], 
+		['/daily', 'Claim your daily dose of burgers!'],
 		['/ping', 'Pong!'], 
 		['/bmi', 'Calculate body mass index!'],
 		['/stock', 'The Burgerbotz stock market simulator game! Also includes real time stock data'],
