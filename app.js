@@ -1716,12 +1716,12 @@ client.on('message', message =>
 				break;
 				
 			case "queue":
-				if(musicServers[message.guild.id].queue) 
+				if(musicServers[message.guild.id].queue && musicServers[message.guild.id].queue != null) 
 				{
 					var msg = ":radio: __**Queue**__";
 					for(i = 0; i < musicServers[message.guild.id].queue.length; i++)
 					{
-						msg += "\n" + (i + 1) + ")" + musicServers[message.guild.id].titles[i] + "\n";
+						msg += "\n" + (i + 1) + ") **" + musicServers[message.guild.id].titles[i] + "**";
 					}
 					post(msg);
 				} else {
