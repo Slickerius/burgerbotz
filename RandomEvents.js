@@ -40,6 +40,21 @@ var x2_msg_3 = "**:dizzy_face: You signed the paper which turned out to be a cun
 
 var x2_msg_4 = "**:person_walking: You declined to sign the paper and walked away.**";
 
+//Event 3 => Homeless
+
+var x3_msg_0 = " You see a homeless person who appears to be fast asleep. Do you:**\n**[1]** Donate\n**[2]** Ignore them\n**[3]** Steal from them";
+
+var x3_msg_1 = "**:angel: You donated :hamburger: ";
+var x3_msg_2 = "**:camera_with_flash: You attempted to donate to the homeless person, which revealed themselves to be a YouTuber filming a social experiment and thanked you for your honesty. They also gave you :hamburger: ";
+
+var x3_msg_3 = "**:person_walking: Unbothered, you walked on from the scene.**";
+
+var x3_msg_4 = "**:punch: They woke up as soon as you attempted to reach for their hamburgers. They tried to assault you but you overpowered them and took :hamburger: ";
+var x3_msg_5 = "**:dizzy_face: You attempted to steal from them which resulted in them waking up. They assaulted you and left after taking :hamburger: ";
+var x3_msg_6 = "**:confused_face: You reached for their pockets but they do not seem to have anything valuable with them.**";
+var x3_msg_7 = "**:money_mouth: You found and took :hamburger: ";
+var x3_msg_8 = "**:pensive: You fled the scene after stealing from them and a group of people with cameras claiming to be YouTubers approached you, claiming it was merely a social experiment. You returned what you stole and walked away in shame.**";
+
 module.exports =
 {
         call: function(channel, user, id, stage, value)
@@ -93,6 +108,29 @@ module.exports =
                                 msg = x2_msg_3 + value + "**";    
                         } else if(stage == 4) {
                                 msg = x2_msg_4;  
+                        }
+                        channel.send(msg);
+                        msg = "";
+                } else if(id == 3) {
+                        if(stage == 0)
+                        {
+                                msg = "**:sleepy: " + user + x3_msg_0;
+                        } else if(stage == 1) {
+                                msg = x3_msg_1 + value + "**";
+                        } else if(stage == 2) {
+                                msg = x3_msg_2 + value + "**";     
+                        } else if(stage == 3) {
+                                msg = x3_msg_3;    
+                        } else if(stage == 4) {
+                                msg = x3_msg_4 + value + "**";  
+                        } else if(stage == 5) {
+                                msg = x3_msg_5 + value + "**";
+                        } else if(stage == 6) {
+                                msg = x3_msg_6;     
+                        } else if(stage == 7) {
+                                msg = x3_msg_7 + value + "**";
+                        } else if(stage == 8) {
+                                msg = x3_msg_8;     
                         }
                         channel.send(msg);
                         msg = "";
