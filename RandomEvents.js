@@ -32,7 +32,7 @@ var x1_msg_6 = "**:angel: You returned the briefcase to its owner, who thanked y
 
 //Event 2 => Paper
 
-var x2_msg_0 = " You have been approached by a person in a suit, handing over to you a piece of paper on which your signature is expected. Do you:**\n**[1]**Sign it\n**[2]**Flee";
+var x2_msg_0 = " You have been approached by a person in a suit, handing over to you a piece of paper on which your signature is expected. Do you:**\n**[1]** Sign it\n**[2]** Flee";
 
 var x2_msg_1 = "**:tada: The paper turned out to be a registration form for a lucky draw, which you won. You received :hamburger: ";
 var x2_msg_2 = "**:confused: You signed the paper but nothing happened.**";
