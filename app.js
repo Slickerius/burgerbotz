@@ -1716,7 +1716,7 @@ client.on('message', message =>
 				break;
 				
 			case "queue":
-				if(musicServers[message.guild.id].queue && musicServers[message.guild.id].queue != null) 
+				if(musicServers[message.guild.id].queue && musicServers[message.guild.id].queue.length >= 1) 
 				{
 					var msg = ":radio: __**Queue**__";
 					for(i = 0; i < musicServers[message.guild.id].queue.length; i++)
