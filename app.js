@@ -192,7 +192,7 @@ client.on('message', message =>
 		let sender = message.author;
 		let ch = message.channel;
 	
-		var randomEventOccurring = randomize(0, 100);
+		var randomEventOccurring = randomize(0, 250);
 		if(randomEventOccurring == 10) 
 		{
 			if(sender.bot) return;
