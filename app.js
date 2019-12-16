@@ -1754,7 +1754,7 @@ client.on('message', message =>
 					var id = db['items'][0]['id']['videoId'];
 					console.log(id);
 					if(!musicServers[message.guild.id]) addServer(message);
-					addToQueue("https://www.youtube.com/watch?v=" + id);
+					addToQueue(message, "https://www.youtube.com/watch?v=" + id);
 				});
 				
 				if(!message.guild.voiceConnection) message.member.voiceChannel.join()
