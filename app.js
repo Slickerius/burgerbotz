@@ -11,7 +11,7 @@ const ytSearchOpts =
 	maxResults: 2,
 	key: "AIzaSyAhx-tA7JcIMYEqWcx1hiNVAB9f3_xok8g",
 	type: "video"
-}
+};
 
 const client = new Discord.Client();
 
@@ -1719,10 +1719,10 @@ client.on('message', message =>
 				break;
 				
 			case "ytx":
-				var results = ytSearch(args[1], ytSearchOpts)
-					.then(result => 
+				ytSearch(args[1], ytSearchOpts)
+					.then(results => 
 					{
-						console.log("BF");
+						console.log(results.results);
 					}).catch(console.error);
 				break;
 				
