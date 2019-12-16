@@ -51,7 +51,7 @@ var x3_msg_3 = "**:person_walking: Unbothered, you walked on from the scene.**";
 
 var x3_msg_4 = "**:punch: They woke up as soon as you attempted to reach for their hamburgers. They tried to assault you but you overpowered them and took :hamburger: ";
 var x3_msg_5 = "**:dizzy_face: You attempted to steal from them which resulted in them waking up. They assaulted you and left after taking :hamburger: ";
-var x3_msg_6 = "**:confused_face: You reached for their pockets but they do not seem to have anything valuable with them.**";
+var x3_msg_6 = "**:confused: You reached for their pockets but they do not seem to have anything valuable with them.**";
 var x3_msg_7 = "**:money_mouth: You found and took :hamburger: ";
 var x3_msg_8 = "**:pensive: You fled the scene after stealing from them and a group of people with cameras claiming to be YouTubers approached you, claiming it was merely a social experiment. You returned what you stole and walked away in shame.**";
 
