@@ -45,7 +45,7 @@ var x2_msg_4 = "**:person_walking: You declined to sign the paper and walked awa
 var x3_msg_0 = " You see a homeless person who appears to be fast asleep. Do you:**\n**[1]** Donate\n**[2]** Ignore them\n**[3]** Steal from them";
 
 var x3_msg_1 = "**:angel: You donated :hamburger: ";
-var x3_msg_2 = "**:camera_with_flash: You attempted to donate to the homeless person, which revealed themselves to be a YouTuber filming a social experiment and thanked you for your honesty. They also gave you :hamburger: ";
+var x3_msg_2 = "**:camera_with_flash: As you were attempting to donate to them, they revealed themselves to be a YouTuber filming a social experiment and thanked you for your honesty. They also gave you :hamburger: ";
 
 var x3_msg_3 = "**:person_walking: Unbothered, you walked on from the scene.**";
 
@@ -67,11 +67,11 @@ module.exports =
                         } else if(stage == 1) {
                                 msg = x0_msg_1;
                         } else if(stage == 2) {
-                                msg = x0_msg_2 + value + "**";     
+                                msg = x0_msg_2 + value + ".**";     
                         } else if(stage == 3) {
                                 msg = x0_msg_3;    
                         } else if(stage == 4) {
-                                msg = x0_msg_4 + value + "**";  
+                                msg = x0_msg_4 + value + ".**";  
                         } else if(stage == 5) {
                                 msg = x0_msg_5 + value + " and fled the scene.**";
                         }
@@ -82,11 +82,11 @@ module.exports =
                         {
                                 msg = "**:briefcase: " + user + x1_msg_0;
                         } else if(stage == 1) {
-                                msg = x1_msg_1 + value + "**";
+                                msg = x1_msg_1 + value + ".**";
                         } else if(stage == 2) {
                                 msg = x1_msg_2;     
                         } else if(stage == 3) {
-                                msg = x1_msg_3 + value + "**";    
+                                msg = x1_msg_3 + value + ".**";    
                         } else if(stage == 4) {
                                 msg = x1_msg_4;  
                         } else if(stage == 5) {
@@ -101,11 +101,11 @@ module.exports =
                         {
                                 msg = "**:scroll: :pen_fountain: " + user + x2_msg_0;
                         } else if(stage == 1) {
-                                msg = x2_msg_1 + value + "**";
+                                msg = x2_msg_1 + value + ".**";
                         } else if(stage == 2) {
                                 msg = x2_msg_2;     
                         } else if(stage == 3) {
-                                msg = x2_msg_3 + value + "**";    
+                                msg = x2_msg_3 + value + ".**";    
                         } else if(stage == 4) {
                                 msg = x2_msg_4;  
                         }
@@ -116,19 +116,19 @@ module.exports =
                         {
                                 msg = "**:sleepy: " + user + x3_msg_0;
                         } else if(stage == 1) {
-                                msg = x3_msg_1 + value + "**";
+                                msg = x3_msg_1 + value + " to the homeless person.**";
                         } else if(stage == 2) {
-                                msg = x3_msg_2 + value + "**";     
+                                msg = x3_msg_2 + value + " for your honesty.**";     
                         } else if(stage == 3) {
                                 msg = x3_msg_3;    
                         } else if(stage == 4) {
-                                msg = x3_msg_4 + value + "**";  
+                                msg = x3_msg_4 + value + ".**";  
                         } else if(stage == 5) {
-                                msg = x3_msg_5 + value + "**";
+                                msg = x3_msg_5 + value + ".**";
                         } else if(stage == 6) {
                                 msg = x3_msg_6;     
                         } else if(stage == 7) {
-                                msg = x3_msg_7 + value + "**";
+                                msg = x3_msg_7 + value + ".**";
                         } else if(stage == 8) {
                                 msg = x3_msg_8;     
                         }
