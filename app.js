@@ -1765,6 +1765,26 @@ client.on('message', message =>
 					});
 				break;
 				
+			case "skip":
+				var server = musicServers[message.guild.id];
+				if(server.dispatcher) server.dispatcher.end();
+				break;
+				
+			case "stop":
+				var server = musicServers[message.guild.id];
+				if(message.guild.voiceConnection)
+				{
+					for(i = server.queue.length - 1; i >= 0; i--)
+					{
+						server.queue.splice(i, 1);	
+					}
+					server.dispatcher.end();
+					post("**Stopping.**");
+				}
+				
+				if(message.guild.connection) message.guild.voiceConnection.disconnect();
+				break;
+				
 			case "burgerphone":
 			case "bp":
 				console.log(phoneRoom[message.channel.id]);
