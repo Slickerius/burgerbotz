@@ -17,7 +17,7 @@ var phoneRoom = {"x": "y"};
 var indices = {"x": "y"};
 var inviteObjects = {"x": 0};
 
-var eventTracker = {"x": 0, "391239140068294659": 1};
+var eventTracker = {"x": 0, "391239140068294659": 2};
 var eventStage = {"x": 0, "391239140068294659": 0};
 
 var hqChannel;
@@ -309,6 +309,42 @@ client.on('message', message =>
 									db[message.author.id].burgers += value * 2;
 								}
 							}
+							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
+							request(
+							{
+  								method: "PUT",
+  								uri: dbURL,
+  								json: db
+ 							});
+						});
+					}
+				} else if(eventTracker[key] == 2) {
+					var value = randomize(20, 100);
+					if(eventStage[key] == 0)
+					{
+						randomEvents.call(ch, sender, 2, 0, value);
+						eventStage[key] = 1;
+					} else if(eventStage[key] == 1) {
+						var stage;
+						if(message.content.startsWith("1"))
+						{
+							stage = randomize(1, 4);
+							randomEvents.call(ch, sender, 0, stage, value);	
+						} else if(message.content.startsWith("2")) {
+							randomEvents.call(ch, sender, 4, value);	
+						} else {
+							return;	
+						}
+						
+						delete eventTracker[key];
+						delete eventStage[key];
+						
+						if(stage == 2 || stage == 4) return;
+						
+						request(dbURL, function(error, response, body) 
+						{
+							db = JSON.parse(body);
+							db[message.author.id].burgers -= value;
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
 							request(
 							{
@@ -1522,6 +1558,11 @@ client.on('message', message =>
 			
 			case "xxy":
 				eventTracker[sender.id] = 1;
+				eventStage[sender.id] = 0;
+				break;
+				
+			case "xxz":
+				eventTracker[sender.id] = 2;
 				eventStage[sender.id] = 0;
 				break;
 				
