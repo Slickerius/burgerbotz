@@ -190,12 +190,14 @@ client.on('message', message =>
 		var randomEventOccurring = randomize(0, 100);
 		if(randomEventOccurring == 10) 
 		{
-			var eventRandomizer = randomize(0, 2);
+			var eventRandomizer = randomize(0, 3);
 			if(eventRandomizer == 0)
 			{
 				eventTracker[sender.id] = 0;
 			} else if(eventRandomizer == 1) {
 				eventTracker[sender.id] = 1;
+			} else if(eventRandomizer == 2) {
+				eventTracker[sender.id] = 2;
 			}
 			eventStage[sender.id] = 0;
 		}
