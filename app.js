@@ -1718,7 +1718,10 @@ client.on('message', message =>
 			case "queue":
 				if(musicServers[message.guild.id].queue) 
 				{
-					post(musicServers[message.guild.id].queue + " " + musicServers[message.guild.id].snippets);
+					for(i = 0; i < musicServers[message.guild.id].queue.length; i++)
+					{
+						post(musicServers[message.guild.id].queue[i] + " " + musicServers[message.guild.id].titles[i]);
+					}	
 				}
 				break;
 				
@@ -1728,7 +1731,8 @@ client.on('message', message =>
 					musicServers[message.guild.id] =
 					{
 						queue: [],
-						snippets: []
+						titles: [],
+						thumbnails: []
 					};	
 				}
 				
@@ -1737,8 +1741,8 @@ client.on('message', message =>
 					var server = musicServers[message.guild.id];
 					server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
 					server.queue.shift();
-					server.snippets.title.shift();
-					server.snippets.thumbnail.shift();
+					server.titles.shift();
+					server.thumbnails.shift();
 					
 					server.dispatcher.on("end", function()
 					{
@@ -1754,8 +1758,8 @@ client.on('message', message =>
 				function addToQueue(message, url, title, thumbnail)
 				{
 					musicServers[message.guild.id].queue.push(url);	
-					musicServers[message.guild.id].snippets.title.push(title);
-					musicServers[message.guild.id].snippets.thumbnail.push(thumbnail);
+					musicServers[message.guild.id].titles.push(title);
+					musicServers[message.guild.id].thumbnails.push(thumbnail);
 				}
 				
 				args.shift();
