@@ -183,7 +183,7 @@ var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
-		if(!database[message.author.id]) database[message.author.id] = {burgers: 100};
+		if(!database[message.author.id]) database[message.author.id] = {burgers: 10};
 		let sender = message.author;
 		let ch = message.channel;
 	
@@ -206,7 +206,7 @@ client.on('message', message =>
 			var db = JSON.parse(body);
 			if(!db[message.author.id]) 
 			{
-				db[message.author.id] = {burgers: 100};
+				db[message.author.id] = {burgers: 10};
 				console.log("Created new DB data for user: " + message.author.name + "#" + message.author.discriminator);
 			}
 		});
@@ -218,7 +218,7 @@ client.on('message', message =>
 			{
 				if(eventTracker[key] == 0)
 				{
-					var value = randomize(5, 200);
+					var value = randomize(1, 25);
 					if(eventStage[key] == 0)
 					{
 						randomEvents.call(ch, 0, 0, value);
@@ -257,8 +257,8 @@ client.on('message', message =>
 						});
 					}
 				} else if(eventTracker[key] == 1) {
-					var value = randomize(50, 2500);
-					var fine = randomize(50, 500);
+					var value = randomize(5, 250);
+					var fine = randomize(5, 50);
 					if(eventStage[key] == 0)
 					{
 						randomEvents.call(ch, 1, 0, 0);
@@ -334,7 +334,7 @@ client.on('message', message =>
 				request(req, function(error, response, body) 
 				{
 					db = JSON.parse(body);
-					var x = randomize(25, 100);
+					var x = randomize(2, 10);
 					post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
 					db[message.author.id].burgers += x;
 					db["gdp"].total += x;
@@ -381,7 +381,7 @@ client.on('message', message =>
 		
 		function onDefeat(player1, player2, winID)
 		{
-			var x = randomize(100, 1000);
+			var x = randomize(15, 75);
 			var req = dbURL;
 			inGame = false;
 			p1isCrippled = false;
@@ -392,7 +392,7 @@ client.on('message', message =>
 			request(req, function(error, response, body) 
 			{
 				db = JSON.parse(body);
-				if(!db[winID]) db[winID] = {burgers: 100};
+				if(!db[winID]) db[winID] = {burgers: 10};
 				db[winID].burgers += x;
 				
 				db["gdp"].battle += x;
@@ -1298,8 +1298,8 @@ client.on('message', message =>
 						request(dbURL, function(error, response, body) 
 						{
 							db = JSON.parse(body);
-							if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-							if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+							if(db[sender.id] == null) db[sender.id] = {burgers: 10};
+							if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 10;
 							if(db[sender.id]['stocks'] == null) db[sender.id]['stocks'] = {};
 							if(db[sender.id].burgers < (amount * price))
 							{
@@ -1366,8 +1366,8 @@ client.on('message', message =>
 						request(dbURL, function(error, response, body) 
 						{
 							db = JSON.parse(body);
-							if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-							if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+							if(db[sender.id] == null) db[sender.id] = {burgers: 10};
+							if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 10;
 							if(db[sender.id]['stocks'] == null) db[sender.id]['stocks'] = {};
 							if(db[sender.id]['stocks'][ticker] < amount)
 							{
@@ -1402,8 +1402,8 @@ client.on('message', message =>
 					request(dbURL, function(error, response, body) 
 					{
 						db = JSON.parse(body);
-						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+						if(db[sender.id] == null) db[sender.id] = {burgers: 10};
+						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 10;
 						if(db[sender.id]['stocks'].length == 0) 
 						{
 							post(":octagonal_sign: **Your stock portfolio is empty!**");
@@ -1434,8 +1434,8 @@ client.on('message', message =>
 					request(dbURL, function(error, response, body) 
 					{
 						db = JSON.parse(body);
-						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+						if(db[sender.id] == null) db[sender.id] = {burgers: 10};
+						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 10;
 						if(db[sender.id] == null) db[sender.id]['stocks'] = {};
 						if(db[sender.id]['stocks'][ticker] == null)
 						{
@@ -1551,8 +1551,8 @@ client.on('message', message =>
 					}
 					if(message.mentions.users.size < 1 && !userFound)
 					{
-						if(db[sender.id] == null) db[sender.id] = {burgers: 100};
-						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 100;
+						if(db[sender.id] == null) db[sender.id] = {burgers: 10};
+						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 10;
 						post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + db[sender.id].burgers + `**`);
 						request(
 						{
@@ -1564,8 +1564,8 @@ client.on('message', message =>
 						if(userFound) return;
 						var user = message.mentions.users.first();
 						if(user.bot) return post(":octagonal_sign: **Semi-sentient beings are barred from Burgerbotz participation!**");
-						if(db[user.id] == null) db[user.id] = {burgers: 100};
-						if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
+						if(db[user.id] == null) db[user.id] = {burgers: 10};
+						if(isNaN(db[user.id].burgers)) db[user.id].burgers = 10;
 						post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + db[user.id].burgers + `**`);
 						request(
 						{
@@ -1592,7 +1592,7 @@ client.on('message', message =>
 								
 								if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 								{
-									if(isNaN(db[x].burgers)) db[x].burgers = 100;
+									if(isNaN(db[x].burgers)) db[x].burgers = 10;
 									db[x].burgers += parseFloat(arg0);							
 									db[sender.id].burgers -= parseFloat(arg0);
 									db["gdp"].transactions += parseFloat(arg0);
@@ -1624,14 +1624,14 @@ client.on('message', message =>
 						{
 							if(!db[user.id])
 							{
-								db[user.id] = {burgers: 100};
+								db[user.id] = {burgers: 10};
 							}
 							
 							if(parseFloat(arg0) < 0) return post("You must enter a positive number.");
 							
 							if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 							{
-								if(isNaN(db[user.id].burgers)) db[user.id].burgers = 100;
+								if(isNaN(db[user.id].burgers)) db[user.id].burgers = 10;
 								db[user.id].burgers += parseFloat(arg0);							
 								db[sender.id].burgers -= arg0;
 								db["gdp"].transactions += parseFloat(arg0);
@@ -1900,6 +1900,23 @@ client.on('message', message =>
 				post(result);
 				break;
 			
+			case "inf-r":
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					for(var key in db)
+					{
+						db[key].burgers = db[key].burgers / 10;
+						console.log("Reevaluated " + key + "'s balance.");
+						request(
+						{
+  							method: "PUT",
+							uri: dbURL,
+  							json: db
+ 						});
+					}
+				break;
+			
 			case "economy":
 				request(dbURL, function(error, response, body) 
 				{
@@ -1982,7 +1999,7 @@ client.on('message', message =>
 					{
 						if(!db[u.id])
 						{
-							db[u.id] = {burgers: 100};
+							db[u.id] = {burgers: 10};
 							console.log("Added DB for user " + u.username);
 						}
 					});
