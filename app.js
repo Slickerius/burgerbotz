@@ -1719,11 +1719,15 @@ client.on('message', message =>
 				break;
 				
 			case "ytx":
-				var url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAhx-tA7JcIMYEqWcx1hiNVAB9f3_xok8g&part=id,snippet&type=video&maxResults=1&q=aaf";
+				args.shift();
+				var query = args.join(" ");
+				var url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAhx-tA7JcIMYEqWcx1hiNVAB9f3_xok8g&part=id,snippet&type=video&maxResults=1&q=" + query;
 				request(url, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					console.log(db['items'][0]['id']['videoId']);
+					var id = db['items'][0]['id']['videoId'];
+					console.log(id);
+					post("https://www.youtube.com/watch?v=" + id);
 				});
 				break;
 				
