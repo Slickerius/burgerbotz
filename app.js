@@ -4,6 +4,7 @@ const request = require('request');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const randomEvents = require('./RandomEvents.js');
+const ytSearch = require('youtube-search');
 
 const client = new Discord.Client();
 
