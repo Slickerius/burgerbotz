@@ -9,7 +9,7 @@ const ytSearch = require('youtube-search');
 const ytSearchOpts = 
 {
 	maxResults: 2,
-	key: "AIzaSyAhx-tA7JcIMYEqWcx1hiNVAB9f3_xok8g",
+	key: "a",
 	type: "video"
 };
 
