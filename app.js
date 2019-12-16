@@ -1716,6 +1716,7 @@ client.on('message', message =>
 				break;
 				
 			case "queue":
+				if(!musicServers[message.guild.id]) return post(":radio: **The queue is empty!**");
 				if(musicServers[message.guild.id].queue && musicServers[message.guild.id].queue.length >= 1) 
 				{
 					var msg = ":radio: __**Queue**__";
