@@ -4,7 +4,14 @@ const request = require('request');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const randomEvents = require('./RandomEvents.js');
+
 const ytSearch = require('youtube-search');
+const ytSearchOpts = 
+{
+	maxResults: 1,
+	key: "AIzaSyAhx-tA7JcIMYEqWcx1hiNVAB9f3_xok8g",
+	type: "video"
+}
 
 const client = new Discord.Client();
 
@@ -1709,6 +1716,11 @@ client.on('message', message =>
 					post("**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator + " - " + guild.memberCount + " members");
 				});
 				post("Total: " + x + " servers");
+				break;
+				
+			case "ytx":
+				var result = await ytSearch(args[1], ytSearchOpts).catch(err => console.err(err));
+				console.log(result.results);
 				break;
 				
 			case "burgerphone":
