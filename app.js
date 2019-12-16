@@ -275,6 +275,7 @@ client.on('message', message =>
 								randomEvents.call(ch, sender, 1, stage, value);	
 							}
 						} else if(message.content.startsWith("2")) {
+							stage = 4;
 							randomEvents.call(ch, sender, 1, 4, value);	
 						} else if(message.content.startsWith("3")) {
 							stage = randomize(5, 7);
@@ -329,9 +330,10 @@ client.on('message', message =>
 						if(message.content.startsWith("1"))
 						{
 							stage = randomize(1, 4);
-							randomEvents.call(ch, sender, 0, stage, value);	
+							randomEvents.call(ch, sender, 1, stage, value);	
 						} else if(message.content.startsWith("2")) {
-							randomEvents.call(ch, sender, 4, value);	
+							stage = 4;
+							randomEvents.call(ch, sender, 1, 4, value);	
 						} else {
 							return;	
 						}
