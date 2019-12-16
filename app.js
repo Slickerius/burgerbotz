@@ -1908,13 +1908,13 @@ client.on('message', message =>
 					{
 						db[key].burgers = db[key].burgers / 10;
 						console.log("Reevaluated " + key + "'s balance.");
-						request(
-						{
-  							method: "PUT",
-							uri: dbURL,
-  							json: db
- 						});
 					}
+					request(
+					{
+  						method: "PUT",
+						uri: dbURL,
+  						json: db
+ 					});
 				});
 				break;
 			
