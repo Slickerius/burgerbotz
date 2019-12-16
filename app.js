@@ -2030,8 +2030,8 @@ client.on('message', message =>
 				{
 					var db = JSON.parse(body);
 					var date = new Date();
-					console.log(date.getTime() + " " + db[sender.id].dailyDate.getTime());
-					if(!db[sender.id].ee || date.getTime() > db[sender.id].dailyDate.getTime())
+					var dailyDate = new Date(db[sender.id].dailyDate);
+					if(!db[sender.id].dailyDate || date.getTime() > dailyDate.getTime())
 					{
 						var output = randomize(10, 15);
 						date.setDate(date.getDate() + 1);
@@ -2045,7 +2045,6 @@ client.on('message', message =>
   							json: db
  						});
 					} else {
-						var dailyDate = new Date(db[sender.id].dailyDate);
 						console.log(date + " " + dailyDate);
 						var timeRemaining = new Date(dailyDate - date);
 						post(":calendar: **You have claimed your daily dose of burgers today. It will be available again in " + timeRemaining.getHours() + "h " + timeRemaining.getMinutes() + "m " + timeRemaining.getSeconds() + "s.**");
