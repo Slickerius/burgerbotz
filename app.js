@@ -1915,6 +1915,7 @@ client.on('message', message =>
   							json: db
  						});
 					}
+				});
 				break;
 			
 			case "economy":
