@@ -1716,7 +1716,10 @@ client.on('message', message =>
 				break;
 				
 			case "queue":
-				post(musicServers[message.guild.id].queue);
+				if(musicServers[message.guild.id].queue) 
+				{
+					post(musicServers[message.guild.id].queue + " " + musicServers[message.guild.id].snippets);
+				}
 				break;
 				
 			case "ytx":
@@ -1724,7 +1727,8 @@ client.on('message', message =>
 				{
 					musicServers[message.guild.id] =
 					{
-						queue: []
+						queue: [],
+						snippets: []
 					};	
 				}
 				
@@ -1733,6 +1737,8 @@ client.on('message', message =>
 					var server = musicServers[message.guild.id];
 					server.dispatcher = connection.playStream(ytdl(server.queue[0], {filter: "audioonly"}));
 					server.queue.shift();
+					server.snippets.title.shift();
+					server.snippets.thumbnail.shift();
 					
 					server.dispatcher.on("end", function()
 					{
@@ -1745,9 +1751,11 @@ client.on('message', message =>
 					});
 				}
 				
-				function addToQueue(message, url)
+				function addToQueue(message, url, title, thumbnail)
 				{
 					musicServers[message.guild.id].queue.push(url);	
+					musicServers[message.guild.id].snippets.title.push(title);
+					musicServers[message.guild.id].snippets.thumbnail.push(thumbnail);
 				}
 				
 				args.shift();
@@ -1758,12 +1766,13 @@ client.on('message', message =>
 					var db = JSON.parse(body);
 					var id = db['items'][0]['id']['videoId'];
 					var title = db['items'][0]['snippet']['title'];
+					var thumbnail = db['items'][0]['snippet']['thumbnails']['default']['url'];
 					if(!musicServers[message.guild.id]) 
 					{
 						addServer(message);
 						post(":notes: Playing **" + title + "**.");
 					} 
-					addToQueue(message, "https://www.youtube.com/watch?v=" + id);
+					addToQueue(message, "https://www.youtube.com/watch?v=" + id, title, thumbnail);
 				});
 				
 				if(!message.guild.voiceConnection) message.member.voiceChannel.join()
