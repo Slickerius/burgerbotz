@@ -1715,6 +1715,10 @@ client.on('message', message =>
 				post("Total: " + x + " servers");
 				break;
 				
+			case "queue":
+				post(musicServers[message.guild.id].queue);
+				break;
+				
 			case "ytx":
 				function addServer(message)
 				{
