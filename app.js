@@ -1722,7 +1722,7 @@ client.on('message', message =>
 				var url = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAhx-tA7JcIMYEqWcx1hiNVAB9f3_xok8g&part=id,snippet&type=video&maxResults=1&q=" + args[1];
 				request(url, function(error, response, body) 
 				{
-					db = JSON.parse(body);
+					var db = JSON.parse(body);
 					post(db);
 				});
 				break;
