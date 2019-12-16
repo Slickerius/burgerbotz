@@ -8,7 +8,7 @@ const randomEvents = require('./RandomEvents.js');
 const ytSearch = require('youtube-search');
 const ytSearchOpts = 
 {
-	maxResults: 1,
+	maxResults: 2,
 	key: "AIzaSyAhx-tA7JcIMYEqWcx1hiNVAB9f3_xok8g",
 	type: "video"
 }
@@ -1722,8 +1722,8 @@ client.on('message', message =>
 				var results = ytSearch(args[1], ytSearchOpts)
 					.then(result => 
 					{
-						console.log(result.results);
-					});
+						console.log("BF");
+					}).catch(console.error);
 				break;
 				
 			case "burgerphone":
