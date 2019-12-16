@@ -20,7 +20,7 @@ var phoneRoom = {"x": "y"};
 var indices = {"x": "y"};
 var inviteObjects = {"x": 0};
 
-var eventTracker = {"x": 0, "391239140068294659": 2};
+var eventTracker = {"x": 0, "391239140068294659": 3};
 var eventStage = {"x": 0, "391239140068294659": 0};
 
 var hqChannel;
@@ -1609,7 +1609,7 @@ client.on('message', message =>
 				break;
 			
 			case "xxz":
-				eventTracker[sender.id] = 2;
+				eventTracker[sender.id] = 3;
 				eventStage[sender.id] = 0;
 				break;
 				
