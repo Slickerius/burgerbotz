@@ -1718,10 +1718,14 @@ client.on('message', message =>
 			case "queue":
 				if(musicServers[message.guild.id].queue) 
 				{
+					var msg = ":radio: __**Queue**__";
 					for(i = 0; i < musicServers[message.guild.id].queue.length; i++)
 					{
-						post(musicServers[message.guild.id].queue[i] + " " + musicServers[message.guild.id].titles[i]);
-					}	
+						msg += "\n" + (i + 1) + ")" + musicServers[message.guild.id].titles[i] + "\n";
+					}
+					post(msg);
+				} else {
+					post(":radio: **The queue is empty!**");	
 				}
 				break;
 				
@@ -1775,7 +1779,9 @@ client.on('message', message =>
 					{
 						addServer(message);
 						post(":notes: Playing **" + title + "**.");
-					} 
+					} else {
+						post(":notes: Added to queue: **" + title + "**.");	
+					}
 					addToQueue(message, "https://www.youtube.com/watch?v=" + id, title, thumbnail);
 				});
 				
