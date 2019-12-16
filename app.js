@@ -4,6 +4,7 @@ const request = require('request');
 const unst = require('./storage/unstatics.js');
 const handler = require('./CommandHandler.js');
 const randomEvents = require('./RandomEvents.js');
+const ffmpeg = require('ffmpeg');
 
 const ytdl = require('ytdl-core');
 
