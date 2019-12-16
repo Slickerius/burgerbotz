@@ -1375,6 +1375,8 @@ client.on('message', message =>
 					{
 						post("__**Usage:**__ /stock sell <stock> <amount>");
 						return;
+					} else if(parseInt(args[3]) < 1) {
+						return post("You have to enter a positive number!");	
 					}
 					var ticker = args[2].toUpperCase();
 					var amount = parseInt(args[3]);
