@@ -492,17 +492,17 @@ client.on('message', message =>
 						if(ms_1_ == 1) 
 						{
 							ms_1 = x + ms_1;
-							ms_1C++;
+							ms_1C += 1;
 						}
 						if(ms_2_ == 1)
 						{
 							ms_2 = x + ms_2;
-							ms_2C++;
+							ms_2C += 1;
 						}
 						if(ms_3_ == 1)
 						{
 							ms_3 = x + ms_3;
-							ms_3C++;
+							ms_3C += 1;
 						}
 						
 						msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
