@@ -466,12 +466,12 @@ client.on('message', message =>
 			var ms_2C = 0;
 			var ms_3C = 0;
 			
-			if(message.startsWith("1"))
+			if(message.content.startsWith("1"))
 			{
 				racePick[sender.id] = 1;
-			} else if(message.startsWith("2")) {
+			} else if(message.content.startsWith("2")) {
 				racePick[sender.id] = 2;
-			} else if(message.startsWith("3")) {
+			} else if(message.content.startsWith("3")) {
 				racePick[sender.id] = 3;
 			} else {
 				return;	
