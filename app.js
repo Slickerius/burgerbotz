@@ -1963,21 +1963,12 @@ client.on('message', message =>
 							
 							msx.edit(x + "\n" + xx + "\n" + xxx);
 							
-							if(xRun == 1)
-							{
-								y = x;
-								x = ":wavy_dash: ";
-							}
-							if(xxRun == 1)
-							{
-								yy = xx;
-								xx = ":wavy_dash: ";
-							}
-							if(xxxRun == 1)
-							{
-								yyy = xxx;
-								xxx = ":wavy_dash: ";
-							}
+							y = x;
+							x = ":wavy_dash: ";
+							yy = xx;
+							xx = ":wavy_dash: ";
+							yyy = xxx;
+							xxx = ":wavy_dash: ";
 						}, 2000);
 					}
 				});
