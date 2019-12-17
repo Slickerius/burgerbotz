@@ -1947,13 +1947,15 @@ client.on('message', message =>
 					var yy = ":wavy_dash: " + ms;
 					var yyy = ":wavy_dash: " + ms;
 					
-					for(i = 0; i < 10; i++)
+					for(i = 0; i < 5; i++)
 					{
 						setTimeout(function()
 						{
 							var xRun = randomize(0, 2);
 							var xxRun = randomize(0, 2);
 							var xxxRun = randomize(0, 2);
+							
+							console.log((i + 1) + ") " + xRun + " " + xxRun + " " + xxxRun);
 							
 							if(xRun == 1) x += y;
 							if(xxRun == 1) xx += yy;
