@@ -1940,16 +1940,42 @@ client.on('message', message =>
 				ch.send(ms).then(function(msx)
 				{
 					var x = "";
-					var y = ":blue_square: " + ms;
-					for(i = 0; i < 5; i++)
+					var xx = "";
+					var xxx = "";
+					
+					var y = ":wavy_dash: " + ms;
+					var yy = ":wavy_dash: " + ms;
+					var yyy = ":wavy_dash: " + ms;
+					
+					for(i = 0; i < 10; i++)
 					{
 						setTimeout(function()
 						{
-							x += y;
-							console.log(x);
-							msx.edit(x);
-							y = x;
-							x = ":blue_square: ";
+							var xRun = randomize(0, 2);
+							var xxRun = randomize(0, 2);
+							var xxxRun = randomize(0, 2);
+							
+							if(xRun == 1) x += y;
+							if(xxRun == 1) xx += yy;
+							if(xxxRun == 1) xxx += yyy;
+							
+							msx.edit(x + "\n" + xx + "\n" + xxx);
+							
+							if(xRun == 1)
+							{
+								y = x;
+								x = ":wavy_dash: ";
+							}
+							if(xxRun == 1)
+							{
+								yy = xx;
+								xx = ":wavy_dash: ";
+							}
+							if(xxxRun == 1)
+							{
+								yyy = xxx;
+								xxx = ":wavy_dash: ";
+							}
 						}, 2000);
 					}
 				});
