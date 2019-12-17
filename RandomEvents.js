@@ -60,7 +60,7 @@ var x3_msg_8 = "**:pensive: You fled the scene after stealing from them and a gr
 var x4_msg_0 = " You see someone suspiciously trying to open a car's door with a crowbar. Do you:**\n**[1]** Confront\n**[2]** Ignore\n**[3]** Help";
 
 var x4_msg_1 = "**:punch: You assaulted them and held them on the ground before alerting the authorities, by which they were taken away. The car's owner thankfully gave you :hamburger: ";
-var x4_msg_2 = "**:punch: You assaulted them until the arrival of the car's owner, which was succeeded by the owner thanking you for your actions.";
+var x4_msg_2 = "**:punch: You assaulted them until the arrival of the car's owner, which was succeeded by the owner thanking you for your actions.**";
 var x4_msg_3 = "**:dizzy_face: You assaulted them mercilessly, ignoring their screeches claiming to be the owner of the car. The police's arrival led to you discovering that the person you attacked was actually the car's owner attempting to gain access to their car after forgetting their key inside in the car. You were fined :hamburger: ";
 
 var x4_msg_4 = "**:person_walking: You decided not to get involved and walked on by.**";
