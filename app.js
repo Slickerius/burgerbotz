@@ -1946,6 +1946,7 @@ client.on('message', message =>
 						setTimeout(function()
 						{
 							x += y + ms;
+							console.log(x);
 							msx.edit(x);
 							y = x;
 							x = ":blue_square: ";
