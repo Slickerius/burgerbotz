@@ -55,6 +55,20 @@ var x3_msg_6 = "**:confused: You reached for their pockets but they do not seem 
 var x3_msg_7 = "**:money_mouth: You found and took :hamburger: ";
 var x3_msg_8 = "**:pensive: You fled the scene after stealing from them and a group of people with cameras claiming to be YouTubers approached you, claiming it was merely a social experiment. You returned what you stole and walked away in shame.**";
 
+//Event 4 => Car Theft (Or Is it?)
+
+var x4_msg_0 = " You see someone suspiciously trying to open a car's door with a crowbar. Do you:**\n**[1]** Confront\n**[2]** Ignore\n**[3]** Help";
+
+var x4_msg_1 = "**:punch: You assaulted them and held them on the ground before alerting the authorities, by which they were taken away. The car's owner thankfully gave you :hamburger: ";
+var x4_msg_2 = "**:punch: You assaulted them until the arrival of the car's owner, which was succeeded by the owner thanking you for your actions.";
+var x4_msg_3 = "**:dizzy_face: You assaulted them mercilessly, ignoring their screeches claiming to be the owner of the car. The police's arrival led to you discovering that the person you attacked was actually the car's owner attempting to gain access to their car after forgetting their key inside in the car. You were fined :hamburger: ";
+
+var x4_msg_4 = "**:person_walking: You decided not to get involved and walked on by.**";
+
+var x4_msg_5 = "**:angel: You successfully assisted them in trying to gain access to the car. They turned out to be the car's owner who forgot their key inside the car and thanked you for your help.**";
+var x4_msg_6 = "**:speak_no_evil: You helped them gain access to the car, before discovering that they were trying to thieve the car. They gave you :hamburger: ";
+var x4_msg_7 = "**:pensive: You assisted them in gaining access to the car, only to be taken aback by the car alarm which alerted the police. You were fined :hamburger: ";
+
 module.exports =
 {
         call: function(channel, user, id, stage, value)
@@ -131,6 +145,27 @@ module.exports =
                                 msg = x3_msg_7 + value + ".**";
                         } else if(stage == 8) {
                                 msg = x3_msg_8;     
+                        }
+                        channel.send(msg);
+                        msg = "";
+                } else if(id == 4) {
+                        if(stage == 0)
+                        {
+                                msg = "**:red_car: " + user + x4_msg_0;
+                        } else if(stage == 1) {
+                                msg = x4_msg_1 + value + " for your bravery.**";
+                        } else if(stage == 2) {
+                                msg = x4_msg_2;    
+                        } else if(stage == 3) {
+                                msg = x4_msg_3 + value + " for physical assault.**";    
+                        } else if(stage == 4) {
+                                msg = x4_msg_4;  
+                        } else if(stage == 5) {
+                                msg = x4_msg_5;
+                        } else if(stage == 6) {
+                                msg = x4_msg_6 + value + " for your assistance.**";     
+                        } else if(stage == 7) {
+                                msg = x4_msg_7 + value + " for being an accomplice.**";    
                         }
                         channel.send(msg);
                         msg = "";
