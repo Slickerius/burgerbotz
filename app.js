@@ -1940,6 +1940,7 @@ client.on('message', message =>
 			case "horserace":
 				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Pick your horse:**\n**:red_circle: [1] Slick**\n**:yellow_circle: [2] Arbaz**\n**:blue_circle: [3] Pyro**";
 				raceTracker[sender.id] = 1;
+				post(msx);
 				break;
 				
 			case "horsie":
