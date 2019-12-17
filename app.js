@@ -1942,7 +1942,7 @@ client.on('message', message =>
 				
 				var x = ":wavy_dash: ";
 				
-				ch.send(ms).then(function(msx)
+				ch.send(ms_1 + "\n" + ms_2 + "\n" + ms_3).then(function(msx)
 				{
 					for(i = 0; i < 5; i++)
 					{
