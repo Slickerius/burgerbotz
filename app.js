@@ -1936,8 +1936,7 @@ client.on('message', message =>
 				break;
 			
 			case "horsie":
-				var ms = "";
-				ms += " <:horsie:656477871476572203>";
+				var ms = "<:horsie:656477871476572203>";
 				ch.send(ms).then(function(msx)
 				{
 					var x = "";
@@ -1950,7 +1949,7 @@ client.on('message', message =>
 							msx.edit(x);
 							y = x;
 							x = ":blue_square: ";
-						}, 500);
+						}, 2000);
 					}
 				});
 				break;
