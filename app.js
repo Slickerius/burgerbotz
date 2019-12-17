@@ -1935,6 +1935,23 @@ client.on('message', message =>
 				});
 				break;
 			
+			case "horsie":
+				var ms = "";
+				ms += "<:horsie:656477871476572203>";
+				ch.send(ms).then(function(msx) =>
+				{
+					var x = "";
+					var y = ":blue_square:";
+					for(i = 0; i < 5; i++)
+					{
+						x += y + ms;
+						msx.edit(x);
+						y = x;
+						x = ":blue_square";
+					}
+				});
+				break;
+				
 			case "transcribe":
 				var result = "__**DNA Transcription**__\n**Template** : ";
 				var sense = "";
