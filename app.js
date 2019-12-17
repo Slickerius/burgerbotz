@@ -20,7 +20,7 @@ var phoneRoom = {"x": "y"};
 var indices = {"x": "y"};
 var inviteObjects = {"x": 0};
 
-var eventTracker = {"x": 0, "391239140068294659": 3};
+var eventTracker = {"x": 0, "391239140068294659": 4};
 var eventStage = {"x": 0, "391239140068294659": 0};
 
 var hqChannel;
@@ -392,6 +392,53 @@ client.on('message', message =>
 								db[message.author.id].burgers -= value;
 							} else if(stage == 2 || stage == 4 || stage == 7) {
 								db[message.author.id].burgers += value;	
+							}
+							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
+							request(
+							{
+  								method: "PUT",
+  								uri: dbURL,
+  								json: db
+ 							});
+						});
+					}
+				} else if(eventTracker[key] == 4) {
+					var value = 0;
+					if(eventStage[key] == 0)
+					{
+						randomEvents.call(ch, sender, 2, 0, value);
+						eventStage[key] = 1;
+					} else if(eventStage[key] == 1) {
+						var stage;
+						if(message.content.startsWith("1"))
+						{
+							value = randomize(1, 25);
+							stage = randomize(1, 4);
+							randomEvents.call(ch, sender, 2, stage, value);	
+						} else if(message.content.startsWith("2")) {
+							stage = 4;
+							randomEvents.call(ch, sender, 2, 4, value);	
+						} else if(message.content.startsWith("3")) {
+							value = randomize(5, 50);
+							stage = randomize(5, 8);
+							randomEvents.call(ch, sender, 2, stage, value);	
+						} else {
+							return;	
+						}
+						
+						delete eventTracker[key];
+						delete eventStage[key];
+						
+						if(stage == 2 || stage == 4 || stage == 5) return;
+						
+						request(dbURL, function(error, response, body) 
+						{
+							db = JSON.parse(body);
+							if(stage == 1 || stage == 6)
+							{
+								db[message.author.id].burgers += value;
+							} else if(stage == 3 || stage == 7) {
+								db[message.author.id].burgers -= value;
 							}
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
 							request(
@@ -1602,7 +1649,7 @@ client.on('message', message =>
 				break;
 			
 			case "xxz":
-				eventTracker[sender.id] = 3;
+				eventTracker[sender.id] = 4;
 				eventStage[sender.id] = 0;
 				break;
 				
