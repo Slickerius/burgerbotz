@@ -1937,38 +1937,16 @@ client.on('message', message =>
 			
 			case "horsie":
 				var ms = "<:horsie:656477871476572203>";
+				var x = ":wavy_dash: " + ms;
+				var z = ":wavy_dash: ";
 				ch.send(ms).then(function(msx)
 				{
-					var x = "";
-					var xx = "";
-					var xxx = "";
-					
-					var y = ":wavy_dash: " + ms;
-					var yy = ":wavy_dash: " + ms;
-					var yyy = ":wavy_dash: " + ms;
-					
 					for(i = 0; i < 5; i++)
 					{
 						setTimeout(function()
 						{
-							var xRun = randomize(0, 2);
-							var xxRun = randomize(0, 2);
-							var xxxRun = randomize(0, 2);
-							
-							console.log((i + 1) + ") " + xRun + " " + xxRun + " " + xxxRun);
-							
-							if(xRun == 1) x += y;
-							if(xxRun == 1) xx += yy;
-							if(xxxRun == 1) xxx += yyy;
-							
-							msx.edit(x + "\n" + xx + "\n" + xxx);
-							
-							y = x;
-							x = ":wavy_dash: ";
-							yy = xx;
-							xx = ":wavy_dash: ";
-							yyy = xxx;
-							xxx = ":wavy_dash: ";
+							x = z + x;
+							msx.edit(x);
 						}, 2000);
 					}
 				});
