@@ -1940,12 +1940,12 @@ client.on('message', message =>
 				ch.send(ms).then(function(msx)
 				{
 					var x = "";
-					var y = ":blue_square: ";
+					var y = ":blue_square: " + ms;
 					for(i = 0; i < 5; i++)
 					{
 						setTimeout(function()
 						{
-							x += y + ms;
+							x += y;
 							console.log(x);
 							msx.edit(x);
 							y = x;
