@@ -1936,17 +1936,27 @@ client.on('message', message =>
 				break;
 			
 			case "horsie":
-				var ms = "<:horsie:656477871476572203>";
-				var x = ":wavy_dash: " + ms;
-				var z = ":wavy_dash: ";
+				var ms_1 = "<:horsie:656477871476572203>";
+				var ms_2 = "<:horsie:656477871476572203>";
+				var ms_3 = "<:horsie:656477871476572203>";
+				
+				var x = ":wavy_dash: ";
+				
 				ch.send(ms).then(function(msx)
 				{
 					for(i = 0; i < 5; i++)
 					{
 						setTimeout(function()
 						{
-							x = z + x;
-							msx.edit(x);
+							var ms_1_ = randomize(0, 2);
+							var ms_2_ = randomize(0, 2);
+							var ms_3_ = randomize(0, 2);
+							
+							if(ms_1_ == 1) ms_1 = x + ms_1;
+							if(ms_2_ == 1) ms_2 = x + ms_2;
+							if(ms_3_ == 1) ms_3 = x + ms_3;
+							
+							msx.edit(ms_1 + "\n" + ms_2 + "\n" + ms_3);
 						}, 2000);
 					}
 				});
