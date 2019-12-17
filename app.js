@@ -1944,10 +1944,13 @@ client.on('message', message =>
 					var y = ":blue_square: ";
 					for(i = 0; i < 5; i++)
 					{
-						x += y + ms;
-						msx.edit(x);
-						y = x;
-						x = ":blue_square ";
+						setTimeout(function()
+						{
+							x += y + ms;
+							msx.edit(x);
+							y = x;
+							x = ":blue_square: ";
+						}, 500);
 					}
 				});
 				break;
