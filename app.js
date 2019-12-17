@@ -1938,7 +1938,7 @@ client.on('message', message =>
 			case "horsie":
 				var ms = "";
 				ms += "<:horsie:656477871476572203>";
-				ch.send(ms).then(function(msx) =>
+				ch.send(ms).then(function(msx)
 				{
 					var x = "";
 					var y = ":blue_square:";
