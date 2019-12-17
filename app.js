@@ -23,6 +23,8 @@ var inviteObjects = {"x": 0};
 var eventTracker = {"x": 0, "391239140068294659": 4};
 var eventStage = {"x": 0, "391239140068294659": 0};
 
+var raceTracker = {"x": 0};
+
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel;
 
@@ -1935,6 +1937,11 @@ client.on('message', message =>
 				});
 				break;
 			
+			case "horserace":
+				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Pick your horse:**\n**:red_circle: [1] Slick**\n**:yellow_circle: [2] Arbaz**\n**:blue_circle: [3] Pyro**";
+				raceTracker[sender.id] = 1;
+				break;
+				
 			case "horsie":
 				var ms_1 = "<:horsie:656477871476572203>";
 				var ms_2 = "<:horsie:656477871476572203>";
