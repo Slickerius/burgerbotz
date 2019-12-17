@@ -406,7 +406,7 @@ client.on('message', message =>
 					var value = 0;
 					if(eventStage[key] == 0)
 					{
-						randomEvents.call(ch, sender, 2, 0, value);
+						randomEvents.call(ch, sender, 4, 0, value);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
 						var stage;
@@ -414,14 +414,14 @@ client.on('message', message =>
 						{
 							value = randomize(1, 25);
 							stage = randomize(1, 4);
-							randomEvents.call(ch, sender, 2, stage, value);	
+							randomEvents.call(ch, sender, 4, stage, value);	
 						} else if(message.content.startsWith("2")) {
 							stage = 4;
-							randomEvents.call(ch, sender, 2, 4, value);	
+							randomEvents.call(ch, sender, 4, 4, value);	
 						} else if(message.content.startsWith("3")) {
 							value = randomize(5, 50);
 							stage = randomize(5, 8);
-							randomEvents.call(ch, sender, 2, stage, value);	
+							randomEvents.call(ch, sender, 4, stage, value);	
 						} else {
 							return;	
 						}
