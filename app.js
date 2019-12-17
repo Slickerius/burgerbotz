@@ -509,6 +509,7 @@ client.on('message', message =>
 					}, 2000);
 				}
 			});
+			console.log(ms_1C + " " + ms_2C + " " + ms_3C);
 			if(racePick[sender.id] == 1)
 			{
 				if(ms_1C > ms_2C && ms_1C > ms_3C)
@@ -2022,33 +2023,6 @@ client.on('message', message =>
 				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Pick your horse:**\n**:red_circle: [1] Slick**\n**:yellow_circle: [2] Arbaz**\n**:blue_circle: [3] Pyro**";
 				raceTracker[sender.id] = 1;
 				post(msx);
-				break;
-				
-			case "horsie":
-				var ms_1 = "<:horsie:656477871476572203>";
-				var ms_2 = "<:horsie:656477871476572203>";
-				var ms_3 = "<:horsie:656477871476572203>";
-				
-				var x = ":wavy_dash: ";
-				
-				ch.send(ms_1 + "\n" + ms_2 + "\n" + ms_3).then(function(msx)
-				{
-					for(i = 0; i < 5; i++)
-					{
-						setTimeout(function()
-						{
-							var ms_1_ = randomize(0, 2);
-							var ms_2_ = randomize(0, 2);
-							var ms_3_ = randomize(0, 2);
-							
-							if(ms_1_ == 1) ms_1 = x + ms_1;
-							if(ms_2_ == 1) ms_2 = x + ms_2;
-							if(ms_3_ == 1) ms_3 = x + ms_3;
-							
-							msx.edit(ms_1 + "\n" + ms_2 + "\n" + ms_3);
-						}, 2000);
-					}
-				});
 				break;
 				
 			case "transcribe":
