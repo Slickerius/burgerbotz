@@ -1937,17 +1937,17 @@ client.on('message', message =>
 			
 			case "horsie":
 				var ms = "";
-				ms += "<:horsie:656477871476572203>";
+				ms += " <:horsie:656477871476572203>";
 				ch.send(ms).then(function(msx)
 				{
 					var x = "";
-					var y = ":blue_square:";
+					var y = ":blue_square: ";
 					for(i = 0; i < 5; i++)
 					{
 						x += y + ms;
 						msx.edit(x);
 						y = x;
-						x = ":blue_square";
+						x = ":blue_square ";
 					}
 				});
 				break;
