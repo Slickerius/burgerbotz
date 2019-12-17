@@ -24,6 +24,7 @@ var eventTracker = {"x": 0, "391239140068294659": 4};
 var eventStage = {"x": 0, "391239140068294659": 0};
 
 var raceTracker = {"x": 0};
+var racePick = {"x": 0};
 
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel;
@@ -453,6 +454,86 @@ client.on('message', message =>
 					}
 				}
 			}
+		}
+	
+		if(raceTracker[sender.id] == 1)
+		{
+			var ms_1 = "<:horsie:656477871476572203>";
+			var ms_2 = "<:horsie:656477871476572203>";
+			var ms_3 = "<:horsie:656477871476572203>";
+			
+			var ms_1C = 0;
+			var ms_2C = 0;
+			var ms_3C = 0;
+			
+			if(message.startsWith("1"))
+			{
+				racePick[sender.id] = 1;
+			} else if(message.startsWith("2")) {
+				racePick[sender.id] = 2;
+			} else if(message.startsWith("3")) {
+				racePick[sender.id] = 3;
+			} else {
+				return;	
+			}
+			
+			var x = ":wavy_dash: ";
+			
+			ch.send(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3).then(function(msx)
+			{
+				for(i = 0; i < 5; i++)
+				{
+					setTimeout(function()
+					{
+						var ms_1_ = randomize(0, 2);
+						var ms_2_ = randomize(0, 2);
+						var ms_3_ = randomize(0, 2);
+						
+						if(ms_1_ == 1) 
+						{
+							ms_1 = x + ms_1;
+							ms_1C++;
+						}
+						if(ms_2_ == 1)
+						{
+							ms_2 = x + ms_2;
+							ms_2C++;
+						}
+						if(ms_3_ == 1)
+						{
+							ms_3 = x + ms_3;
+							ms_3C++;
+						}
+						
+						msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
+					}, 2000);
+				}
+			});
+			if(racePick[sender.id] == 1)
+			{
+				if(ms_1C > ms_2C && ms_1C > ms_3C)
+				{
+					post("Won.");	
+				} else {
+					post("Lost.");
+				}
+			} else if(racePick[sender.id] == 2) {
+				if(ms_2C > ms_1C && ms_2C > ms_3C)
+				{
+					post("Won.");	
+				} else {
+					post("Lost.");
+				}
+			} else if(racePick[sender.id] == 3) {
+				if(ms_3C > ms_1C && ms_3C > ms_2C)
+				{
+					post("Won.");	
+				} else {
+					post("Lost.");
+				}
+			}
+			delete raceTracker[sender.id];
+			delete racePick[sender.id];
 		}
 	
 		if(inFGame)
