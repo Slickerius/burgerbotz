@@ -419,7 +419,7 @@ client.on('message', message =>
 							stage = 4;
 							randomEvents.call(ch, sender, 4, 4, value);	
 						} else if(message.content.startsWith("3")) {
-							value = randomize(5, 50);
+							value = randomize(5, 30);
 							stage = randomize(5, 8);
 							randomEvents.call(ch, sender, 4, stage, value);	
 						} else {
