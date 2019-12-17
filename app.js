@@ -508,31 +508,34 @@ client.on('message', message =>
 						msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
 					}, 2000);
 				}
+				
+				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
+				if(racePick[sender.id] == 1)
+				{
+					if(ms_1C > ms_2C && ms_1C > ms_3C)
+					{
+						post("Won.");	
+					} else {
+						post("Lost.");
+					}
+				} else if(racePick[sender.id] == 2) {
+					if(ms_2C > ms_1C && ms_2C > ms_3C)
+					{
+						post("Won.");	
+					} else {
+						post("Lost.");
+					}
+				} else if(racePick[sender.id] == 3) {
+					if(ms_3C > ms_1C && ms_3C > ms_2C)
+					{
+						post("Won.");	
+					} else {
+						post("Lost.");
+					}
+				}
 			});
-			console.log(ms_1C + " " + ms_2C + " " + ms_3C);
-			if(racePick[sender.id] == 1)
-			{
-				if(ms_1C > ms_2C && ms_1C > ms_3C)
-				{
-					post("Won.");	
-				} else {
-					post("Lost.");
-				}
-			} else if(racePick[sender.id] == 2) {
-				if(ms_2C > ms_1C && ms_2C > ms_3C)
-				{
-					post("Won.");	
-				} else {
-					post("Lost.");
-				}
-			} else if(racePick[sender.id] == 3) {
-				if(ms_3C > ms_1C && ms_3C > ms_2C)
-				{
-					post("Won.");	
-				} else {
-					post("Lost.");
-				}
-			}
+			
+			
 			delete raceTracker[sender.id];
 			delete racePick[sender.id];
 		}
