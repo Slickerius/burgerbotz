@@ -525,6 +525,7 @@ client.on('message', message =>
 			if(message.content.startsWith("1"))
 			{
 				racePick[sender.id] = 1;
+				console.log(racePick[sender.id]);
 			} else if(message.content.startsWith("2")) {
 				racePick[sender.id] = 2;
 			} else if(message.content.startsWith("3")) {
