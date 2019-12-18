@@ -238,6 +238,7 @@ client.on('message', message =>
 				{
 					if(args[i].includes(template) || args[i].startsWith(template))	
 					{
+						console.log("AAX " + i);
 						var l = _args[i].length;
 						var code;
 						
