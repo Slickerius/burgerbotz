@@ -234,6 +234,7 @@ client.on('message', message =>
 			var template = "discord.gg/";
 			if(message.content.includes(template))
 			{
+				console.log(msg0);
 				for(i = 0; i < msg0.length; i++)
 				{
 					if(msg0[i].includes(template) || args[i + 1].startsWith(template))	
