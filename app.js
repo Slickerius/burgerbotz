@@ -237,11 +237,22 @@ client.on('message', message =>
 					if(args[i].includes(template) || args[i].startsWith(template))	
 					{
 						console.log(args[i]);
-						var code = args[i].slice(0, 10);
+						var l = args[i].length;
+						var code;
+						
+						if(args[i]).startsWith('https')
+						{
+							code = args[i].substr(19, (l - 1));
+						} else if(args[i].startsWith('http')) {
+							code = args[i].substr(18, (l - 1));
+						} else if(args[i].startsWith('d')) {
+							code = args[i].substr(11, (l - 1));
+						}
+						
 						console.log(code);
 						client.fetchInvite(code).then(function(invite)
 						{
-							console.log(invite.guild.name + " " + invite.code);
+							post(invite.guild.name + " " + invite.code);
 						});	
 					}
 				}
