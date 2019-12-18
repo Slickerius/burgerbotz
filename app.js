@@ -237,12 +237,10 @@ client.on('message', message =>
 			var template = "discord.gg/";
 			if(message.content.toLowerCase().includes(template))
 			{
-				console.log("AAC");
 				for(i = 0; i < _args.length; i++)
 				{
 					if(_args[i].toLowerCase().includes(template) || _args[i].toLowerCase().startsWith(template))	
 					{
-						console.log("AAX " + i);
 						var l = _args[i].length;
 						var code;
 						
@@ -259,7 +257,7 @@ client.on('message', message =>
 						{
 							if(invite.guild.name != null)
 							{
-								message.delete.then(function(msx)
+								message.delete().then(function(msx)
 								{
 									logChannel.send("Deleted invite posted by **" + sender.username + "#" + sender.discriminator + "** (" + invite.code + ") to **" + invite.guild.name + "**.");
 								});
