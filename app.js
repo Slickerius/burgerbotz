@@ -27,7 +27,7 @@ var raceTracker = {"x": 0};
 var racePick = {"x": 0};
 
 var hqChannel;
-var joinChannel, leaveChannel, mainChannel;
+var joinChannel, leaveChannel, mainChannel, logChannel;
 
 var musicServers = {};
 
@@ -86,6 +86,10 @@ client.on('ready', () =>
 			if(channel.id === "620395189940387871") 
 			{
 				mainChannel = channel;	
+			}
+			if(channel.id === "656845623345020988") 
+			{
+				logChannel = channel;	
 			}
 		});
 		
@@ -251,10 +255,15 @@ client.on('message', message =>
 							code = _args[i].substr(11, (l - 1));
 						}
 						
-						console.log(code);
 						client.fetchInvite(code).then(function(invite)
 						{
-							post(invite.guild.name + " " + invite.code);
+							if(invite.guild.name != null)
+							{
+								message.delete.then(function(msx)
+								{
+									logChannel.send("Deleted invite posted by **" + sender.username + "#" + sender.discriminator + "** (" + invite.code + ") to **" + invite.guild.name + "**.");
+								});
+							}
 						});	
 					}
 				}
