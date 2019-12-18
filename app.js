@@ -559,14 +559,14 @@ client.on('message', message =>
 						ms_3C += 1;
 					}
 					
-					if(ms_1_ == 10 || ms_2_ == 10 || ms_3_ == 10) i = 30;
-						
 					msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
+					if(ms_1_ == 10 || ms_2_ == 10 || ms_3_ == 10) break;
 				}
 				
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
 				if(racePick[sender.id] == 1)
 				{
+					console.log("One picked.");
 					if(ms_1C > ms_2C && ms_1C > ms_3C)
 					{
 						post("Won.");	
