@@ -260,6 +260,7 @@ client.on('message', message =>
 								message.delete().then(function(msx)
 								{
 									logChannel.send("Deleted invite posted by **" + sender.username + "#" + sender.discriminator + "** (" + invite.code + ") to **" + invite.guild.name + "**.");
+									sender.send(":warning: **Do not post Discord invite links onto the " + message.guild.name + " server.**");
 								});
 							}
 						});	
