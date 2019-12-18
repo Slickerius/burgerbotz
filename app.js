@@ -195,6 +195,16 @@ client.on('message', message =>
 		let sender = message.author;
 		let ch = message.channel;
 	
+		var msg0 = message.content.split(' ');
+		var cmd0 = msg0[0];
+		var cmd = "";
+	
+		delete msg0[0];
+		var arg = msg0.join(" ");
+		
+		var msg = message.content.toLowerCase();
+		const args = msg.slice(prefix.length).trim().split(/ +/g);
+	
 		var randomEventOccurring = randomize(0, 250);
 		if(randomEventOccurring == 10) 
 		{
@@ -213,8 +223,27 @@ client.on('message', message =>
 				console.log("Created new DB data for user: " + message.author.name + "#" + message.author.discriminator);
 			}
 		});
+		
 		var date = message.createdAt;
 	
+		if(message.guild.id == "613500872839921675")
+		{
+			var template = "discord.gg/";
+			if(message.content.includes(template))
+			{
+				for(i = 0; i < args.length; i++)
+				{
+					if(args[i].includes(template))	
+					{
+						client.fetchInvite(args[i]).then(function(invite)
+						{
+							console.log(invite.guild.name + " " + invite.code);
+						});	
+					}
+				}
+			}
+		}
+		
 		for(var key in eventTracker)
 		{
 			if(key == message.author.id)
@@ -986,20 +1015,10 @@ client.on('message', message =>
 				
 		}
 	
-		var msg0 = message.content.split(' ');
-		var cmd0 = msg0[0];
-		var cmd = "";
-	
 		if(cmd0.charAt(0) == prefix)
 		{
 			cmd = cmd0.slice(1).toLowerCase();
 		}
-		
-		delete msg0[0];
-		var arg = msg0.join(" ");
-		
-		var msg = message.content.toLowerCase();
-		const args = msg.slice(prefix.length).trim().split(/ +/g);
 		
 		if(temp[sender.id].afk && cmd != "afk")
 		{
