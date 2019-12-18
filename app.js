@@ -236,7 +236,7 @@ client.on('message', message =>
 				console.log("AAC");
 				for(i = 0; i < _args.length; i++)
 				{
-					if(_args[i].toLowerCase().includes(template) || _args[i].toLowerCase()startsWith(template))	
+					if(_args[i].toLowerCase().includes(template) || _args[i].toLowerCase().startsWith(template))	
 					{
 						console.log("AAX " + i);
 						var l = _args[i].length;
