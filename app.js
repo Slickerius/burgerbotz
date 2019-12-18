@@ -537,32 +537,31 @@ client.on('message', message =>
 			
 			ch.send(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3).then(function(msx)
 			{
-				for(i = 0; i < 5; i++)
+				for(i = 0; i < 30; i++)
 				{
-					//setTimeout(function()
-					//{
-						var ms_1_ = randomize(0, 2);
-						var ms_2_ = randomize(0, 2);
-						var ms_3_ = randomize(0, 2);
+					var ms_1_ = randomize(0, 2);
+					var ms_2_ = randomize(0, 2);
+					var ms_3_ = randomize(0, 2);
 						
-						if(ms_1_ == 1) 
-						{
-							ms_1 = x + ms_1;
-							ms_1C += 1;
-						}
-						if(ms_2_ == 1)
-						{
-							ms_2 = x + ms_2;
-							ms_2C += 1;
-						}
-						if(ms_3_ == 1)
-						{
-							ms_3 = x + ms_3;
-							ms_3C += 1;
-						}
+					if(ms_1_ == 1) 
+					{
+						ms_1 = x + ms_1;
+						ms_1C += 1;
+					}
+					if(ms_2_ == 1)
+					{
+						ms_2 = x + ms_2;
+						ms_2C += 1;
+					}
+					if(ms_3_ == 1)
+					{
+						ms_3 = x + ms_3;
+						ms_3C += 1;
+					}
+					
+					if(ms_1_ == 10 || ms_2_ == 10 || ms_3_ == 10) i = 30;
 						
-						msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
-					//}, 500);
+					msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
 				}
 				
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
