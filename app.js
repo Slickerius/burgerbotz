@@ -235,6 +235,7 @@ client.on('message', message =>
 			var template = "discord.gg/";
 			if(message.content.includes(template))
 			{
+				console.log("AAC");
 				for(i = 0; i < _args.length; i++)
 				{
 					if(_args[i].includes(template) || args[i].startsWith(template))	
