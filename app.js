@@ -240,7 +240,7 @@ client.on('message', message =>
 						var l = args[i].length;
 						var code;
 						
-						if(args[i]).startsWith('https')
+						if(args[i].startsWith('https'))
 						{
 							code = args[i].substr(19, (l - 1));
 						} else if(args[i].startsWith('http')) {
