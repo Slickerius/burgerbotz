@@ -509,7 +509,9 @@ client.on('message', message =>
 				}
 			}
 		}
-	
+		
+		//Race Event
+		
 		if(raceTracker[sender.id] == 1)
 		{
 			var ms_1 = "<:horsie:656477871476572203>";
@@ -537,8 +539,8 @@ client.on('message', message =>
 			{
 				for(i = 0; i < 5; i++)
 				{
-					setTimeout(function()
-					{
+					//setTimeout(function()
+					//{
 						var ms_1_ = randomize(0, 2);
 						var ms_2_ = randomize(0, 2);
 						var ms_3_ = randomize(0, 2);
@@ -560,8 +562,7 @@ client.on('message', message =>
 						}
 						
 						msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
-					}, 2000);
-					console.log("A" + ms_1C + " " + ms_2C + " " + ms_3C);
+					//}, 500);
 				}
 				
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
