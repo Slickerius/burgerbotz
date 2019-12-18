@@ -560,6 +560,7 @@ client.on('message', message =>
 						}
 						
 						msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
+						console.log(ms_1C + " " + ms_2C + " " + ms_3C);
 					}, 2000);
 				}
 				
