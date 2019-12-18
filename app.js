@@ -236,7 +236,9 @@ client.on('message', message =>
 				{
 					if(args[i].includes(template) || args[i].startsWith(template))	
 					{
+						console.log(args[i]);
 						var code = args[i].slice(0, 10);
+						console.log(code);
 						client.fetchInvite(code).then(function(invite)
 						{
 							console.log(invite.guild.name + " " + invite.code);
