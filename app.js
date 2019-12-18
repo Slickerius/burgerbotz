@@ -564,6 +564,7 @@ client.on('message', message =>
 				}
 				
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
+				console.log("Pick: " + racePick[sender.id]);
 				if(racePick[sender.id] == 1)
 				{
 					console.log("One picked.");
