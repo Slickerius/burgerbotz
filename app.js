@@ -205,6 +205,8 @@ client.on('message', message =>
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
 	
+		console.log(args[1]);
+	
 		var randomEventOccurring = randomize(0, 250);
 		if(randomEventOccurring == 10) 
 		{
@@ -232,21 +234,20 @@ client.on('message', message =>
 			var template = "discord.gg/";
 			if(message.content.includes(template))
 			{
-				for(i = 0; i < args.length; i++)
+				for(i = 0; i < msg0.length; i++)
 				{
-					if(args[i].includes(template) || args[i].startsWith(template))	
+					if(msg0[i].includes(template) || args[i + 1].startsWith(template))	
 					{
-						console.log(args[i]);
-						var l = args[i].length;
+						var l = msg0[i].length;
 						var code;
 						
-						if(args[i].startsWith('https'))
+						if(args[i + 1].startsWith('https'))
 						{
-							code = args[i].substr(19, (l - 1));
-						} else if(args[i].startsWith('http')) {
-							code = args[i].substr(18, (l - 1));
-						} else if(args[i].startsWith('d')) {
-							code = args[i].substr(11, (l - 1));
+							code = msg0[i].substr(19, (l - 1));
+						} else if(args[i + 1].startsWith('http')) {
+							code = msg0[i].substr(18, (l - 1));
+						} else if(args[i + 1].startsWith('d')) {
+							code = msg0[i].substr(11, (l - 1));
 						}
 						
 						console.log(code);
