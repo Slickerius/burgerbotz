@@ -204,7 +204,7 @@ client.on('message', message =>
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
-		const _args = message.content.slice(prefix.length).trim().split(/ +/g);
+		const _args = message.content.split(' ');
 	
 		var randomEventOccurring = randomize(0, 250);
 		if(randomEventOccurring == 10) 
@@ -236,18 +236,18 @@ client.on('message', message =>
 				console.log("AAC");
 				for(i = 0; i < _args.length; i++)
 				{
-					if(args[i].includes(template) || args[i].startsWith(template))	
+					if(_args[i].toLowerCase().includes(template) || _args[i].toLowerCase()startsWith(template))	
 					{
 						console.log("AAX " + i);
 						var l = _args[i].length;
 						var code;
 						
-						if(args[i].startsWith('https'))
+						if(_args[i].toLowerCase().startsWith('https'))
 						{
 							code = _args[i].substr(19, (l - 1));
-						} else if(args[i].startsWith('http')) {
+						} else if(_args[i].toLowerCase().startsWith('http')) {
 							code = _args[i].substr(18, (l - 1));
-						} else if(args[i].startsWith('d')) {
+						} else if(_args[i].toLowerCase().startsWith('d')) {
 							code = _args[i].substr(11, (l - 1));
 						}
 						
