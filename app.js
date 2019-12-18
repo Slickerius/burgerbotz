@@ -228,6 +228,7 @@ client.on('message', message =>
 	
 		if(message.guild.id == "613500872839921675")
 		{
+			
 			var template = "discord.gg/";
 			if(message.content.includes(template))
 			{
@@ -236,7 +237,7 @@ client.on('message', message =>
 					if(args[i].includes(template))	
 					{
 						console.log(args[i]);
-						client.fetchInvite(args[i]).then(function(invite)
+						client.fetchInvite("wGHXVJz").then(function(invite)
 						{
 							console.log(invite.guild.name + " " + invite.code);
 						});	
