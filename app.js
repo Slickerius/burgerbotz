@@ -206,8 +206,6 @@ client.on('message', message =>
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
 		const _args = message.content.slice(prefix.length).trim().split(/ +/g);
 	
-		console.log(args[1]);
-	
 		var randomEventOccurring = randomize(0, 250);
 		if(randomEventOccurring == 10) 
 		{
@@ -233,12 +231,12 @@ client.on('message', message =>
 		{
 			
 			var template = "discord.gg/";
-			if(message.content.includes(template))
+			if(message.content.toLowerCase().includes(template))
 			{
 				console.log("AAC");
 				for(i = 0; i < _args.length; i++)
 				{
-					if(_args[i].includes(template) || args[i].startsWith(template))	
+					if(args[i].includes(template) || args[i].startsWith(template))	
 					{
 						var l = _args[i].length;
 						var code;
