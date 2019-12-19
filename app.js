@@ -520,27 +520,26 @@ client.on('message', message =>
 			
 			var ms_1C = 0;
 			var ms_2C = 0;
-			var ms_3C = 0;
+			var ms_3C = 0
+			
+			var pick;
 			
 			if(message.content.startsWith("1"))
 			{
-				racePick[sender.id] = 1;
+				pick = 1;
 				console.log("1 : " + racePick[sender.id]);
 			} else if(message.content.startsWith("2")) {
-				racePick[sender.id] = 2;
+				pick = 2;
 			} else if(message.content.startsWith("3")) {
-				racePick[sender.id] = 3;
+				pick = 3;
 			} else {
 				return;	
 			}
-			
-			console.log("2 : " + racePick[sender.id]);
 			
 			var x = ":wavy_dash: ";
 			
 			ch.send(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3).then(function(msx)
 			{
-				console.log("3 : " + racePick[sender.id]);
 				for(i = 0; i < 30; i++)
 				{
 					var ms_1_ = randomize(0, 2);
@@ -569,8 +568,8 @@ client.on('message', message =>
 				console.log("4 : " + racePick[sender.id]);
 				
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
-				console.log("Pick: " + racePick[sender.id]);
-				if(racePick[sender.id] == 1)
+				console.log("Pick: " + pick);
+				if(pick == 1)
 				{
 					console.log("One picked.");
 					if(ms_1C > ms_2C && ms_1C > ms_3C)
@@ -579,14 +578,14 @@ client.on('message', message =>
 					} else {
 						post("Lost.");
 					}
-				} else if(racePick[sender.id] == 2) {
+				} else if(pick == 2) {
 					if(ms_2C > ms_1C && ms_2C > ms_3C)
 					{
 						post("Won.");	
 					} else {
 						post("Lost.");
 					}
-				} else if(racePick[sender.id] == 3) {
+				} else if(pick == 3) {
 					if(ms_3C > ms_1C && ms_3C > ms_2C)
 					{
 						post("Won.");	
@@ -598,7 +597,6 @@ client.on('message', message =>
 			
 			
 			delete raceTracker[sender.id];
-			delete racePick[sender.id];
 		}
 	
 		if(inFGame)
