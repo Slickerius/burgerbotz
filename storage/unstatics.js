@@ -325,6 +325,31 @@ rape = [
   "https://i.pinimg.com/originals/9c/11/f6/9c11f69bdf4517a6226f57875b163c20.gif", 
   "https://media.giphy.com/media/TxBXGd0h4kVS8/giphy.gif"];
 
+horseNames = [
+	"Slick",
+	"Arbaz",
+	"Pyro",
+	"Bunny",
+	"Kasaeda",
+	"Annabelle",
+	"Trico",
+	"Lilith",
+	"Soppy",
+	"Trixie",
+	"Laundry",
+	"Gitty",
+	"Yasmine",
+	"Kat",
+	"Humphrey",
+	"Jon",
+	"Phedora",
+	"Demon",
+	"Skyler",
+	"Phil",
+	"Denki",
+	"Tomaz",
+	"Puff"];
+
 help = "```/afk - Sets away from keyboard status\n/battle - Challenges another user to a battle!\n/burger - A burger a day keeps the doctor away!\n/coinflip - Flips a coin\n/dm - Sends DM to a user\n/flags - Starts a flag guessing game\n/help - Shows this help screen\n/invite - Invite me to your server!\n/nigger - Calculates a user's niggerness\n/ping - Pong\n/post - Posts a message\n/random - Generates a random number\n/rape - Rapes a user\n/s - Spits on grave```";
 
-module.exports = {flags, burger, rape, help, commandMap};
+module.exports = {flags, burger, rape, help, commandMap, horseNames};
