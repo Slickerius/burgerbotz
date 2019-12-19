@@ -527,7 +527,10 @@ client.on('message', message =>
 			var ms_2C = 0;
 			var ms_3C = 0;
 			
-			var amount = raceAmount[sender.id], var opt1 = raceOpt1[sender.id], var opt2 = raceOpt2[sender.id], var opt3 = raceOpt3[sender.id];
+			var amount = raceAmount[sender.id];
+			var opt1 = raceOpt1[sender.id];
+			var opt2 = raceOpt2[sender.id]; 
+			var opt3 = raceOpt3[sender.id];
 			
 			var pick;
 			
