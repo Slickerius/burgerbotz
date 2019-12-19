@@ -525,8 +525,7 @@ client.on('message', message =>
 			if(message.content.startsWith("1"))
 			{
 				racePick[sender.id] = 1;
-				console.log(racePick[sender.id]);
-				console.log("ID1 " + sender.id);
+				console.log("1 : " + racePick[sender.id]);
 			} else if(message.content.startsWith("2")) {
 				racePick[sender.id] = 2;
 			} else if(message.content.startsWith("3")) {
@@ -535,10 +534,13 @@ client.on('message', message =>
 				return;	
 			}
 			
+			console.log("2 : " + racePick[sender.id]);
+			
 			var x = ":wavy_dash: ";
 			
 			ch.send(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3).then(function(msx)
 			{
+				console.log("3 : " + racePick[sender.id]);
 				for(i = 0; i < 30; i++)
 				{
 					var ms_1_ = randomize(0, 2);
@@ -564,9 +566,9 @@ client.on('message', message =>
 					msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
 					if(ms_1_ == 10 || ms_2_ == 10 || ms_3_ == 10) break;
 				}
+				console.log("4 : " + racePick[sender.id]);
 				
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
-				console.log("ID2 " + sender.id);
 				console.log("Pick: " + racePick[sender.id]);
 				if(racePick[sender.id] == 1)
 				{
