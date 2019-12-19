@@ -612,7 +612,7 @@ client.on('message', message =>
 						win = true;
 						setTimeout(function(){ post(":trophy: **Your horse " + opt3 + " has won the match! You won :hamburger: " + prize + "**"); }, timeout);
 					} else if(ms_1C > ms_2C){
-						setTimeout(function(){ post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt1 + ".\nBetter luck next time!**"); }, timeout); }, timeout);
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt1 + ".\nBetter luck next time!**"); }, timeout);
 					} else {
 						setTimeout(function(){ post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**"); }, timeout);
 					}
