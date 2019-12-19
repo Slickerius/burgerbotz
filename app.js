@@ -578,7 +578,7 @@ client.on('message', message =>
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
 				console.log("Pick: " + pick);
 				var win = false;
-				var timeout = 25; // in seconds
+				var timeout = 30; // in seconds
 				timeout *= 1000;
 				
 				if(pick == 1)
@@ -2130,11 +2130,15 @@ client.on('message', message =>
 				raceTracker[sender.id] = 1;
 				raceAmount[sender.id] = parseInt(args[1]);
 				
-				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + raceAmount[sender.id] + "**\n**Pick your horse:**\n**:red_circle: [1] Slick**\n**:yellow_circle: [2] Arbaz**\n**:blue_circle: [3] Pyro**";
+				
 
-				raceOpt1[sender.id] = "Slick";
-				raceOpt2[sender.id] = "Arbaz";
-				raceOpt3[sender.id] = "Pyro";
+				raceOpt1[sender.id] = unst.horseNames[randomize(0, unst.horseNames.length)];
+				raceOpt2[sender.id] = unst.horseNames[randomize(0, unst.horseNames.length)];
+				raceOpt3[sender.id] = unst.horseNames[randomize(0, unst.horseNames.length)];
+				if(raceOpt1[sender.id] == raceOpt2[sender.id] || raceOpt1[sender.id] == raceOpt3[sender.id]) raceOpt1[sender.id] = unst.horseNames[randomize(0, unst.horseNames.length)];
+				if(raceOpt2[sender.id] == raceOpt3[sender.id]) raceOpt2[sender.id] = unst.horseNames[randomize(0, unst.horseNames.length)];
+				
+				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + raceAmount[sender.id] + "**\n**Pick your horse:**\n**:red_circle: [1] " + raceOpt1[sender.id] + "**\n**:yellow_circle: [2] " + raceOpt2[sender.id] + "**\n**:blue_circle: [3] " + raceOpt3[sender.id] + "**";
 				
 				post(msx);
 				break;
