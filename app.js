@@ -519,14 +519,15 @@ client.on('message', message =>
 		
 		if(raceTracker[sender.id] == 1)
 		{
-			console.log("AXX " + raceAmount[sender.id] + " " + raceOpt1[sender.id] + " " + raceOpt2[sender.id] + " " + raceOpt3[sender.id]);
 			var ms_1 = "<:horsie:656477871476572203>";
 			var ms_2 = "<:horsie:656477871476572203>";
 			var ms_3 = "<:horsie:656477871476572203>";
 			
 			var ms_1C = 0;
 			var ms_2C = 0;
-			var ms_3C = 0
+			var ms_3C = 0;
+			
+			var amount = raceAmount[sender.id], var opt1 = raceOpt1[sender.id], var opt2 = raceOpt2[sender.id], var opt3 = raceOpt3[sender.id];
 			
 			var pick;
 			
@@ -580,35 +581,35 @@ client.on('message', message =>
 					console.log("One picked.");
 					if(ms_1C > ms_2C && ms_1C > ms_3C)
 					{
-						var prize = raceAmount[sender.id] * 3;
+						var prize = amount * 3;
 						win = true;
-						post(":trophy: **Your horse " + raceOpt1[sender.id] + " has won the match! You won :hamburger: " + prize + "**");	
+						post(":trophy: **Your horse " + opt1 + " has won the match! You won :hamburger: " + prize + "**");	
 					} else if(ms_2C > ms_3C) {
-						post(":disappointed: **Your horse " + raceOpt1[sender.id] + " has not been able to stand a chance against the might of " + raceOpt2[sender.id] + ".\nBetter luck next time!**");
+						post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**");
 					} else {
-						post(":disappointed: **Your horse " + raceOpt1[sender.id] + " has not been able to stand a chance against the might of " + raceOpt3[sender.id] + ".\nBetter luck next time!**");
+						post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt3 + ".\nBetter luck next time!**");
 					}
 				} else if(pick == 2) {
 					if(ms_2C > ms_1C && ms_2C > ms_3C)
 					{
-						var prize = raceAmount[sender.id] * 3;
+						var prize = amount * 3;
 						win = true;
-						post(":trophy: **Your horse " + raceOpt2[sender.id] + " has won the match! You won :hamburger: " + prize + "**");
+						post(":trophy: **Your horse " + opt2 + " has won the match! You won :hamburger: " + prize + "**");
 					} else if(ms_1C > ms_3C){
-						post(":disappointed: **Your horse " + raceOpt2[sender.id] + " has not been able to stand a chance against the might of " + raceOpt1[sender.id] + ".\nBetter luck next time!**");
+						post(":disappointed: **Your horse " + opt2 + " has not been able to stand a chance against the might of " + opt1 + ".\nBetter luck next time!**");
 					} else {
-						post(":disappointed: **Your horse " + raceOpt2[sender.id] + " has not been able to stand a chance against the might of " + raceOpt3[sender.id] + ".\nBetter luck next time!**");
+						post(":disappointed: **Your horse " + opt2 + " has not been able to stand a chance against the might of " + opt3 + ".\nBetter luck next time!**");
 					}
 				} else if(pick == 3) {
 					if(ms_3C > ms_1C && ms_3C > ms_2C)
 					{
-						var prize = raceAmount[sender.id] * 3;
+						var prize = amount * 3;
 						win = true;
-						post(":trophy: **Your horse " + raceOpt3[sender.id] + " has won the match! You won :hamburger: " + prize + "**");
+						post(":trophy: **Your horse " + opt3 + " has won the match! You won :hamburger: " + prize + "**");
 					} else if(ms_1C > ms_2C){
-						post(":disappointed: **Your horse " + raceOpt3[sender.id] + " has not been able to stand a chance against the might of " + raceOpt1[sender.id] + ".\nBetter luck next time!**");
+						post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt1 + ".\nBetter luck next time!**");
 					} else {
-						post(":disappointed: **Your horse " + raceOpt3[sender.id] + " has not been able to stand a chance against the might of " + raceOpt2[sender.id] + ".\nBetter luck next time!**");
+						post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**");
 					}
 				}
 				request(req, function(error, response, body) 
@@ -616,10 +617,10 @@ client.on('message', message =>
 					db = JSON.parse(body);
 					if(win)
 					{
-						var prize = raceAmount[sender.id] * 3;
+						var prize = amount * 3;
 						db[sender.id].burgers += prize;
 					} else {
-						db[sender.id].burgers -= raceAmount[sender.id];
+						db[sender.id].burgers -= amount;
 					}
 					request(
 					{
