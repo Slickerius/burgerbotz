@@ -213,7 +213,7 @@ client.on('message', message =>
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
-		const _args = message.content.split(' ');xt
+		const _args = message.content.split(' ');
 	
 		var randomEventOccurring = randomize(0, 250);
 		if(randomEventOccurring == 10) 
