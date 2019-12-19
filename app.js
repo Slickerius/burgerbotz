@@ -578,6 +578,8 @@ client.on('message', message =>
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
 				console.log("Pick: " + pick);
 				var win = false;
+				var timeout = 25; // in seconds
+				timeout *= 1000;
 				
 				if(pick == 1)
 				{
@@ -586,34 +588,33 @@ client.on('message', message =>
 					{
 						var prize = amount * 3;
 						win = true;
-						setTimeout(function(){ post(":trophy: **Your horse " + opt1 + " has won the match! You won :hamburger: " + prize + "**"); }, 10000);
-						post(":trophy: **Your horse " + opt1 + " has won the match! You won :hamburger: " + prize + "**");	
+						setTimeout(function(){ post(":trophy: **Your horse " + opt1 + " has won the match! You won :hamburger: " + prize + "**"); }, timeout);
 					} else if(ms_2C > ms_3C) {
-						setTimeout(function(){ post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**"); }, 10000);
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**"); }, timeout);
 					} else {
-						setTimeout(function(){ post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt3 + ".\nBetter luck next time!**"); }, 10000);
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt3 + ".\nBetter luck next time!**"); }, timeout);
 					}
 				} else if(pick == 2) {
 					if(ms_2C > ms_1C && ms_2C > ms_3C)
 					{
 						var prize = amount * 3;
 						win = true;
-						post(":trophy: **Your horse " + opt2 + " has won the match! You won :hamburger: " + prize + "**");
+						setTimeout(function(){ post(":trophy: **Your horse " + opt2 + " has won the match! You won :hamburger: " + prize + "**"); }, timeout);
 					} else if(ms_1C > ms_3C){
-						post(":disappointed: **Your horse " + opt2 + " has not been able to stand a chance against the might of " + opt1 + ".\nBetter luck next time!**");
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt2 + " has not been able to stand a chance against the might of " + opt1 + ".\nBetter luck next time!**"); }, timeout);
 					} else {
-						post(":disappointed: **Your horse " + opt2 + " has not been able to stand a chance against the might of " + opt3 + ".\nBetter luck next time!**");
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt2 + " has not been able to stand a chance against the might of " + opt3 + ".\nBetter luck next time!**"); }, timeout);
 					}
 				} else if(pick == 3) {
 					if(ms_3C > ms_1C && ms_3C > ms_2C)
 					{
 						var prize = amount * 3;
 						win = true;
-						post(":trophy: **Your horse " + opt3 + " has won the match! You won :hamburger: " + prize + "**");
+						setTimeout(function(){ post(":trophy: **Your horse " + opt3 + " has won the match! You won :hamburger: " + prize + "**"); }, timeout);
 					} else if(ms_1C > ms_2C){
-						post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt1 + ".\nBetter luck next time!**");
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt1 + ".\nBetter luck next time!**"); }, timeout); }, timeout);
 					} else {
-						post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**");
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**"); }, timeout);
 					}
 				}
 				
