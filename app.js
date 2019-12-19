@@ -615,7 +615,8 @@ client.on('message', message =>
 						post(":disappointed: **Your horse " + opt3 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**");
 					}
 				}
-				request(req, function(error, response, body) 
+				
+				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					if(win)
