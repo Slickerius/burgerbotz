@@ -547,7 +547,7 @@ client.on('message', message =>
 			
 			var x = ":wavy_dash: ";
 			
-			ch.send(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3).then(function(msx)
+			ch.send(":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + amount + "**\n:red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3).then(function(msx)
 			{
 				for(i = 0; i < 30; i++)
 				{
@@ -571,7 +571,7 @@ client.on('message', message =>
 						ms_3C += 1;
 					}
 					
-					msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
+					msx.edit(":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + amount + "**\n:red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
 					if(ms_1_ == 10 || ms_2_ == 10 || ms_3_ == 10) break;
 				}
 				
@@ -586,11 +586,12 @@ client.on('message', message =>
 					{
 						var prize = amount * 3;
 						win = true;
+						setTimeout(function(){ post(":trophy: **Your horse " + opt1 + " has won the match! You won :hamburger: " + prize + "**"); }, 10000);
 						post(":trophy: **Your horse " + opt1 + " has won the match! You won :hamburger: " + prize + "**");	
 					} else if(ms_2C > ms_3C) {
-						post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**");
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt2 + ".\nBetter luck next time!**"); }, 10000);
 					} else {
-						post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt3 + ".\nBetter luck next time!**");
+						setTimeout(function(){ post(":disappointed: **Your horse " + opt1 + " has not been able to stand a chance against the might of " + opt3 + ".\nBetter luck next time!**"); }, 10000);
 					}
 				} else if(pick == 2) {
 					if(ms_2C > ms_1C && ms_2C > ms_3C)
@@ -622,6 +623,7 @@ client.on('message', message =>
 					if(win)
 					{
 						var prize = amount * 3;
+						db[sender.id].burgers -= amount;
 						db[sender.id].burgers += prize;
 					} else {
 						db[sender.id].burgers -= amount;
@@ -2123,11 +2125,12 @@ client.on('message', message =>
 				{
 					return post(":horse: **Usage: /horserace <bet amount>**");	
 				}
-				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Pick your horse:**\n**:red_circle: [1] Slick**\n**:yellow_circle: [2] Arbaz**\n**:blue_circle: [3] Pyro**";
 				
 				raceTracker[sender.id] = 1;
 				raceAmount[sender.id] = parseInt(args[1]);
 				
+				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + raceAmount[sender.id] + "**\n**Pick your horse:**\n**:red_circle: [1] Slick**\n**:yellow_circle: [2] Arbaz**\n**:blue_circle: [3] Pyro**";
+
 				raceOpt1[sender.id] = "Slick";
 				raceOpt2[sender.id] = "Arbaz";
 				raceOpt3[sender.id] = "Pyro";
