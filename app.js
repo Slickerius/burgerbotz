@@ -581,7 +581,7 @@ client.on('message', message =>
 						ms_3C += 1;
 					}
 					
-					msx.edit(":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + amount + "**\n:red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
+					msx.edit(":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + amount + " on " + pickName + "(" + pickCode + ").**\n**" + _opt1 + ")** :red_circle: " + ms_1 + "\n**" + _opt2 + ")** :yellow_circle: " + ms_2 + "\n**" + _opt3 + ")** :blue_circle: " + ms_3);
 					if(ms_1_ == 10 || ms_2_ == 10 || ms_3_ == 10) break;
 				}
 				
