@@ -532,22 +532,32 @@ client.on('message', message =>
 			var opt2 = raceOpt2[sender.id]; 
 			var opt3 = raceOpt3[sender.id];
 			
+			var _opt1 = opt1.slice(0, 1);
+			var _opt2 = opt2.slice(0, 1);
+			var _opt3 = opt3.slice(0, 1);
+			
 			var pick;
+			var pickName;
+			var pickCode;
 			
 			if(message.content.startsWith("1"))
 			{
 				pick = 1;
+				pickName = opt1;
 			} else if(message.content.startsWith("2")) {
 				pick = 2;
+				pickName = opt2;
 			} else if(message.content.startsWith("3")) {
 				pick = 3;
+				pickName = opt3;
 			} else {
 				return;	
 			}
+			pickCode = pickName.slice(0, 1);
 			
 			var x = ":wavy_dash: ";
 			
-			ch.send(":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + amount + "**\n:red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3).then(function(msx)
+			ch.send(":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + amount + " on " + pickName + "(" + pickCode + ").**\n**" + _opt1 + ")** :red_circle: " + ms_1 + "\n**" + _opt2 + ")** :yellow_circle: " + ms_2 + "\n**" + _opt3 + ")** :blue_circle: " + ms_3).then(function(msx)
 			{
 				for(i = 0; i < 30; i++)
 				{
@@ -578,7 +588,7 @@ client.on('message', message =>
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
 				console.log("Pick: " + pick);
 				var win = false;
-				var timeout = 30; // in seconds
+				var timeout = 35; // in seconds
 				timeout *= 1000;
 				
 				if(pick == 1)
