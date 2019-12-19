@@ -24,7 +24,12 @@ var eventTracker = {"x": 0, "391239140068294659": 4};
 var eventStage = {"x": 0, "391239140068294659": 0};
 
 var raceTracker = {"x": 0};
-var racePick = {"x": 0};
+var raceAmount = {"x": 0};
+
+var raceOpt1 = {"x": "y"};
+var raceOpt2 = {"x": "y"};
+var raceOpt3 = {"x": "y"};
+
 
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel, logChannel;
@@ -527,7 +532,6 @@ client.on('message', message =>
 			if(message.content.startsWith("1"))
 			{
 				pick = 1;
-				console.log("1 : " + racePick[sender.id]);
 			} else if(message.content.startsWith("2")) {
 				pick = 2;
 			} else if(message.content.startsWith("3")) {
@@ -565,7 +569,6 @@ client.on('message', message =>
 					msx.edit(":red_circle: " + ms_1 + "\n:yellow_circle: " + ms_2 + "\n:blue_circle: " + ms_3);
 					if(ms_1_ == 10 || ms_2_ == 10 || ms_3_ == 10) break;
 				}
-				console.log("4 : " + racePick[sender.id]);
 				
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
 				console.log("Pick: " + pick);
@@ -574,9 +577,12 @@ client.on('message', message =>
 					console.log("One picked.");
 					if(ms_1C > ms_2C && ms_1C > ms_3C)
 					{
-						post("Won.");	
+						var prize = raceAmount[sender.id] * 3;
+						post(":trophy: Your horse " + raceOpt1[sender.id] + " has won the match! You won :hamburger: " + prize + "**");	
+					} else if(ms_2C > ms_3C) {
+						post(":disappointed: **Your horse " + raceOpt1[sender.id] + " has not been able to stand a chance against the might of " + raceOpt2[sender.id] + ".\nBetter luck next time!**");
 					} else {
-						post("Lost.");
+						post(":disappointed: **Your horse " + raceOpt1[sender.id] + " has not been able to stand a chance against the might of " + raceOpt3[sender.id] + ".\nBetter luck next time!**");
 					}
 				} else if(pick == 2) {
 					if(ms_2C > ms_1C && ms_2C > ms_3C)
@@ -2072,8 +2078,23 @@ client.on('message', message =>
 				break;
 			
 			case "horserace":
+				if(raceTracker[sender.id] == 1)
+				{
+					return post(":octagonal_sign: **You are already betting on a race!**");	
+				}
+				if(args[1] != parseInt(args[1]))
+				{
+					return post(":horse: **Usage: /horserace <bet amount>**");	
+				}
 				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Pick your horse:**\n**:red_circle: [1] Slick**\n**:yellow_circle: [2] Arbaz**\n**:blue_circle: [3] Pyro**";
+				
 				raceTracker[sender.id] = 1;
+				raceAmount[sender.id] = parseInt(args[1]);
+				
+				raceOpt1[sender.id] = "Slick";
+				raceOpt2[sender.id] = "Arbaz";
+				raceOpt3[sender.id] = "Pyro";
+				
 				post(msx);
 				break;
 				
