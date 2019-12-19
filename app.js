@@ -213,7 +213,7 @@ client.on('message', message =>
 		
 		var msg = message.content.toLowerCase();
 		const args = msg.slice(prefix.length).trim().split(/ +/g);
-		const _args = message.content.split(' ');
+		const _args = message.content.split(' ');xt
 	
 		var randomEventOccurring = randomize(0, 250);
 		if(randomEventOccurring == 10) 
@@ -236,39 +236,42 @@ client.on('message', message =>
 		
 		var date = message.createdAt;
 	
-		if(message.guild.id == "613500872839921675")
+		if(message.channel.type == "text")
 		{
-			
-			var template = "discord.gg/";
-			if(message.content.toLowerCase().includes(template))
+			if(message.guild.id == "613500872839921675")
 			{
-				for(i = 0; i < _args.length; i++)
+
+				var template = "discord.gg/";
+				if(message.content.toLowerCase().includes(template))
 				{
-					if(_args[i].toLowerCase().includes(template) || _args[i].toLowerCase().startsWith(template))	
+					for(i = 0; i < _args.length; i++)
 					{
-						var l = _args[i].length;
-						var code;
-						
-						if(_args[i].toLowerCase().startsWith('https'))
+						if(_args[i].toLowerCase().includes(template) || _args[i].toLowerCase().startsWith(template))	
 						{
-							code = _args[i].substr(19, (l - 1));
-						} else if(_args[i].toLowerCase().startsWith('http')) {
-							code = _args[i].substr(18, (l - 1));
-						} else if(_args[i].toLowerCase().startsWith('d')) {
-							code = _args[i].substr(11, (l - 1));
-						}
-						
-						client.fetchInvite(code).then(function(invite)
-						{
-							if(invite.guild.name != null)
+							var l = _args[i].length;
+							var code;
+
+							if(_args[i].toLowerCase().startsWith('https'))
 							{
-								message.delete().then(function(msx)
-								{
-									logChannel.send("Deleted invite posted by **" + sender.username + "#" + sender.discriminator + "** (" + invite.code + ") to **" + invite.guild.name + "**.");
-									sender.send(":warning: **Do not post Discord invite links onto the " + message.guild.name + " server.**");
-								});
+								code = _args[i].substr(19, (l - 1));
+							} else if(_args[i].toLowerCase().startsWith('http')) {
+								code = _args[i].substr(18, (l - 1));
+							} else if(_args[i].toLowerCase().startsWith('d')) {
+								code = _args[i].substr(11, (l - 1));
 							}
-						});	
+
+							client.fetchInvite(code).then(function(invite)
+							{
+								if(invite.guild.name != null)
+								{
+									message.delete().then(function(msx)
+									{
+										logChannel.send("Deleted invite posted by **" + sender.username + "#" + sender.discriminator + "** (" + invite.code + ") to **" + invite.guild.name + "**.");
+										sender.send(":warning: **Do not post Discord invite links onto the " + message.guild.name + " server.**");
+									});
+								}
+							});	
+						}
 					}
 				}
 			}
