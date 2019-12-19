@@ -519,6 +519,7 @@ client.on('message', message =>
 		
 		if(raceTracker[sender.id] == 1)
 		{
+			console.log("AXX " + raceAmount[sender.id] + " " + raceOpt1[sender.id] + " " + raceOpt2[sender.id] + " " + raceOpt3[sender.id]);
 			var ms_1 = "<:horsie:656477871476572203>";
 			var ms_2 = "<:horsie:656477871476572203>";
 			var ms_3 = "<:horsie:656477871476572203>";
