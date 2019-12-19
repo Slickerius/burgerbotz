@@ -572,13 +572,16 @@ client.on('message', message =>
 				
 				console.log(ms_1C + " " + ms_2C + " " + ms_3C);
 				console.log("Pick: " + pick);
+				var win = false;
+				
 				if(pick == 1)
 				{
 					console.log("One picked.");
 					if(ms_1C > ms_2C && ms_1C > ms_3C)
 					{
 						var prize = raceAmount[sender.id] * 3;
-						post(":trophy: Your horse " + raceOpt1[sender.id] + " has won the match! You won :hamburger: " + prize + "**");	
+						win = true;
+						post(":trophy: **Your horse " + raceOpt1[sender.id] + " has won the match! You won :hamburger: " + prize + "**");	
 					} else if(ms_2C > ms_3C) {
 						post(":disappointed: **Your horse " + raceOpt1[sender.id] + " has not been able to stand a chance against the might of " + raceOpt2[sender.id] + ".\nBetter luck next time!**");
 					} else {
@@ -587,22 +590,50 @@ client.on('message', message =>
 				} else if(pick == 2) {
 					if(ms_2C > ms_1C && ms_2C > ms_3C)
 					{
-						post("Won.");	
+						var prize = raceAmount[sender.id] * 3;
+						win = true;
+						post(":trophy: **Your horse " + raceOpt2[sender.id] + " has won the match! You won :hamburger: " + prize + "**");
+					} else if(ms_1C > ms_3C){
+						post(":disappointed: **Your horse " + raceOpt2[sender.id] + " has not been able to stand a chance against the might of " + raceOpt1[sender.id] + ".\nBetter luck next time!**");
 					} else {
-						post("Lost.");
+						post(":disappointed: **Your horse " + raceOpt2[sender.id] + " has not been able to stand a chance against the might of " + raceOpt3[sender.id] + ".\nBetter luck next time!**");
 					}
 				} else if(pick == 3) {
 					if(ms_3C > ms_1C && ms_3C > ms_2C)
 					{
-						post("Won.");	
+						var prize = raceAmount[sender.id] * 3;
+						win = true;
+						post(":trophy: **Your horse " + raceOpt3[sender.id] + " has won the match! You won :hamburger: " + prize + "**");
+					} else if(ms_1C > ms_2C){
+						post(":disappointed: **Your horse " + raceOpt3[sender.id] + " has not been able to stand a chance against the might of " + raceOpt1[sender.id] + ".\nBetter luck next time!**");
 					} else {
-						post("Lost.");
+						post(":disappointed: **Your horse " + raceOpt3[sender.id] + " has not been able to stand a chance against the might of " + raceOpt2[sender.id] + ".\nBetter luck next time!**");
 					}
 				}
+				request(req, function(error, response, body) 
+				{
+					db = JSON.parse(body);
+					if(win)
+					{
+						var prize = raceAmount[sender.id] * 3;
+						db[sender.id].burgers += prize;
+					} else {
+						db[sender.id].burgers -= raceAmount[sender.id];
+					}
+					request(
+					{
+  						method: "PUT",
+  						uri: dbURL,
+  						json: db
+ 					});
+				});
 			});
 			
-			
 			delete raceTracker[sender.id];
+			delete raceAmount[sender.id];
+			delete raceOpt1[sender.id];
+			delete raceOpt2[sender.id];
+			delete raceOpt3[sender.id];
 		}
 	
 		if(inFGame)
