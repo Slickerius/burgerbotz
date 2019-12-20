@@ -2142,7 +2142,7 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					if(!db[target.id].reputation) db[targetUser.id].reputation = 50;
+					if(!db[targetUser.id].reputation) db[targetUser.id].reputation = 50;
 					var repBar = handler.getReputationBar(db[targetUser.id].reputation);
 					var botembed = new Discord.RichEmbed()
 							.setThumbnail(targetUser.avatarURL)
