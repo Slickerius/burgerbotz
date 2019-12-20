@@ -2132,9 +2132,9 @@ client.on('message', message =>
 			
 			case "pf":
 				var targetUser;
-				if(message.mentions.users.size < 0)
+				if(message.mentions.users.size < 1)
 				{
-					targetUser = message.author;	
+					targetUser = sender;	
 					console.log(targetUser.id);
 				} else {
 					targetUser = user;	
