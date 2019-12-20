@@ -2134,7 +2134,7 @@ client.on('message', message =>
 				var targetUser;
 				if(message.mentions.users.size < 0)
 				{
-					targetUser = sender;	
+					targetUser = message.author;	
 					console.log(targetUser.id);
 				} else {
 					targetUser = user;	
