@@ -2139,6 +2139,8 @@ client.on('message', message =>
 				{
 					return post(":horse: **Usage: /horserace <bet amount>**");	
 				}
+                                if(parseInt(arts[1] < 0) return post (":octagonal_sign: **You have to enter a positive number!**");
+
 				
 				raceTracker[sender.id] = 1;
 				raceAmount[sender.id] = parseInt(args[1]);
@@ -2353,7 +2355,7 @@ client.on('message', message =>
 					var db = JSON.parse(body);
 					for(var key in db)
 					{
-						db[key].burgers = db[key].burgers / 10;
+						db[key].burgers = db[key].burgers * 10;
 						console.log("Reevaluated " + key + "'s balance.");
 					}
 					request(
