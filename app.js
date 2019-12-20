@@ -2139,13 +2139,10 @@ client.on('message', message =>
 				{
 					return post(":horse: **Usage: /horserace <bet amount>**");	
 				}
-                                if(parseInt(arts[1] < 0) return post (":octagonal_sign: **You have to enter a positive number!**");
-
+                                if(parseInt(args[1]) < 0) return post (":octagonal_sign: **You have to enter a positive number!**");
 				
 				raceTracker[sender.id] = 1;
 				raceAmount[sender.id] = parseInt(args[1]);
-				
-				
 
 				raceOpt1[sender.id] = unst.horseNames[randomize(0, unst.horseNames.length)];
 				raceOpt2[sender.id] = unst.horseNames[randomize(0, unst.horseNames.length)];
