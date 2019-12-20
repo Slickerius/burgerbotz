@@ -71,8 +71,10 @@ var x4_msg_7 = "**:pensive: You assisted them in gaining access to the car, only
 
 module.exports =
 {
-        call: function(channel, user, id, stage, value)
+        call: function(channel, user, id, stage, value, repChange)
         {
+                var repSign = "+";
+                if(repChange < 0) repSign = "-";
                 if(id == 0)
                 {
                         if(stage == 0)
@@ -153,19 +155,19 @@ module.exports =
                         {
                                 msg = "**:red_car: " + user + x4_msg_0;
                         } else if(stage == 1) {
-                                msg = x4_msg_1 + value + " for your bravery.**";
+                                msg = x4_msg_1 + value + " for your bravery.**" + repSign + repChange;
                         } else if(stage == 2) {
-                                msg = x4_msg_2;    
+                                msg = x4_msg_2 + repSign + repChange;    
                         } else if(stage == 3) {
-                                msg = x4_msg_3 + value + " for physical assault.**";    
+                                msg = x4_msg_3 + value + " for physical assault.**" + repSign + repChange;    
                         } else if(stage == 4) {
-                                msg = x4_msg_4;  
+                                msg = x4_msg_4 + repSign + repChange;  
                         } else if(stage == 5) {
-                                msg = x4_msg_5;
+                                msg = x4_msg_5 + repSign + repChange;
                         } else if(stage == 6) {
-                                msg = x4_msg_6 + value + " for your assistance.**";     
+                                msg = x4_msg_6 + value + " for your assistance.**" + repSign + repChange;     
                         } else if(stage == 7) {
-                                msg = x4_msg_7 + value + " for being an accomplice.**";    
+                                msg = x4_msg_7 + value + " for being an accomplice.**" + repSign + repChange;    
                         }
                         channel.send(msg);
                         msg = "";
