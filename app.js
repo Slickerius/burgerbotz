@@ -2131,52 +2131,25 @@ client.on('message', message =>
 				break;
 			
 			case "pf":
-				var x = parseInt(args[1]);
-				
-				var red = "<:red:657479499725799426>";
-				var red_ = "<:red_:657487997612195870>";
-				var yellow = "<:yellow:657487824114810900>";
-				var yellow_ = "<:yellow_:657487835707867142>";
-				var green = "<:green:657487789247561729>";
-				var green_ = "<:green_:657487798810443777>";
-				
-				var repBarArr = [red, red, red, red, red, yellow, green, green, green, green, green];
-				
-				if(x <= 10)
+				var target;
+				if(message.mentions.users.size < 0)
 				{
-					repBarArr[0] = red_;
-				} else if(x <= 20) {
-					repBarArr[1] = red_;
-				} else if(x <= 30) {
-					repBarArr[2] = red_;
-				} else if(x <= 40) {
-					repBarArr[3] = red_;
-				} else if(x < 50) {
-					repBarArr[4] = red_;
-				} else if(x == 50) {
-					repBarArr[5] = yellow_;
-				} else if(x <= 60) {
-					repBarArr[6] = green_;
-				} else if(x <= 70) {
-					repBarArr[7] = green_;
-				} else if(x <= 80) {
-					repBarArr[8] = green_;
-				} else if(x <= 90) {
-					repBarArr[9] = green_;
-				} else if(x <= 100) {
-					repBarArr[10] = green_;
+					target = sender;	
+				} else {
+					target = user;	
 				}
-				var repBar = repBarArr.join(' ');
 				
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
+					if(!db[target.id].reputation) db[target.id].reputation = 50;
+					var repBar = handler.getReputationBar(db[target.id].reputation);
 					var botembed = new Discord.RichEmbed()
-							.setThumbnail(sender.avatarURL)
-							.setTitle(sender.username)
+							.setThumbnail(target.avatarURL)
+							.setTitle(target.username)
 							.setColor("#fcc66a")
 							.setDescription("Sample sample")
-							.addField("Wealth", ":hamburger: " + db[sender.id].burgers)
+							.addField("Wealth", ":hamburger: " + db[target.id].burgers)
 							.addField("Reputation", repBar);
 							ch.send(botembed);
 					var botembed = "";
