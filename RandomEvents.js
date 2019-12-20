@@ -155,19 +155,19 @@ module.exports =
                         {
                                 msg = "**:red_car: " + user + x4_msg_0;
                         } else if(stage == 1) {
-                                msg = x4_msg_1 + value + " for your bravery.**" + repSign + repChange;
+                                msg = x4_msg_1 + value + " for your bravery.**\n**:sparkles: " + repSign + repChange + " reputation.**";
                         } else if(stage == 2) {
-                                msg = x4_msg_2 + repSign + repChange;    
+                                msg = x4_msg_2 + "\n**:sparkles: " + repSign + repChange + " reputation.**";    
                         } else if(stage == 3) {
-                                msg = x4_msg_3 + value + " for physical assault.**" + repSign + repChange;    
+                                msg = x4_msg_3 + value + " for physical assault.**\n**:sparkles: " + repSign + repChange + " reputation.**";    
                         } else if(stage == 4) {
-                                msg = x4_msg_4 + repSign + repChange;  
+                                msg = x4_msg_4 + "\n**:sparkles: " + repSign + repChange + " reputation.**";  
                         } else if(stage == 5) {
-                                msg = x4_msg_5 + repSign + repChange;
+                                msg = x4_msg_5 + "\n**:sparkles: " + repSign + repChange + " reputation.**";
                         } else if(stage == 6) {
-                                msg = x4_msg_6 + value + " for your assistance.**" + repSign + repChange;     
+                                msg = x4_msg_6 + value + " for your assistance.**\n**:sparkles: " + repSign + repChange + " reputation.**";     
                         } else if(stage == 7) {
-                                msg = x4_msg_7 + value + " for being an accomplice.**" + repSign + repChange;    
+                                msg = x4_msg_7 + value + " for being an accomplice.**\n**:sparkles: " + repSign + repChange + " reputation.**";    
                         }
                         channel.send(msg);
                         msg = "";
