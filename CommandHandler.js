@@ -285,5 +285,43 @@ module.exports =
 	ping: function(channel, message)
 	{
 		channel.send("***PONG!*** Returned request in " + (Date.now() - message.createdTimestamp) + " ms");
+	},
+	
+	getReputationBar(): function(reputation)
+	{
+		var red = "<:red:657479499725799426>";
+		var red_ = "<:red_:657487997612195870>";
+		var yellow = "<:yellow:657487824114810900>";
+		var yellow_ = "<:yellow_:657487835707867142>";
+		var green = "<:green:657487789247561729>";
+		var green_ = "<:green_:657487798810443777>";
+				
+		var repBarArr = [red, red, red, red, red, yellow, green, green, green, green, green];
+		if(x <= 10)
+		{
+			repBarArr[0] = red_;
+		} else if(reputation <= 20) {
+			repBarArr[1] = red_;
+		} else if(reputation <= 30) {
+			repBarArr[2] = red_;
+		} else if(reputation <= 40) {
+			repBarArr[3] = red_;
+		} else if(reputation < 50) {
+			repBarArr[4] = red_;
+		} else if(reputation == 50) {
+			repBarArr[5] = yellow_;
+		} else if(reputation <= 60) {
+			repBarArr[6] = green_;
+		} else if(reputation <= 70) {
+			repBarArr[7] = green_;
+		} else if(reputation <= 80) {
+			repBarArr[8] = green_;
+		} else if(reputation <= 90) {
+			repBarArr[9] = green_;
+		} else if(reputation <= 100) {
+			repBarArr[10] = green_;
+		}
+		var repBar = repBarArr.join(' ');
+		return repBar;
 	}
 };
