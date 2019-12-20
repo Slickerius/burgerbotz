@@ -2135,10 +2135,14 @@ client.on('message', message =>
 				{
 					var db = JSON.parse(body);
 					var botembed = new Discord.RichEmbed()
-							.setImage(sender.avatarURL)
+							.setThumbnail(sender.avatarURL)
+							.setTitle(sender.name)
 							.setColor("#fcc66a")
-							.addField("Description", ":hamburger: " + db[sender.id].burgers);
+							.setDescription("Sample sample")
+							.addField("Wealth", ":hamburger: " + db[sender.id].burgers)
+							.addField("X", "Y");
 							ch.send(botembed);
+					var botembed = "";
 				});
 				break;
 				
