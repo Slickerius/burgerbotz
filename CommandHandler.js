@@ -287,7 +287,7 @@ module.exports =
 		channel.send("***PONG!*** Returned request in " + (Date.now() - message.createdTimestamp) + " ms");
 	},
 	
-	getReputationBar(): function(reputation)
+	getReputationBar: function(reputation)
 	{
 		var red = "<:red:657479499725799426>";
 		var red_ = "<:red_:657487997612195870>";
