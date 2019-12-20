@@ -281,24 +281,25 @@ client.on('message', message =>
 		{
 			if(key == message.author.id)
 			{
+				var repChange = 0;
 				if(eventTracker[key] == 0)
 				{
 					var value = randomize(1, 25);
 					if(eventStage[key] == 0)
 					{
-						randomEvents.call(ch, sender, 0, 0, value);
+						randomEvents.call(ch, sender, 0, 0, value, repChange);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
 						var stage;
 						if(message.content.startsWith("1"))
 						{
 							stage = randomize(1, 3);
-							randomEvents.call(ch, sender, 0, stage, value);	
+							randomEvents.call(ch, sender, 0, stage, value, repChange);	
 						} else if(message.content.startsWith("2")) {
 							stage = randomize(3, 5);
-							randomEvents.call(ch, sender, 0, stage, value);	
+							randomEvents.call(ch, sender, 0, stage, value, repChange);	
 						} else if(message.content.startsWith("3")) {
-							randomEvents.call(ch, sender, 0, 5, value);	
+							randomEvents.call(ch, sender, 0, 5, value, repChange);	
 						} else {
 							return;	
 						}
@@ -326,7 +327,7 @@ client.on('message', message =>
 					var fine = randomize(5, 50);
 					if(eventStage[key] == 0)
 					{
-						randomEvents.call(ch, sender, 1, 0, 0);
+						randomEvents.call(ch, sender, 1, 0, 0, repChange);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
 						var stage;
@@ -335,17 +336,17 @@ client.on('message', message =>
 							stage = randomize(1, 4);
 							if(stage == 3)
 							{
-								randomEvents.call(ch, sender, 1, stage, fine);
+								randomEvents.call(ch, sender, 1, stage, fine, repChange);
 							} else {
 								console.log(stage);
-								randomEvents.call(ch, sender, 1, stage, value);	
+								randomEvents.call(ch, sender, 1, stage, value, repChange);	
 							}
 						} else if(message.content.startsWith("2")) {
 							stage = 4;
-							randomEvents.call(ch, sender, 1, 4, value);	
+							randomEvents.call(ch, sender, 1, 4, value, repChange);	
 						} else if(message.content.startsWith("3")) {
 							stage = randomize(5, 7);
-							if(stage == 6) randomEvents.call(ch, sender, 1, stage, value);
+							if(stage == 6) randomEvents.call(ch, sender, 1, stage, value, repChange);
 						} else {
 							return;	
 						}
@@ -366,13 +367,13 @@ client.on('message', message =>
 							} else if(stage == 5) {
 								if(tip == 0)
 								{
-									randomEvents.call(ch, sender, 1, stage, (value / 2));	
+									randomEvents.call(ch, sender, 1, stage, (value / 2), repChange);	
 									db[message.author.id].burgers += value / 2;
 								} else if(tip == 1) {
-									randomEvents.call(ch, sender, 1, stage, value);	
+									randomEvents.call(ch, sender, 1, stage, value, repChange);	
 									db[message.author.id].burgers += value;
 								} else if(tip == 2) {
-									randomEvents.call(ch, sender, 1, stage, (value * 2));	
+									randomEvents.call(ch, sender, 1, stage, (value * 2), repChange);	
 									db[message.author.id].burgers += value * 2;
 								}
 							}
@@ -389,17 +390,17 @@ client.on('message', message =>
 					var value = randomize(20, 100);
 					if(eventStage[key] == 0)
 					{
-						randomEvents.call(ch, sender, 2, 0, value);
+						randomEvents.call(ch, sender, 2, 0, value, repChange);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
 						var stage;
 						if(message.content.startsWith("1"))
 						{
 							stage = randomize(1, 4);
-							randomEvents.call(ch, sender, 2, stage, value);	
+							randomEvents.call(ch, sender, 2, stage, value, repChange);	
 						} else if(message.content.startsWith("2")) {
 							stage = 4;
-							randomEvents.call(ch, sender, 2, 4, value);	
+							randomEvents.call(ch, sender, 2, 4, value, repChange);	
 						} else {
 							return;	
 						}
@@ -426,20 +427,20 @@ client.on('message', message =>
 					var value = randomize(1, 15);
 					if(eventStage[key] == 0)
 					{
-						randomEvents.call(ch, sender, 3, 0, value);
+						randomEvents.call(ch, sender, 3, 0, value, repChange);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
 						var stage;
 						if(message.content.startsWith("1"))
 						{
 							stage = randomize(1, 3);
-							randomEvents.call(ch, sender, 3, stage, value);	
+							randomEvents.call(ch, sender, 3, stage, value, repChange);	
 						} else if(message.content.startsWith("2")) {
 							stage = 3;
-							randomEvents.call(ch, sender, 3, 3, value);	
+							randomEvents.call(ch, sender, 3, 3, value, repChange);	
 						} else if(message.content.startsWith("3")) {
 							stage = randomize(4, 9);
-							randomEvents.call(ch, sender, 3, stage, value);
+							randomEvents.call(ch, sender, 3, stage, value, repChange);
 						} else {
 							return;	
 						}
@@ -471,7 +472,7 @@ client.on('message', message =>
 					var value = 0;
 					if(eventStage[key] == 0)
 					{
-						randomEvents.call(ch, sender, 4, 0, value);
+						randomEvents.call(ch, sender, 4, 0, value, repChange);
 						eventStage[key] = 1;
 					} else if(eventStage[key] == 1) {
 						var stage;
@@ -479,14 +480,21 @@ client.on('message', message =>
 						{
 							value = randomize(1, 25);
 							stage = randomize(1, 4);
-							randomEvents.call(ch, sender, 4, stage, value);	
+							if(stage == 1)
+							{
+								repChange = randomize(4, 10);
+							} else if(stage == 3) {
+								repChange = randomize(-10, -4);
+							}
+							randomEvents.call(ch, sender, 4, stage, value, repChange);	
 						} else if(message.content.startsWith("2")) {
 							stage = 4;
-							randomEvents.call(ch, sender, 4, 4, value);	
+							randomEvents.call(ch, sender, 4, 4, value, repChange);	
 						} else if(message.content.startsWith("3")) {
 							value = randomize(5, 30);
 							stage = randomize(5, 8);
-							randomEvents.call(ch, sender, 4, stage, value);	
+							if(stage == 5)
+							randomEvents.call(ch, sender, 4, stage, value, repChange);	
 						} else {
 							return;	
 						}
@@ -2130,21 +2138,28 @@ client.on('message', message =>
 				});
 				break;
 			
-			case "pf":
+			case "profile":
 				var targetUser;
 				if(message.mentions.users.size < 1)
 				{
 					targetUser = sender;	
-					console.log(targetUser.id);
 				} else {
 					targetUser = user;	
-					console.log(targetUser.id);
 				}
 				
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					if(!db[targetUser.id].reputation) db[targetUser.id].reputation = 50;
+					if(!db[targetUser.id].reputation) 
+					{
+						db[targetUser.id].reputation = 50;
+						request(
+						{
+  							method: "PUT",
+							uri: dbURL,
+  							json: db
+ 						});
+					}
 					var repBar = handler.getReputationBar(db[targetUser.id].reputation);
 					var botembed = new Discord.RichEmbed()
 							.setThumbnail(targetUser.avatarURL)
