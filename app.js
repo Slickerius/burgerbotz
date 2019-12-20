@@ -200,10 +200,20 @@ var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
-		if(!database[message.author.id]) database[message.author.id] = {burgers: 10};
 		let sender = message.author;
 		let ch = message.channel;
-	
+		request(dbURL, function(error, response, body) 
+		{
+			var db = JSON.parse(body);
+			if(!db[sender.id]) 
+			{
+				db[message.author.id] = {burgers: 10};
+				console.log("Created new DB data for user: " + message.author.name + "#" + message.author.discriminator);
+			}
+			if(!db[sender.id].reputation) db[sender.id].reputation = 50;
+			if(!db[sender.id].burgers) db[sender.id].burgers = 10;
+		});
+		
 		var msg0 = message.content.split(' ');
 		var cmd0 = msg0[0];
 		var cmd = "";
@@ -223,16 +233,6 @@ client.on('message', message =>
 			eventTracker[sender.id] = eventRandomizer;
 			eventStage[sender.id] = 0;
 		}
-		
-		request(dbURL, function(error, response, body) 
-		{
-			var db = JSON.parse(body);
-			if(!db[message.author.id]) 
-			{
-				db[message.author.id] = {burgers: 10};
-				console.log("Created new DB data for user: " + message.author.name + "#" + message.author.discriminator);
-			}
-		});
 		
 		var date = message.createdAt;
 	
@@ -520,6 +520,9 @@ client.on('message', message =>
 							} else if(stage == 3 || stage == 7) {
 								db[message.author.id].burgers -= value;
 							}
+							
+							db[sender.id].reputation += repChange;
+							
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
 							request(
 							{
