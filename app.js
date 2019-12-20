@@ -2131,7 +2131,7 @@ client.on('message', message =>
 				break;
 			
 			case "pf":
-				request(url, function(error, response, body) 
+				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					var botembed = new Discord.RichEmbed()
