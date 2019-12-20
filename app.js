@@ -2131,25 +2131,25 @@ client.on('message', message =>
 				break;
 			
 			case "pf":
-				var target;
+				var targetUser;
 				if(message.mentions.users.size < 0)
 				{
-					target = sender;	
+					targetUser = sender;	
 				} else {
-					target = user;	
+					targetUser = user;	
 				}
 				
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					if(!db[target.id].reputation) db[target.id].reputation = 50;
-					var repBar = handler.getReputationBar(db[target.id].reputation);
+					if(!db[target.id].reputation) db[targetUser.id].reputation = 50;
+					var repBar = handler.getReputationBar(db[targetUser.id].reputation);
 					var botembed = new Discord.RichEmbed()
-							.setThumbnail(target.avatarURL)
-							.setTitle(target.username)
+							.setThumbnail(targetUser.avatarURL)
+							.setTitle(targetUser.username)
 							.setColor("#fcc66a")
 							.setDescription("Sample sample")
-							.addField("Wealth", ":hamburger: " + db[target.id].burgers)
+							.addField("Wealth", ":hamburger: " + db[targetUser.id].burgers)
 							.addField("Reputation", repBar);
 							ch.send(botembed);
 					var botembed = "";
