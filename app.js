@@ -2151,9 +2151,9 @@ client.on('message', message =>
 					repBarArr[2] = red_;
 				} else if(x <= 40) {
 					repBarArr[3] = red_;
-				} else if(x <= 50) {
+				} else if(x < 50) {
 					repBarArr[4] = red_;
-				} else if(x = 50) {
+				} else if(x == 50) {
 					repBarArr[5] = yellow_;
 				} else if(x <= 60) {
 					repBarArr[6] = green_;
