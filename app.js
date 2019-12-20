@@ -2131,6 +2131,43 @@ client.on('message', message =>
 				break;
 			
 			case "pf":
+				var x = parseInt(args[1]);
+				
+				var red = "<:red:657479499725799426>";
+				var red_ = "<:red_:657487997612195870>";
+				var yellow = "<:yellow:657487824114810900>";
+				var yellow_ = "<:yellow_:657487835707867142>";
+				var green = "<:green:657487789247561729>";
+				var green_ = "<:green_:657487798810443777>";
+				
+				var repBarArr = [red, red, red, red, red, yellow, green, green, green, green, green];
+				
+				if(x <= 10)
+				{
+					repBar[0] = red_;
+				} else if(x <= 20) {
+					repBar[1] = red_;
+				} else if(x <= 30) {
+					repBar[2] = red_;
+				} else if(x <= 40) {
+					repBar[3] = red_;
+				} else if(x <= 50) {
+					repBar[4] = red_;
+				} else if(x = 50) {
+					repBar[5] = yellow_;
+				} else if(x <= 60) {
+					repBar[6] = green_;
+				} else if(x <= 70) {
+					repBar[7] = green_;
+				} else if(x <= 80) {
+					repBar[8] = green_;
+				} else if(x <= 90) {
+					repBar[9] = green_;
+				} else if(x <= 100) {
+					repBar[10] = green_;
+				}
+				var repBar = repBarArr.join(' ');
+				
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
@@ -2140,7 +2177,7 @@ client.on('message', message =>
 							.setColor("#fcc66a")
 							.setDescription("Sample sample")
 							.addField("Wealth", ":hamburger: " + db[sender.id].burgers)
-							.addField("X", "                  Y");
+							.addField("Reputation", repBar);
 							ch.send(botembed);
 					var botembed = "";
 				});
