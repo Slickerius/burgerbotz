@@ -2130,6 +2130,18 @@ client.on('message', message =>
 				});
 				break;
 			
+			case "pf":
+				request(url, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					var botembed = new Discord.RichEmbed()
+							.setImage(sender.avatarURL)
+							.setColor("#fcc66a")
+							.addField("Description", ":hamburger: " + db[sender.id].burgers);
+							ch.send(botembed);
+				});
+				break;
+				
 			case "horserace":
 				if(raceTracker[sender.id] == 1)
 				{
