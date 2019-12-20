@@ -2135,8 +2135,10 @@ client.on('message', message =>
 				if(message.mentions.users.size < 0)
 				{
 					targetUser = sender;	
+					console.log(targetUser.id);
 				} else {
 					targetUser = user;	
+					console.log(targetUser.id);
 				}
 				
 				request(dbURL, function(error, response, body) 
