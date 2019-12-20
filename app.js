@@ -524,6 +524,8 @@ client.on('message', message =>
 							db[sender.id].reputation += repChange;
 							
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
+							if(db[message.author.id].reputation < 0) db[message.author.id].reputation = 0;
+							if(db[message.author.id].reputation > 100) db[message.author.id].reputation = 100;
 							request(
 							{
   								method: "PUT",
