@@ -494,6 +494,13 @@ client.on('message', message =>
 							value = randomize(5, 30);
 							stage = randomize(5, 8);
 							if(stage == 5)
+							{
+								repChange = randomize(1, 5);
+							} else if(stage == 6) {
+								repChange = randomize(-2, 0);	
+							} else {
+								repChange = randomize(-15, -4);	
+							}
 							randomEvents.call(ch, sender, 4, stage, value, repChange);	
 						} else {
 							return;	
