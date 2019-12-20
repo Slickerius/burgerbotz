@@ -2144,27 +2144,27 @@ client.on('message', message =>
 				
 				if(x <= 10)
 				{
-					repBar[0] = red_;
+					repBarArr[0] = red_;
 				} else if(x <= 20) {
-					repBar[1] = red_;
+					repBarArr[1] = red_;
 				} else if(x <= 30) {
-					repBar[2] = red_;
+					repBarArr[2] = red_;
 				} else if(x <= 40) {
-					repBar[3] = red_;
+					repBarArr[3] = red_;
 				} else if(x <= 50) {
-					repBar[4] = red_;
+					repBarArr[4] = red_;
 				} else if(x = 50) {
-					repBar[5] = yellow_;
+					repBarArr[5] = yellow_;
 				} else if(x <= 60) {
-					repBar[6] = green_;
+					repBarArr[6] = green_;
 				} else if(x <= 70) {
-					repBar[7] = green_;
+					repBarArr[7] = green_;
 				} else if(x <= 80) {
-					repBar[8] = green_;
+					repBarArr[8] = green_;
 				} else if(x <= 90) {
-					repBar[9] = green_;
+					repBarArr[9] = green_;
 				} else if(x <= 100) {
-					repBar[10] = green_;
+					repBarArr[10] = green_;
 				}
 				var repBar = repBarArr.join(' ');
 				
