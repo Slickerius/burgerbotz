@@ -1864,7 +1864,8 @@ client.on('message', message =>
 				break;
 			
 			case "xxz":
-				eventTracker[sender.id] = 4;
+				if(parseInt(args[1]) > 4) return;
+				eventTracker[sender.id] = parseInt(args[1]);
 				eventStage[sender.id] = 0;
 				break;
 				
