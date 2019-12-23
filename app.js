@@ -742,8 +742,6 @@ client.on('message', message =>
 			p1isCrippled = false;
 			p2isCrippled = false;
 			post("***:trophy: " + player1 + " has defeated " + player2 + "!\nGiven :hamburger: " + x + " as a prize.***");
-			console.log(database[winID].burgers);
-			console.log(database[winID]);
 			request(req, function(error, response, body) 
 			{
 				db = JSON.parse(body);
