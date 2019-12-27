@@ -2239,6 +2239,7 @@ client.on('message', message =>
 					request(dbURL, function(error, response, body) 
 					{	
 						var db = JSON.parse(body);
+						if(!db[sender.id]['inventory']) db[sender.id]['inventory'] = {energyDrinks: 0};
 						if(db[sender.id]['inventory'].energyDrinks > 0)
 						{
 							var recovery = randomize(70, 101);
