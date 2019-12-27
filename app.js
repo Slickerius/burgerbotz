@@ -910,6 +910,7 @@ client.on('message', message =>
 		{		
 				if(message.content.startsWith("1"))
 				{
+					if(temp[sender.id].hp == 0) return;
 					if(luckPoints > 85)
 					{
 						temp[sender.id].ammo += 1;
