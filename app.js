@@ -2656,8 +2656,8 @@ client.on('message', message =>
 					if(!temp[user.id]) temp[user.id] = {hp: xHP, ammo: 1};
 					if(!temp[sender.id]) temp[sender.id] = {hp: yHP, ammo: 1};
 					
-					temp[user.id] = {hp: 100, ammo: 1};
-					temp[sender.id] = {hp: 100, ammo: 1};
+					temp[user.id] = {hp: xHP, ammo: 1};
+					temp[sender.id] = {hp: yHP, ammo: 1};
 					
 					player1ID = sender.id;
 					player2ID = user.id;
