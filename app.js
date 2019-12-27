@@ -2243,7 +2243,14 @@ client.on('message', message =>
 							var recovery = randomize(70, 101);
 							db[sender.id]['inventory'].energyDrinks -= 1;
 							db[sender.id].hp += recovery;
+							if(db[sender.id].hp > 100) db[sender.id].hp = 100;
 							post("<:drink:660031984092839947> **You drank an energy drink. +:heart: " + recovery + " HP.**");
+							request(
+							{
+  								method: "PUT",
+								uri: dbURL,
+  								json: db
+ 							});
 						} else {
 							post("**:octagonal_sign: You don't have any energy drinks! Type */store* to acquire one.**");	
 						}
