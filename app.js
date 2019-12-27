@@ -2587,15 +2587,26 @@ client.on('message', message =>
 			case "store":
 				if(args[1] == "buy")
 				{
-					if(parseInt(args[3]) == args[3] && parseInt(args[3]) > 0)
+					var selection = args[2];
+					var amount;
+					var value;
+					
+					if(args[3] == "drink" && args[2] == "energy")
 					{
-						if(args[2] == "0")
+						amount = parseInt(args[4]);
+					} else {
+						amount = parseInt(args[3]);	
+					}
+					
+					if((parseInt(args[3]) == args[3] && parseInt(args[3]) > 0) || (parseInt(args[4]) == args[4] && parseInt(args[4]) > 0))
+					{
+						if(selection == "energy")
 						{
 							request(dbURL, function(error, response, body) 
 							{
 								var db = JSON.parse(body);
-								var amount = parseInt(args[3]);
-								var value = amount * 5;
+								value = amount * 5;
+								
 								if(db[sender.id].burgers >= value)
 								{
 									if(!db[sender.id]['inventory']) db[sender.id]['inventory'] = {energyDrinks: 0};
@@ -2620,8 +2631,8 @@ client.on('message', message =>
 						.setThumbnail("https://images.emojiterra.com/twitter/v12/512px/1f6d2.png")
 						.setColor("#fcc66a")
 						.setTitle("The Burgerstore")
-						.addField("Consumables", "[0] <:drink:660031984092839947> **Energy Drink**   - :hamburger: 5")
-						.setFooter("Usage: /store buy <item id> <amount>");
+						.setDescription("The official Burgerbotz item store!\nUsage: /store buy <item> <amount>")
+						.addField("Consumables", "<:drink:660031984092839947> **Energy Drink** - :hamburger: 5\nRefills your energy.")
 						ch.send(storeEmbed);
 				break;
 
