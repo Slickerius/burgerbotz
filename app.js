@@ -2437,6 +2437,10 @@ client.on('message', message =>
 				});
 				break;
 			
+			case "xhp":
+				console.log("DB HP: " + getHP(sender.id));
+				break;
+				
 			case "economy":
 				request(dbURL, function(error, response, body) 
 				{
