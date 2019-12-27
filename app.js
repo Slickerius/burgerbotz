@@ -883,9 +883,10 @@ client.on('message', message =>
 					var db = JSON.parse(body);
 					if(db[sender.id].hp == 0)
 					{
-						return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");	
+						post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");	
 						inRequest = false;
 						inGame = false;
+						return;
 					}
 				});
 				inRequest = false;
@@ -2763,7 +2764,7 @@ client.on('message', message =>
 						temp[sender.id] = {hp: yHP, ammo: 1};
 					});
 					
-					if(temp[sender.id] == 0) return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
+					if(temp[sender.id].hp == 0) return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
 					
 					player1ID = sender.id;
 					player2ID = user.id;
