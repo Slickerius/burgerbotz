@@ -170,18 +170,13 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function postHP(x)
-{
-	_tempHp = x;
-}
-
 function getHP(id)
 {
 	request(dbURL, function(error, response, body) 
 	{
 		var db = JSON.parse(body);
 		console.log("A: " + db[id].hp);
-		postHP(db[id].hp);
+		_tempHp = db[id].hp;
 		console.log("B: " + _tempHp);
 	});
 	return _tempHp;
