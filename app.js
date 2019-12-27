@@ -908,10 +908,8 @@ client.on('message', message =>
 	
 		if(inGame && turnID === sender.id)
 		{		
-				if(message.content.startsWith("1"))
+				if(message.content.startsWith("1") && temp[sender.id].hp > 0)
 				{
-					if(temp[sender.id].hp == 0) return;
-					console.log(temp[sender.id].hp);
 					if(luckPoints > 85)
 					{
 						temp[sender.id].ammo += 1;
