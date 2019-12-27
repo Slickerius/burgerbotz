@@ -2446,7 +2446,7 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					if(!db[sender.id]['inventory'].energyDrinks) 
+					if(!db[sender.id]['inventory'] || !db[sender.id]['inventory'].energyDrinks) 
 					{
 						db[sender.id]['inventory'].energyDrinks = 0;
 						request({method: "PUT", uri: dbURL, json: db});
