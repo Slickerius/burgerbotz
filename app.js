@@ -169,6 +169,15 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function getHP(id);
+{
+	request(dbURL, function(error, response, body) 
+	{
+		var db = JSON.parse(body);
+		return db[id].hp;
+	});
+}
+
 function factorial(n) 
 {
 	if ( n == 1 ) 
@@ -2639,8 +2648,10 @@ client.on('message', message =>
 				} else if (inGame) {
 					post("A battle is already ongoing!");
 				} else {
-					if(!temp[user.id]) temp[user.id] = {hp: 100, ammo: 1};
-					if(!temp[sender.id]) temp[sender.id] = {hp: 100, ammo: 1};
+					var xHP = getHP(user.id);
+					var yHP = getHP(sender.id);
+					if(!temp[user.id]) temp[user.id] = {hp: xHP, ammo: 1};
+					if(!temp[sender.id]) temp[sender.id] = {hp: yHP, ammo: 1};
 					
 					temp[user.id] = {hp: 100, ammo: 1};
 					temp[sender.id] = {hp: 100, ammo: 1};
