@@ -22,7 +22,9 @@ commandMap = new Map([
 		['/invite', 'Invite me to your server!'],
 		['/bp', 'Burgerphone! Connect to a Burgerphone room and chat with others.'],
 		['/flags', 'Starts a flag guessing game'],
-		['/transcribe', 'DNA codon triplet transcription tool']
+		['/transcribe', 'DNA codon triplet transcription tool'],
+		['/store', 'The Burgerstore, providing all of your needs'],
+		['/consume', 'Consume an item']
 		]);
 
 flags = [
