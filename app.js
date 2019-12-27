@@ -207,8 +207,8 @@ client.on('message', message =>
 			var db = JSON.parse(body);
 			if(!db[sender.id]) 
 			{
-				db[message.author.id] = {burgers: 10};
-				console.log("Created new DB data for user: " + message.author.name + "#" + message.author.discriminator);
+				db[sender.id] = {burgers: 10};
+				console.log("Created new DB data for user: " + sender.username + "#" + sender.discriminator);
 			}
 			if(!db[sender.id].reputation) db[sender.id].reputation = 50;
 			if(!db[sender.id].burgers) db[sender.id].burgers = 10;
