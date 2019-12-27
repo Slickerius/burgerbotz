@@ -2499,6 +2499,27 @@ client.on('message', message =>
 				}
 				break;
 			
+			case "aadx":
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					client.users.forEach(function(u)
+					{
+						if(!db[u.id].hp)
+						{
+							db[u.id].hp = 100;
+							console.log("Added DB HP data for user " + u.username);
+						}
+					});
+					request(
+					{
+  						method: "PUT",
+  						uri: dbURL,
+  						json: db
+ 					});
+				});
+				break;
+				
 			case "aadz":
 				request(dbURL, function(error, response, body) 
 				{
