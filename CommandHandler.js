@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const unst = require('./storage/unstatics.js');
 
-module.exports = {flags, burger, rape, help, inventory};
+module.exports = {flags, burger, rape, help};
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var commands = unst.commandMap;
