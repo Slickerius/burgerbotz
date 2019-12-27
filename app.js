@@ -751,7 +751,7 @@ client.on('message', message =>
 			post("```" + pTurn + "'s turn.\n\n" + p1Name + " HP: " + temp[p1ID].hp + "/100 Ammo: " + temp[p1ID].ammo + "\n" + p2Name + " HP: " + temp[p2ID].hp + "/100 Ammo: " + temp[p2ID].ammo + "\n\n[1] Punch\n[2] Kick\n[3] Shoot\n[4] Heal\n[5] Run```");	
 		}
 		
-		function onDefeat(player1, player2, winID)
+		function onDefeat(player1, player2, winID, loseID)
 		{
 			var x = randomize(15, 75);
 			var req = dbURL;
@@ -764,6 +764,9 @@ client.on('message', message =>
 				db = JSON.parse(body);
 				if(!db[winID]) db[winID] = {burgers: 10};
 				db[winID].burgers += x;
+				
+				db[winID].hp = temp[winID].hp;
+				db[loseID].hp = temp[loseID].hp;
 				
 				db["gdp"].battle += x;
 				db["gdp"].total += x;
@@ -919,7 +922,7 @@ client.on('message', message =>
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
-							onDefeat(player1Name, player2Name, player1ID);
+							onDefeat(player1Name, player2Name, player1ID, player2ID);
 							inGame = false;
 						}
 					} else {
@@ -933,7 +936,7 @@ client.on('message', message =>
 								turnID = player1ID;
 								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 							} else {
-								onDefeat(player2Name, player1Name, player2ID);
+								onDefeat(player2Name, player1Name, player2ID, player2ID);
 								inGame = false;
 							}
 						} else {
@@ -982,7 +985,7 @@ client.on('message', message =>
 							turnID = player2ID;
 							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
-							onDefeat(player1Name, player2Name, player1ID);
+							onDefeat(player1Name, player2Name, player1ID, player2ID);
 							inGame = false;
 						}
 					} else {
@@ -994,7 +997,7 @@ client.on('message', message =>
 							turnID = player1ID;
 							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 						} else {
-							onDefeat(player2Name, player1Name, player2ID);
+							onDefeat(player2Name, player1Name, player2ID, player1ID);
 							inGame = false;
 						}
 					}
@@ -1025,7 +1028,7 @@ client.on('message', message =>
 									turnID = player2ID;
 									tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
-									onDefeat(player1Name, player2Name, player1ID);
+									onDefeat(player1Name, player2Name, player1ID, player2ID);
 									inGame = false;
 								}
 							}
@@ -1056,7 +1059,7 @@ client.on('message', message =>
 									turnID = player1ID;
 									tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
 								} else {
-									onDefeat(player2Name, player1Name, player2ID);
+									onDefeat(player2Name, player1Name, player2ID, player1ID);
 									inGame = false;
 								}
 							}
