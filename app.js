@@ -890,11 +890,11 @@ client.on('message', message =>
 					}
 				});
 				inRequest = false;
-				if(turnID == player1ID)
+				if(turnID == player1ID && temp[sender.id].hp > 0)
 				{
 					tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
 					inGame = true;
-				} else {
+				} else if(turnID == player2ID && temp[sender.id].hp > 0) {
 					tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
 					f0 = true;
 					inGame = true;
