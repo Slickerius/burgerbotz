@@ -910,7 +910,7 @@ client.on('message', message =>
 		{		
 				if(message.content.startsWith("1"))
 				{
-					if(temp[sender.id].hp == 0) console.log("ARR");
+					if(temp[sender.id].hp == 0) return;
 					console.log(temp[sender.id].hp);
 					if(luckPoints > 85)
 					{
