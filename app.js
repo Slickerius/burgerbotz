@@ -30,6 +30,7 @@ var raceOpt1 = {"x": "y"};
 var raceOpt2 = {"x": "y"};
 var raceOpt3 = {"x": "y"};
 
+var _tempHp;
 
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel, logChannel;
@@ -169,16 +170,21 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function postHP(x)
+{
+	_tempHp = x;
+}
+
 function getHP(id)
 {
-	var x;
 	request(dbURL, function(error, response, body) 
 	{
 		var db = JSON.parse(body);
 		console.log("A: " + db[id].hp);
-		x = db[id].hp;
+		postHP(db[id].hp);
+		console.log("B: " + _tempHp);
 	});
-	return x;
+	return _tempHp;
 }
 
 function factorial(n) 
