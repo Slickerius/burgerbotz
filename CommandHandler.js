@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const unst = require('./storage/unstatics.js');
 
-module.exports = {flags, burger, rape, help};
+module.exports = {flags, burger, rape, help, inventory};
 
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var commands = unst.commandMap;
@@ -323,5 +323,10 @@ module.exports =
 		}
 		var repBar = repBarArr.join(' ');
 		return repBar;
+	},
+	
+	getInventory: function(name, drinks)
+	{
+		var out = "__**:briefcase: " + name + "'s Inventory**__\n<:drink:660031984092839947> **Energy Drinks : " + drinks + "**\nType **/store** to buy items!";
 	}
 };
