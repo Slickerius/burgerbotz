@@ -212,6 +212,13 @@ client.on('message', message =>
 			}
 			if(!db[sender.id].reputation) db[sender.id].reputation = 50;
 			if(!db[sender.id].burgers) db[sender.id].burgers = 10;
+			
+			request(
+			{
+  				method: "PUT",
+  				uri: dbURL,
+  				json: db
+ 			});
 		});
 		
 		var msg0 = message.content.split(' ');
