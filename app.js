@@ -176,7 +176,7 @@ function getHP(id)
 	{
 		var db = JSON.parse(body);
 		console.log("A: " + db[id].hp);
-		x = db[id.hp];
+		x = db[id].hp;
 	});
 	return x;
 }
