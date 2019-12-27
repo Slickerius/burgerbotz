@@ -2616,13 +2616,13 @@ client.on('message', message =>
 						}
 					}
 				}
-				var botembed = new Discord.RichEmbed()
+				var storeEmbed = new Discord.RichEmbed()
 						.setImage("https://images.emojiterra.com/twitter/v12/512px/1f6d2.png")
 						.setColor("#fcc66a")
 						.setTitle("The Burgerstore")
 						.addField("Consumables", "[0] <:drink:660031984092839947> **Energy Drink**   - :hamburger: 5")
 						.setFooter("Usage: /store buy <item id> <amount>");
-						ch.send(botembed);
+						ch.send(storeEmbed);
 				break;
 
 			case "daily":
