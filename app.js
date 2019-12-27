@@ -202,22 +202,6 @@ client.on('message', message =>
 {
 		let sender = message.author;
 		let ch = message.channel;
-		request(dbURL, function(error, response, body) 
-		{
-			var db = JSON.parse(body);
-			if(!db[sender.id]) 
-			{
-				db[sender.id] = {burgers: 10};
-				console.log("Created new DB data for user: " + sender.username + "#" + sender.discriminator);
-			}
-			if(!db[sender.id].reputation) db[sender.id].reputation = 50;
-			request(
-			{
-  				method: "PUT",
-  				uri: dbURL,
-  				json: db
- 			});
-		});
 		
 		var msg0 = message.content.split(' ');
 		var cmd0 = msg0[0];
