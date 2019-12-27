@@ -489,6 +489,8 @@ client.on('message', message =>
 							if(stage == 1)
 							{
 								repChange = randomize(4, 10);
+							} else if(stage == 2) {
+								repChange = randomize(2, 8);	
 							} else if(stage == 3) {
 								repChange = randomize(-10, -4);
 							}
