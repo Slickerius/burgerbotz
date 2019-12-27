@@ -2199,6 +2199,7 @@ client.on('message', message =>
 							.setTitle(targetUser.username)
 							.setColor("#fcc66a")
 							.setDescription("Sample sample")
+							.addField("Health", ":heart: " + db[targetUser.id].hp)
 							.addField("Wealth", ":hamburger: " + db[targetUser.id].burgers)
 							.addField("Reputation", repBar);
 							ch.send(botembed);
@@ -2229,6 +2230,27 @@ client.on('message', message =>
 				var msx = ":horse: __**A Day at the Races**__ :horse:\n**Stake: :hamburger: " + raceAmount[sender.id] + "**\n**Pick your horse:**\n**:red_circle: [1] " + raceOpt1[sender.id] + "**\n**:yellow_circle: [2] " + raceOpt2[sender.id] + "**\n**:blue_circle: [3] " + raceOpt3[sender.id] + "**";
 				
 				post(msx);
+				break;
+				
+			case "consume":
+				if(args[1] == "energy")
+				{
+					request(dbURL, function(error, response, body) 
+					{	
+						var db = JSON.parse(body);
+						if(db[sender.id]['inventory'].energyDrinks > 0)
+						{
+							var recovery = randomize(70, 101);
+							db[sender.id]['inventory'].energyDrinks -= 1;
+							db[sender.id].hp += recovery;
+							post("<:drink:660031984092839947> **You drank an energy drink. +:heart: " + recovery + " HP.**");
+						} else {
+							post("**:octagonal_sign: You don't have any energy drinks! Type */store* to acquire one.**");	
+						}
+					});
+					return;
+				}
+				post("**Usage: /consume <item>**\n*Type /inventory to see your owned consumables.*");
 				break;
 				
 			case "transcribe":
