@@ -758,6 +758,9 @@ client.on('message', message =>
 				db[winID].hp = temp[winID].hp;
 				db[loseID].hp = temp[loseID].hp;
 				
+				if(db[winID].hp < 0) db[winID].hp = 0;
+				if(db[loseID].hp < 0) db[loseID].hp = 0;
+				
 				db["gdp"].battle += x;
 				db["gdp"].total += x;
 				request(
@@ -875,6 +878,16 @@ client.on('message', message =>
 		{
 			if(message.content.startsWith("1"))
 			{
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					if(db[sender.id].hp == 0)
+					{
+						return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");	
+						inRequest = false;
+						inGame = false;
+					}
+				});
 				inRequest = false;
 				if(turnID == player1ID)
 				{
@@ -2427,8 +2440,18 @@ client.on('message', message =>
 				});
 				break;
 			
-			case "xhp":
-				console.log("DB HP: " + getHP(sender.id));
+			case "i":
+			case "inv":
+			case "inventory":
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					if(!db[sender.id].inventory.energyDrinks) 
+					{
+						db[sender.id].inventory.energyDrinks = 0;
+					}
+					post(handler.getInventory(sender.username, db[sender.id].inventory.energyDrinks));
+				});
 				break;
 				
 			case "economy":
@@ -2650,6 +2673,11 @@ client.on('message', message =>
 						var db = JSON.parse(body);
 						var xHP = db[user.id].hp;
 						var yHP = db[sender.id].hp;
+						
+						if(yHP == 0)
+						{
+							return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");		
+						}
 						
 						if(!temp[user.id]) temp[user.id] = {hp: xHP, ammo: 1};
 						if(!temp[sender.id]) temp[sender.id] = {hp: yHP, ammo: 1};
