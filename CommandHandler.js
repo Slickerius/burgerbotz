@@ -328,5 +328,6 @@ module.exports =
 	getInventory: function(name, drinks)
 	{
 		var out = "__**:briefcase: " + name + "'s Inventory**__\n<:drink:660031984092839947> **Energy Drinks : " + drinks + "**\nType **/store** to buy items!";
+		return out;
 	}
 };
