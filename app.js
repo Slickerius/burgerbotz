@@ -2583,7 +2583,48 @@ client.on('message', message =>
 			case "invite":
 				post(":hamburger: ***__Get Burgerbotz!__*** :hamburger:" + invite);
 				break;
-				
+			
+			case "store":
+				if(args[1] == "buy")
+				{
+					if(parseInt(args[3]) == args[3])
+					{
+						if(args[2] == "0")
+						{
+							request(dbURL, function(error, response, body) 
+							{
+								var db = JSON.parse(body);
+								var amount = parseInt(args[3]);
+								var value = amount * 5;
+								if(db[sender.id].burgers >= value)
+								{
+									if(!db[sender.id]['inventory']) db[sender.id]['inventory'] = {energyDrinks: 0};
+									db[sender.id]['inventory'].energyDrinks += amount;
+									db[sender.id].burgers -= value;
+									post("**Successfully bought " + amount + " <:drink:660031984092839947> for :hamburger: " + value + ".**");
+									request(
+									{
+  										method: "PUT",
+  										uri: dbURL,
+  										json: db
+ 									});
+									return;
+								} else {
+									return post(":octagonal_sign: **You have insufficient burgers to buy <:drink:660031984092839947> " + amount + ".**");
+								}
+							});
+						}
+					}
+				}
+				var botembed = new Discord.RichEmbed()
+						.setImage("https://images.emojiterra.com/twitter/v12/512px/1f6d2.png")
+						.setColor("#fcc66a")
+						.setTitle("The Burgerstore")
+						.addField("Consumables", "[0] <:drink:660031984092839947> **Energy Drink**   - :hamburger: 5")
+						.setFooter("Usage: /store buy <item id> <amount>");
+						ch.send(botembed);
+				break;
+
 			case "daily":
 				request(dbURL, function(error, response, body) 
 				{
