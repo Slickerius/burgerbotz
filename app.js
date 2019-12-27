@@ -30,8 +30,6 @@ var raceOpt1 = {"x": "y"};
 var raceOpt2 = {"x": "y"};
 var raceOpt3 = {"x": "y"};
 
-var _tempHp;
-
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel, logChannel;
 
@@ -168,18 +166,6 @@ client.on('guildMemberRemove', member =>
 function randomize(min, max) 
 {
 	return Math.floor(Math.random() * (max - min)) + min;
-}
-
-function getHP(id)
-{
-	request(dbURL, function(error, response, body) 
-	{
-		var db = JSON.parse(body);
-		console.log("A: " + db[id].hp);
-		_tempHp = db[id].hp;
-		console.log("B: " + _tempHp);
-	});
-	return _tempHp;
 }
 
 function factorial(n) 
@@ -2659,13 +2645,18 @@ client.on('message', message =>
 				} else if (inGame) {
 					post("A battle is already ongoing!");
 				} else {
-					var xHP = getHP(user.id);
-					var yHP = getHP(sender.id);
-					if(!temp[user.id]) temp[user.id] = {hp: xHP, ammo: 1};
-					if(!temp[sender.id]) temp[sender.id] = {hp: yHP, ammo: 1};
+					request(dbURL, function(error, response, body) 
+					{
+						var db = JSON.parse(body);
+						var xHP = db[user.id].hp;
+						var yHP = db[sender.id].hp;
+						
+						if(!temp[user.id]) temp[user.id] = {hp: xHP, ammo: 1};
+						if(!temp[sender.id]) temp[sender.id] = {hp: yHP, ammo: 1};
 					
-					temp[user.id] = {hp: xHP, ammo: 1};
-					temp[sender.id] = {hp: yHP, ammo: 1};
+						temp[user.id] = {hp: xHP, ammo: 1};
+						temp[sender.id] = {hp: yHP, ammo: 1};
+					});
 					
 					player1ID = sender.id;
 					player2ID = user.id;
