@@ -169,7 +169,7 @@ function randomize(min, max)
 	return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function getHP(id);
+function getHP(id)
 {
 	request(dbURL, function(error, response, body) 
 	{
