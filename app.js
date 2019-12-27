@@ -2449,6 +2449,7 @@ client.on('message', message =>
 					if(!db[sender.id].inventory.energyDrinks) 
 					{
 						db[sender.id].inventory.energyDrinks = 0;
+						request({method: "PUT", uri: dbURL, json: db});
 					}
 					post(handler.getInventory(sender.username, db[sender.id].inventory.energyDrinks));
 				});
