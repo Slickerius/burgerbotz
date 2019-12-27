@@ -802,9 +802,8 @@ client.on('message', message =>
 					} else {
 						post("Guessed incorrectly. You got **tails**!");
 					}
-				}
-				else if(y == "t" || y == "tails")
-				{
+					temp[sender.id].inGame = 0;
+				} else if(y == "t" || y == "tails") {
 					if(x == 1)
 					{
 						post("*Guessed correctly! You got **tails***\n*Your prize:* :hamburger: **" + z + "**");
@@ -818,9 +817,9 @@ client.on('message', message =>
 					} else {
 						post("Guessed incorrectly. You got **heads**!");
 					}
+					temp[sender.id].inGame = 0;
 				}
 			});
-			temp[sender.id].inGame = 0;
 		}
 	
 		if(temp[sender.id].inReqR == 1)
