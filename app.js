@@ -2763,7 +2763,7 @@ client.on('message', message =>
 						temp[sender.id] = {hp: yHP, ammo: 1};
 					});
 					
-					if(yHP == 0) return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
+					if(temp[sender.id] == 0) return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
 					
 					player1ID = sender.id;
 					player2ID = user.id;
