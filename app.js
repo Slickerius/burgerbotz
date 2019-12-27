@@ -171,12 +171,14 @@ function randomize(min, max)
 
 function getHP(id)
 {
+	var x;
 	request(dbURL, function(error, response, body) 
 	{
 		var db = JSON.parse(body);
 		console.log("A: " + db[id].hp);
-		return db[id].hp;
+		x = db[id.hp];
 	});
+	return x;
 }
 
 function factorial(n) 
