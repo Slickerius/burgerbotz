@@ -2030,8 +2030,7 @@ client.on('message', message =>
 				
 			case "rate":
 				var rating = parseFloat(args[2]);
-				if(message.mentions.users.size < 1) return post(":octagonal_sign: **You have to mention someone to rate!**");
-				if(args[2] != rating || rating > 5 || (rating % 0.5) != 0 || rating < 0.5) return post("**:stars: Usage: /rate <user> <rating>**\n**Rate someone! You can give someone a rating (represented by stars) from 0.5 to 5.**");
+				if(message.mentions.users.size < 1 || args[2] != rating || rating > 5 || (rating % 0.5) != 0 || rating < 0.5) return post("**:stars: Usage: /rate <user> <rating>**\n**Rate someone! You can give someone a rating (represented by stars) from 0.5 to 5.**");
 				var toRate = message.mentions.users.first();
 				//if(toRate.bot) return post("**:octagonal_sign: You can only rate users!**");
 				if(toRate == sender) return post("**:octagonal_sign: You can not rate yourself!**");
