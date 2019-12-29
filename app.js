@@ -2224,13 +2224,12 @@ client.on('message', message =>
 					{
 						stars = handler.getStars(rating);
 					} else {
-						for(var key in db[targetUser.id]['reputation'])
+						for(var key in db[targetUser.id]['ratings'])
 						{
-							rating += db[targetUser.id]['reputation'].key;
+							rating += db[targetUser.id]['ratings'].key;
 							raters += 1;
-							console.log(key + " " + db[targetUser.id]['reputation'].key);
+							console.log(key + " " + db[targetUser.id]['ratings'].key);
 						}
-						console.log(rating);
 						rating /= raters;
 						ratingStars = Math.round(rating * 2) / 2;
 						stars = handler.getStars(ratingStars);
