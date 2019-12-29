@@ -2716,6 +2716,27 @@ client.on('message', message =>
 				}
 				break;
 				
+			case "aadp":
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					client.users.forEach(function(u)
+					{
+						if(!db[u.id])
+						{
+							if(!db[u.id]['ratings']) db[u.id]['ratings'] = {};
+							console.log("Added ratings DB for user " + u.username);
+						}
+					});
+					request(
+					{
+  						method: "PUT",
+  						uri: dbURL,
+  						json: db
+ 					});
+				});
+				break;
+				
 			case "aadv":
 				var db;
 				if(sender.id != "391239140068294659" || args.length < 0 || parseInt(args[1]) != args[1]) return;
