@@ -209,6 +209,7 @@ client.on('message', message =>
 			{
 				db[sender.id] = {burgers: 10};
 				if(!db[sender.id].reputation) db[sender.id].reputation = 50;
+				if(!db[sender.id]['ratings']) db[sender.id]['ratings'] = {};
 				console.log("Created new DB data for user: " + sender.username + "#" + sender.discriminator);
 				request(
 				{
@@ -2025,6 +2026,26 @@ client.on('message', message =>
 					post("**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator + " - " + guild.memberCount + " members");
 				});
 				post("Total: " + x + " servers");
+				break;
+				
+			case "rate":
+				var rating = parseFloat(args[2]);
+				if(message.mentions.users.size < 1) return post(":octagonal_sign: **You have to mention someone to rate!**");
+				if(args[2] != rating || rating > 5 || (rating % 0.5) != 0) return post("**Usage: /rate <user> <rating>**\n**Rate someone! The acceptable values for the rating are 0.5, 1, 1.5, 2, 2.5, 3, 4.5, 5**");
+				var target = message.mentions.users.first();
+				request(url, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					db[target.id]['ratings'][sender.id] = rating;
+					post("**" + sender.username + " has given " + target.username + " a rating of " + rating + " (" + handler.getStars(rating) + ")**");
+					target.send("**" + sender.username + " has given you a rating of " + rating + " (" + handler.getStars(rating) + ")**");
+					request(
+					{
+  						method: "PUT",
+  						uri: dbURL,
+  						json: db
+ 					});
+				});
 				break;
 				
 			case "queue":
