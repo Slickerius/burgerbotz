@@ -2034,6 +2034,7 @@ client.on('message', message =>
 				if(args[2] != rating || rating > 5 || (rating % 0.5) != 0 || rating < 0.5) return post("**Usage: /rate <user> <rating>**\n**Rate someone! You can give someone a rating (represented by stars) from 0.5 to 5.**");
 				var toRate = message.mentions.users.first();
 				if(toRate.bot) return post("**:octagonal_sign: You can only rate users!**");
+				if(toRate == sender) return post("**:octagonal_sign: You can not rate yourself!**");
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
@@ -2226,9 +2227,9 @@ client.on('message', message =>
 					} else {
 						for(var key in db[targetUser.id]['ratings'])
 						{
-							rating += db[targetUser.id]['ratings'].key;
+							rating += db[targetUser.id]['ratings'][key];
 							raters += 1;
-							console.log(key + " " + db[targetUser.id]['ratings'].key);
+							console.log(key + " " + db[targetUser.id]['ratings'][key]);
 						}
 						rating /= raters;
 						ratingStars = Math.round(rating * 2) / 2;
