@@ -74,7 +74,7 @@ module.exports =
         call: function(channel, user, id, stage, value, repChange)
         {
                 var repSign = "+";
-                if(repChange < 0) repSign = "-";
+                if(repChange < 0) repSign = "";
                 if(id == 0)
                 {
                         if(stage == 0)
