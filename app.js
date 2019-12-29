@@ -2031,15 +2031,15 @@ client.on('message', message =>
 			case "rate":
 				var rating = parseFloat(args[2]);
 				if(message.mentions.users.size < 1) return post(":octagonal_sign: **You have to mention someone to rate!**");
-				if(args[2] != rating || rating > 5 || (rating % 0.5) != 0) return post("**Usage: /rate <user> <rating>**\n**Rate someone! The acceptable values for the rating are 0.5, 1, 1.5, 2, 2.5, 3, 4.5, 5**");
+				if(args[2] != rating || rating > 5 || (rating % 0.5) != 0 || rating < 0.5) return post("**Usage: /rate <user> <rating>**\n**Rate someone! You can give someone a rating (represented by stars) from 0.5 to 5.**");
 				var toRate = message.mentions.users.first();
 				if(toRate.bot) return post("**:octagonal_sign: You can only rate users!**");
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					db[toRate.id]['ratings'][sender.id] = rating;
-					post("**" + sender.username + " has given " + target.username + " a rating of " + rating + " (" + handler.getStars(rating) + ")**");
-					toRate.send("**" + sender.username + " has given you a rating of " + rating + " (" + handler.getStars(rating) + ")**");
+					post("**" + sender.username + " has given " + toRate + " a rating of " + rating + " (" + handler.getStars(rating) + ")**");
+					toRate.send("**" + sender.username + "#" + sender.discriminator + " has given you a rating of " + rating + " (" + handler.getStars(rating) + ")**");
 					request(
 					{
   						method: "PUT",
@@ -2206,6 +2206,10 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
+					var rating = 0;
+					var ratingStars = 0;
+					var stars;
+					var raters = 0;
 					if(!db[targetUser.id].reputation) 
 					{
 						db[targetUser.id].reputation = 50;
@@ -2216,6 +2220,19 @@ client.on('message', message =>
   							json: db
  						});
 					}
+					if(!db[targetUser.id]['ratings'])
+					{
+						stars = handler.getStars(rating);
+					} else {
+						for(var key in db[targetUser.id]['reputation'])
+						{
+							rating += db[targetUser.id]['reputation'].key;
+							raters++;
+						}
+						rating /= raters;
+						ratingStars = Math.round(rating * 2) / 2;
+						stars = handler.getStars(ratingStars);
+					}
 					var repBar = handler.getReputationBar(db[targetUser.id].reputation);
 					var botembed = new Discord.RichEmbed()
 							.setThumbnail(targetUser.avatarURL)
@@ -2224,7 +2241,8 @@ client.on('message', message =>
 							.setDescription("Sample sample")
 							.addField("Health", ":heart: " + db[targetUser.id].hp)
 							.addField("Wealth", ":hamburger: " + db[targetUser.id].burgers)
-							.addField("Reputation", repBar);
+							.addField("Reputation", repBar)
+							.addField("User Rating", stars + " " + rating + " (" + raters + ")");
 							ch.send(botembed);
 					var botembed = "";
 				});
