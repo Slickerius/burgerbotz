@@ -2209,7 +2209,7 @@ client.on('message', message =>
 					var ratingStars = 0;
 					var stars;
 					var raters = 0;
-					if(!db[targetUser.id].reputation) 
+					if(!db[targetUser.id].reputation && db[targetUser.id].reputation != 0) 
 					{
 						db[targetUser.id].reputation = 50;
 						request(
