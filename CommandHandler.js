@@ -360,5 +360,54 @@ module.exports =
 			out = star + star + star + star + star;
 		}
 		return out;
+	},
+	
+	getUserDescription(username, wealth, reputation)
+	{
+		var out = "**" + username + "** is a";
+		if(wealth < 50)
+		{
+			out += "n impoverished, ";	
+		} else if(wealth < 100) {
+			out += " poor, ";
+		} else if(wealth < 1000) {
+			out += " moderately funded, ";	
+		} else if(wealth < 2500) {
+			out += " fulfilled, ";	
+		} else if(wealth < 5000) {
+			out += " well funded ";	
+		} else if(wealth < 10000) {
+			out += " rich, ";	
+		} else {
+			out += " super-rich, ";	
+		} 
+		
+		if(reputation == 50) 
+		{
+			out += " neutral ";	
+		} else if(reputation <= 10) {
+			out += " diabolical ";	
+		} else if(reputation <= 20) {
+			out += " evil ";	
+		} else if(reputation <= 30) {
+			out += " immoral ";	
+		} else if(reputation <= 40) {
+			out += " bad ";	
+		} else if(reputation <= 50) {
+			out += " unreputable ";	
+		} else if(reputation <= 60) {
+			out += " reputable ";	
+		} else if(reputation <= 70) {
+			out += " kind ";	
+		} else if(reputation <= 80) {
+			out += " pleasant ";	
+		} else if(reputation <= 90) {
+			out += " revered ";	
+		} else if(reputation <= 100) {
+			out += " Godly ";	
+		}
+		
+		out += "person."
+		return out;
 	}
 };
