@@ -2033,7 +2033,7 @@ client.on('message', message =>
 				if(message.mentions.users.size < 1) return post(":octagonal_sign: **You have to mention someone to rate!**");
 				if(args[2] != rating || rating > 5 || (rating % 0.5) != 0) return post("**Usage: /rate <user> <rating>**\n**Rate someone! The acceptable values for the rating are 0.5, 1, 1.5, 2, 2.5, 3, 4.5, 5**");
 				var toRate = message.mentions.users.first();
-				request(url, function(error, response, body) 
+				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					db[target.id]['ratings'][sender.id] = rating;
