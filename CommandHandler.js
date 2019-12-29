@@ -329,5 +329,36 @@ module.exports =
 	{
 		var out = "__**:briefcase: " + name + "'s Inventory**__\n<:drink:660031984092839947> **Energy Drinks : " + drinks + "**\nType **/store** to buy items!";
 		return out;
+	},
+	
+	getStars(rating)
+	{
+		var star = ":star: ";
+		var halfStar = "<:half_star:660769776129409024> ";
+		var emptyStar = "<:empty_star:660769776125345832> ";
+		var out = emptyStar + emptyStar + emptyStar + emptyStar + emptyStar;
+		if(rating == 0.5)
+		{
+			out = halfStar + emptyStar + emptyStar + emptyStar + emptyStar;
+		} else if(rating == 1) {
+			out = star + emptyStar + emptyStar + emptyStar + emptyStar;
+		} else if(rating == 1.5) {
+			out = star + halfStar + emptyStar + emptyStar + emptyStar;
+		} else if(rating == 2) {
+			out = star + star + emptyStar + emptyStar + emptyStar;
+		} else if(rating == 2.5) {
+			out = star + star + halfStar + emptyStar + emptyStar;
+		} else if(rating == 3) {
+			out = star + star + star + emptyStar + emptyStar;
+		} else if(rating == 3.5) {
+			out = star + star + star + halfStar + emptyStar;
+		} else if(rating == 4) {
+			out = star + star + star + star + emptyStar;
+		} else if(rating == 4.5) {
+			out = star + star + star + star + halfStar;
+		} else if(rating == 5) {
+			out = star + star + star + star + star;
+		}
+		return out;
 	}
 };
