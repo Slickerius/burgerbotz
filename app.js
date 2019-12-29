@@ -2037,7 +2037,7 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					db[target.id]['ratings'][sender.id] = rating;
+					db[toRate.id]['ratings'][sender.id] = rating;
 					post("**" + sender.username + " has given " + target.username + " a rating of " + rating + " (" + handler.getStars(rating) + ")**");
 					toRate.send("**" + sender.username + " has given you a rating of " + rating + " (" + handler.getStars(rating) + ")**");
 					request(
