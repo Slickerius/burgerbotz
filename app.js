@@ -517,7 +517,7 @@ client.on('message', message =>
 						delete eventTracker[key];
 						delete eventStage[key];
 						
-						if(stage == 2 || stage == 4 || stage == 5) return;
+						if(stage == 4) return;
 						
 						request(dbURL, function(error, response, body) 
 						{
