@@ -297,7 +297,7 @@ module.exports =
 		var green_ = "<:green_:657487798810443777>";
 				
 		var repBarArr = [red, red, red, red, red, yellow, green, green, green, green, green];
-		if(x <= 10)
+		if(reputation <= 10)
 		{
 			repBarArr[0] = red_;
 		} else if(reputation <= 20) {
