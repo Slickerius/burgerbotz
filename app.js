@@ -2722,11 +2722,8 @@ client.on('message', message =>
 					var db = JSON.parse(body);
 					client.users.forEach(function(u)
 					{
-						if(!db[u.id])
-						{
-							if(!db[u.id]['ratings']) db[u.id]['ratings'] = {};
-							console.log("Added ratings DB for user " + u.username);
-						}
+						if(!db[u.id]['ratings']) db[u.id]['ratings'] = {};
+						console.log("Added ratings DB for user " + u.username);
 					});
 					request(
 					{
