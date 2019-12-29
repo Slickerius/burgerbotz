@@ -2233,18 +2233,30 @@ client.on('message', message =>
 						ratingStars = Math.round(rating * 2) / 2;
 						stars = handler.getStars(ratingStars);
 					}
+					
 					var repBar = handler.getReputationBar(db[targetUser.id].reputation);
+					
+					if(targetUser.bot)
+					{
+						var botembed = new Discord.RichEmbed()
+							.setThumbnail(targetUser.avatarURL)
+							.setTitle(targetUser.username)
+							.setColor("#fcc66a")
+							.setDescription("A human's servant.")
+							.addField("Bot Rating", stars + " " + rating + " (" + raters + ")");
+						return ch.send(botembed);
+					}
+					
 					var botembed = new Discord.RichEmbed()
 							.setThumbnail(targetUser.avatarURL)
 							.setTitle(targetUser.username)
 							.setColor("#fcc66a")
-							.setDescription("Sample sample")
+							.setDescription(handler.getUserDescription(targetUser.username, db[targetUser.id].burgers, db[targetUser.id].reputation))
 							.addField("Health", ":heart: " + db[targetUser.id].hp)
 							.addField("Wealth", ":hamburger: " + db[targetUser.id].burgers)
 							.addField("Reputation", repBar)
 							.addField("User Rating", stars + " " + rating + " (" + raters + ")");
 							ch.send(botembed);
-					var botembed = "";
 				});
 				break;
 				
