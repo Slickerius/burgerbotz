@@ -2232,6 +2232,7 @@ client.on('message', message =>
 						rating /= raters;
 						ratingStars = Math.round(rating * 2) / 2;
 						stars = handler.getStars(ratingStars);
+						rating = rating.toFixed(2);
 					}
 					
 					var repBar = handler.getReputationBar(db[targetUser.id].reputation);
