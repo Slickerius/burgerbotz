@@ -957,6 +957,7 @@ client.on('message', message =>
 	
 		if(battleChannels[ch.id] == 0 && playerOnes[sender.id] || battleChannels[ch.id] == 1 && playerTwos[sender.id])
 		{		
+				console.log(battleChannels[ch.id]);
 				if(message.content.startsWith("1") && temp[sender.id].hp > 0)
 				{
 					if(luckPoints > 85)
@@ -1021,6 +1022,7 @@ client.on('message', message =>
 						} else {
 							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
 							delete isF0[ch.id];
+							console.log("This the cause");
 						}
 					}
 				} else if(message.content.startsWith("2")) {
