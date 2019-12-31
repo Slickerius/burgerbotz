@@ -2920,8 +2920,8 @@ client.on('message', message =>
 					battlePairsMirror[user.id] = sender.id;
 					battlePairNames[sender.username] = user.username;
 					battlePairNamesMirror[user.username] = sender.username;
-					playerOnes[sender.username] = 1;
-					playerTwos[user.username] = 1;
+					playerOnes[sender.id] = 1;
+					playerTwos[user.id] = 1;
 					
 					setTimeout(function()
 				        {
