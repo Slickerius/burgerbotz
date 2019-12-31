@@ -902,6 +902,7 @@ client.on('message', message =>
 			console.log("AADV");
 			if(message.content.startsWith("1"))
 			{
+				console.log("AAPV");
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
@@ -916,6 +917,7 @@ client.on('message', message =>
 				
 				delete battleRequests[ch.id];
 				delete requestTo[sender.id];
+				console.log("AAPX");
 				
 				if(battleChannels[ch.id] == 0 && playerOnes[sender.id]) console.log("AAXY");
 				if(battleChannels[ch.id] == 1 && playerTwos[sender.id]) console.log("AAPL");
