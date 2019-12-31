@@ -924,14 +924,11 @@ client.on('message', message =>
 				
 				console.log(playerTwos[sender.id]);
 				
-				if(battleChannels[ch.id] == 0 && playerOnes[sender.id]) console.log("AAXY");
-				if(battleChannels[ch.id] == 1 && playerTwos[sender.id]) console.log("AAPL");
-				
-				if(battleChannels[ch.id] == 0 && playerOnes[sender.id] && temp[sender.id].hp > 0)
+				if(battleChannels[ch.id] == 0 && temp[sender.id].hp > 0)
 				{
 					console.log("A");
 					tabScreen(sender.username, sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
-				} else if(battleChannels[ch.id] == 1 && playerTwos[sender.id] && temp[sender.id].hp > 0) {
+				} else if(battleChannels[ch.id] == 1 && temp[sender.id].hp > 0) {
 					console.log("B");
 					tabScreen(sender.username, battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.id], sender.username);
 					isF0[ch.id] = 1;
@@ -965,7 +962,7 @@ client.on('message', message =>
 					if(playerOnes[sender.id])
 					{
 						temp[battlePairs[sender.id]].hp -= damage;
-						post(":punch: ***" + sender.id + " has punched " + battlePairNames[sender.username] + ". -" + damage + " HP***");
+						post(":punch: ***" + sender.username + " has punched " + battlePairNames[sender.username] + ". -" + damage + " HP***");
 						
 						if(temp[battlePairs[sender.id]].hp > 0)
 						{
@@ -990,7 +987,7 @@ client.on('message', message =>
 						if(!isF0[ch.id])
 						{
 							temp[battlePairsMirror[sender.id]].hp -= damage;
-							post(":punch: ***" + sender.id + " has punched " + battlePairNamesMirror[sender.username] + ". -" + damage + " HP***");
+							post(":punch: ***" + sender.username + " has punched " + battlePairNamesMirror[sender.username] + ". -" + damage + " HP***");
 							
 							if(temp[battlePairsMirror[sender.id]].hp > 0)
 							{
