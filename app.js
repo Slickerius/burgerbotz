@@ -909,8 +909,15 @@ client.on('message', message =>
 					if(db[sender.id].hp == 0)
 					{
 						post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");	
-						inRequest = false;
-						inGame = false;
+						delete playerOnes[battlePairs[sender.id]];
+						delete playerTwos[sender.id];
+						delete battleRequests[ch.id];
+						delete requestTo[sender.id];
+						delete battlePairs[battlePairsMirror[sender.id]];
+						delete battlePairsMirror[sender.id];
+						delete battlePairNames[battlePairNamesMirror[sender.username]];
+						delete battlePairNamesMirror[sender.username];
+						
 						return;
 					}
 				});
@@ -971,6 +978,9 @@ client.on('message', message =>
 						} else {
 							onDefeat(sender.username, battlePairNames[sender.username], sender.id, battlePairs[sender.id]);
 							
+							delete playerOnes[battlePairsMirror[sender.id]];
+							delete playerTwos[sender.id];
+							
 							delete isCrippled[sender.id];
 							delete isCrippled[battlePairs[sender.id]];
 							
@@ -994,6 +1004,10 @@ client.on('message', message =>
 								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 							} else {
 								onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
+								
+								delete playerOnes[battlePairsMirror[sender.id]];
+								delete playerTwos[sender.id];
+								
 								delete isCrippled[sender.id];
 								delete isCrippled[battlePairsMirror[sender.id]];
 							
@@ -1053,6 +1067,9 @@ client.on('message', message =>
 							} else {
 								onDefeat(sender.username, battlePairNames[sender.username], sender.id, battlePairs[sender.id]);
 							
+								delete playerOnes[battlePairsMirror[sender.id]];
+								delete playerTwos[sender.id];
+								
 								delete isCrippled[sender.id];
 								delete isCrippled[battlePairs[sender.id]];
 
@@ -1074,6 +1091,10 @@ client.on('message', message =>
 								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 							} else {
 								onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
+								
+								delete playerOnes[battlePairsMirror[sender.id]];
+								delete playerTwos[sender.id];
+								
 								delete isCrippled[sender.id];
 								delete isCrippled[battlePairsMirror[sender.id]];
 							
