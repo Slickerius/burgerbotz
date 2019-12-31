@@ -897,8 +897,11 @@ client.on('message', message =>
 			}
 		}
 		
+		if(requestTo[sender.id]) console.log("AADY");
+		if(battleRequests[ch.id]) console.log("AADX");
 		if(battleRequests[ch.id] && requestTo[sender.id])
 		{
+			console.log("AADV");
 			if(message.content.startsWith("1"))
 			{
 				request(dbURL, function(error, response, body) 
