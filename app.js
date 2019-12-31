@@ -920,7 +920,9 @@ client.on('message', message =>
 				console.log("AAPX");
 				
 				if(battleChannels[ch.id] == 0) console.log("AAXY_1");
-				if(battleChannels[ch.id] == 0) console.log("AAPL_1");
+				if(battleChannels[ch.id] == 1) console.log("AAPL_1");
+				
+				console.log(playerTwos[sender.id]);
 				
 				if(battleChannels[ch.id] == 0 && playerOnes[sender.id]) console.log("AAXY");
 				if(battleChannels[ch.id] == 1 && playerTwos[sender.id]) console.log("AAPL");
