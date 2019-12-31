@@ -937,7 +937,7 @@ client.on('message', message =>
 					tabScreen(sender.username, battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 				} else if(battleChannels[ch.id] == 1 && temp[sender.id].hp > 0) {
 					console.log("B");
-					tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.id], sender.username);
+					tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 					isF0[ch.id] = 1;
 				}
 			} else if (message.content.startsWith("2")) {
