@@ -981,7 +981,6 @@ client.on('message', message =>
 							delete battlePairNames[sender.username];
 							
 							delete battleChannels[ch.id];
-							
 						}
 					} else {
 						if(!isF0[ch.id])
@@ -1012,62 +1011,81 @@ client.on('message', message =>
 						}
 					}
 				} else if(message.content.startsWith("2")) {
-					if(sender.id == player1ID && p1isCrippled)
+					if(playerOnes[sender.id] && isCrippled[sender.id])
 					{
 						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!***");
 						
-						turnID = player2ID;
-						tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+						battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+						tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
 					} else if (sender.id == player2ID && p2isCrippled) {
 						post(":cartwheel: ***" + sender.username + " tried to kick their opponent but failed since they're crippled!***");
 						
-						turnID = player1ID;
-						tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+						battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+						tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 					} else {
 					if(luckPoints > 95)
 					{
-						if(sender.id == player1ID)
+						if(playerOnes[sender.id])
 						{
-							p1isCrippled = true;
+							isCrippled[sender.id] = 1;
 							post(":boot: ***" + sender.username + " torn their hamstring whilst trying to kick their opponent!***");
 							
-							turnID = player2ID;
-							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
-						} else {
-							p2isCrippled = true;
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
+						} else if(playerTwos[sender.id]) {
+							isCrippled[sender.id] = 1;
 							post(":boot: ***" + sender.username + " torn their hamstring whilst trying to kick their opponent!***");
 							
-							turnID = player1ID;
-							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 						}
 					} else {
-					var damage = randomize(10, 20);
-					if(sender.id === player1ID)
-					{
-						temp[player2ID].hp -= damage;
-						post(":boot: ***" + player1Name + " has kicked " + player2Name + ". -" + damage + " HP***");
-						
-						if(temp[player2ID].hp > 0)
+						var damage = randomize(10, 20);
+						if(playerOnes[sender.id])
 						{
-							turnID = player2ID;
-							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
-						} else {
-							onDefeat(player1Name, player2Name, player1ID, player2ID);
-							inGame = false;
+							temp[battlePairs[sender.id]].hp -= damage;
+							post(":boot: ***" + sender.username + " has kicked " + battlePairNames[sender.username] + ". -" + damage + " HP***");
+
+							if(temp[battlePairs[sender.id]].hp > 0)
+							{
+								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+								tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
+							} else {
+								onDefeat(sender.username, battlePairNames[sender.username], sender.id, battlePairs[sender.id]);
+							
+								delete isCrippled[sender.id];
+								delete isCrippled[battlePairs[sender.id]];
+
+								delete battlePairsMirror[battlePairs[sender.id]];
+								delete battlePairs[sender.id];
+
+								delete battlePairNamesMirror[battlePairNames[sender.username]];
+								delete battlePairNames[sender.username];
+
+								delete battleChannels[ch.id];
+							}
+						} else if(playerTwos[sender.id]) {
+							temp[battlePairsMirror[sender.id]].hp -= damage;
+							post(":boot: ***" + sender.username + " has kicked " + battlePairNamesMirror[sender.username] + ". -" + damage + " HP***");
+
+							if(temp[battlePairsMirror[sender.id]].hp > 0)
+							{
+								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
+							} else {
+								onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
+								delete isCrippled[sender.id];
+								delete isCrippled[battlePairsMirror[sender.id]];
+							
+								delete battlePairs[battlePairsMirror[sender.id]];
+								delete battlePairsMirror[sender.id];
+							
+								delete battlePairNames[battlePairNamesMirror[sender.username]];
+								delete battlePairNamesMirror[sender.username];
+							
+								delete battleChannels[ch.id];
+							}
 						}
-					} else {
-						temp[player1ID].hp -= damage;
-						post(":boot: ***" + player2Name + " has kicked " + player1Name + ". -" + damage + " HP***");
-						
-						if(temp[player1ID].hp > 0)
-						{
-							turnID = player1ID;
-							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
-						} else {
-							onDefeat(player2Name, player1Name, player2ID, player1ID);
-							inGame = false;
-						}
-					}
 					}
 					}
 				} else if(message.content.startsWith("3")) {
@@ -2880,11 +2898,14 @@ client.on('message', message =>
 				if(sender.id != "391239140068294659" && sender.id != "412211364682137600") return post(":octagonal_sign: **Burgerbotz battle game is currently under maintenance.**\n**Sorry for the inconvenience.**");
 				if(message.mentions.users.size < 1) 
 				{
-					post("You have to mention someone to battle with")
+					post(":octagonal_sign: **You have to mention someone to battle with.**")
 				} else if(message.mentions.users.size >= 1 && user === sender) {
-					post("You can not battle yourself!");
+					post(":octagonal_sign: **You can not battle yourself!**");
 				} else if(battleChannels[ch.id]) {
-					post("A battle is already ongoing!");
+					post(":octagonal_sign: **A battle is already ongoing in this channel!**");
+				} else if(playerOnes[sender.id] || playerTwos[sender.id]) {
+					post(":octagonal_sign: **You can only be involved in one battle at a time!**");	
+				}
 				} else {
 					request(dbURL, function(error, response, body) 
 					{
