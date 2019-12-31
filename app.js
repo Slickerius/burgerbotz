@@ -919,6 +919,9 @@ client.on('message', message =>
 				delete requestTo[sender.id];
 				console.log("AAPX");
 				
+				if(battleChannels[ch.id] == 0) console.log("AAXY_1");
+				if(battleChannels[ch.id] == 0) console.log("AAPL_1");
+				
 				if(battleChannels[ch.id] == 0 && playerOnes[sender.id]) console.log("AAXY");
 				if(battleChannels[ch.id] == 1 && playerTwos[sender.id]) console.log("AAPL");
 				
