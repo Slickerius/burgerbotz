@@ -950,7 +950,6 @@ client.on('message', message =>
 				delete battlePairsMirror[sender.id];
 				delete battlePairNames[battlePairNamesMirror[sender.username]];
 				delete battlePairNamesMirror[sender.username];
-				delete playerTwos[sender.id];
 				
 				post(sender.username + " has fled the scene!");
 			}
@@ -978,8 +977,8 @@ client.on('message', message =>
 						} else {
 							onDefeat(sender.username, battlePairNames[sender.username], sender.id, battlePairs[sender.id]);
 							
-							delete playerOnes[battlePairsMirror[sender.id]];
-							delete playerTwos[sender.id];
+							delete playerOnes[sender.id];
+							delete playerTwos[battlePairs[sender.id]];
 							
 							delete isCrippled[sender.id];
 							delete isCrippled[battlePairs[sender.id]];
@@ -1067,8 +1066,8 @@ client.on('message', message =>
 							} else {
 								onDefeat(sender.username, battlePairNames[sender.username], sender.id, battlePairs[sender.id]);
 							
-								delete playerOnes[battlePairsMirror[sender.id]];
-								delete playerTwos[sender.id];
+								delete playerOnes[sender.id];
+								delete playerTwos[battlePairs[sender.id]];
 								
 								delete isCrippled[sender.id];
 								delete isCrippled[battlePairs[sender.id]];
@@ -1112,68 +1111,94 @@ client.on('message', message =>
 				} else if(message.content.startsWith("3")) {
 					var damage = randomize(30, 70);
 
-					if(sender.id === player1ID)
+					if(playerOnes[sender.id])
 					{
-						if(temp[player1ID].ammo > 0)
+						if(temp[sender.id].ammo > 0)
 						{
 							var luck = randomize(0, 10);
 							if(luck > 7)
 							{
 								post(":gun: ***Your shot has missed!***");
-								temp[player1ID].ammo -= 1;	
+								temp[sender.id].ammo -= 1;	
 								
-								turnID = player2ID;
-								tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+								tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
 							} else {
-								temp[player2ID].hp -= damage;
-								temp[player1ID].ammo -= 1;
-								post(":gun: ***" + player1Name + " has shot " + player2Name + ", dealing " + damage + " HP***");
+								temp[battlePairs[sender.id]].hp -= damage;
+								temp[sender.id].ammo -= 1;
+								post(":gun: ***" + sender.username + " has shot " + battlePairNamesMirror[sender.username] + ", dealing " + damage + " HP***");
 								
-								if(temp[player2ID].hp > 0)
+								if(temp[battlePairs[sender.id]].hp > 0)
 								{
-									turnID = player2ID;
-									tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);	
+									battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+									tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
 								} else {
-									onDefeat(player1Name, player2Name, player1ID, player2ID);
-									inGame = false;
+									onDefeat(sender.username, battlePairNames[sender.username], sender.id, battlePairs[sender.id]);
+							
+									delete playerOnes[sender.id];
+									delete playerTwos[battlePairs[sender.id]];
+
+									delete isCrippled[sender.id];
+									delete isCrippled[battlePairs[sender.id]];
+
+									delete battlePairsMirror[battlePairs[sender.id]];
+									delete battlePairs[sender.id];
+
+									delete battlePairNamesMirror[battlePairNames[sender.username]];
+									delete battlePairNames[sender.username];
+
+									delete battleChannels[ch.id];
 								}
 							}
 						} else {
 							post(":gun: **Click** ***You tried to open fire but you ran out of ammo!***");
 							
-							turnID = player2ID;
-							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
 						}
-					} else {
-						if(temp[player2ID].ammo > 0)
+					} else if(playerTwos[sender.id]) {
+						if(temp[sender.id].ammo > 0)
 						{
 							var luck = randomize(0, 10);
 							if(luck > 7)
 							{
 								post(":gun: ***Your shot has missed!***");
-								temp[player2ID].ammo -= 1;	
+								temp[sender.id].ammo -= 1;	
 								
-								turnID = player1ID;
-								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 							} else {
-								temp[player1ID].hp -= damage;
-								temp[player2ID].ammo -= 1;
-								post(":gun: ***" + player2Name + " has shot " + player1Name + ", dealing " + damage + " HP***");
+								temp[battlePairsMirror[sender.id]].hp -= damage;
+								temp[sender.id].ammo -= 1;
+								post(":gun: ***" + sender.username + " has shot " + battlePairNamesMirror[sender.username] + ", dealing " + damage + " HP***");
 								
 								if(temp[player1ID].hp > 0)
 								{
-									turnID = player1ID;
-									tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
+									battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+									tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 								} else {
-									onDefeat(player2Name, player1Name, player2ID, player1ID);
-									inGame = false;
+									onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
+								
+									delete playerOnes[battlePairsMirror[sender.id]];
+									delete playerTwos[sender.id];
+
+									delete isCrippled[sender.id];
+									delete isCrippled[battlePairsMirror[sender.id]];
+
+									delete battlePairs[battlePairsMirror[sender.id]];
+									delete battlePairsMirror[sender.id];
+
+									delete battlePairNames[battlePairNamesMirror[sender.username]];
+									delete battlePairNamesMirror[sender.username];
+
+									delete battleChannels[ch.id];
 								}
 							}
 						} else {
 							post(":gun: **Click** ***You tried to open fire but you ran out of ammo!***");
 							
-							turnID = player1ID;
-							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 						}
 					}
 				} else if(message.content.startsWith("4")) {
@@ -1185,34 +1210,34 @@ client.on('message', message =>
 						healPoints = 100 - temp[sender.id].hp;
 					}
 					
-					if(sender.id === player1ID)
+					if(playerOnes[sender.id])
 					{
 						if(success <= 70) 
 						{
-							temp[player1ID].hp += healPoints;
-							post(":hamburger: ***" + player1Name + " has healed themselves, gaining " + healPoints + " HP***");
+							temp[sender.id].hp += healPoints;
+							post(":hamburger: ***" + sender.username + " has healed themselves, gaining " + healPoints + " HP***");
 						
-							turnID = player2ID;
-							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
 						} else {
-							post(":dizzy_face: ***" + player1Name + " tried to heal themselves but failed!***");
+							post(":dizzy_face: ***" + sender.username + " tried to heal themselves but failed!***");
 							
-							turnID = player2ID;
-							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
 						}
-					} else {
+					} else if(playerTwos[sender.id]) {
 						if(success <= 70)
 						{
-							temp[player2ID].hp += healPoints;
-							post(":hamburger: ***" + player2Name + " has healed themselves, gaining " + healPoints + " HP***");
+							temp[sender.id].hp += healPoints;
+							post(":hamburger: ***" + sender.username + " has healed themselves, gaining " + healPoints + " HP***");
 							
-							turnID = player1ID;
-							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 						} else {
-							post(":dizzy_face: ***" + player2Name + " tried to heal themselves but failed!***");
+							post(":dizzy_face: ***" + sender.username + " tried to heal themselves but failed!***");
 							
-							turnID = player1ID;
-							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 						}
 					}
 				} else if(message.content.startsWith("5")) {
@@ -1221,27 +1246,89 @@ client.on('message', message =>
 					if(luck > 8)
 					{
 						post(":footprints: ***" + sender.username + " has left the battlefield!***");
-						inGame = false;
+						if(playerOnes[sender.id])
+						{
+							onDefeat(battlePairNames[sender.username], sender.username, battlePairs[sender.id], sender.id);
+							
+							delete playerOnes[sender.id];
+							delete playerTwos[battlePairs[sender.id]];
+
+							delete isCrippled[sender.id];
+							delete isCrippled[battlePairs[sender.id]];
+
+							delete battlePairsMirror[battlePairs[sender.id]];
+							delete battlePairs[sender.id];
+
+							delete battlePairNamesMirror[battlePairNames[sender.username]];
+							delete battlePairNames[sender.username];
+
+							delete battleChannels[ch.id];
+						} else if(playerTwos[sender.id]) {
+							onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
+								
+							delete playerOnes[battlePairsMirror[sender.id]];
+							delete playerTwos[sender.id];
+							
+							delete isCrippled[sender.id];
+							delete isCrippled[battlePairsMirror[sender.id]];
+
+							delete battlePairs[battlePairsMirror[sender.id]];
+							delete battlePairsMirror[sender.id];
+
+							delete battlePairNames[battlePairNamesMirror[sender.username]];
+							delete battlePairNamesMirror[sender.username];
+
+							delete battleChannels[ch.id];
+						}
 					} else {
 						temp[sender.id].hp -= damage;
 						post(":cartwheel: ***" + sender.username + " tried to run away but slipped and fell! -" + damage + " HP***");
 						
-						if(sender.id === player1ID)
+						if(playerOnes[sender.id])
 						{
-							turnID = player2ID;
-							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
-						} else {
-							turnID = player1ID;
-							tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);	
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
+						} else  if(playerTwos[sender.id]) {
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 						}
 					}
 				}
 			setTimeout(function()
 			{
-				if(inGame)
+				if(battleChannels[ch.id])
 				{	
 					post(":shrug: ***The battle has concluded with no clear victor.***");
-					inGame = false;
+					if(playerOnes[sender.id]) 
+					{
+						delete playerOnes[sender.id];
+						delete playerTwos[battlePairs[sender.id]];
+
+						delete isCrippled[sender.id];
+						delete isCrippled[battlePairs[sender.id]];
+
+						delete battlePairsMirror[battlePairs[sender.id]];
+						delete battlePairs[sender.id];
+
+						delete battlePairNamesMirror[battlePairNames[sender.username]];
+						delete battlePairNames[sender.username];
+
+						delete battleChannels[ch.id];
+					} else if(playerTwos[sender.id]) {
+						delete playerOnes[battlePairsMirror[sender.id]];
+						delete playerTwos[sender.id];
+							
+						delete isCrippled[sender.id];
+						delete isCrippled[battlePairsMirror[sender.id]];
+					
+						delete battlePairs[battlePairsMirror[sender.id]];
+						delete battlePairsMirror[sender.id];
+						
+						delete battlePairNames[battlePairNamesMirror[sender.username]];
+						delete battlePairNamesMirror[sender.username];
+
+						delete battleChannels[ch.id];
+					}
 				}
 			}, 1800000);
 				
