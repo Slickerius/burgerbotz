@@ -964,10 +964,10 @@ client.on('message', message =>
 					var damage = randomize(5, 10);
 					if(playerOnes[sender.id])
 					{
-						temp[player2ID].hp -= damage;
+						temp[battlePairs[sender.id]].hp -= damage;
 						post(":punch: ***" + sender.id + " has punched " + battlePairNames[sender.username] + ". -" + damage + " HP***");
 						
-						if(temp[player2ID].hp > 0)
+						if(temp[battlePairs[sender.id]].hp > 0)
 						{
 							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
 							tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
@@ -989,10 +989,10 @@ client.on('message', message =>
 					} else {
 						if(!isF0[ch.id])
 						{
-							temp[player1ID].hp -= damage;
+							temp[battlePairsMirror[sender.id]].hp -= damage;
 							post(":punch: ***" + sender.id + " has punched " + battlePairNamesMirror[sender.username] + ". -" + damage + " HP***");
 							
-							if(temp[player1ID].hp > 0)
+							if(temp[battlePairsMirror[sender.id]].hp > 0)
 							{
 								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
 								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
