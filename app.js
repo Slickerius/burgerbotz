@@ -927,7 +927,7 @@ client.on('message', message =>
 				if(battleChannels[ch.id] == 0 && temp[sender.id].hp > 0)
 				{
 					console.log("A");
-					tabScreen(sender.username, sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
+					tabScreen(battlePairsMirror[sender.id], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 				} else if(battleChannels[ch.id] == 1 && temp[sender.id].hp > 0) {
 					console.log("B");
 					tabScreen(sender.username, battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.id], sender.username);
