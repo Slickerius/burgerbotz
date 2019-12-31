@@ -896,9 +896,7 @@ client.on('message', message =>
 				post(":octagonal_sign: That's not a valid response!");	
 			}
 		}
-		
-		if(requestTo[sender.id]) console.log("AADY");
-		if(battleRequests[ch.id]) console.log("AADX");
+
 		if(battleRequests[ch.id] && requestTo[sender.id])
 		{
 			console.log("AADV");
@@ -919,10 +917,15 @@ client.on('message', message =>
 				delete battleRequests[ch.id];
 				delete requestTo[sender.id];
 				
+				if(battleChannels[ch.id] == 0 && playerOnes[sender.id]) console.log("AAXY");
+				if(battleChannels[ch.id] == 1 && playerTwos[sender.id]) console.log("AAPL");
+				
 				if(battleChannels[ch.id] == 0 && playerOnes[sender.id] && temp[sender.id].hp > 0)
 				{
+					console.log("A");
 					tabScreen(sender.username, sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
 				} else if(battleChannels[ch.id] == 1 && playerTwos[sender.id] && temp[sender.id].hp > 0) {
+					console.log("B");
 					tabScreen(sender.username, battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.id], sender.username);
 					isF0[ch.id] = 1;
 				}
