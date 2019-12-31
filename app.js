@@ -1266,7 +1266,7 @@ client.on('message', message =>
 
 							delete battleChannels[ch.id];
 						} else if(playerTwos[sender.id]) {
-							onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
+							onDefeat(battlePairNamesMirror[sender.username], sender.username, battlePairsMirror[sender.id], sender.id;
 								
 							delete playerOnes[battlePairsMirror[sender.id]];
 							delete playerTwos[sender.id];
