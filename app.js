@@ -993,36 +993,29 @@ client.on('message', message =>
 							delete battleChannels[ch.id];
 						}
 					} else {
-						if(!isF0[ch.id])
+						temp[battlePairsMirror[sender.id]].hp -= damage;
+						post(":punch: ***" + sender.username + " has punched " + battlePairNamesMirror[sender.username] + ". -" + damage + " HP***");
+					
+						if(temp[battlePairsMirror[sender.id]].hp > 0)
 						{
-							temp[battlePairsMirror[sender.id]].hp -= damage;
-							post(":punch: ***" + sender.username + " has punched " + battlePairNamesMirror[sender.username] + ". -" + damage + " HP***");
-							
-							if(temp[battlePairsMirror[sender.id]].hp > 0)
-							{
-								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
-								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
-							} else {
-								onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
-								
-								delete playerOnes[battlePairsMirror[sender.id]];
-								delete playerTwos[sender.id];
-								
-								delete isCrippled[sender.id];
-								delete isCrippled[battlePairsMirror[sender.id]];
-							
-								delete battlePairs[battlePairsMirror[sender.id]];
-								delete battlePairsMirror[sender.id];
-							
-								delete battlePairNames[battlePairNamesMirror[sender.username]];
-								delete battlePairNamesMirror[sender.username];
-							
-								delete battleChannels[ch.id];
-							}
-						} else {
 							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
-							delete isF0[ch.id];
-							console.log("This the cause");
+							tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
+						} else {
+							onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
+								
+							delete playerOnes[battlePairsMirror[sender.id]];
+							delete playerTwos[sender.id];
+								
+							delete isCrippled[sender.id];
+							delete isCrippled[battlePairsMirror[sender.id]];
+							
+							delete battlePairs[battlePairsMirror[sender.id]];
+							delete battlePairsMirror[sender.id];
+						
+							delete battlePairNames[battlePairNamesMirror[sender.username]];
+							delete battlePairNamesMirror[sender.username];
+							
+							delete battleChannels[ch.id];
 						}
 					}
 				} else if(message.content.startsWith("2")) {
