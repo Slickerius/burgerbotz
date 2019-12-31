@@ -30,6 +30,18 @@ var raceOpt1 = {"x": "y"};
 var raceOpt2 = {"x": "y"};
 var raceOpt3 = {"x": "y"};
 
+var battleChannels = {"x": 0};  	 // ChannelID : Turn ID <- 0-1
+var battleRequests = {"x": 0};  	 // ChannelID : InRequest ID <- 0-1
+var battlePairs = {"x": "y"};     	 // Player 1 ID : Player 2 ID
+var battlePairsMirror = {"x": "y"};      // Player 2 ID : Player 1 ID
+var battlePairNames = {"x": "y"}; 	 // Player 1 Username : Player 2 Username 
+var battlePairNamesMirror = {"x": "y"};  // Player 2 Username : Player 1 Username
+var requestTo = {"x": 0};       	 // RequestTo ID : 0-1
+var playerOnes = ["x"];          	 // IDs of every player 1s
+var playerTwos = ["x"];          	 // IDs of every player 2s
+var isCrippled = ["x"];                  // IDs of every crippled player
+var isF0 = ["x": 0};                     // Whether F0 is true in channel
+
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel, logChannel;
 
@@ -175,6 +187,16 @@ function factorial(n)
   		return 1;
 	}
 	return n * factorial(n - 1)
+}
+
+function flipTurn(turn)
+{
+	if(turn == 0)
+	{
+		return 1;	
+	} else if(turn == 1) {
+		return 0;	
+	}
 }
 
 //a
@@ -875,7 +897,7 @@ client.on('message', message =>
 			}
 		}
 		
-		if(inRequest && reqID === sender.id)
+		if(battleRequests[ch.id] && requestTo[sender.id])
 		{
 			if(message.content.startsWith("1"))
 			{
@@ -890,24 +912,26 @@ client.on('message', message =>
 						return;
 					}
 				});
-				inRequest = false;
-				if(turnID == player1ID && temp[sender.id].hp > 0)
+				
+				delete battleRequests[ch.id];
+				delete requestTo[sender.id];
+				
+				if(battleChannels[ch.id] == 0 && playerOnes[sender.id] && temp[sender.id].hp > 0)
 				{
-					tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
-					inGame = true;
-				} else if(turnID == player2ID && temp[sender.id].hp > 0) {
-					tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
-					f0 = true;
-					inGame = true;
+					tabScreen(sender.username, sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
+				} else if(battleChannels[ch.id] == 1 && playerTwos[sender.id] && temp[sender.id].hp > 0) {
+					tabScreen(sender.username, battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.id], sender.username);
+					isF0[ch.id] = 1;
 				}
 			} else if (message.content.startsWith("2")) {
-				inGame = false;
-				inRequest = false;
+				delete battleChannels[ch.id];
+				delete requestTo[sender.id];
+				delete battleRequests[ch.id];
 				post(sender.username + " has fled the scene!");
 			}
 		}
 	
-		if(inGame && turnID === sender.id)
+		if(battleChannels[ch.id] == 0 && playerOnes[sender.id] || battleChannels[ch.id] == 1 && playerTwos[sender.id])
 		{		
 				if(message.content.startsWith("1") && temp[sender.id].hp > 0)
 				{
@@ -917,36 +941,56 @@ client.on('message', message =>
 						post("***" + sender.username + " grabbed a magazine whilst punching their opponent! +1 ammo***");
 					}
 					var damage = randomize(5, 10);
-					if(sender.id === player1ID)
+					if(playerOnes[sender.id])
 					{
 						temp[player2ID].hp -= damage;
-						post(":punch: ***" + player1Name + " has punched " + player2Name + ". -" + damage + " HP***");
+						post(":punch: ***" + sender.id + " has punched " + battlePairNames[sender.username] + ". -" + damage + " HP***");
 						
 						if(temp[player2ID].hp > 0)
 						{
-							turnID = player2ID;
-							tabScreen(player2Name, player1ID, player2ID, player1Name, player2Name);
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
 						} else {
-							onDefeat(player1Name, player2Name, player1ID, player2ID);
-							inGame = false;
+							onDefeat(sender.username, battlePairNames[sender.username], sender.id, battlePairs[sender.id]);
+							
+							delete isCrippled[sender.id];
+							delete isCrippled[battlePairs[sender.id]];
+							
+							delete battlePairsMirror[battlePairs[sender.id]];
+							delete battlePairs[sender.id];
+							
+							delete battlePairNamesMirror[battlePairNames[sender.username]];
+							delete battlePairNames[sender.username];
+							
+							delete battleChannels[ch.id];
+							
 						}
 					} else {
-						if(!f0)
+						if(!isF0[ch.id])
 						{
 							temp[player1ID].hp -= damage;
-							post(":punch: ***" + player2Name + " has punched " + player1Name + ". -" + damage + " HP***");
+							post(":punch: ***" + sender.id + " has punched " + battlePairNamesMirror[sender.username] + ". -" + damage + " HP***");
 							
 							if(temp[player1ID].hp > 0)
 							{
-								turnID = player1ID;
-								tabScreen(player1Name, player1ID, player2ID, player1Name, player2Name);
+								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
 							} else {
-								onDefeat(player2Name, player1Name, player2ID, player2ID);
-								inGame = false;
+								onDefeat(sender.username, battlePairNamesMirror[sender.username], sender.id, battlePairsMirror[sender.id]);
+								delete isCrippled[sender.id];
+								delete isCrippled[battlePairsMirror[sender.id]];
+							
+								delete battlePairs[battlePairsMirror[sender.id]];
+								delete battlePairsMirror[sender.id];
+							
+								delete battlePairNames[battlePairNamesMirror[sender.username]];
+								delete battlePairNamesMirror[sender.username];
+							
+								delete battleChannels[ch.id];
 							}
 						} else {
-							turnID = player2ID;
-							f0 = false;
+							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+							delete isF0[ch.id];
 						}
 					}
 				} else if(message.content.startsWith("2")) {
@@ -2815,12 +2859,13 @@ client.on('message', message =>
 				break;
 				
 			case "battle":
+				if(sender.id != "391239140068294659" && sender.id != "412211364682137600") return post(":octagonal_sign: **Burgerbotz battle game is currently under maintenance.**\n**Sorry for the inconvenience.**");
 				if(message.mentions.users.size < 1) 
 				{
 					post("You have to mention someone to battle with")
-				} else if (message.mentions.users.size >= 1 && user === sender) {
+				} else if(message.mentions.users.size >= 1 && user === sender) {
 					post("You can not battle yourself!");
-				} else if (inGame) {
+				} else if(battleChannels[ch.id]) {
 					post("A battle is already ongoing!");
 				} else {
 					request(dbURL, function(error, response, body) 
@@ -2838,30 +2883,30 @@ client.on('message', message =>
 					
 					if(temp[sender.id].hp == 0) return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
 					
-					player1ID = sender.id;
-					player2ID = user.id;
-					
-					player1Name = sender.username;
-					player2Name = user.username;
-					
 					var rand = randomize(0, 2);
 					if(rand > 0)
 					{
-						turnID = player1ID;
+						battleChannels[ch.id] = 0;
 					} else {
-						turnID = player2ID;
+						battleChannels[ch.id] = 1;
 					}
-					reqID = user.id;
+					requestTo[user.id] = 1;
 					
 					post(`${user}, you have been challenged to a battle by ${sender.username}!` + "\n```[1] Engage\n[2] Run```");
-					inRequest = true;
+					battleRequests[ch.id] = 1;
+					
+					battlePairs[sender.id] = user.id;
+					battlePairsMirror[user.id] = sender.id;
+					battlePairNames[sender.username] = user.username;
+					battlePairNamesMirror[user.username] = sender.username;
 					
 					setTimeout(function()
 				        {
-						if(inRequest)
+						if(battleRequests[ch.id])
 						{	
 							post(":shrug: ***" + user.username + " has ignored " + sender.username + "'s challenge to battle.***");
-							inRequest = false;
+							delete battleRequests[ch.id];
+							delete requesttTo[user.id];
 						}
 					}, 90000);
 				}
