@@ -1126,7 +1126,7 @@ client.on('message', message =>
 							} else {
 								temp[battlePairs[sender.id]].hp -= damage;
 								temp[sender.id].ammo -= 1;
-								post(":gun: ***" + sender.username + " has shot " + battlePairNamesMirror[sender.username] + ", dealing " + damage + " HP***");
+								post(":gun: ***" + sender.username + " has shot " + battlePairNames[sender.username] + ", dealing " + damage + " HP***");
 								
 								if(temp[battlePairs[sender.id]].hp > 0)
 								{
@@ -1172,7 +1172,7 @@ client.on('message', message =>
 								temp[sender.id].ammo -= 1;
 								post(":gun: ***" + sender.username + " has shot " + battlePairNamesMirror[sender.username] + ", dealing " + damage + " HP***");
 								
-								if(temp[player1ID].hp > 0)
+								if(temp[battlePairsMirror[sender.id]].hp > 0)
 								{
 									battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
 									tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
