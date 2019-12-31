@@ -942,7 +942,7 @@ client.on('message', message =>
 				delete playerTwos[sender.id];
 				delete battlePairs[battlePairsMirror[sender.id]];
 				delete battlePairsMirror[sender.id];
-				delete battlePairNames[battlePairNamesMirror[sender.username];
+				delete battlePairNames[battlePairNamesMirror[sender.username]];
 				delete battlePairNamesMirror[sender.username];
 				delete playerTwos[sender.id];
 				
