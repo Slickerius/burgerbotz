@@ -1245,7 +1245,7 @@ client.on('message', message =>
 				} else if(message.content.startsWith("5")) {
 					var luck = randomize(0, 10);
 					var damage = randomize(5, 10);
-					if(luck > 8)
+					if(luck > 4)
 					{
 						post(":footprints: ***" + sender.username + " has left the battlefield!***");
 						if(playerOnes[sender.id])
