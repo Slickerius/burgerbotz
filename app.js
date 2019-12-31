@@ -37,9 +37,9 @@ var battlePairsMirror = {"x": "y"};      // Player 2 ID : Player 1 ID
 var battlePairNames = {"x": "y"}; 	 // Player 1 Username : Player 2 Username 
 var battlePairNamesMirror = {"x": "y"};  // Player 2 Username : Player 1 Username
 var requestTo = {"x": 0};       	 // RequestTo ID : 0-1
-var playerOnes = ["x"];          	 // IDs of every player 1s
-var playerTwos = ["x"];          	 // IDs of every player 2s
-var isCrippled = ["x"];                  // IDs of every crippled player
+var playerOnes = {"x": 0};          	 // IDs of every player 1s
+var playerTwos = {"x": 0};          	 // IDs of every player 2s
+var isCrippled = {"x": 0};                  // IDs of every crippled player
 var isF0 = {"x": 0};                     // Whether F0 is true in channel
 
 var hqChannel;
@@ -938,6 +938,14 @@ client.on('message', message =>
 				delete battleChannels[ch.id];
 				delete requestTo[sender.id];
 				delete battleRequests[ch.id];
+				delete playerOnes[battlePairsMirror[sender.id]];
+				delete playerTwos[sender.id];
+				delete battlePairs[battlePairsMirror[sender.id]];
+				delete battlePairsMirror[sender.id];
+				delete battlePairNames[battlePairNamesMirror[sender.username];
+				delete battlePairNamesMirror[sender.username];
+				delete playerTwos[sender.id];
+				
 				post(sender.username + " has fled the scene!");
 			}
 		}
@@ -2910,6 +2918,8 @@ client.on('message', message =>
 					battlePairsMirror[user.id] = sender.id;
 					battlePairNames[sender.username] = user.username;
 					battlePairNamesMirror[user.username] = sender.username;
+					playerOnes[sender.username] = 1;
+					playerTwos[user.username] = 1;
 					
 					setTimeout(function()
 				        {
