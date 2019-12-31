@@ -40,7 +40,7 @@ var requestTo = {"x": 0};       	 // RequestTo ID : 0-1
 var playerOnes = ["x"];          	 // IDs of every player 1s
 var playerTwos = ["x"];          	 // IDs of every player 2s
 var isCrippled = ["x"];                  // IDs of every crippled player
-var isF0 = ["x": 0};                     // Whether F0 is true in channel
+var isF0 = {"x": 0};                     // Whether F0 is true in channel
 
 var hqChannel;
 var joinChannel, leaveChannel, mainChannel, logChannel;
