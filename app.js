@@ -2905,7 +2905,6 @@ client.on('message', message =>
 					post(":octagonal_sign: **A battle is already ongoing in this channel!**");
 				} else if(playerOnes[sender.id] || playerTwos[sender.id]) {
 					post(":octagonal_sign: **You can only be involved in one battle at a time!**");	
-				}
 				} else {
 					request(dbURL, function(error, response, body) 
 					{
