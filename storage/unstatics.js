@@ -332,6 +332,7 @@ rape = [
 horseNames = [
 	"Slick",
 	"Arbaz",
+	"Maus",
 	"Pyro",
 	"Bunny",
 	"Kasaeda",
