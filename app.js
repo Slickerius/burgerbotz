@@ -565,6 +565,67 @@ client.on('message', message =>
  							});
 						});
 					}
+				} else if(eventTracker[key] == 5) {
+					var value = 0;
+					if(eventStage[key] == 0)
+					{
+						randomEvents.call(ch, sender, 5, 0, value, repChange);
+						eventStage[key] = 1;
+					} else if(eventStage[key] == 1) {
+						var stage;
+						if(message.content.startsWith("1"))
+						{
+							stage = randomize(1, 3);
+							if(stage == 1)
+							{
+								repChange = randomize(3, 10);
+							} else if(stage == 2) {
+								repChange = randomize(5, 12);	
+							}
+							randomEvents.call(ch, sender, 5, stage, value, repChange);	
+						} else if(message.content.startsWith("2")) {
+							stage = 3;
+							randomEvents.call(ch, sender, 5, 3, value, repChange);	
+						} else if(message.content.startsWith("3")) {
+							value = randomize(5, 30);
+							stage = randomize(4, 6);
+							if(stage == 4)
+							{
+								repChange = randomize(-5, 1);
+							} else if(stage == 5) {
+								repChange = randomize(-15, -4);	
+							}
+							randomEvents.call(ch, sender, 4, stage, value, repChange);	
+						} else {
+							return;	
+						}
+						
+						delete eventTracker[key];
+						delete eventStage[key];
+						
+						if(stage == 3) return;
+						
+						request(dbURL, function(error, response, body) 
+						{
+							db = JSON.parse(body);
+							if(stage == 4 || stage == 5)
+							{
+								db[message.author.id].burgers -= value;
+							}
+							
+							db[sender.id].reputation += repChange;
+							
+							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
+							if(db[message.author.id].reputation < 0) db[message.author.id].reputation = 0;
+							if(db[message.author.id].reputation > 100) db[message.author.id].reputation = 100;
+							request(
+							{
+  								method: "PUT",
+  								uri: dbURL,
+  								json: db
+ 							});
+						});
+					}
 				}
 			}
 		}
