@@ -910,7 +910,7 @@ client.on('message', message =>
 					{
 						post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");	
 						delete battleChannels[ch.id];
-						delete playerOnes[battlePairs[sender.id]];
+						delete playerOnes[battlePairsMirror[sender.id]];
 						delete playerTwos[sender.id];
 						delete battleRequests[ch.id];
 						delete requestTo[sender.id];
