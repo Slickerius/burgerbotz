@@ -3046,6 +3046,8 @@ client.on('message', message =>
 					post(":octagonal_sign: **A battle is already ongoing in this channel!**");
 				} else if(playerOnes[sender.id] || playerTwos[sender.id]) {
 					post(":octagonal_sign: **You can only be involved in one battle at a time!**");	
+				} else if(playerOnes[user.id] || playerTwos[user.id]) {
+					post(":octagonal_sign: **" + user.username + " is already in a battle!**");
 				} else {
 					request(dbURL, function(error, response, body) 
 					{
@@ -3063,29 +3065,26 @@ client.on('message', message =>
 						{
 							return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
 						}
-					});
-					
-					console.log(temp[sender.id].hp);
+						var rand = randomize(0, 2);
+						if(rand > 0)
+						{
+							battleChannels[ch.id] = 0;
+						} else {
+							battleChannels[ch.id] = 1;
+						}
+						requestTo[user.id] = 1;
 
-					var rand = randomize(0, 2);
-					if(rand > 0)
-					{
-						battleChannels[ch.id] = 0;
-					} else {
-						battleChannels[ch.id] = 1;
-					}
-					requestTo[user.id] = 1;
-					
-					post(`${user}, you have been challenged to a battle by ${sender.username}!` + "\n```[1] Engage\n[2] Run```");
-					battleRequests[ch.id] = 1;
-					
-					battlePairs[sender.id] = user.id;
-					battlePairsMirror[user.id] = sender.id;
-					battlePairNames[sender.username] = user.username;
-					battlePairNamesMirror[user.username] = sender.username;
-					playerOnes[sender.id] = 1;
-					playerTwos[user.id] = 1;
-					
+						post(`${user}, you have been challenged to a battle by ${sender.username}!` + "\n```[1] Engage\n[2] Run```");
+						battleRequests[ch.id] = 1;
+
+						battlePairs[sender.id] = user.id;
+						battlePairsMirror[user.id] = sender.id;
+						battlePairNames[sender.username] = user.username;
+						battlePairNamesMirror[user.username] = sender.username;
+						playerOnes[sender.id] = 1;
+						playerTwos[user.id] = 1;
+					});
+
 					setTimeout(function()
 				        {
 						if(battleRequests[ch.id])
