@@ -70,12 +70,12 @@ var x4_msg_6 = "**:speak_no_evil: You helped them gain access to the car, before
 var x4_msg_7 = "**:pensive: You assisted them in gaining access to the car, only to be taken aback by the car alarm which alerted the police. You were fined :hamburger: ";
 
 //Event 5 => Elderly
-var x5_msg_0 = " You see an elderly person collapsing, seemingly desperate for help. Do you:**\n**[1]** Help\n**[2]** Ignore\n**[3] Steal from them";
+var x5_msg_0 = " You see an elderly person collapsing, seemingly desperate for help. Do you:**\n**[1]** Help\n**[2]** Ignore\n**[3]** Steal from them";
 
 var x5_msg_1 = "**:angel: You rushed to their aid and called for ambulance. They later went to thank you for your assistance.**";
 var x5_msg_2 = "**:pensive: You attempted your best to aid them and called for ambulance, unfortunately their time had come.**";
 
-var x5_msg_3 = "***:person_walking: You chose not to think much of the occurrence and moved along.***";
+var x5_msg_3 = "**:person_walking: You chose not to think much of the occurrence and moved along.**";
 
 var x5_msg_4 = "**:money_mouth: You found and took :hamburger: ";
 var x5_msg_5 = "**:dizzy_face: You were caught attempting to steal from an elderly in need. You were fined :hamburger: ";
