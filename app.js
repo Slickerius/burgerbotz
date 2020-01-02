@@ -899,7 +899,7 @@ client.on('message', message =>
 
 		if(battleRequests[ch.id] && requestTo[sender.id])
 		{
-			console.log("AADV");
+			console.log("AADV: " + requestTo[sender.id]);
 			if(message.content.startsWith("1"))
 			{
 				console.log("AAPV");
@@ -955,7 +955,7 @@ client.on('message', message =>
 			}
 		}
 	
-		if(battleChannels[ch.id] == 0 && playerOnes[sender.id] || battleChannels[ch.id] == 1 && playerTwos[sender.id])
+		if((battleChannels[ch.id] == 0 && playerOnes[sender.id] || battleChannels[ch.id] == 1 && playerTwos[sender.id]) && !battleRequests[ch.id])
 		{		
 				console.log(battleChannels[ch.id]);
 				if(message.content.startsWith("1") && temp[sender.id].hp > 0)
