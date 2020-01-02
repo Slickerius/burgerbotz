@@ -3002,7 +3002,7 @@ client.on('message', message =>
 						.setThumbnail("https://images.emojiterra.com/twitter/v12/512px/1f6d2.png")
 						.setColor("#fcc66a")
 						.setTitle("The Burgerstore")
-						.setDescription("The official Burgerbotz item store!\nUsage: /store buy <item> <amount>")
+						.setDescription("The official Burgerbotz item store!\nUsage: /store buy <item> <amount>\nTo use an item, type /use <item>")
 						.addField("Consumables", "<:drink:660031984092839947> **Energy Drink** - Refills your energy. - :hamburger: **5**");
 						ch.send(storeEmbed);
 				break;
