@@ -909,6 +909,7 @@ client.on('message', message =>
 					if(db[sender.id].hp == 0)
 					{
 						post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");	
+						delete battleChannels[ch.id];
 						delete playerOnes[battlePairs[sender.id]];
 						delete playerTwos[sender.id];
 						delete battleRequests[ch.id];
@@ -1280,11 +1281,49 @@ client.on('message', message =>
 						
 						if(playerOnes[sender.id])
 						{
-							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
-							tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
+							if(temp[sender.id] > 0)
+							{
+								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+								tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
+							} else {
+								onDefeat(battlePairNames[sender.username], sender.username, battlePairs[sender.id], sender.id);
+							
+								delete playerOnes[sender.id];
+								delete playerTwos[battlePairs[sender.id]];
+
+								delete isCrippled[sender.id];
+								delete isCrippled[battlePairs[sender.id]];
+
+								delete battlePairsMirror[battlePairs[sender.id]];
+								delete battlePairs[sender.id];
+
+								delete battlePairNamesMirror[battlePairNames[sender.username]];
+								delete battlePairNames[sender.username];
+
+								delete battleChannels[ch.id];
+							}
 						} else  if(playerTwos[sender.id]) {
-							battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
-							tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
+							if(temp[sender.id] > ))
+							{
+								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
+								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
+							} else {
+								onDefeat(battlePairNamesMirror[sender.username], sender.username, battlePairsMirror[sender.id], sender.id);
+								
+								delete playerOnes[battlePairsMirror[sender.id]];
+								delete playerTwos[sender.id];
+
+								delete isCrippled[sender.id];
+								delete isCrippled[battlePairsMirror[sender.id]];
+
+								delete battlePairs[battlePairsMirror[sender.id]];
+								delete battlePairsMirror[sender.id];
+
+								delete battlePairNames[battlePairNamesMirror[sender.username]];
+								delete battlePairNamesMirror[sender.username];
+
+								delete battleChannels[ch.id];
+							}
 						}
 					}
 				}
@@ -3014,15 +3053,15 @@ client.on('message', message =>
 						var xHP = db[user.id].hp;
 						var yHP = db[sender.id].hp;
 						
+						if(yHP == 0) return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
+						
 						if(!temp[user.id]) temp[user.id] = {hp: xHP, ammo: 1};
 						if(!temp[sender.id]) temp[sender.id] = {hp: yHP, ammo: 1};
 					
 						temp[user.id] = {hp: xHP, ammo: 1};
 						temp[sender.id] = {hp: yHP, ammo: 1};
 					});
-					
-					if(temp[sender.id].hp == 0) return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
-					
+
 					var rand = randomize(0, 2);
 					if(rand > 0)
 					{
