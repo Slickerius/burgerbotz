@@ -257,7 +257,7 @@ client.on('message', message =>
 		if(randomEventOccurring == 10) 
 		{
 			if(sender.bot) return;
-			var eventRandomizer = randomize(0, 5);
+			var eventRandomizer = randomize(0, 6);
 			eventTracker[sender.id] = eventRandomizer;
 			eventStage[sender.id] = 0;
 		}
@@ -309,7 +309,7 @@ client.on('message', message =>
 		{
 			if(key == message.author.id)
 			{
-				if(playerOnes[sender.id] || playerTwos[sender.id]) return;
+				if(playerOnes[sender.id] || playerTwos[sender.id] || temp[sender.id].inGame == 1) return;
 				var repChange = 0;
 				if(eventTracker[key] == 0)
 				{
@@ -595,7 +595,7 @@ client.on('message', message =>
 							} else if(stage == 5) {
 								repChange = randomize(-15, -4);	
 							}
-							randomEvents.call(ch, sender, 4, stage, value, repChange);	
+							randomEvents.call(ch, sender, 5, stage, value, repChange);	
 						} else {
 							return;	
 						}
@@ -1568,7 +1568,7 @@ client.on('message', message =>
  								});
 								post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/t)*");
 							} else {
-								post(":octagonal_sign: You have insufficient burgers to do this bet.");	
+								post(":octagonal_sign: **You have insufficient burgers to do this bet.**");	
 							}
 						});
 					}	
