@@ -309,7 +309,7 @@ client.on('message', message =>
 		{
 			if(key == message.author.id)
 			{
-				if(playerOnes[sender.id] || playerTwos[sender.id] || temp[sender.id].inGame == 1) return;
+				if(playerOnes[sender.id] || playerTwos[sender.id] || (temp[sender.id] && temp[sender.id].inGame == 1)) return;
 				var repChange = 0;
 				if(eventTracker[key] == 0)
 				{
