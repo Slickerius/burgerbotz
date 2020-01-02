@@ -3061,7 +3061,7 @@ client.on('message', message =>
 					});
 					
 					console.log(temp[sender.id].hp);
-					if(temp[sender.id].hp <= 0)
+					if(temp[sender.id].hp <= 0 || !temp[sender.id].hp)
 					{
 						return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
 					}
