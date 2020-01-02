@@ -24,7 +24,7 @@ commandMap = new Map([
 		['/flags', 'Starts a flag guessing game'],
 		['/transcribe', 'DNA codon triplet transcription tool'],
 		['/store', 'The Burgerstore, providing all of your needs'],
-		['/consume', 'Consume an item'],
+		['/use', 'Use an item'],
 		['/profile', 'Check your (or someone else\'s) Burgerbotz profile!'],
 		['/rate', 'Rate other people!']
 		]);
