@@ -69,6 +69,17 @@ var x4_msg_5 = "**:angel: You successfully assisted them in trying to gain acces
 var x4_msg_6 = "**:speak_no_evil: You helped them gain access to the car, before discovering that they were trying to thieve the car. They gave you :hamburger: ";
 var x4_msg_7 = "**:pensive: You assisted them in gaining access to the car, only to be taken aback by the car alarm which alerted the police. You were fined :hamburger: ";
 
+//Event 5 => Elderly
+var x5_msg_0 = " You see an elderly person collapsing, seemingly desperate for help. Do you:**\n**[1]** Help\n**[2]** Ignore\n**[3] Steal from them";
+
+var x5_msg_1 = "**:angel: You rushed to their aid and called for ambulance. They later went to thank you for your assistance.**";
+var x5_msg_2 = "**:pensive: You attempted your best to aid them and called for ambulance, unfortunately their time had come.**";
+
+var x5_msg_3 = "***:person_walking: You chose not to think much of the occurrence and moved along.***";
+
+var x5_msg_4 = "**:money_mouth: You found and took :hamburger: ";
+var x5_msg_5 = "**:dizzy_face: You were caught attempting to steal from an elderly in need. You were fined :hamburger: ";
+
 module.exports =
 {
         call: function(channel, user, id, stage, value, repChange)
@@ -168,6 +179,23 @@ module.exports =
                                 msg = x4_msg_6 + value + " for your assistance.**\n**:sparkles: " + repSign + repChange + " reputation.**";     
                         } else if(stage == 7) {
                                 msg = x4_msg_7 + value + " for being an accomplice.**\n**:sparkles: " + repSign + repChange + " reputation.**";    
+                        }
+                        channel.send(msg);
+                        msg = "";
+                } else if(id == 5) {
+                        if(stage == 0)
+                        {
+                                msg = "**:older_adult: " + user + x5_msg_0;
+                        } else if(stage == 1) {
+                                msg = x5_msg_1 + "\n**:sparkles: " + repSign + repChange + " reputation.**";
+                        } else if(stage == 2) {
+                                msg = x5_msg_2 + "\n**:sparkles: " + repSign + repChange + " reputation.**";    
+                        } else if(stage == 3) {
+                                msg = x5_msg_3 + "\n**:sparkles: " + repSign + repChange + " reputation.**";    
+                        } else if(stage == 4) {
+                                msg = x5_msg_4 + value + ".**\n**:sparkles: " + repSign + repChange + " reputation.**";  
+                        } else if(stage == 5) {
+                                msg = x5_msg_5 + value + ".**\n**:sparkles: " + repSign + repChange + " reputation.**";
                         }
                         channel.send(msg);
                         msg = "";
