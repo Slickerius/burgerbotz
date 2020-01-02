@@ -3090,8 +3090,15 @@ client.on('message', message =>
 						if(battleRequests[ch.id])
 						{	
 							post(":shrug: ***" + user.username + " has ignored " + sender.username + "'s challenge to battle.***");
+							delete battleChannels[ch.id];
+							delete playerOnes[battlePairsMirror[sender.id]];
+							delete playerTwos[sender.id];
 							delete battleRequests[ch.id];
-							delete requestTo[user.id];
+							delete requestTo[sender.id];
+							delete battlePairs[battlePairsMirror[sender.id]];
+							delete battlePairsMirror[sender.id];
+							delete battlePairNames[battlePairNamesMirror[sender.username]];
+							delete battlePairNamesMirror[sender.username];
 						}
 					}, 90000);
 				}
