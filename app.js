@@ -3053,14 +3053,18 @@ client.on('message', message =>
 						var xHP = db[user.id].hp;
 						var yHP = db[sender.id].hp;
 						
-						if(yHP == 0) return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
-						
 						if(!temp[user.id]) temp[user.id] = {hp: xHP, ammo: 1};
 						if(!temp[sender.id]) temp[sender.id] = {hp: yHP, ammo: 1};
 					
 						temp[user.id] = {hp: xHP, ammo: 1};
 						temp[sender.id] = {hp: yHP, ammo: 1};
 					});
+					
+					console.log(temp[sender.id].hp);
+					if(temp[sender.id].hp == 0)
+					{
+						return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
+					}
 
 					var rand = randomize(0, 2);
 					if(rand > 0)
