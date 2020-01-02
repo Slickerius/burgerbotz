@@ -1281,7 +1281,7 @@ client.on('message', message =>
 						
 						if(playerOnes[sender.id])
 						{
-							if(temp[sender.id] > 0)
+							if(temp[sender.id].hp > 0)
 							{
 								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
 								tabScreen(battlePairNames[sender.username], sender.id, battlePairs[sender.id], sender.username, battlePairNames[sender.username]);
@@ -1303,7 +1303,7 @@ client.on('message', message =>
 								delete battleChannels[ch.id];
 							}
 						} else  if(playerTwos[sender.id]) {
-							if(temp[sender.id] > 0)
+							if(temp[sender.id].hp > 0)
 							{
 								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
 								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
@@ -3061,7 +3061,7 @@ client.on('message', message =>
 					});
 					
 					console.log(temp[sender.id].hp);
-					if(temp[sender.id].hp == 0)
+					if(temp[sender.id].hp <= 0)
 					{
 						return post(":octagonal_sign: **You are too exhausted to battle!**\n**Refill your energy by buying an energy drink at the /store.**");
 					}
