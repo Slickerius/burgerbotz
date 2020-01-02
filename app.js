@@ -1303,7 +1303,7 @@ client.on('message', message =>
 								delete battleChannels[ch.id];
 							}
 						} else  if(playerTwos[sender.id]) {
-							if(temp[sender.id] > ))
+							if(temp[sender.id] > 0)
 							{
 								battleChannels[ch.id] = flipTurn(battleChannels[ch.id]);
 								tabScreen(battlePairNamesMirror[sender.username], battlePairsMirror[sender.id], sender.id, battlePairNamesMirror[sender.username], sender.username);
