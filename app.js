@@ -3102,7 +3102,7 @@ client.on('message', message =>
 				break;
 				
 			case "battle":
-				if(sender.id != "391239140068294659" && sender.id != "412211364682137600" && sender.id != "600339048665710605") return post(":octagonal_sign: **Burgerbotz battle game is currently under maintenance.**\n**Sorry for the inconvenience.**");
+				//if(sender.id != "391239140068294659" && sender.id != "412211364682137600" && sender.id != "600339048665710605") return post(":octagonal_sign: **Burgerbotz battle game is currently under maintenance.**\n**Sorry for the inconvenience.**");
 				if(message.mentions.users.size < 1) 
 				{
 					post(":octagonal_sign: **You have to mention someone to battle with.**")
