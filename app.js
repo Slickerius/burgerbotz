@@ -309,6 +309,7 @@ client.on('message', message =>
 		{
 			if(key == message.author.id)
 			{
+				if(playerOnes[sender.id] || playerTwos[sender.id]) return;
 				var repChange = 0;
 				if(eventTracker[key] == 0)
 				{
@@ -2507,7 +2508,7 @@ client.on('message', message =>
 				post(msx);
 				break;
 				
-			case "consume":
+			case "use":
 				if(args[1] == "energy")
 				{
 					request(dbURL, function(error, response, body) 
@@ -2516,6 +2517,10 @@ client.on('message', message =>
 						if(!db[sender.id]['inventory']) db[sender.id]['inventory'] = {energyDrinks: 0};
 						if(db[sender.id]['inventory'].energyDrinks > 0)
 						{
+							if(playerOnes[sender.id] || playerTwos[sender.id])
+							{
+								return post(":octagonal_sign: **You may not use this item while in battle.**");	
+							}
 							var recovery = randomize(70, 101);
 							db[sender.id]['inventory'].energyDrinks -= 1;
 							db[sender.id].hp += recovery;
