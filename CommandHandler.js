@@ -409,5 +409,17 @@ module.exports =
 		
 		out += "person."
 		return out;
+	},
+	
+	isOldEnough(user)
+	{
+		var date = Date.now();
+		var userCreated = user.createdAt;
+		if(Math.abs(date - userCreated) < 86400000) 
+		{
+			return false;	
+		} else {
+			return true;	
+		}
 	}
 };
