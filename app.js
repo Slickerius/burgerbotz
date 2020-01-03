@@ -224,6 +224,9 @@ client.on('message', message =>
 		let sender = message.author;
 		let ch = message.channel;
 	
+		console.log(handler.isOldEnough(sender));
+		if(!handler.isOldEnough(sender)) return;
+	
 		request(dbURL, function(error, response, body) 
 		{
 			var db = JSON.parse(body);
