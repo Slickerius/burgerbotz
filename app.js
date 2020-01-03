@@ -2504,6 +2504,7 @@ client.on('message', message =>
 					var raters = 0;
 					
 					var winRate = (db[targetUser.id]['battleData'].wins / db[targetUser.id]['battleData'].matches) * 100;
+					if(!winRate) winRate = 0;
 					
 					if(!db[targetUser.id].reputation && db[targetUser.id].reputation != 0) 
 					{
