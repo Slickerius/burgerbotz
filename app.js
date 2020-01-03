@@ -840,10 +840,16 @@ client.on('message', message =>
 			{
 				db = JSON.parse(body);
 				if(!db[winID]) db[winID] = {burgers: 10};
+				if(!db[winID]['battleData']) db[winID]['battleData'] = {wins: 0, matches:0};
 				db[winID].burgers += x;
 				
 				db[winID].hp = temp[winID].hp;
 				db[loseID].hp = temp[loseID].hp;
+				
+				db[winID]['battleData'].wins += 1;
+				
+				db[winID]['battleData'].matches += 1;
+				db[loseID]['battleData'].matches += 1;
 				
 				if(db[winID].hp < 0) db[winID].hp = 0;
 				if(db[loseID].hp < 0) db[loseID].hp = 0;
@@ -2496,6 +2502,9 @@ client.on('message', message =>
 					var ratingStars = 0;
 					var stars;
 					var raters = 0;
+					
+					var winRate = (db[targetUser.id]['battleData'].wins / db[targetUser.id]['battleData'].matches) * 100;
+					
 					if(!db[targetUser.id].reputation && db[targetUser.id].reputation != 0) 
 					{
 						db[targetUser.id].reputation = 50;
@@ -2543,6 +2552,7 @@ client.on('message', message =>
 							.addField("Health", ":heart: " + db[targetUser.id].hp)
 							.addField("Wealth", ":hamburger: " + db[targetUser.id].burgers)
 							.addField("Reputation", repBar)
+							.addField("Battle Statistics", ":fist: **" + db[targetUser.id]['battleData'].wins + "** wins / **" + db[targetUser.id]['battleData'].matches + "** matches\n:trophy: **Win Rate: " + winRate + "%**")
 							.addField("User Rating", stars + " " + rating + " (" + raters + ")");
 							ch.send(botembed);
 				});
