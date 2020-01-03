@@ -2910,6 +2910,7 @@ client.on('message', message =>
 					var db = JSON.parse(body);
 					client.users.forEach(function(u)
 					{
+						if(!db[u.id]) db[u.id] = {burgers: 10};
 						if(!db[u.id].hp)
 						{
 							db[u.id].hp = 100;
