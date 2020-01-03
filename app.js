@@ -223,8 +223,7 @@ client.on('message', message =>
 {
 		let sender = message.author;
 		let ch = message.channel;
-	
-		console.log(handler.isOldEnough(sender));
+
 		if(!handler.isOldEnough(sender)) return;
 	
 		request(dbURL, function(error, response, body) 
@@ -831,7 +830,7 @@ client.on('message', message =>
 		
 		function onDefeat(player1, player2, winID, loseID)
 		{
-			var x = randomize(15, 75);
+			var x = randomize(15, 31);
 			var req = dbURL;
 			inGame = false;
 			p1isCrippled = false;
@@ -2306,12 +2305,14 @@ client.on('message', message =>
 			
 			case "inf":
 				var x = 0;
+				var out = "**Server List**";
 				client.guilds.forEach(function(guild)
 				{
 					x++;
-					post("**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator + " - " + guild.memberCount + " members");
+					out += "**>" + guild.name + "** - " + guild.owner.user.username + "#" + guild.owner.user.discriminator + " - " + guild.memberCount + " members\n";
 				});
-				post("Total: " + x + " servers");
+				out += "Total: " + x + " servers";
+				post(out);
 				break;
 				
 			case "rate":
@@ -2914,6 +2915,17 @@ client.on('message', message =>
 							db[u.id].hp = 100;
 							console.log("Added DB HP data for user " + u.username);
 						}
+						if(!db[u.id]['ratings']) 
+						{
+							db[u.id]['ratings'] = {};
+							console.log("Added ratings DB for user " + u.username);
+						}
+						if(!db[u.id]['battleData'])
+						{
+							db[u.id]['battleData'] = {wins: 0, matches: 0};
+							console.log("Added battle DB for user " + u.username);
+						}
+						
 					});
 					request(
 					{
