@@ -2919,16 +2919,17 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					for(var key in db)
-					{
-						client.users.forEach(function (us)
-						{
-							if(key == us.id) return console.log(us.id + " exists.");	
-						});
-						console.log(key + "Doesn't exist, deleting.");
-						delete db[key];
-					}
-					request({ url: 'https://api.myjson.com/bins/193a5g', method: 'PUT', json: {burgers: 50}});
+					request({ url: 'https://api.myjson.com/bins/193a5g', method: 'PUT', json: db});
+					//for(var key in db)
+					//{
+					//	client.users.forEach(function (us)
+					//	{
+					//		if(key == us.id) return console.log(us.id + " exists.");	
+					//	});
+					//	console.log(key + "Doesn't exist, deleting.");
+					//	delete db[key];
+					//}
+					
 					client.users.forEach(function(u)
 					{
 						if(!db[u.id]) db[u.id] = {burgers: 10};
