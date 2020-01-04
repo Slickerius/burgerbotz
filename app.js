@@ -3047,12 +3047,7 @@ client.on('message', message =>
 						db[sender.id].burgers += output;
 						post(":calendar: **You have claimed your daily dose of burgers worth :hamburger: " + output + "!**");
 						db[sender.id].dailyDate = date;
-						request(
-						{
-  							method: "PUT",
-  							uri: dbURL,
-  							json: db
- 						});
+						request({method: "PUT", uri: dbURL, json: db});
 					} else {
 						console.log(date + " " + dailyDate);
 						var timeRemaining = new Date(dailyDate - date);
