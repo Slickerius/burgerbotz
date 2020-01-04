@@ -2921,7 +2921,12 @@ client.on('message', message =>
 					var db = JSON.parse(body);
 					for(var key in db)
 					{
-						console.log(key);	
+						client.users.forEach(function (us)
+						{
+							if(key == us.id) return console.log(us.id + " exists.");	
+						});
+						console.log(db[key] + "Doesn't exist, deleting.");
+						delete db[key];
 					}
 					request({ url: 'https://api.myjson.com/bins/193a5g', method: 'PUT', json: db});
 					client.users.forEach(function(u)
