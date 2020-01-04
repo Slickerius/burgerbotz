@@ -2919,6 +2919,10 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
+					for(var key in db)
+					{
+						console.log(key);	
+					}
 					request({ url: 'https://api.myjson.com/bins/193a5g', method: 'PUT', json: db});
 					client.users.forEach(function(u)
 					{
