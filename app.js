@@ -2919,6 +2919,7 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
+					fs.createReadStream('userData.json').pipe(request.put('https://api.myjson.com/bins/193a5g'));
 					request(
 					{
   						method: "PUT",
