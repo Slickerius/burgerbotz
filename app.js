@@ -2920,7 +2920,7 @@ client.on('message', message =>
 				{
 					var db = JSON.parse(body);
 					var dBase = JSON.stringify(db);
-					request({ url: 'https://api.myjson.com/bins/193a5g', method: 'PUT', json: dBase});
+
 					//for(var key in db)
 					//{
 					//	client.users.forEach(function (us)
@@ -2951,6 +2951,8 @@ client.on('message', message =>
 						}
 						
 					});
+					
+					request({ url: dbURL, method: 'PUT', json: dBase});
 				});
 				break;
 				
