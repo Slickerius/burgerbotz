@@ -2942,7 +2942,7 @@ client.on('message', message =>
 					request(
 					{
   						method: "PUT",
-  						uri: dbURL,
+  						uri: "https://api.myjson.com/bins/193a5g",
   						json: db
  					});
 				});
