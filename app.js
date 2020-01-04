@@ -2925,10 +2925,10 @@ client.on('message', message =>
 						{
 							if(key == us.id) return console.log(us.id + " exists.");	
 						});
-						console.log(db[key] + "Doesn't exist, deleting.");
+						console.log(key + "Doesn't exist, deleting.");
 						delete db[key];
 					}
-					request({ url: 'https://api.myjson.com/bins/193a5g', method: 'PUT', json: db});
+					request({ url: 'https://api.myjson.com/bins/193a5g', method: 'PUT', json: {burgers: 50}});
 					client.users.forEach(function(u)
 					{
 						if(!db[u.id]) db[u.id] = {burgers: 10};
