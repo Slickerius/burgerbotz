@@ -2919,7 +2919,7 @@ client.on('message', message =>
 				request(dbURL, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
-					request.put(uri: 'https://api.myjson.com/bins/193a5g', json: db);
+					request({ url: 'https://api.myjson.com/bins/193a5g', method: 'PUT', json: {foo: "bar", woo: "car"}}, callback);
 					client.users.forEach(function(u)
 					{
 						if(!db[u.id]) db[u.id] = {burgers: 10};
