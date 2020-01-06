@@ -745,6 +745,7 @@ client.on('message', message =>
 					}
 				}
 				
+				if(amount == 0) return;
 				request(dbURL, function(error, response, body) 
 				{
 					db = JSON.parse(body);
@@ -910,6 +911,7 @@ client.on('message', message =>
 					{
 						post("*Guessed correctly! You got **heads***\n*Your prize:* :hamburger: **" + z + "**");
 						db[sender.id].burgers += z;
+						if(z == 0) return;
 						request(
 						{
   							method: "PUT",
@@ -925,6 +927,7 @@ client.on('message', message =>
 					{
 						post("*Guessed correctly! You got **tails***\n*Your prize:* :hamburger: **" + z + "**");
 						db[sender.id].burgers += z;
+						if(z == 0) return;
 						request(
 						{
   							method: "PUT",
@@ -2244,7 +2247,7 @@ client.on('message', message =>
 						{
 							if(args[1] == x)
 							{
-								if(parseFloat(arg0) < 0) return post("You must enter a positive number.");
+								if(parseFloat(arg0) < 0 || parseFloat(arg0) == 0) return post("You must enter a positive number.");
 								
 								if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 								{
@@ -2283,7 +2286,7 @@ client.on('message', message =>
 								db[user.id] = {burgers: 10};
 							}
 							
-							if(parseFloat(arg0) < 0) return post("You must enter a positive number.");
+							if(parseFloat(arg0) < 0 || parseFloat(arg0) == 0) return post("You must enter a positive number.");
 							
 							if(db[sender.id].burgers - parseFloat(arg0) >= 0)
 							{
