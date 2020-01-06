@@ -2918,6 +2918,24 @@ client.on('message', message =>
 				}
 				break;
 			
+			case "inf-rs":
+				if(sender.id != "391239140068294659") return;
+				request(dbURL, function(error, response, body) 
+				{
+					var db = JSON.parse(body);
+					for(var key in db)
+					{
+						client.users.forEach(function (us)
+						{
+							if(key == us.id) return console.log(us.id + " exists.");	
+						});
+						console.log(key + "Doesn't exist, deleting.");
+						delete db[key];
+					}
+					request({ url: dbURL, method: 'PUT', json: db});
+				});
+				break;
+				
 			case "aadx":
 				request(dbURL, function(error, response, body) 
 				{
