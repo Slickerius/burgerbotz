@@ -912,6 +912,7 @@ client.on('message', message =>
 						post("*Guessed correctly! You got **heads***\n*Your prize:* :hamburger: **" + z + "**");
 						db[sender.id].burgers += z;
 						if(z == 0) return;
+						console.log("Not 0!");
 						request(
 						{
   							method: "PUT",
@@ -928,6 +929,7 @@ client.on('message', message =>
 						post("*Guessed correctly! You got **tails***\n*Your prize:* :hamburger: **" + z + "**");
 						db[sender.id].burgers += z;
 						if(z == 0) return;
+						console.log("Not 0!");
 						request(
 						{
   							method: "PUT",
