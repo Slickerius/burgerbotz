@@ -110,8 +110,7 @@ client.on('ready', () =>
 		});
 		
 		console.log("AADX");
-		var invites = guild.fetchInvites()
-			.then(invite => {
+		var invites = guild.fetchInvites().then(invite => {
 				console.log("AADY");
 				var invArr = invite.array();
 				console.log("Array: " + invArr);
@@ -123,7 +122,7 @@ client.on('ready', () =>
 					inviteObjects[inv.code] = inv.uses;
 					console.log("Compiled " + inv.code + " into inviteObjects.");
 				}
-			});
+		});
 	}
    });
 });
