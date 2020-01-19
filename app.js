@@ -133,6 +133,7 @@ client.on('guildMemberAdd', member =>
 	}
 	if(member.guild.id == "613500872839921675")
 	{
+		console.log(joinChannel.id);
 		member.user.send("Welcome to the **" + member.guild.name + "**! Unlike most servers, there isn't a lot of *crippling* rules to bar your freedom of speech here. Just have fun alright?");
 		var invites = member.guild.fetchInvites()
 			.then(invite => {
