@@ -109,8 +109,10 @@ client.on('ready', () =>
 			}
 		});
 		
+		console.log("AADX");
 		var invites = guild.fetchInvites()
 			.then(invite => {
+				console.log("AADY");
 				var invArr = invite.array();
 				console.log("Array: " + invArr);
 				for(i = 0; i < invArr.length; i++)
