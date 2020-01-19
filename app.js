@@ -112,6 +112,7 @@ client.on('ready', () =>
 		var invites = guild.fetchInvites()
 			.then(invite => {
 				var invArr = invite.array();
+				console.log("Array: " + invArr);
 				for(i = 0; i < invArr.length; i++)
 				{
 					var inv = invArr[i];
