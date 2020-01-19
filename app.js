@@ -109,12 +109,9 @@ client.on('ready', () =>
 			}
 		});
 		
-		console.log("AADX");
 		var invites = guild.fetchInvites().then(invite => 
 		{
-				console.log("AADY");
 				var invArr = invite.array();
-				console.log("Array: " + invArr);
 				for(i = 0; i < invArr.length; i++)
 				{
 					var inv = invArr[i];
@@ -124,8 +121,6 @@ client.on('ready', () =>
 					console.log("Compiled " + inv.code + " into inviteObjects.");
 				}
 		}).catch(console.error);
-		
-		var invitex = guild.fetchInvites().then(invite => console.log("Arr size: " + invite.size));
 	}
    });
 });
