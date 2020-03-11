@@ -786,8 +786,9 @@ client.on('message', message =>
 				{
 					db = JSON.parse(body);
 					var x = randomize(2, 10);
-					post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
-					db[message.author.id].burgers += x;
+					//post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
+					post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "***");
+					//db[message.author.id].burgers += x;
 					db["gdp"].total += x;
 					db["gdp"].flags += x;
 					request(
