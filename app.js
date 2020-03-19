@@ -20,8 +20,8 @@ var phoneRoom = {"x": "y"};
 var indices = {"x": "y"};
 var inviteObjects = {"x": 0};
 
-var eventTracker = {"x": 0, "391239140068294659": 4};
-var eventStage = {"x": 0, "391239140068294659": 0};
+var eventTracker = {"x": 0};
+var eventStage = {"x": 0};
 
 var raceTracker = {"x": 0};
 var raceAmount = {"x": 0};
@@ -229,6 +229,7 @@ client.on('message', message =>
 	
 		request(dbURL, function(error, response, body) 
 		{
+			if(!body) return;
 			var db = JSON.parse(body);
 			if(!db[sender.id]) 
 			{
@@ -444,6 +445,7 @@ client.on('message', message =>
 						
 						request(dbURL, function(error, response, body) 
 						{
+							if(!body) return;
 							db = JSON.parse(body);
 							db[message.author.id].burgers -= value;
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
@@ -484,6 +486,7 @@ client.on('message', message =>
 						
 						request(dbURL, function(error, response, body) 
 						{
+							if(!body) return;
 							db = JSON.parse(body);
 							if(stage == 1 || stage == 5)
 							{
@@ -547,6 +550,7 @@ client.on('message', message =>
 						
 						request(dbURL, function(error, response, body) 
 						{
+							if(!body) return;
 							db = JSON.parse(body);
 							if(stage == 1 || stage == 6)
 							{
@@ -610,6 +614,7 @@ client.on('message', message =>
 						
 						request(dbURL, function(error, response, body) 
 						{
+							if(!body) return;
 							db = JSON.parse(body);
 							if(stage == 4 || stage == 5)
 							{
@@ -784,6 +789,7 @@ client.on('message', message =>
 				var db;
 				request(req, function(error, response, body) 
 				{
+					if(!body) return;
 					db = JSON.parse(body);
 					var x = randomize(2, 10);
 					//post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
