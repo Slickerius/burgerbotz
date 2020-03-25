@@ -1914,7 +1914,7 @@ client.on('message', message =>
 						change = change.toFixed(2);
 						change = Math.abs(change);
 
-						var uri = "https://finviz.com/chart.ashx?t=" + args[2];
+						var uri = "https://stockcharts.com/c-sc/sc?s=" + args[2] + "&p=D&b=5&g=0&i=0&r=1585150489758";
 						var botembed = new Discord.RichEmbed()
 						.setImage(uri)
 						.setColor("#fcc66a");
