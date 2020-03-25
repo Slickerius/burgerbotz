@@ -1773,6 +1773,11 @@ client.on('message', message =>
 					dji = dji.toFixed(2);
 					
 					out += "**(1)** Dow Jones Industrial Average (**^DJI**) : **" + dji + "** \n";
+					var uri1 = "https://stockcharts.com/c-sc/sc?s=%24INDU&p=D&b=5&g=0&i=0&r=1585158296615";
+					var botembed1 = new Discord.RichEmbed()
+					.setImage(uri1)
+					.setColor("#fcc66a");
+					ch.send(botembed1);
 					request(req_sp500_val, function(error, response, body) 
 					{
 						const content = JSON.parse(body);
@@ -1788,6 +1793,11 @@ client.on('message', message =>
 						sp500 = sp500.toFixed(2);
 						
 						out += "**(2)** S&P 500 (**^INX**) : **" + sp500 + "** \n";
+						var uri2 = "https://stockcharts.com/c-sc/sc?s=%24SPX&p=D&b=5&g=0&i=0&r=1585158609409";
+						var botembed2 = new Discord.RichEmbed()
+						.setImage(uri2)
+						.setColor("#fcc66a");
+						ch.send(botembed2);
 						request(req_nasdaq_val, function(error, response, body) 
 						{
 							//const content = JSON.parse(body);
@@ -1818,6 +1828,11 @@ client.on('message', message =>
 								rus2000 = rus2000.toFixed(2);
 											
 								out += "**(3)** Russell 2000 (**^RUT**) : **" + rus2000 + "** \n";
+								var uri3 = "https://stockcharts.com/c-sc/sc?s=%24COMPQ&p=D&b=5&g=0&i=0&r=1585158431338";
+								var botembed3 = new Discord.RichEmbed()
+								.setImage(uri3)
+								.setColor("#fcc66a");
+								ch.send(botembed3);
 								post(out);
 							});
 						});
