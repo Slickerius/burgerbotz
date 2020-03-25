@@ -1832,8 +1832,10 @@ client.on('message', message =>
 								var botembed3 = new Discord.RichEmbed()
 								.setImage(uri3)
 								.setColor("#fcc66a");
-								ch.send(botembed3);
 								post(out);
+								ch.send(botembed1);
+								ch.send(botembed2);
+								ch.send(botembed3);
 							});
 						});
 					});
