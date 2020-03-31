@@ -1777,7 +1777,6 @@ client.on('message', message =>
 					var botembed1 = new Discord.RichEmbed()
 					.setImage(uri1)
 					.setColor("#fcc66a");
-					ch.send(botembed1);
 					request(req_sp500_val, function(error, response, body) 
 					{
 						const content = JSON.parse(body);
@@ -1797,7 +1796,6 @@ client.on('message', message =>
 						var botembed2 = new Discord.RichEmbed()
 						.setImage(uri2)
 						.setColor("#fcc66a");
-						ch.send(botembed2);
 						request(req_nasdaq_val, function(error, response, body) 
 						{
 							//const content = JSON.parse(body);
