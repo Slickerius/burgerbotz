@@ -1775,6 +1775,42 @@ client.on('message', message =>
 						    name: 'chart.png'
 					    }]
 					});
+				} else if(args[1] == "copper") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=HG&cot=085692&p=h1&rev=637213999000169571";
+					return ch.send("__**Copper Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				} else if(args[1] == "gold") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=GC&cot=088691&p=h1&rev=637213999920506084";
+					return ch.send("__**Gold Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				} else if(args[1] == "platinum") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=PL&cot=076651&p=h1&rev=637214000758039463";
+					return ch.send("__**Platinum Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				} else if(args[1] == "silver") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=SI&cot=084691&p=h1&rev=637214001013219357";
+					return ch.send("__**Silver Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
 				}
 				
 				var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
@@ -1785,7 +1821,8 @@ client.on('message', message =>
 				.setThumbnail(url_)
 				.setDescription("***Commands:***\n**/futures all** - Displays all futures charts.")
         			.addField("Energy", "**/futures brent** - Displays Brent crude oil futures chart.\n**/futures crude** - Displays WTI crude oil futures chart.\n**/futures gas** - Displays natural gas futures chart.")
-        			.setColor("#fcc66a");
+        			.addField("Metals", "**/futures copper** - Displays copper futures chart.\n**/futures gold** - Displays gold futures chart.\n**/futures platinum** - Displays platinum futures chart.\n**/futures silver** - Displays silver futures chart.")
+				.setColor("#fcc66a");
         
         			return ch.send(botembed);
 				break;
