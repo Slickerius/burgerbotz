@@ -1746,14 +1746,48 @@ client.on('message', message =>
 				break;
 			
 			case "futures":
-				var uri1 = "https://finviz.com/fut_chart.ashx?t=CL&cot=067651&p=h1&rev=637213922762574748";
-				ch.send("", 
+				var uri1;
+				if(args[1] == "brent")
 				{
-				    files: [{
-					    attachment: uri1,
-					    name: 'chart.png'
-				    }]
-				});
+					uri1 = "https://finviz.com/fut_chart.ashx?t=QA&p=h1&rev=637213994972398998";
+					return ch.send("__**Brent Crude Oil Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				} else if(args[1] == "crude") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=CL&cot=067651&p=h1&rev=637213994858796340";
+					return ch.send("__**WTI Crude Oil Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				} else if(args[1] == "gas") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=NG&cot=023651&p=h1&rev=637213995309769266";
+					return ch.send("__**Natural Gas Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				}
+				
+				var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
+				var url_ = "https://pngimg.com/uploads/gold/gold_PNG11028.png";
+				
+				let botembed = new Discord.RichEmbed()
+       				.setAuthor("Assets Futures", url)
+				.setThumbnail(url_)
+				.setDescription("***Commands:***\n**/futures all** - Displays all futures charts.")
+        			.addField("Energy", "**/futures brent** - Displays Brent crude oil futures chart.\n**/futures crude** - Displays WTI crude oil futures chart.\n**/futures gas** - Displays natural gas futures chart.")
+        			.setColor("#fcc66a");
+        
+        			return ch.send(botembed);
 				break;
 				
 			case "markets":
