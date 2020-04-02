@@ -1780,7 +1780,7 @@ client.on('message', message =>
 				var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
 				var url_ = "https://pngimg.com/uploads/gold/gold_PNG11028.png";
 				
-				let botembed = new Discord.RichEmbed()
+				var botembed = new Discord.RichEmbed()
        				.setAuthor("Assets Futures", url)
 				.setThumbnail(url_)
 				.setDescription("***Commands:***\n**/futures all** - Displays all futures charts.")
@@ -2193,7 +2193,7 @@ client.on('message', message =>
 			
 				var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
 				var url_ = "http://pngimages.net/sites/default/files/stockmarket-png-image-24631.png";
-				let botembed = new Discord.RichEmbed()
+				var botembed = new Discord.RichEmbed()
        				.setAuthor("📉 Burgerbotz Stock Market Simulator Game 📈", url)
 				.setThumbnail(url_)
         			.setDescription("***Commands:***\n**/stock buy** - Buys a stock.\n**/stock details** - Displays your position on a stock.\n**/stock info/lookup/check** - Looks up information regarding a specific stock.\n**/stock portfolio/pf** - Displays your stock portfolio.\n**/stock sell** - Sells a stock.")
