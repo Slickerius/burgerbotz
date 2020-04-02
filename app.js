@@ -1811,6 +1811,42 @@ client.on('message', message =>
 						    name: 'chart.png'
 					    }]
 					});
+				} else if(args[1] == "dow") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=YM&cot=124601,124603&p=h1&rev=637214007289891640";
+					return ch.send("__**Dow Jones Industrial Average Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				} else if(args[1] == "nasdaq") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=NQ&cot=209741,209742&p=h1&rev=637214008056258939";
+					return ch.send("__**Nasdaq 100 Index Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				} else if(args[1] == "russell") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=ER2&cot=239742&p=h1&rev=637214008373317543";
+					return ch.send("__**Russell 2000 Index Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
+				} else if(args[1] == "sp500") {
+					uri1 = "https://finviz.com/fut_chart.ashx?t=ES&cot=138741,13874A&p=h1&rev=637214009937927422";
+					return ch.send("__**S&P 500 Index Futures**__", 
+					{
+					    files: [{
+						    attachment: uri1,
+						    name: 'chart.png'
+					    }]
+					});
 				}
 				
 				var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
@@ -1819,9 +1855,10 @@ client.on('message', message =>
 				var botembed = new Discord.RichEmbed()
        				.setAuthor("Assets Futures", url)
 				.setThumbnail(url_)
-				.setDescription("***Commands:***\n**/futures all** - Displays all futures charts.")
+				.setDescription("__**Commands**__")
         			.addField("Energy", "**/futures brent** - Displays Brent crude oil futures chart.\n**/futures crude** - Displays WTI crude oil futures chart.\n**/futures gas** - Displays natural gas futures chart.")
-        			.addField("Metals", "**/futures copper** - Displays copper futures chart.\n**/futures gold** - Displays gold futures chart.\n**/futures platinum** - Displays platinum futures chart.\n**/futures silver** - Displays silver futures chart.")
+        			.addField("Indices", "**/futures dow** - Displays Dow Jones Industrial Average futures chart.\n**/futures nasdaq** - Displays Nasdaq 100 futures chart.\n**/futures russell** - Displays Russell 2000 futures chart.\n**/futures sp500** - Displays S&P 500 futures chart.")
+				.addField("Metals", "**/futures copper** - Displays copper futures chart.\n**/futures gold** - Displays gold futures chart.\n**/futures platinum** - Displays platinum futures chart.\n**/futures silver** - Displays silver futures chart.")
 				.setColor("#fcc66a");
         
         			return ch.send(botembed);
