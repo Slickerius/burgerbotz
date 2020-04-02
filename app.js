@@ -1745,6 +1745,14 @@ client.on('message', message =>
 				handler.bmi(ch, args[1], args[2]);
 				break;
 			
+			case "futures":
+				var uri1 = "https://finviz.com/fut_chart.ashx?t=CL&cot=067651&p=h1&rev=637213922762574748";
+				var botembed1 = new Discord.RichEmbed()
+				.setImage(uri1)
+				.setColor("#fcc66a");
+				ch.send(botembed1);
+				break;
+				
 			case "markets":
 				var out = ":chart_with_downwards_trend: __**Markets Indices**__ :chart_with_upwards_trend:\n";
 				
