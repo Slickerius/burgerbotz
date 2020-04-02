@@ -1746,7 +1746,7 @@ client.on('message', message =>
 				break;
 			
 			case "futures":
-				var uri1 = "https://upload.wikimedia.org/wikipedia/en/0/0a/Ancap_flag.png";
+				var uri1 = "https://finviz.com/fut_chart.ashx?t=CL&cot=067651&p=h1&rev=637213922762574748";
 				ch.send("", 
 				{
 				    files: [{
