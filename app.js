@@ -1639,6 +1639,9 @@ client.on('message', message =>
 				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
+					
+					if(!db["gdp"]) db["gdp"] = {"total": 0, "flags": 0, "battle": 0, "coinflip": 0, "consumption": 0, "transactions": 0};
+					
 					db["gdp"].total = 0;
 					db["gdp"].flags = 0;
 					db["gdp"].battle = 0;
