@@ -11,6 +11,8 @@ const ytdl = require('ytdl-core');
 const client = new Discord.Client();
 
 const dbURL = process.env.DB_URL;
+const dbKey = process.env.DB_KEY;
+
 const status = "/help";
 const stockApiKey = "4MAQ744ZHW6LDYAK";
 
@@ -3239,7 +3241,7 @@ function updateDB(db)
 	var options = {
 		url: dbURL,
 		headers: {
-			'secret-key': token,
+			'secret-key': dbKey,
 			'versioning': false
 		},
 		method: 'PUT',
