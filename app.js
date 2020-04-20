@@ -16,6 +16,15 @@ const dbKey = process.env.DB_KEY;
 const status = "/help";
 const stockApiKey = "4MAQ744ZHW6LDYAK";
 
+const getOptions = 
+{
+	url: 'https://api.jsonbin.io/b/5e9de3022940c704e1db9a3a',
+	headers: {
+		'secret-key': dbKey
+	},
+	method: 'GET'
+};
+
 var database = JSON.parse(fs.readFileSync('userData.json', 'utf8'));
 var temp = JSON.parse(fs.readFileSync('temp.json', 'utf8'));
 var phoneRoom = {"x": "y"};
@@ -229,7 +238,7 @@ client.on('message', message =>
 
 		if(!handler.isOldEnough(sender)) return;
 	
-		request(dbURL, function(error, response, body) 
+		request(getOptions, function(error, response, body) 
 		{
 			if(!body) return;
 			var db = JSON.parse(body);
@@ -339,7 +348,7 @@ client.on('message', message =>
 						
 						if(stage == 1 || stage == 3) return;
 						
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							db = JSON.parse(body);
 							db[message.author.id].burgers -= value;
@@ -380,7 +389,7 @@ client.on('message', message =>
 						
 						if(stage == 2 || stage == 4 || stage == 6) return;
 						
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							db = JSON.parse(body);
 							var tip = randomize(0, 3);
@@ -430,7 +439,7 @@ client.on('message', message =>
 						
 						if(stage == 2 || stage == 4) return;
 						
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							if(!body) return;
 							db = JSON.parse(body);
@@ -466,7 +475,7 @@ client.on('message', message =>
 						
 						if(stage == 3 || stage == 6 || stage == 8) return;
 						
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							if(!body) return;
 							db = JSON.parse(body);
@@ -525,7 +534,7 @@ client.on('message', message =>
 						
 						if(stage == 4) return;
 						
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							if(!body) return;
 							db = JSON.parse(body);
@@ -584,7 +593,7 @@ client.on('message', message =>
 						
 						if(stage == 3) return;
 						
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							if(!body) return;
 							db = JSON.parse(body);
@@ -719,7 +728,7 @@ client.on('message', message =>
 				}
 				
 				if(amount == 0) return;
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					if(win)
@@ -749,7 +758,7 @@ client.on('message', message =>
 			{
 				var req = dbURL;
 				var db;
-				request(req, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					if(!body) return;
 					db = JSON.parse(body);
@@ -802,7 +811,7 @@ client.on('message', message =>
 			p1isCrippled = false;
 			p2isCrippled = false;
 			post("***:trophy: " + player1 + " has defeated " + player2 + "!\nGiven :hamburger: " + x + " as a prize.***");
-			request(req, function(error, response, body) 
+			request(getOptions, function(error, response, body) 
 			{
 				db = JSON.parse(body);
 				if(!db[winID]) db[winID] = {burgers: 10};
@@ -862,7 +871,7 @@ client.on('message', message =>
 			*  1 = tails
 			*/
 			
-			request(dbURL, function(error, response, body) 
+			request(getOptions, function(error, response, body) 
 			{
 				var db = JSON.parse(body);
 				if (y == "h" || y == "heads")
@@ -928,7 +937,7 @@ client.on('message', message =>
 			if(message.content.startsWith("1"))
 			{
 				console.log("AAPV");
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					if(db[sender.id].hp == 0)
@@ -1511,7 +1520,7 @@ client.on('message', message =>
 					{
 						post("*Usage: /coinflip <bet amount>*");
 					} else {
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							var db = JSON.parse(body);
 							console.log(db);
@@ -1608,7 +1617,7 @@ client.on('message', message =>
 				break;
 				
 			case "burger":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					if(db[sender.id].burgers >= 1)
@@ -1627,7 +1636,7 @@ client.on('message', message =>
 			case "gdp_r":
 				if(sender.id != "391239140068294659") return;
 				if(args[1] != gdp_r_verif) return;
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					db["gdp"].total = 0;
@@ -1643,7 +1652,7 @@ client.on('message', message =>
 				
 			case "inf-apt":
 				if(sender.id != "391239140068294659") return;
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					db[args[1]].burgers = parseInt(args[2]);
@@ -2023,7 +2032,7 @@ client.on('message', message =>
 						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
 						price.toFixed(2);
 
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							db = JSON.parse(body);
 							if(db[sender.id] == null) db[sender.id] = {burgers: 10};
@@ -2088,7 +2097,7 @@ client.on('message', message =>
 						var price = parseFloat(content['Time Series (Daily)'][date]['4. close']);
 						price.toFixed(2);
 
-						request(dbURL, function(error, response, body) 
+						request(getOptions, function(error, response, body) 
 						{
 							db = JSON.parse(body);
 							if(db[sender.id] == null) db[sender.id] = {burgers: 10};
@@ -2119,7 +2128,7 @@ client.on('message', message =>
 				
 				if(args[1] == "portfolio" || args[1] == "pf")
 				{
-					request(dbURL, function(error, response, body) 
+					request(getOptions, function(error, response, body) 
 					{
 						db = JSON.parse(body);
 						if(db[sender.id] == null) db[sender.id] = {burgers: 10};
@@ -2151,7 +2160,7 @@ client.on('message', message =>
 					}
 					console.log("A");
 					var ticker = args[2].toUpperCase();
-					request(dbURL, function(error, response, body) 
+					request(getOptions, function(error, response, body) 
 					{
 						db = JSON.parse(body);
 						if(db[sender.id] == null) db[sender.id] = {burgers: 10};
@@ -2193,7 +2202,7 @@ client.on('message', message =>
 			case "baltop":
 			case "balancetop":
 				var db;
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					var y = "```-=[Burgerbotz World Ranking]=-\n\n";
@@ -2247,7 +2256,7 @@ client.on('message', message =>
 			case "burgers":
 				var db;
 				var userFound;
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					for(var x in db)
@@ -2284,7 +2293,7 @@ client.on('message', message =>
 				break;
 				
 			case "pay":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					var arg0 = args[2];
@@ -2367,7 +2376,7 @@ client.on('message', message =>
 				var toRate = message.mentions.users.first();
 				//if(toRate.bot) return post("**:octagonal_sign: You can only rate users!**");
 				if(toRate == sender) return post("**:octagonal_sign: You can not rate yourself!**");
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					db[toRate.id]['ratings'][sender.id] = rating;
@@ -2507,7 +2516,7 @@ client.on('message', message =>
 				break;
 			
 			case "gdp":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					db = JSON.parse(body);
 					db["gdp"] += parseFloat(args[1]);
@@ -2525,7 +2534,7 @@ client.on('message', message =>
 					targetUser = user;	
 				}
 				
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					var rating = 0;
@@ -2612,7 +2621,7 @@ client.on('message', message =>
 			case "use":
 				if(args[1] == "energy")
 				{
-					request(dbURL, function(error, response, body) 
+					request(getOptions, function(error, response, body) 
 					{	
 						var db = JSON.parse(body);
 						if(!db[sender.id]['inventory']) db[sender.id]['inventory'] = {energyDrinks: 0};
@@ -2829,7 +2838,7 @@ client.on('message', message =>
 				break;
 			
 			case "inf-r":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					for(var key in db)
@@ -2844,7 +2853,7 @@ client.on('message', message =>
 			case "i":
 			case "inv":
 			case "inventory":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					if(!db[sender.id]['inventory'] || !db[sender.id]['inventory'].energyDrinks) 
@@ -2857,7 +2866,7 @@ client.on('message', message =>
 				break;
 				
 			case "economy":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					var total = 0;
@@ -2932,7 +2941,7 @@ client.on('message', message =>
 			
 			case "inf-rs":
 				if(sender.id != "391239140068294659") return;
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					for(var key in db)
@@ -2949,7 +2958,7 @@ client.on('message', message =>
 				break;
 				
 			case "aadx":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					var dBase = JSON.stringify(db);
@@ -2990,7 +2999,7 @@ client.on('message', message =>
 				break;
 				
 			case "aadz":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					client.users.forEach(function(u)
@@ -3036,7 +3045,7 @@ client.on('message', message =>
 					{
 						if(selection == "energy")
 						{
-							request(dbURL, function(error, response, body) 
+							request(getOptions, function(error, response, body) 
 							{
 								var db = JSON.parse(body);
 								value = amount * 5;
@@ -3066,7 +3075,7 @@ client.on('message', message =>
 				break;
 
 			case "daily":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					var date = new Date();
@@ -3110,7 +3119,7 @@ client.on('message', message =>
 				break;
 				
 			case "aadp":
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
 					client.users.forEach(function(u)
@@ -3127,7 +3136,7 @@ client.on('message', message =>
 				if(sender.id != "391239140068294659" || args.length < 0 || parseInt(args[1]) != args[1]) return;
 				var increment = parseInt(args[1]);
 				
-				request(dbURL, function(error, response, body) 
+				request(getOptions, function(error, response, body) 
 				{
 					console.log('error:', error);
 					console.log('statusCode:', response && response.statusCode);
@@ -3158,7 +3167,7 @@ client.on('message', message =>
 				} else if(playerOnes[user.id] || playerTwos[user.id]) {
 					post(":octagonal_sign: **" + user.username + " is already in a battle!**");
 				} else {
-					request(dbURL, function(error, response, body) 
+					request(getOptions, function(error, response, body) 
 					{
 						var db = JSON.parse(body);
 						var xHP = db[user.id].hp;
