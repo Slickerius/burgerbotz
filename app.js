@@ -10,7 +10,7 @@ const ytdl = require('ytdl-core');
 
 const client = new Discord.Client();
 
-const dbURL = process.env.DBURL;
+const dbURL = process.env.DB_URL;
 const status = "/help";
 const stockApiKey = "4MAQ744ZHW6LDYAK";
 
@@ -237,12 +237,7 @@ client.on('message', message =>
 				if(!db[sender.id].reputation) db[sender.id].reputation = 50;
 				if(!db[sender.id]['ratings']) db[sender.id]['ratings'] = {};
 				console.log("Created new DB data for user: " + sender.username + "#" + sender.discriminator);
-				request(
-				{
-  					method: "PUT",
-  					uri: dbURL,
-  					json: db
- 				});
+				updateDB(db);
 			}
 		});
 		
@@ -347,12 +342,7 @@ client.on('message', message =>
 							db = JSON.parse(body);
 							db[message.author.id].burgers -= value;
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
-							request(
-							{
-  								method: "PUT",
-  								uri: dbURL,
-  								json: db
- 							});
+							updateDB(db);
 						});
 					}
 				} else if(eventTracker[key] == 1) {
@@ -411,12 +401,7 @@ client.on('message', message =>
 								}
 							}
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
-							request(
-							{
-  								method: "PUT",
-  								uri: dbURL,
-  								json: db
- 							});
+							updateDB(db);
 						});
 					}
 				} else if(eventTracker[key] == 2) {
@@ -449,12 +434,7 @@ client.on('message', message =>
 							db = JSON.parse(body);
 							db[message.author.id].burgers -= value;
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
-							request(
-							{
-  								method: "PUT",
-  								uri: dbURL,
-  								json: db
- 							});
+							updateDB(db);
 						});
 					}
 				} else if(eventTracker[key] == 3) {
@@ -495,12 +475,7 @@ client.on('message', message =>
 								db[message.author.id].burgers += value;	
 							}
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
-							request(
-							{
-  								method: "PUT",
-  								uri: dbURL,
-  								json: db
- 							});
+							updateDB(db);
 						});
 					}
 				} else if(eventTracker[key] == 4) {
@@ -564,12 +539,7 @@ client.on('message', message =>
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
 							if(db[message.author.id].reputation < 0) db[message.author.id].reputation = 0;
 							if(db[message.author.id].reputation > 100) db[message.author.id].reputation = 100;
-							request(
-							{
-  								method: "PUT",
-  								uri: dbURL,
-  								json: db
- 							});
+							updateDB(db);
 						});
 					}
 				} else if(eventTracker[key] == 5) {
@@ -626,12 +596,7 @@ client.on('message', message =>
 							if(db[message.author.id].burgers < 0) db[message.author.id].burgers = 0;
 							if(db[message.author.id].reputation < 0) db[message.author.id].reputation = 0;
 							if(db[message.author.id].reputation > 100) db[message.author.id].reputation = 100;
-							request(
-							{
-  								method: "PUT",
-  								uri: dbURL,
-  								json: db
- 							});
+							updateDB(db);
 						});
 					}
 				}
@@ -763,12 +728,7 @@ client.on('message', message =>
 					} else {
 						db[sender.id].burgers -= amount;
 					}
-					request(
-					{
-  						method: "PUT",
-  						uri: dbURL,
-  						json: db
- 					});
+					updateDB(db);
 				});
 			});
 			
@@ -797,12 +757,7 @@ client.on('message', message =>
 					//db[message.author.id].burgers += x;
 					db["gdp"].total += x;
 					db["gdp"].flags += x;
-					request(
-					{
-  						method: "PUT",
-  						uri: req,
-  						json: db
- 					});
+					updateDB(db);
 				});
 				clearTimeout(flagTimeout);
 				inFGame = false;
@@ -865,12 +820,7 @@ client.on('message', message =>
 				
 				db["gdp"].battle += x;
 				db["gdp"].total += x;
-				request(
-				{
-  					method: "PUT",
-  					uri: req,
-  					json: db
- 				});
+				updateDB(db);
 			});
 		}
 		
@@ -921,12 +871,7 @@ client.on('message', message =>
 						db[sender.id].burgers += z;
 						if(z == 0) return;
 						console.log("Not 0!");
-						request(
-						{
-  							method: "PUT",
-  							uri: dbURL,
-  							json: db
- 						});
+						updateDB(db);
 					} else {
 						post("Guessed incorrectly. You got **tails**!");
 					}
@@ -938,12 +883,7 @@ client.on('message', message =>
 						db[sender.id].burgers += z;
 						if(z == 0) return;
 						console.log("Not 0!");
-						request(
-						{
-  							method: "PUT",
-  							uri: dbURL,
-  							json: db
- 						});
+						updateDB(db);
 					} else {
 						post("Guessed incorrectly. You got **heads**!");
 					}
@@ -1581,12 +1521,7 @@ client.on('message', message =>
 								db[sender.id].burgers -= parseInt(args[1]);
 								db["gdp"].coinflip += parseInt(args[1]);
 								db["gdp"].total += parseInt(args[1]);
-								request(
-								{
-  									method: "PUT",
-  									uri: dbURL,
-  									json: db
- 								});
+								updateDB(db);
 								post(":money_with_wings: __***Coinflip***__ :money_with_wings:\n**Stake: :hamburger: " + args[1] + "**\n*Choose: heads/tails? (h/t)*");
 							} else {
 								post(":octagonal_sign: **You have insufficient burgers to do this bet.**");	
@@ -1679,12 +1614,7 @@ client.on('message', message =>
 						db[sender.id].burgers -= 1;
 						db["gdp"].consumption += 1;
 						db["gdp"].total += 1;
-						request(
-						{
-  							method: "PUT",
-  							uri: dbURL,
-  							json: db
- 						});
+						updateDB(db);
 					} else {
 						post(":octagonal_sign: You do not have any burgers! :shrug:");	
 					}
@@ -1703,12 +1633,7 @@ client.on('message', message =>
 					db["gdp"].coinflip = 0;
 					db["gdp"].consumption = 0;
 					db["gdp"].transactions = 0;
-					request(
-					{
-  							method: "PUT",
-  							uri: dbURL,
-  							json: db
- 					});
+					updateDB(db);
 					post("Success.");
 				});
 				break;
@@ -1719,12 +1644,7 @@ client.on('message', message =>
 				{
 					var db = JSON.parse(body);
 					db[args[1]].burgers = parseInt(args[2]);
-					request(
-					{
-  							method: "PUT",
-  							uri: dbURL,
-  							json: db
- 					});
+					updateDB(db);
 					post("Success.");
 				});
 				break;
@@ -2122,12 +2042,7 @@ client.on('message', message =>
 								db[sender.id]['burgers'] = x;
 								db[sender.id]['stocks'][ticker] = y;
 								post("Successfully bought " + amount + " shares of **" + ticker + "** for **:hamburger: " + (amount * price) + "**.");
-								request(
-								{
-									method: "PUT",
-									uri: dbURL,
-									json: db
-								});	
+								updateDB(db);
 							}
 						});
 					});
@@ -2191,12 +2106,7 @@ client.on('message', message =>
 								db[sender.id]['stocks'][ticker] = y;
 								if(db[sender.id]['stocks'][ticker] == 0) delete db[sender.id]['stocks'][ticker];
 
-								request(
-								{
-									method: "PUT",
-									uri: dbURL,
-									json: db
-								});	
+								updateDB(db);
 								post("Successfully sold " + amount + " shares of **" + ticker + "** for **:hamburger: " + (amount * price) + "**.");
 							}
 						});
@@ -2357,12 +2267,7 @@ client.on('message', message =>
 						if(db[sender.id] == null) db[sender.id] = {burgers: 10};
 						if(isNaN(db[sender.id].burgers)) db[sender.id].burgers = 10;
 						post(`**:diamond_shape_with_a_dot_inside: ${sender.username}**'s *balance contains* :hamburger: **` + db[sender.id].burgers + `**`);
-						request(
-						{
-  							method: "PUT",
-  							uri: dbURL,
-  							json: db
- 						});
+						updateDB(db);
 					} else {
 						if(userFound) return;
 						var user = message.mentions.users.first();
@@ -2370,12 +2275,7 @@ client.on('message', message =>
 						if(db[user.id] == null) db[user.id] = {burgers: 10};
 						if(isNaN(db[user.id].burgers)) db[user.id].burgers = 10;
 						post(`**:diamond_shape_with_a_dot_inside: ${user.username}**'s *balance contains* :hamburger: **` + db[user.id].burgers + `**`);
-						request(
-						{
-  							method: "PUT",
-  							uri: dbURL,
-  							json: db
- 						});
+						updateDB(db);
 					}
 				});
 				break;
@@ -2400,12 +2300,7 @@ client.on('message', message =>
 									db[sender.id].burgers -= parseFloat(arg0);
 									db["gdp"].transactions += parseFloat(arg0);
 									db["gdp"].total += parseFloat(arg0);
-									request(
-									{
-  										method: "PUT",
-  										uri: dbURL,
-  										json: db
- 									});
+									updateDB(db);
 									post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + x + "**!");
 									client.users.forEach(function(u)
 									{
@@ -2439,12 +2334,7 @@ client.on('message', message =>
 								db[sender.id].burgers -= arg0;
 								db["gdp"].transactions += parseFloat(arg0);
 								db["gdp"].total += parseFloat(arg0);
-								request(
-								{
-  									method: "PUT",
-  									uri: dbURL,
-  									json: db
- 								});
+								updateDB(db);
 								post("*Successfully given* :hamburger: **" + arg0 + "** *to user* **" + user.username + "**!");
 							} else {
 								post("You have insufficient burgers to make this transaction!");	
@@ -2479,12 +2369,7 @@ client.on('message', message =>
 					var db = JSON.parse(body);
 					db[toRate.id]['ratings'][sender.id] = rating;
 					post("**" + sender.username + "#" + sender.discriminator + " has given " + toRate + " a rating of " + rating + " ( " + handler.getStars(rating) + ")**");
-					request(
-					{
-  						method: "PUT",
-  						uri: dbURL,
-  						json: db
- 					});
+					updateDB(db);
 				});
 				break;
 				
@@ -2623,12 +2508,7 @@ client.on('message', message =>
 				{
 					db = JSON.parse(body);
 					db["gdp"] += parseFloat(args[1]);
-					request(
-					{
-  						method: "PUT",
-  						uri: dbURL,
-  						json: db
- 					});
+					updateDB(db);
 					console.log("A");
 				});
 				break;
@@ -2656,12 +2536,7 @@ client.on('message', message =>
 					if(!db[targetUser.id].reputation && db[targetUser.id].reputation != 0) 
 					{
 						db[targetUser.id].reputation = 50;
-						request(
-						{
-  							method: "PUT",
-							uri: dbURL,
-  							json: db
- 						});
+						updateDB(db);
 					}
 					if(!db[targetUser.id]['ratings'])
 					{
@@ -2749,12 +2624,7 @@ client.on('message', message =>
 							db[sender.id].hp += recovery;
 							if(db[sender.id].hp > 100) db[sender.id].hp = 100;
 							post("<:drink:660031984092839947> **You drank an energy drink. +:heart: " + recovery + " HP.**");
-							request(
-							{
-  								method: "PUT",
-								uri: dbURL,
-  								json: db
- 							});
+							updateDB(db);
 						} else {
 							post("**:octagonal_sign: You don't have any energy drinks! Type */store* to acquire one.**");	
 						}
@@ -2964,12 +2834,7 @@ client.on('message', message =>
 						db[key].burgers = db[key].burgers * 10;
 						console.log("Reevaluated " + key + "'s balance.");
 					}
-					request(
-					{
-  						method: "PUT",
-						uri: dbURL,
-  						json: db
- 					});
+					updateDB(db);
 				});
 				break;
 			
@@ -2982,7 +2847,7 @@ client.on('message', message =>
 					if(!db[sender.id]['inventory'] || !db[sender.id]['inventory'].energyDrinks) 
 					{
 						db[sender.id]['inventory'] = {energyDrinks: 0};
-						request({method: "PUT", uri: dbURL, json: db});
+						updateDB(db);
 					}
 					post(handler.getInventory(sender.username, db[sender.id]['inventory'].energyDrinks));
 				});
@@ -3076,7 +2941,7 @@ client.on('message', message =>
 						console.log(key + "Doesn't exist, deleting.");
 						delete db[key];
 					}
-					request({ url: dbURL, method: 'PUT', json: db});
+					updateDB(db);
 				});
 				break;
 				
@@ -3117,7 +2982,7 @@ client.on('message', message =>
 						
 					});
 					
-					request({ url: dbURL, method: 'PUT', json: dBase});
+					updateDB(dBase);
 				});
 				break;
 				
@@ -3133,12 +2998,7 @@ client.on('message', message =>
 							console.log("Added DB for user " + u.username);
 						}
 					});
-					request(
-					{
-  						method: "PUT",
-  						uri: dbURL,
-  						json: db
- 					});
+					updateDB(db);
 				});
 				break;
 			
@@ -3184,12 +3044,7 @@ client.on('message', message =>
 									db[sender.id]['inventory'].energyDrinks += amount;
 									db[sender.id].burgers -= value;
 									post("**Successfully bought " + amount + " <:drink:660031984092839947> for :hamburger: " + value + ".**");
-									request(
-									{
-  										method: "PUT",
-  										uri: dbURL,
-  										json: db
- 									});
+									updateDB(db);
 								} else {
 									return post(":octagonal_sign: **You have insufficient burgers to buy <:drink:660031984092839947> " + amount + ".**");
 								}
@@ -3220,7 +3075,7 @@ client.on('message', message =>
 						db[sender.id].burgers += output;
 						post(":calendar: **You have claimed your daily dose of burgers worth :hamburger: " + output + "!**");
 						db[sender.id].dailyDate = date;
-						request({method: "PUT", uri: dbURL, json: db});
+						updateDB(db);
 					} else {
 						console.log(date + " " + dailyDate);
 						var timeRemaining = new Date(dailyDate - date);
@@ -3260,12 +3115,7 @@ client.on('message', message =>
 						if(!db[u.id]['ratings']) db[u.id]['ratings'] = {};
 						console.log("Added ratings DB for user " + u.username);
 					});
-					request(
-					{
-  						method: "PUT",
-  						uri: dbURL,
-  						json: db
- 					});
+					updateDB(db);
 				});
 				break;
 				
@@ -3282,12 +3132,7 @@ client.on('message', message =>
 					db = JSON.parse(body);
 					db[sender.id].burgers += increment;
 					post(db[sender.id].burgers);
-					request(
-					{
-  						method: "PUT",
-  						uri: dbURL,
-  						json: db
- 					});
+					updateDB(db);
 				});
 				//request({
   				//	method: "PUT",
@@ -3387,5 +3232,21 @@ client.on('guildCreate', guild =>
 		}
 	});
 });
+
+
+function updateDB(db)
+{
+	var options = {
+		url: dbURL,
+		headers: {
+			'secret-key': token,
+			'versioning': false
+		},
+		method: 'PUT',
+		json: db
+	};
+
+	request(options, function (error, response, body) {});
+}
 
 client.login(process.env.BOT_TOKEN);
