@@ -1514,6 +1514,7 @@ client.on('message', message =>
 						request(dbURL, function(error, response, body) 
 						{
 							var db = JSON.parse(body);
+							console.log(db);
 							if(db[sender.id].burgers - parseInt(args[1]) >= 0)
 							{
 								if(parseInt(args[1]) < 0) return post("You must enter a positive number.");
