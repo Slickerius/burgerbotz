@@ -3261,11 +3261,7 @@ function updateDB(db)
 		json: db
 	};
 
-	request(options, function (error, response, body) 
-	{
-		
-		console.log(JSON.parse(body));
-	});
+	request(options, function (error, response, body) {});
 }
 
 client.login(process.env.BOT_TOKEN);
