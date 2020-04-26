@@ -235,8 +235,6 @@ client.on('message', message =>
 {
 		let sender = message.author;
 		let ch = message.channel;
-
-		if(sender.id == "611998589291331620") return;
 		
 		if(!handler.isOldEnough(sender)) return;
 	
@@ -1436,6 +1434,8 @@ client.on('message', message =>
 				});
 			}
 		}
+		
+		if(cmd == "battle" || cmd == "baltop" || cmd == "bal" || cmd == "balance" || cmd == "balancetop || cmd == "burger" || cmd == "coinflip" || cmd == "daily" || cmd == "pay" || cmd == "profile" || cmd == "rate" || cmd == "store" || cmd == "use") return;
 		
 		switch(cmd)
 		{
