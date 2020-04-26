@@ -2861,6 +2861,7 @@ client.on('message', message =>
 			case "i":
 			case "inv":
 			case "inventory":
+				return post("Fuck you Bunny. :p");
 				request(getOptions, function(error, response, body) 
 				{
 					var db = JSON.parse(body);
