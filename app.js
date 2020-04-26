@@ -2003,6 +2003,7 @@ client.on('message', message =>
 				
 				if(args[1] == "buy")
 				{
+					return post('Fuck you Bunny. :p');
 					if(args.length < 3 || parseInt(args[3]) != args[3])
 					{
 						post("__**Usage:**__ /stock buy <stock> <amount>");
@@ -2068,6 +2069,7 @@ client.on('message', message =>
 				
 				if(args[1] == "sell")
 				{
+					return post('Fuck you Bunny. :p');
 					if(args.length < 3 || parseInt(args[3]) != args[3])
 					{
 						post("__**Usage:**__ /stock sell <stock> <amount>");
@@ -2133,6 +2135,7 @@ client.on('message', message =>
 				
 				if(args[1] == "portfolio" || args[1] == "pf")
 				{
+					return post('Fuck you Bunny. :p');
 					request(getOptions, function(error, response, body) 
 					{
 						db = JSON.parse(body);
