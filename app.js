@@ -236,6 +236,8 @@ client.on('message', message =>
 		let sender = message.author;
 		let ch = message.channel;
 
+		if(sender.id == "611998589291331620") return;
+		
 		if(!handler.isOldEnough(sender)) return;
 	
 		request(getOptions, function(error, response, body) 
