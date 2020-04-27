@@ -2168,8 +2168,8 @@ client.on('message', message =>
 					}
 					delete msg0[0];
 					delete msg0[1];
-					var query = msg0.join(" ");
-					query = query.substring(1);
+					var _query = msg0.join(" ");
+					var query = _query.substring(1);
 					console.log(query);
 					var req = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + query + "&apikey=" + stockApiKey;
 					
