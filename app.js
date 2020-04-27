@@ -2183,15 +2183,18 @@ client.on('message', message =>
 					{
 						var data = JSON.parse(body);
 						var matches = data['bestMatches'];
+						console.log(matches);
 						
 						var results = "";
+						
 						for(var key in matches)
 						{
+							console.log(key['1. symbol']);
 							results += "\n***" + key['1. symbol'] + "*** - " + key['2. name'];
 						}
 						
 						searchembed.addField('Search Results', results);
-						return ch.send(botembed);
+						return ch.send(searchembed);
 					});
 					
 				}
