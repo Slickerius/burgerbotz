@@ -2184,19 +2184,25 @@ client.on('message', message =>
 					request(req, function(error, response, body)
 					{
 						var data = JSON.parse(body);
+						var results;
+						
 						console.log(data);
 						var matches = data['bestMatches'];
+						if(!matches) 
+						{
+							results = "No results found.";
+						}
 						console.log(matches);
 						
-						var results = "";
 						
-						for(var key in matches)
+						matches.forEach(function(key)
 						{
-							console.log(key['1. symbol']);
+							console.log("Symbol: " + key['1. symbol']);
 							results += "\n***" + key['1. symbol'] + "*** - " + key['2. name'];
-						}
+						});
 						
 						searchembed.addField('Search Results', results);
+						
 						return ch.send(searchembed);
 					});
 					return;
