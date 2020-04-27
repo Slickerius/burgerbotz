@@ -2169,6 +2169,7 @@ client.on('message', message =>
 					delete msg0[0];
 					delete msg0[1];
 					var query = msg0.join(" ");
+					query = query.substr(1);
 					console.log(query);
 					var req = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + query + "&apikey=" + stockApiKey;
 					
@@ -2184,16 +2185,11 @@ client.on('message', message =>
 					request(req, function(error, response, body)
 					{
 						var data = JSON.parse(body);
-						var results;
+						var results = "";
 						
 						console.log(data);
 						var matches = data['bestMatches'];
-						if(!matches) 
-						{
-							results = "No results found.";
-						}
 						console.log(matches);
-						
 						
 						matches.forEach(function(key)
 						{
@@ -2201,6 +2197,7 @@ client.on('message', message =>
 							results += "\n***" + key['1. symbol'] + "*** - " + key['2. name'];
 						});
 						
+						if(!results) result = "No results found.";
 						searchembed.addField('Search Results', results);
 						
 						return ch.send(searchembed);
