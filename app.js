@@ -2160,6 +2160,42 @@ client.on('message', message =>
 					return;
 				}
 				
+				if(args[1] == "search")
+				{
+					if(args.length < 3)
+					{
+						return post("__**Usage:**__ /stock search <company/security name>");
+					}
+					delete msg0[0];
+					var query = msg0.join(" ");
+					var req = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + query + "&apikey=" + stockApiKey;
+					
+					var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
+					var url_ = "http://pngimages.net/sites/default/files/stockmarket-png-image-24631.png";
+					
+					var searchembed = new Discord.RichEmbed()
+					.setAuthor("Symbol Lookup", url)
+					.setDescription('"' + query + '"')
+					.setThumbnail(url_)
+					.setColor("#fcc66a");
+					
+					request(req, function(error, response, body)
+					{
+						var data = JSON.parse(body);
+						var matches = data['bestMatches'];
+						
+						var results = "";
+						for(var key in matches)
+						{
+							results += "\n***" + key['1. symbol'] + "*** - " + key['2. name'];
+						}
+						
+						searchembed.addField('Search Results', results);
+						return ch.send(botembed);
+					});
+					
+				}
+				
 				if(args[1] == "details")
 				{
 					if(args.length < 3)
