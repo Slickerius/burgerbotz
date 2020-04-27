@@ -2167,6 +2167,7 @@ client.on('message', message =>
 						return post("__**Usage:**__ /stock search <company/security name>");
 					}
 					delete msg0[0];
+					delete msg0[1];
 					var query = msg0.join(" ");
 					console.log(query);
 					var req = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + query + "&apikey=" + stockApiKey;
