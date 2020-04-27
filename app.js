@@ -2248,7 +2248,7 @@ client.on('message', message =>
 				var botembed = new Discord.RichEmbed()
        				.setAuthor("📉 Burgerbotz Stock Market Simulator Game 📈", url)
 				.setThumbnail(url_)
-        			.setDescription("***Commands:***\n**/stock buy** - Buys a stock.\n**/stock details** - Displays your position on a stock.\n**/stock info/lookup/check** - Looks up information regarding a specific stock.\n**/stock portfolio/pf** - Displays your stock portfolio.\n**/stock sell** - Sells a stock.")
+        			.setDescription("***Commands:***\n**/stock buy** - Buys a stock.\n**/stock details** - Displays your position on a stock.\n**/stock info/lookup/check** - Looks up information regarding a specific stock.\n**/stock portfolio/pf** - Displays your stock portfolio.\n**/stock search** - Search for a specific company/security's ticker symbol.\n**/stock sell** - Sells a stock.")
         			.setColor("#fcc66a");
         
         			return ch.send(botembed);
