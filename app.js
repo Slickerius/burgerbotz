@@ -2168,6 +2168,7 @@ client.on('message', message =>
 					}
 					delete msg0[0];
 					var query = msg0.join(" ");
+					console.log(query);
 					var req = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + query + "&apikey=" + stockApiKey;
 					
 					var url = "https://cdn.discordapp.com/avatars/477763761629954060/f114c29fda258459d0518c80199f6630.png";
@@ -2182,6 +2183,7 @@ client.on('message', message =>
 					request(req, function(error, response, body)
 					{
 						var data = JSON.parse(body);
+						console.log(data);
 						var matches = data['bestMatches'];
 						console.log(matches);
 						
@@ -2196,7 +2198,7 @@ client.on('message', message =>
 						searchembed.addField('Search Results', results);
 						return ch.send(searchembed);
 					});
-					
+					return;
 				}
 				
 				if(args[1] == "details")
