@@ -2194,7 +2194,10 @@ client.on('message', message =>
 						matches.forEach(function(key)
 						{
 							console.log("Symbol: " + key['1. symbol']);
-							results += "\n***" + key['1. symbol'] + "*** - " + key['2. name'];
+							if(key['4. region'] == 'United States')
+							{
+								results += "\n***" + key['1. symbol'] + "*** - " + key['2. name'];
+							}
 						});
 						
 						if(!results) results = "No results found.";
