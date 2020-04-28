@@ -236,6 +236,8 @@ client.on('message', message =>
 		let sender = message.author;
 		let ch = message.channel;
 		
+		if(message.content.length > 1999) return;
+		
 		if(!handler.isOldEnough(sender)) return;
 	
 		request(getOptions, function(error, response, body) 
