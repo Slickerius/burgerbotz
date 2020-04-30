@@ -233,6 +233,7 @@ var inFGame = false, flagID, flagTimeout;
 
 client.on('message', message => 
 {
+		if(message.guild.id == `622621080611323915`) return;
 		let sender = message.author;
 		let ch = message.channel;
 		
