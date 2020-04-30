@@ -759,20 +759,8 @@ client.on('message', message =>
 			
 			if(response.includes(flagName))
 			{
-				var req = dbURL;
-				var db;
-				request(getOptions, function(error, response, body) 
-				{
-					if(!body) return;
-					db = JSON.parse(body);
-					var x = randomize(2, 10);
-					//post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
-					post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "***");
-					//db[message.author.id].burgers += x;
-					db["gdp"].total += x;
-					db["gdp"].flags += x;
-					updateDB(db);
-				});
+				//post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "\nGiven :hamburger: " + x + " as prize.***");
+				post(":trophy: ***" + message.author.username + "** has guessed correctly! Answer: **" + flags[flagID].name + "***");
 				clearTimeout(flagTimeout);
 				inFGame = false;
 			}
