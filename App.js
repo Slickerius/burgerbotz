@@ -24,8 +24,8 @@ client.battleHealth = new Discord.Collection();  //Player HP
 client.battleBullets = new Discord.Collection(); //Number of bullets
 
 //Keys
-client.stockApiKey = `4MAQ744ZHW6LDYAK`;
-client.newsApiKey = `de2d48b51f9f4e24ba90565ae907baef`;
+client.stockApiKey = process.env.STOCK_KEY;
+client.newsApiKey = process.env.NEWS_KEY;
 
 //Bot Server
 client.inviteObj = {"x": 0};
@@ -40,7 +40,7 @@ const utils = require(`./Utils.js`);
 //Handler
 const handler = require(`./handlers/EventHandler.js`);
 
-const mongoURI = `mongodb+srv://livlisky:sVy12YA6UsnquU5U@burgerbotz-f9rdj.gcp.mongodb.net/test?retryWrites=true&w=majority`;
+const mongoURI = process.env.MONGO_URI;
 const prefix = `/`;
 
 mongoose.connect(mongoURI, 
@@ -97,7 +97,6 @@ client.on(`message`, (message) =>
     let sender = message.author;
     let msg = message.content.toLowerCase();
 
-    //if(ch.id != `624713636564434984` && ch.id != `705177579862360166` && ch.id != `629962609256431616`) return;
     if(sender.bot) return;
 
     const args = msg.slice(prefix.length).trim().split(/ +/g);
@@ -116,4 +115,4 @@ client.on(`message`, (message) =>
     }
 });
 
-client.login(`NjE2MjQ0NTgwNzczMjY1NDQz.XrKdgA.gqBA2FXg1fa_e89LBMqMcA09u3c`);
+client.login(process.env.BOT_TOKEN);
